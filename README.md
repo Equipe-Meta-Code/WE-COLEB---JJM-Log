@@ -1,33 +1,35 @@
 <h1 align="center"> Projeto API - 4  º Semestre </h1>
 
 ## 🎯 Objetivo
+Desenvolver um sistema Web com regra de negócio complexa em ambiente de produção (Deploy), com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes para a empresa **JJM Log**.
+
+
+## 📍 Requisitos não-funcionais
+•	Documentação via GitHub.
+
+•	Protótipo criado no Figma.
+
+•	Modelagem de Banco de Dados.
+
+•	Interface responsiva. 
 
 
 ## 🔧 Tecnologias utilizadas
-- ![TypeScript](https://img.shields.io/badge/TypeScript-0B1320?style=for-the-badge&logo=Typescript&logoColor=white)
 
-- ![JavaScript](https://img.shields.io/badge/JavaScript-0B1320?style=for-the-badge&logo=JavaScript&logoColor=white)
+| ![TypeScript](https://img.shields.io/badge/-TypeScript-0D1117?style=for-the-badge&logo=typescript) | ![JavaScript](https://img.shields.io/badge/-JavaScript-0D1117?style=for-the-badge&logo=javascript) | ![MySQL](https://img.shields.io/badge/-MySQL-0D1117?style=for-the-badge&logo=mysql) | ![REACT](https://img.shields.io/badge/React-0D1117?style=for-the-badge&logo=react) |
+| --- | --- | --- | --- |
+| ![NODEJS](https://img.shields.io/badge/NodeJS-0D1117?style=for-the-badge&logo=javascript) | ![FIGMA](https://img.shields.io/badge/Figma-0D1117?style=for-the-badge&logo=figma) | ![Trello](https://img.shields.io/badge/Trello-0D1117?style=for-the-badge&logo=Trello) | ![Microsoft](https://img.shields.io/badge/Microsoft_Office-0D1117?style=for-the-badge&logo=microsoft-office) |
 
-- ![MySQL](https://img.shields.io/badge/MySQL-0B1320?style=for-the-badge&logo=mysql&logoColor=white)
-
-- ![REACT](https://img.shields.io/badge/React-0B1320?style=for-the-badge&logo=react&logoColor=white)
-
-- ![NODEJS](https://img.shields.io/badge/NodeJS-0B1320?style=for-the-badge&logo=javascript&logoColor=white)
-
-- ![FIGMA](https://img.shields.io/badge/Figma-0B1320?style=for-the-badge&logo=figma&logoColor=white)
-
-- ![Trello](https://img.shields.io/badge/Trello-0B1320?style=for-the-badge&logo=Trello&logoColor=white)
-
-- ![Microsoft](https://img.shields.io/badge/Microsoft_Office-0B1320?style=for-the-badge&logo=microsoft-office&logoColor=white)
-
-- ![GITHUB](https://img.shields.io/badge/GitHub-0B1320?style=for-the-badge&logo=github&logoColor=white)
-  
-- ![SLACK](https://img.shields.io/badge/Slack-0B1320?style=for-the-badge&logo=slack&logoColor=white)
-  
 
 <span id="sprints">
 
 ## 📊 Sprints e Backlog
+
+<div style="display: flex;">
+  <img src="https://github.com/user-attachments/assets/909aef2a-802f-4f94-9556-c58c3a05eb1c" width="500"  />
+  <img src="https://github.com/user-attachments/assets/a582ae84-9e07-4252-9e17-6a05277a7d8f" width="500" />
+</div>
+
 
 
 <span id="user">
