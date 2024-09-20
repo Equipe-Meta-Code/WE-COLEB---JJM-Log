@@ -1,7 +1,15 @@
 <h1 align="center"> Projeto API - 4  º Semestre </h1>
 
 ## 🎯 Objetivo
-Desenvolver um sistema Web com regra de negócio complexa em ambiente de produção (Deploy), com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes para a empresa **JJM Log**.
+Desenvolver um sistema Web com regra de negócio complexa em ambiente de produção (Deploy), com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes, para a empresa **JJM Log**.
+
+
+## 📍 Requisitos funcionais
+•	Desenvolver em JavaScript e TypeScript (Requisito Fatec).
+
+•	O sistema deverá implementar junções de padrões como o MVC (Requisito Fatec). 
+
+•	O sistema deverá ter interfaces com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes.
 
 
 ## 📍 Requisitos não-funcionais
