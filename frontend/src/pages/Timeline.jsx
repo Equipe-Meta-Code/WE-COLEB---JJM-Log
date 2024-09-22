@@ -121,6 +121,44 @@ const TimelineCard = ({ steps, title }) => {
   );
 };
 
+const LicensePlateCard = () => {
+    return (
+      <Card sx={{ 
+        width: '100%', 
+        maxWidth: '200px', 
+        backgroundColor: '#1B4215',
+        color: 'white', 
+        borderRadius: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        padding: 2,
+        marginBottom: 2
+      }}>
+        <Typography variant="h6">Placa do Veículo</Typography>
+        <Box
+          sx={{
+            width: '80%',
+            height: '40px',
+            border: '2px solid white',
+            borderRadius: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'white',
+            color: 'black',
+            fontSize: '20px',
+            fontWeight: 'bold',
+          }}
+        >
+          ABC-1234
+        </Box>
+      </Card>
+    );
+  };
+  
+  
 
 
  
