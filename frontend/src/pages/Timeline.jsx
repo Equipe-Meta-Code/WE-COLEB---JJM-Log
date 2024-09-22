@@ -43,4 +43,84 @@ const TimelineCard = ({ steps, title }) => {
     }
   };
 
+  return (
+    <Card sx={{ 
+      width: '100%', 
+      maxWidth: '600px', 
+      backgroundColor: '#1B4215', 
+      color: 'white', 
+      borderRadius: '10px',
+      marginBottom: 2,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start'
+    }}>
+      <CardContent>
+        <Typography variant="h5" component="div" onClick={handleExpandClick} sx={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          {title}
+          <IconButton>
+            <ExpandMoreIcon sx={{ color: 'white' }} />
+          </IconButton>
+        </Typography>
+        <Box sx={{ height: '2px', backgroundColor: 'white', my: 1 }} />
+        <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+          <Typography variant="body2" sx={{ backgroundColor: 'white', color: 'black', borderRadius: '12px', padding: '4px 8px' }}>
+            Em processo
+          </Typography>
+          <Typography variant="body2" sx={{ backgroundColor: 'white', color: 'black', borderRadius: '12px', padding: '4px 8px' }}>
+            Mercadoria
+          </Typography>
+        </Box>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
+            {steps.map((stepData, step) => (
+              <Box key={step} sx={{ display: 'flex', alignItems: 'center', position: 'relative', mb: 2 }}>
+                <Button
+                  onClick={() => handleStepClick(step + 1)}
+                  sx={{
+                    minWidth: '40px',
+                    height: '40px',
+                    backgroundColor: 'grey',
+                    color: 'white',
+                    borderRadius: '50%',
+                    zIndex: 1
+                  }}
+                  disabled={step + 1 > activeStep}
+                >
+                  <FiberManualRecordIcon />
+                </Button>
+                {step < 3 && (
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '20px',
+                      left: '19px',
+                      height: '40px',
+                      width: '2px',
+                      backgroundColor: 'grey',
+                    }}
+                  />
+                )}
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', ml: 4 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <LocalShippingIcon sx={{ color: 'white', mr: 1 }} />
+                    <Typography variant="body2" sx={{ color: 'white', whiteSpace: 'nowrap' }}>
+                      {stepData.label}
+                    </Typography>
+                  </Box>
+                  <Typography variant="caption" sx={{ color: 'lightgrey', alignSelf: 'flex-start' }}>
+                    {stepData.city}
+                  </Typography>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+        </Collapse>
+      </CardContent>
+    </Card>
+  );
+};
+
+
+
  
