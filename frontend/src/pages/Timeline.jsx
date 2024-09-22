@@ -157,6 +157,61 @@ const LicensePlateCard = () => {
       </Card>
     );
   };
+
+  const SmallCard = ({ title, value, icon }) => {
+    return (
+      <Card sx={{
+        height: '130px',
+        width: '100%',
+        backgroundColor: '#1B4215',
+        color: 'white',
+        borderRadius: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 2,
+        marginBottom: 2,
+        transition: 'transform 0.3s, box-shadow 0.3s',
+        '&:hover': {
+          transform: 'scale(1.05)',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+        },
+      }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, textAlign: 'left' }}>
+          <Typography variant="body2" sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{title}</Typography>
+          <Box sx={{ borderTop: '1px solid white', my: 1 }} />
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {icon}
+            <Typography variant="h6" sx={{ marginLeft: 1 }}>{value}</Typography>
+          </Box>
+        </Box>
+      </Card>
+    );
+  };
+  
+  const Timeline = () => {
+    return (
+      <Grid container spacing={2} sx={{ padding: 2 }}>
+        <Grid item xs={12} md={8}>
+          <TimelineCard steps={timelineStepsEntrega} title="Card de Entregas" />
+          <TimelineCard steps={timelineStepsLogistico} title="Card de Logística" />
+          <TimelineCard steps={timelineStepsFinanceiro} title="Card de Financeiro" />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <LicensePlateCard />
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 2 }}>
+            <SmallCard title="Carga" value="200kg" icon={<CardGiftcardIcon sx={{ color: 'white' }} />} />
+            <SmallCard title="Volume" value="3m³" icon={<StorageIcon sx={{ color: 'white' }} />} />
+            <SmallCard title="Distância" value="150km" icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
+            <SmallCard title="Tempo Estimado" value="2h" icon={<CalendarTodayIcon sx={{ color: 'white' }} />} />
+          </Box>
+        </Grid>
+      </Grid>
+    );
+  };
+  
+  export default Timeline;
+  
   
   
 
