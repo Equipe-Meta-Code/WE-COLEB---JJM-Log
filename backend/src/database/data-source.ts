@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 import User from "../models/User";
 import Role from "../models/Role";
 import Permission from "../models/Permission";
+import Departamentos from "../models/Departamentos";
 import { CreateUsers1726672168699 } from "./migrations/1726672168699-CreateUsers";
 import { CreatePermissions1726679330555 } from "./migrations/1726679330555-CreatePermissions";
 import { CreateRoles1726679379911 } from "./migrations/1726679379911-CreateRoles";
@@ -20,7 +21,7 @@ export const AppDataSource = new DataSource({
     database: "wecollab",
     synchronize: true,
     logging: false,
-    entities: [User, Role, Permission],
+    entities: [User, Role, Permission, Departamentos],
     migrations: [CreateUsers1726672168699,
                 CreatePermissions1726679330555,
                 CreateRoles1726679379911,
