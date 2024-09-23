@@ -1,13 +1,26 @@
 import { useState } from 'react';
 import styles from './Cadastros.module.css';
+import api from '../../services/api'
 
 function CadastrarDepartamentos() {
-    const [departamento, setDepartamento] = useState(''); 
+    
+    const [nome , setDepartamento] = useState(''); 
 
-    async function cadastrarDepartanento() {
+    async function cadastrarDepartamento() {
         console.log("Cadastrar Pedido");
-        console.log(departamento);
-    };
+        console.log(nome);
+    
+        try {
+            const response = await api.post("/departamentos", {
+                nome,
+
+            });
+            console.log(response)
+        } catch (error) {
+            console.error("Erro ao cadastrar:", error);
+        }
+    }
+    
 
     return (
         <div className={styles.pagina}>
@@ -21,12 +34,12 @@ function CadastrarDepartamentos() {
                         type="text"
                         name="titulo"
                         placeholder='Nome do Departamento'
-                        value={departamento}
+                        value={nome}
                         onChange={(e) => setDepartamento(e.target.value)} 
                     />
 
                 </div>
-                <button className={styles.botaoCadastrar} onClick={cadastrarDepartanento}>Enviar</button>
+                <button className={styles.botaoCadastrar} onClick={cadastrarDepartamento}>Enviar</button>
             </div>
         </div>
     );
