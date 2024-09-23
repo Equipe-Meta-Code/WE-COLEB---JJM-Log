@@ -1,31 +1,31 @@
 SEQUÊNCIA PARA RODAR O PROJETO
 
 ```
-cd backend_acessos
+cd backend
 ```
 
 ```
 npm install
 ```
 
-Alterar as credencias do banco de dados no arquivo backend_acessos/src/database/migrations/data-source.ts
+Alterar as credencias do banco de dados no arquivo backend/src/database/migrations/data-source.ts
 
 ```
 npm run typeorm -- -d ./src/database/data-source.ts migration:run
 ```
 
-Vá no arquivo banco em backend_acessos e execute aqueles inserts no banco de dados
+Vá no arquivo banco em database e execute aqueles inserts no banco de dados
 
 ```
 npm run dev:server
-```5t
+```
 
 
 SEQUÊNCIA PARA CRIAR O PROJETO
 
 Criar o projeto
 ```
-npx typeorm init --name backend_acessos --database mysql
+npx typeorm init --name backend --database mysql
 ```
 
 Remover essa versão do mysql
