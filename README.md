@@ -43,6 +43,8 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 ## 📊 User Stories
 
+![Rank](https://github.com/user-attachments/assets/f47fcab4-051f-4cd0-8607-d9a9678483e7)
+
 
 
 <span id="MVP">
@@ -52,7 +54,7 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 <span id="Diagrama de classes">
  
-## 📁 Diagrama de classes (DER)
+## 📁 Diagrama (DER)
 
 ![Diagrama Banco de Dados Api](https://github.com/user-attachments/assets/87b7857a-a4e1-47c0-94fc-b9e039cb33e8)
 
