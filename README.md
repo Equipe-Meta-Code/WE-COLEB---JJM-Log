@@ -45,7 +45,7 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 <span id="Diagrama de classes">
  
-## 📁 Diagrama de classes (UML)
+## 📁 Diagrama de classes (DER)
 
 
 
