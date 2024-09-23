@@ -1,3 +1,4 @@
+<div align="center">   <img src="https://github.com/user-attachments/assets/68d845f6-fa5e-46f0-81d4-ab9de866a2a7"   /> </div>
 <h1 align="center"> Projeto API - 4  º Semestre </h1>
 
 ## 🎯 Objetivo
