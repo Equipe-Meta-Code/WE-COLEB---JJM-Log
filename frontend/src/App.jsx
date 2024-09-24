@@ -1,14 +1,20 @@
 import { useState } from 'react'
 
 import './App.css'
-import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento'
+import CadastroUsuario from './pages/login/CadastroUsuario'
+import Login from './pages/login/login'
+
+/* import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento' */
+
 
 function App() {
 
 
   return (
     <>
-      <CadastrarDepartamentos/>
+      {/* <CadastrarDepartamentos/> */}
+      <CadastroUsuario/>
+      <Login/>
     </>
   )
 }
