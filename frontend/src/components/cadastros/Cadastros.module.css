@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    padding: 0;
+}
+
 label,h1{
     color: white;
     margin: 0px;
@@ -9,7 +15,7 @@ label,h1{
     align-items: center;
 }
 .container{
-    max-width: 600px;
+    max-width: 100%;
     border: 0px;
     background-color: #1B4215;
     border-radius: 16px;
@@ -26,12 +32,24 @@ label,h1{
 .campos{
     display: flex;
     flex-direction: column;
-    width: calc(100% - 68px);
+    width: calc(100% - 56px);
     text-align: left;
 }
 
-.inputDepartamento{
-    
+.campoData{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}
+.conjuntoData{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: calc(100% - 56px);
+}
+
+.inputTexto, .inputDatas{
     padding: 5px 10px;
     border-radius: 8px;
     border: 0px;
@@ -41,16 +59,16 @@ label,h1{
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
-.inputDepartamento:focus {
+.inputTexto:focus {
     border-color: #3e8e41;
     box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
 }
-.inputDepartamento::placeholder {
+.inputTexto::placeholder {
     color: #ffffff;
     opacity: 0.7; 
     font-size: 14px;
 }
-.inputDepartamento:hover {
+.inputTexto:hover {
     background-color: #86b179;
 }
 .botaoCadastrar{

@@ -30,7 +30,7 @@ function CadastrarDepartamentos() {
 
                     <label>Nome do Departamento:</label>
                     <input
-                        className={styles.inputDepartamento} 
+                        className={styles.inputTexto} 
                         type="text"
                         name="titulo"
                         placeholder='Nome do Departamento'
@@ -39,7 +39,9 @@ function CadastrarDepartamentos() {
                     />
 
                 </div>
-                <button className={styles.botaoCadastrar} onClick={cadastrarDepartamento}>Enviar</button>
+                <button className={styles.botaoCadastrar} onClick={cadastrarDepartamento}>
+                    Cadastrar
+                </button>
             </div>
         </div>
     );
