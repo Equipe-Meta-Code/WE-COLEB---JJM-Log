@@ -17,7 +17,10 @@ router.post("/permissions", PermissionController.create);
 router.post("/roles", RoleController.create);
 router.post("/departamentos", DepartamentoController.create);
 router.post("/etapas", EtapaController.create);
+router.post("/pedidos", PedidoController.create);
 
+router.get("/pedidos", PedidoController.getAll);
+router.get("/etapas", EtapaController.getAll);
 router.get("/departamentos", DepartamentoController.getAll);
 
 router.get("/users/roles", UserController.roles);

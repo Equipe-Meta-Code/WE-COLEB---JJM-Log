@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { AppDataSource } from "../database/data-source";
-import Departamentos from "../models/Departamentos";
+import Departamentos from "../models/Departamento";
 
 class DepartamentoController {
 
-    
+
     async create(req: Request, res: Response): Promise<Response> {
         const { nome } = req.body;
         const departamentoRepository = AppDataSource.getRepository(Departamentos);
