@@ -1,14 +1,15 @@
 import { useState } from 'react'
 
 import './App.css'
-import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento'
+import FluxoCard from './pages/FluxoCard'
+import CardList from './pages/CardList'
 
 function App() {
 
 
   return (
     <>
-      <CadastrarDepartamentos/>
+      <CardList/>
     </>
   )
 }
