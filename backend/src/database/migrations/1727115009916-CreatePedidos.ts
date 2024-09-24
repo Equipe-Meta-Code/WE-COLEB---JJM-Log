@@ -16,12 +16,12 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
                 },
                 {
                     name: 'user_id',
-                    type: 'varchar',
+                    type: 'int',
                     isNullable: false,
                 },
                 {
                     name: 'cliente_id',
-                    type: 'varchar',
+                    type: 'int',
                     isNullable: false,
                 },
                 {
@@ -57,7 +57,7 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
                 },
                 {
                     name: 'peso',
-                    type: 'varchar',
+                    type: 'float',
                     isNullable: true,
                 },
                 {
@@ -67,12 +67,12 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
                 },
                 {
                     name: 'volume',
-                    type: 'int',
+                    type: 'float',
                     isNullable: true,
                 },
                 {
                     name: 'distancia',
-                    type: 'int',
+                    type: 'float',
                     isNullable: true,
                 },
             ],
