@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Card, CardContent, Typography, IconButton, Collapse, Button, Grid } from '@mui/material';
+import { Box, Avatar, Card, CardContent, Typography, IconButton, Collapse, Button, Grid } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -7,6 +7,8 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import StorageIcon from '@mui/icons-material/Storage';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import PhoneIcon from '@mui/icons-material/Phone'; // Ícone de telefone
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const timelineStepsEntrega = [
   { label: "Entrega saiu da cidade base", city: "Kyoto, Japão" },
@@ -121,6 +123,106 @@ const TimelineCard = ({ steps, title }) => {
   );
 };
 
+// Card de informações do motorista
+const DriverCard = () => {
+  const driverInfo = {
+    id: "222-111-33",
+    name: "Matthew Perry",
+    address: "Houston Lane, Lan 9, 22/1",
+    deliveryTime: "12:30 PM 31 Jan",
+    phone: "(555) 123-4567",
+    photoUrl: "foto-perfil-temporaria" // Link temporário da foto
+  };
+
+  return (
+    <Card sx={{
+      width: '330px',
+      height: '215px',
+      backgroundColor: '#202020',
+      color: 'white',
+      borderRadius: '38px',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      margin: '10px',
+      padding: 1,
+      gap: 1
+    }}>
+      {/* Container para o card em destaque e o botão Call */}
+      <Box sx={{
+        width: '190px',
+        height: '220px',
+        borderRadius: '35px',
+        backgroundColor: '#414141',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 1
+      }}>
+        {/* Card interno em destaque */}
+        <Box sx={{
+          backgroundColor: '#1B4215',
+          borderRadius: '30px',
+          padding: 3,
+          height: '140px',
+          width: '140px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'top',
+          gap: 1
+        }}>
+           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            {/* Foto do motorista */}
+            <Avatar src={driverInfo.photoUrl} alt={driverInfo.name} sx={{ borderRadius: '12px'}} />
+
+            {/* Título do motorista */}
+            <Typography variant="h7" component="div">Driver</Typography>
+          </Box>
+
+          <Typography variant="body2" color="lightgrey">ID: {driverInfo.id}</Typography>
+
+          <Typography variant="body1" fontWeight="bold">{driverInfo.name}</Typography>
+        </Box>
+
+        {/* Botão de chamada */}
+        <Button
+          variant="contained"
+          sx={{
+            width: '140px',
+            height: '45px',
+            marginBottom: '5px',
+            borderRadius: '30px',
+            backgroundColor: 'grey',
+            color: 'white',
+            '&:hover': { backgroundColor: '#555' }
+          }}
+          startIcon={<PhoneIcon />}
+        >
+          Call
+        </Button>
+      </Box>
+
+      {/* Informações de endereço e horário */}
+      <Box sx={{ textAlign: 'left' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <LocationOnIcon sx={{ color: 'lightgrey' }} />
+          <Typography variant="body1" fontWeight="bold">Address</Typography>
+        </Box>
+        <Typography variant="body2" sx={{ marginLeft: '24px' }}>{driverInfo.address}</Typography>
+
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, marginTop: 2 }}>
+          <CalendarTodayIcon sx={{ color: 'lightgrey' }} />
+          <Typography variant="body1" fontWeight="bold">Delivery</Typography>
+        </Box>
+        <Typography variant="body2" sx={{ marginLeft: '24px' }}>{driverInfo.deliveryTime}</Typography>
+      </Box>
+    </Card>
+  );
+};
+
 const LicensePlateCard = () => {
     return (
       <Card sx={{ 
@@ -198,6 +300,7 @@ const LicensePlateCard = () => {
           <TimelineCard steps={timelineStepsFinanceiro} title="Card de Financeiro" />
         </Grid>
         <Grid item xs={12} md={4}>
+          <DriverCard />
           <LicensePlateCard />
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 2 }}>
             <SmallCard title="Carga" value="200kg" icon={<CardGiftcardIcon sx={{ color: 'white' }} />} />
