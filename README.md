@@ -56,7 +56,7 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
  
 ## 📁 Diagrama (DER)
 
-![Diagrama Banco de Dados Api](https://github.com/user-attachments/assets/87b7857a-a4e1-47c0-94fc-b9e039cb33e8)
+![image](https://github.com/user-attachments/assets/2926ddf4-333b-4291-8241-c478edf2a769)
 
 <span id="Vídeo">
  
