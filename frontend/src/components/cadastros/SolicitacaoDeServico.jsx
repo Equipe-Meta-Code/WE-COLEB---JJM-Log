@@ -81,10 +81,82 @@ function SolicitacaoDeServico() {
                 distancia: dadosPedido.distancia,
             });
             console.log(response);
+
+            await cadastrarEtapasPorDepartamento();
+
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
         }
     }
+
+    // Função para adicionar um novo departamento
+    function adicionarDepartamento() {
+        const novoIdPedido = pedidos.length + 1; // Número de pedidos + 1
+        const novoDepartamento = {
+            idPedido: novoIdPedido,
+            idDepartamento: '', 
+            etapas: [] // Cada departamento agora tem um array de etapas
+        };
+    
+        setDadosPedido((prevState) => ({
+            ...prevState,
+            departamentos: [...prevState.departamentos, novoDepartamento],
+        }));
+    }
+
+    // Função para adicionar uma nova etapa para um departamento específico
+    function adicionarEtapa(departamentoId) {
+        const novoIdPedido = pedidos.length + 1;
+        const novaEtapa = {
+            pedidoId: novoIdPedido,
+            etapaId: '',
+            estado: 'Não Iniciado',
+            departamento: departamentoId
+        };
+
+        // Atualizar o departamento correspondente
+        const novosDepartamentos = dadosPedido.departamentos.map(departamento => {
+            if (departamento.idDepartamento === departamentoId) {
+                return {
+                    ...departamento,
+                    etapas: [...departamento.etapas, novaEtapa]
+                };
+            }
+            return departamento;
+        });
+
+        setDadosPedido((prevState) => ({
+            ...prevState,
+            departamentos: novosDepartamentos
+        }));
+    }
+
+    // Função para atualizar uma etapa em um departamento
+    function atualizarEtapa(departamentoId, etapaIndex, etapaId) {
+        const novosDepartamentos = dadosPedido.departamentos.map(departamento => {
+            if (departamento.idDepartamento === departamentoId) {
+                const novasEtapas = departamento.etapas.map((etapa, index) => {
+                    if (index === etapaIndex) {
+                        return { ...etapa, etapaId: etapaId }; // Atualiza a etapa específica
+                    }
+                    return etapa;
+                });
+                return { ...departamento, etapas: novasEtapas };
+            }
+            return departamento;
+        });
+
+        setDadosPedido((prevState) => ({
+            ...prevState,
+            departamentos: novosDepartamentos
+        }));
+    }
+    
+    useEffect(() => {
+        buscarDepartamentos();
+        buscarPedidos();
+        buscarEtapas(); // Buscar as etapas quando o componente carregar
+    }, []);
 
     return (
         <div className={styles.pagina}>
@@ -223,6 +295,70 @@ function SolicitacaoDeServico() {
                     </div>
                 ) : null}
 
+                {/* Botão para adicionar departamento */}
+                <button className={styles.botaoCadastrar} onClick={adicionarDepartamento}>
+                    Adicionar Departamento
+                </button>
+
+                {dadosPedido.departamentos.map((departamento, index) => (
+                    <div key={index} className={styles.campos}>
+                        <label>Selecione o Departamento: </label>
+                        <div className={styles.departamentos}>
+                            <select
+                                className={styles.inputTexto}
+                                id={styles.selectCategorias}
+                                value={departamento.idDepartamento}
+                                onChange={(e) => {
+                                    const novoDepartamento = [...dadosPedido.departamentos];
+                                    novoDepartamento[index].idDepartamento = e.target.value;
+                                    setDadosPedido({ ...dadosPedido, departamentos: novoDepartamento });
+                                }}
+                            >
+                                <option value="">-- Selecione um departamento --</option>
+                                {departamentos.map(departamento => (
+                                    <option key={departamento.id} value={departamento.id}>
+                                        {departamento.nome}
+                                    </option>
+                                ))}
+                            </select>
+
+                            {departamento.idDepartamento !== '' && (
+                                <div className={styles.etapasAdicionadas}>
+                                    {departamento.etapas.map((etapa, etapaIndex) => (
+                                        <div key={etapaIndex} className={styles.campos}>
+                                            <label>Selecione a Etapa: </label>
+                                            <select
+                                                className={styles.inputTexto}
+                                                id={styles.selectCategorias}
+                                                value={etapa.etapaId}
+                                                onChange={(e) => {
+                                                    atualizarEtapa(departamento.idDepartamento, etapaIndex, e.target.value);
+                                                }}
+                                            >
+                                                <option value="">-- Selecione uma etapa --</option>
+                                                {etapas
+                                                    .filter(etapaItem => etapaItem.departamento.id === parseInt(departamento.idDepartamento))
+                                                    .map(etapaItem => (
+                                                        <option key={etapaItem.id} value={etapaItem.id}>
+                                                            {etapaItem.nome}
+                                                        </option>
+                                                    ))}
+                                            </select>
+                                        </div>
+                                    ))}
+
+                                    <button
+                                        id={styles.adicionarEtapa}
+                                        className={styles.botaoCadastrar}
+                                        onClick={() => adicionarEtapa(departamento.idDepartamento)}
+                                    >
+                                        Adicionar Etapa
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ))}
 
                 <button onClick={cadastrarPedido} className={styles.botaoCadastrar}>Cadastrar</button>
                 <button onClick={console.log(dadosPedido)} className={styles.botaoCadastrar}>testar</button>
