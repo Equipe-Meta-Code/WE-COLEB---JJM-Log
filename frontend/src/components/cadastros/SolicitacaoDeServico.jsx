@@ -18,6 +18,20 @@ function SolicitacaoDeServico() {
         quantidade: '',
         volume: '',
         distancia: '',
+        departamentos: [
+            {
+                idPedido: pedidos.length + 1, 
+                idDepartamento: '', 
+                etapas: [
+                    {
+                        pedidoId: pedidos.length + 1,
+                        etapaId: '',
+                        estado: 'Não Iniciado', // Define o estado inicial da etapa
+                        departamento: ''
+                    }
+                ]
+            }
+        ],
     });
 
     // Função para buscar departamentos
