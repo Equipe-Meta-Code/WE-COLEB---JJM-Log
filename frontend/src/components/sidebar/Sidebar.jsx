@@ -8,11 +8,12 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { FaRoute, FaUser, FaSignOutAlt } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
+import { FaRoute, FaSignOutAlt } from "react-icons/fa";
+import { FaGear, FaBuildingUser } from "react-icons/fa6";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiOrganizationChart } from "react-icons/ri";
-import { Tooltip } from '@mui/material'; 
+import { ImUserPlus } from "react-icons/im";
+import { Tooltip, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './sideBar.css';  
 
@@ -35,6 +36,18 @@ const Drawer = styled(MuiDrawer)(({ theme }) => ({
 
 export default function Sidebar() {
   const theme = useTheme();
+
+  // estado para abrir e fechar as opções de cadastro
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <nav>
@@ -131,7 +144,77 @@ export default function Sidebar() {
                         color: 'white',
                       }}
                     >
-                      <FaUser size={19} />
+                      <FaBuildingUser size={19} />
+                    </ListItemIcon>
+                  </Link>
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
+
+            <Divider/>
+
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip title="Cadastro" placement="right" arrow>
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: "center",
+                  }}
+                  onClick={handleClick}  // Abre opções ao clicar
+                >
+                  <ListItemIcon
+                    sx={{
+                      justifyContent: "center",
+                      color: 'white',
+                    }}
+                    >
+                      <ImUserPlus size={19} />
+                    </ListItemIcon>
+                </ListItemButton>
+              </Tooltip>
+
+              {/* Menu que aparece ao clicar em "Cadastro" */}
+              <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'center',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'center',
+                  horizontal: 'left',
+                }}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Link to="/Cadastro/Departamento" className="no-link-style">Cadastro de Departamento</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/Cadastro/Etapas" className="no-link-style">Cadastro de Etapas</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/Cadastro/Pedido" className="no-link-style">Cadastro de Pedido</Link>
+                </MenuItem>
+              </Menu>
+            </ListItem>
+
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip title="Sair" placement="right" arrow>
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link to="/Logout" className="menu-link-icon">
+                    <ListItemIcon
+                      sx={{
+                        justifyContent: "center",
+                        color: 'white',
+                      }}
+                    >
+                      <FaSignOutAlt size={19} />
                     </ListItemIcon>
                   </Link>
                 </ListItemButton>
@@ -154,28 +237,6 @@ export default function Sidebar() {
                       }}
                     >
                       <FaGear size={19} />
-                    </ListItemIcon>
-                  </Link>
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
-
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Sair" placement="right" arrow>
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: "center",
-                  }}
-                >
-                  <Link to="/Logout" className="menu-link-icon">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: 'white',
-                      }}
-                    >
-                      <FaSignOutAlt size={19} />
                     </ListItemIcon>
                   </Link>
                 </ListItemButton>
