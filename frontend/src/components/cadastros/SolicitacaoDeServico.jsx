@@ -97,8 +97,91 @@ function SolicitacaoDeServico() {
                     </div>
                 </div>
 
+                <div className={styles.campos}>
+                    <label>Selecione a Categoria do Serviço: </label>
+                    <select
+                        className={styles.inputTexto}
+                        id={styles.selectCategorias}
+                        value={dadosPedido.categoria}
+                        onChange={(e) => setDadosPedido({ ...dadosPedido, categoria: e.target.value })}
+                    >
+                        <option value="">-- Selecione uma opção --</option>
+                        <option value="entrega">Entrega</option>
+                        <option value="financeiro">Financeiro</option>
+                        <option value="recursos_humanos">Recursos Humanos</option>
+                    </select>
+                </div>
+
+                {dadosPedido.categoria === 'entrega' ? (
+                    <div className={styles.entrega}>
+                        <div className={styles.campos}>
+                            <label>Selecione o tipo da Entrega: </label>
+                            <select
+                                className={styles.inputTexto}
+                                id={styles.selectCategorias}
+                                value={dadosPedido.tipos}
+                                onChange={(e) => setDadosPedido({ ...dadosPedido, tipos: e.target.value })}
+                            >
+                                <option value="">-- Selecione uma opção --</option>
+                                <option value="tecnologia">Tecnologia</option>
+                                <option value="alimento">Alimento</option>
+                                <option value="recurso">Recurso</option>
+                            </select>
+                        </div>
+
+                        <div className={styles.conjuntoDuplas}>
+                            <div className={styles.conjuntoEntrega}>
+                                <label>Peso: </label>
+                                <input
+                                    className={styles.inputEntrega}
+                                    type="text"
+                                    placeholder="Digite o Peso"
+                                    value={dadosPedido.peso}
+                                    onChange={(e) => setDadosPedido({ ...dadosPedido, peso: e.target.value })}
+                                />
+                            </div>
+
+                            <div className={styles.conjuntoEntrega}>
+                                <label>Quantidade: </label>
+                                <input
+                                    className={styles.inputEntrega}
+                                    type="text"
+                                    placeholder="Digite a Quantidade"
+                                    value={dadosPedido.quantidade}
+                                    onChange={(e) => setDadosPedido({ ...dadosPedido, quantidade: e.target.value })}
+                                />
+                            </div>
+                        </div>
+
+                        <div className={styles.conjuntoDuplas}>
+                            <div className={styles.conjuntoEntrega}>
+                                <label>Volume: </label>
+                                <input
+                                    className={styles.inputEntrega}
+                                    type="text"
+                                    placeholder="Digite o Volume"
+                                    value={dadosPedido.volume}
+                                    onChange={(e) => setDadosPedido({ ...dadosPedido, volume: e.target.value })}
+                                />
+                            </div>
+
+                            <div className={styles.conjuntoEntrega}>
+                                <label>Distância(km): </label>
+                                <input
+                                    className={styles.inputEntrega}
+                                    type="text"
+                                    placeholder="Digite a Distância"
+                                    value={dadosPedido.distancia}
+                                    onChange={(e) => setDadosPedido({ ...dadosPedido, distancia: e.target.value })}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                ) : null}
+
 
                 <button onClick={cadastrarPedido} className={styles.botaoCadastrar}>Cadastrar</button>
+                <button onClick={console.log(dadosPedido)} className={styles.botaoCadastrar}>testar</button>
             </div>
         </div>
     );
