@@ -20,6 +20,36 @@ function SolicitacaoDeServico() {
         distancia: '',
     });
 
+    // Função para buscar departamentos
+    async function buscarDepartamentos() {
+        try {
+            const response = await api.get("/departamentos");
+            setDepartamentos(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar departamentos:", error);
+        }
+    }
+
+    // Função para buscar pedidos
+    async function buscarPedidos() {
+        try {
+            const response = await api.get("/pedidos");
+            setPedidos(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar pedidos:", error);
+        }
+    }
+
+    // Função para buscar etapas
+    async function buscarEtapas() {
+        try {
+            const response = await api.get("/etapas"); // Corrigido para a rota de etapas
+            setEtapas(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar etapas:", error);
+        }
+    }
+
     // Função para cadastrar pedido
     async function cadastrarPedido() {
         console.log(dadosPedido);
