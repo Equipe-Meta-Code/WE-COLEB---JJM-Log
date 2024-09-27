@@ -1,9 +1,16 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+
 import User from "../models/User";
 import Role from "../models/Role";
 import Permission from "../models/Permission";
-import Departamentos from "../models/Departamentos";
+import Departamento from "../models/Departamento";
+import Cliente from "../models/Cliente";
+import Endereco from "../models/Endereco";
+import Etapa from "../models/Etapa";
+import EtapaPedido from "../models/EtapaPedido";
+import Pedido from "../models/Pedido";
+
 import { CreateUsers1726672168699 } from "./migrations/1726672168699-CreateUsers";
 import { CreatePermissions1726679330555 } from "./migrations/1726679330555-CreatePermissions";
 import { CreateRoles1726679379911 } from "./migrations/1726679379911-CreateRoles";
@@ -15,12 +22,7 @@ import { CreatePedidos1727115009916 } from "./migrations/1727115009916-CreatePed
 import { CreateDepartamentos1727183720141 } from "./migrations/1727183720141-CreateDepartamentos";
 import { CreateEtapas1727183768483 } from "./migrations/1727183768483-CreateEtapas";
 import { CreateEtapasPedidos1727183789278 } from "./migrations/1727183789278-CreateEtapasPedidos";
-import Cliente from "../models/Cliente";
-import Departamento from "../models/Departamento";
-import Endereco from "../models/Endereco";
-import Etapa from "../models/Etapa";
-import EtapaPedido from "../models/EtapaPedido";
-import Pedido from "../models/Pedido";
+
 
 
 export const AppDataSource = new DataSource({
@@ -28,7 +30,7 @@ export const AppDataSource = new DataSource({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "sofia",
+    password: "",
     database: "wecollab",
     synchronize: true,
     logging: false,

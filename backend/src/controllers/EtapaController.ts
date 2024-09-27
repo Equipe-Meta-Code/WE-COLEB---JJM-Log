@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../database/data-source";
-import Etapas from "../models/Etapas";
-import Departamentos from "../models/Departamentos"; // Importar o model de Departamentos
+import Etapas from "../models/Etapa";
+import Departamentos from "../models/Departamento"; // Importar o model de Departamentos
 
 class EtapaController {
 
@@ -28,6 +28,22 @@ class EtapaController {
 
         } catch (error) {
             return res.status(500).json({ message: "Erro ao criar etapa", error });
+        }
+    }
+
+      // Listar todas as etapas
+      async getAll(req: Request, res: Response): Promise<Response> {
+        const etapaRepository = AppDataSource.getRepository(Etapas);
+
+        try {
+
+            const etapas = await etapaRepository.find({
+                relations: ["departamento"],
+            });
+
+            return res.status(200).json(etapas);
+        } catch (error) {
+            return res.status(500).json({ message: "Erro ao buscar etapas", error });
         }
     }
 }
