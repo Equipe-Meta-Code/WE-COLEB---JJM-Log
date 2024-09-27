@@ -9,7 +9,18 @@ import { CreatePermissions1726679330555 } from "./migrations/1726679330555-Creat
 import { CreateRoles1726679379911 } from "./migrations/1726679379911-CreateRoles";
 import { CreatePermissionsRoles1726679445904 } from "./migrations/1726679445904-CreatePermissionsRoles";
 import { CreateUsersRoles1726679463665 } from "./migrations/1726679463665-CreateUsersRoles";
-import { CreateDepartamentos1727086743759 } from "./migrations/1727086743759-CreateDepartamentos";
+import { CreateClientes1727114980676 } from "./migrations/1727114980676-CreateClientes";
+import { CreateEndereco1727114998737 } from "./migrations/1727114998737-CreateEndereco";
+import { CreatePedidos1727115009916 } from "./migrations/1727115009916-CreatePedidos";
+import { CreateDepartamentos1727183720141 } from "./migrations/1727183720141-CreateDepartamentos";
+import { CreateEtapas1727183768483 } from "./migrations/1727183768483-CreateEtapas";
+import { CreateEtapasPedidos1727183789278 } from "./migrations/1727183789278-CreateEtapasPedidos";
+import Cliente from "../models/Cliente";
+import Departamento from "../models/Departamento";
+import Endereco from "../models/Endereco";
+import Etapa from "../models/Etapa";
+import EtapaPedido from "../models/EtapaPedido";
+import Pedido from "../models/Pedido";
 
 
 export const AppDataSource = new DataSource({
@@ -21,12 +32,17 @@ export const AppDataSource = new DataSource({
     database: "wecollab",
     synchronize: true,
     logging: false,
-    entities: [User, Role, Permission, Departamentos],
+    entities: [User, Role, Permission, Cliente, Departamento, Endereco, Etapa, EtapaPedido, Pedido],
     migrations: [CreateUsers1726672168699,
                 CreatePermissions1726679330555,
                 CreateRoles1726679379911,
                 CreatePermissionsRoles1726679445904,
                 CreateUsersRoles1726679463665,
-                CreateDepartamentos1727086743759],
+                CreateClientes1727114980676,
+                CreateEndereco1727114998737,
+                CreatePedidos1727115009916,
+                CreateDepartamentos1727183720141,
+                CreateEtapas1727183768483,
+                CreateEtapasPedidos1727183789278],
     subscribers: [],
 })

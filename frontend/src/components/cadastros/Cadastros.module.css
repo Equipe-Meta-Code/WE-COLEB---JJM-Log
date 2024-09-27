@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    padding: 0;
+}
+
+label,h1{
+    color: white;
+    margin: 0px;
+}
+.pagina{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    max-width: 100%;
+    border: 0px;
+    background-color: #1B4215;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 0px;
+}
+.titulo{
+    margin: 16px 16px 0px 16px;
+    font-size: 28px;
+}
+.campos{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 56px);
+    text-align: left;
+}
+
+.campoData{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}
+.conjuntoData{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: calc(100% - 56px);
+}
+
+.inputTexto, .inputDatas{
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #729966;
+    font-size: 16px;
+    color: #000000; 
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.inputTexto:focus {
+    border-color: #3e8e41;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+.inputTexto::placeholder {
+    color: #ffffff;
+    opacity: 0.7; 
+    font-size: 14px;
+}
+.inputTexto:hover {
+    background-color: #86b179;
+}
+.botaoCadastrar{
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 0px;
+    background-color: #729966;
+    font-size: 16px;
+    color: #000000;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 16px;
+}
+.botaoCadastrar:hover{
+    background-color: #86b179;
+}
