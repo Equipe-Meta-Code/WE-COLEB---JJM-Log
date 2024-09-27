@@ -13,7 +13,7 @@ function SolicitacaoDeServico() {
         dataInicial: '',
         dataFinal: '',
         categoria: '',
-        tipos: '',
+        tipo: '',
         peso: '',
         quantidade: '',
         volume: '',
@@ -74,7 +74,7 @@ function SolicitacaoDeServico() {
                 data_inicial: dadosPedido.dataInicial,
                 data_entrega: dadosPedido.dataFinal,
                 categoria: dadosPedido.categoria,
-                tipos: dadosPedido.tipos,
+                tipo: dadosPedido.tipo,
                 peso: dadosPedido.peso,
                 quantidade: dadosPedido.quantidade,
                 volume: dadosPedido.volume,
@@ -86,6 +86,31 @@ function SolicitacaoDeServico() {
 
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
+        }
+    }
+
+    // Função para cadastrar em etapasPedido
+    async function cadastrarEtapasPorDepartamento() {
+        try {
+
+            for (const departamento of dadosPedido.departamentos) {
+
+                if (departamento.etapas && departamento.etapas.length > 0) {
+
+                    for (const etapa of departamento.etapas) {
+                        const resp = await api.post("/etapapedido", {
+                            estado: etapa.estado,
+                            etapa_id: etapa.etapaId,
+                            pedido_id: etapa.pedidoId
+                        });
+    
+                        console.log(`Etapa ${etapa.etapaId} do Departamento ${departamento.idDepartamento} cadastrada com sucesso.`);
+                        console.log(resp);
+                    }
+                }
+            }
+        } catch (error) {
+            console.error("Erro ao cadastrar as etapas:", error);
         }
     }
 
@@ -235,8 +260,8 @@ function SolicitacaoDeServico() {
                             <select
                                 className={styles.inputTexto}
                                 id={styles.selectCategorias}
-                                value={dadosPedido.tipos}
-                                onChange={(e) => setDadosPedido({ ...dadosPedido, tipos: e.target.value })}
+                                value={dadosPedido.tipo}
+                                onChange={(e) => setDadosPedido({ ...dadosPedido, tipo: e.target.value })}
                             >
                                 <option value="">-- Selecione uma opção --</option>
                                 <option value="tecnologia">Tecnologia</option>

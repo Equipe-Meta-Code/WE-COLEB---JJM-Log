@@ -30,6 +30,22 @@ class EtapaController {
             return res.status(500).json({ message: "Erro ao criar etapa", error });
         }
     }
+
+      // Listar todas as etapas
+      async getAll(req: Request, res: Response): Promise<Response> {
+        const etapaRepository = AppDataSource.getRepository(Etapas);
+
+        try {
+
+            const etapas = await etapaRepository.find({
+                relations: ["departamento"],
+            });
+
+            return res.status(200).json(etapas);
+        } catch (error) {
+            return res.status(500).json({ message: "Erro ao buscar etapas", error });
+        }
+    }
 }
 
 export default new EtapaController();

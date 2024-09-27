@@ -54,6 +54,14 @@ class PedidoController {
         }
     }
 
+    // Buscar todos os pedidos
+    async getAll(req: Request, res: Response): Promise<Response> {
+        const pedidoRepository = AppDataSource.getRepository(Pedido);
+
+        const pedidos = await pedidoRepository.find();
+
+        return res.status(200).json(pedidos);
+    }
 }
 
 export default new PedidoController();
