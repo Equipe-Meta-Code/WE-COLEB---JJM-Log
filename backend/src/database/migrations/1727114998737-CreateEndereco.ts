@@ -63,7 +63,7 @@ export class CreateEndereco1727114998737 implements MigrationInterface {
             referencedColumnNames: ['id'],
             name: 'fk_cliente_endereco_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
     }
 

@@ -25,7 +25,7 @@ export class CreateDepartamentosPedidos1727183848377 implements MigrationInterfa
             referencedColumnNames: ['id'],
             name: 'fk_pedido_pedido_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
 
         await queryRunner.createForeignKey('departamento_pedido', new TableForeignKey({
@@ -34,7 +34,7 @@ export class CreateDepartamentosPedidos1727183848377 implements MigrationInterfa
             referencedColumnNames: ['id'],
             name: 'fk_departamento_pedido_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
     }
 
