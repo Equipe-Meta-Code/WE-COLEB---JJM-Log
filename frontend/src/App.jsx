@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import CadastroUsuario from './pages/login/CadastroUsuario'
 import Login from './pages/login/login'
+import './pages/login/style.css'; 
 
 /* import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento' */
 
