@@ -38,7 +38,7 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
             referencedColumnNames: ['id'],
             name: 'fk_pedido_etapa_pedido_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
 
         await queryRunner.createForeignKey('etapa_pedido', new TableForeignKey({
@@ -47,7 +47,7 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
             referencedColumnNames: ['id'],
             name: 'fk_etapa_etapa_pedido_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
     }
 

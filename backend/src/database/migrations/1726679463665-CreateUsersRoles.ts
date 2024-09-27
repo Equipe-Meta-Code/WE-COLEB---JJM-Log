@@ -21,7 +21,7 @@ export class CreateUsersRoles1726679463665 implements MigrationInterface {
                 referencedTableName: 'roles',
                 name: 'fk_roles_users_',
                 onDelete: 'CASCADE',
-                onUpdate: 'SET NULL'
+                onUpdate: 'CASCADE'
             })
         );
 
@@ -33,7 +33,7 @@ export class CreateUsersRoles1726679463665 implements MigrationInterface {
                 referencedTableName: 'users',
                 name: 'fk_users_roles_',
                 onDelete: 'CASCADE',
-                onUpdate: 'SET NULL'
+                onUpdate: 'CASCADE'
             })
         );
     }

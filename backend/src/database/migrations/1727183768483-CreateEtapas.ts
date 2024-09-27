@@ -33,7 +33,7 @@ export class CreateEtapas1727183768483 implements MigrationInterface {
             referencedColumnNames: ['id'],
             name: 'fk_departamento_etapa_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
     }
 
