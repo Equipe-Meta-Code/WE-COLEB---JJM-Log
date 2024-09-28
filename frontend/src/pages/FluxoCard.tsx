@@ -4,13 +4,19 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
+import { useNavigate } from 'react-router-dom';
 
-export default function FluxoCard({ title, state, date, pending, delay, verification }) { 
-
+export default function FluxoCard({ pedidoId, title, state, date, pending, delay, verification }) { 
   const [expanded, setExpanded] = React.useState(false); 
+  const navigate = useNavigate();
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);  
+    setExpanded(!expanded);
+  };
+
+  const handleViewTimeline = () => {
+    // Redireciona para a página Timeline com o ID do pedido na URL
+    navigate(`/timeline/${pedidoId}`);
   };
 
   return (
@@ -31,8 +37,8 @@ export default function FluxoCard({ title, state, date, pending, delay, verifica
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" sx={{ color: 'white' }} onClick={handleExpandClick}>
-            {expanded ? 'Esconder' : 'Visualizar'}
+          <Button size="small" sx={{ color: 'white' }} onClick={handleViewTimeline}>
+            Visualizar
           </Button>
         </CardActions>
       </Card>
