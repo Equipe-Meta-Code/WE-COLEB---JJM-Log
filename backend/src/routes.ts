@@ -29,6 +29,8 @@ router.get("/departamentos", DepartamentoController.getAll);
 router.get("/etapapedido", EtapaPedidoController.getAll);
 router.get('/etapapedido/pedido/:pedidoId', EtapaPedidoController.getByPedidoId);
 
+router.put('/etapapedido/:id', EtapaPedidoController.update);
+
 router.get("/users/roles", UserController.roles);
 router.put("/updatePassword", UserController.updatePassword);
 
