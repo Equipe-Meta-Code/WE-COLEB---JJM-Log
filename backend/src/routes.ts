@@ -22,7 +22,8 @@ router.post("/pedidos", PedidoController.create);
 router.post("/etapapedido", EtapaPedidoController.create);
 
 
-router.get("/pedidos", PedidoController.getAll);
+router.get("/pedidos", PedidoController.getAll); // Buscar todos os pedidos
+router.get("/pedidos/:id", PedidoController.getById); // Buscar pedido por ID
 router.get("/etapas", EtapaController.getAll);
 router.get("/departamentos", DepartamentoController.getAll);
 

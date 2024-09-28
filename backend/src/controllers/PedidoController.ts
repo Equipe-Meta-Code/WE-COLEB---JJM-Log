@@ -55,6 +55,29 @@ class PedidoController {
 
         return res.status(200).json(pedidos);
     }
+
+    // Buscar um pedido por ID
+    async getById(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+        const pedidoRepository = AppDataSource.getRepository(Pedido);
+
+        try {
+            // Busca o pedido junto com as relações (user e cliente)
+            const pedido = await pedidoRepository.findOne({
+                where: { id: Number(id) },
+                relations: ["user", "cliente"], // Incluindo as relações que você precisa
+            });
+
+            if (!pedido) {
+                return res.status(404).json({ message: "Pedido não encontrado" });
+            }
+
+            return res.status(200).json(pedido);
+        } catch (error) {
+            console.error("Erro ao buscar o pedido por ID:", error);
+            return res.status(500).json({ message: "Erro ao buscar pedido", error });
+        }
+    }
 }
 
 export default new PedidoController();
