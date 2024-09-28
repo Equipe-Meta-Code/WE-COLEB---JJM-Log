@@ -18,16 +18,11 @@ class PedidoController {
             quantidade,
             volume,
             distancia,
-            user, // Isso é o ID do usuário
-            cliente // Isso é o ID do cliente
         } = req.body;
 
         const pedidoRepository = AppDataSource.getRepository(Pedido);
 
         try {
-            // Simulação para caso user ou cliente não existam (pode remover isso no futuro)
-            const user_id = user || 1;
-            const cliente_id = cliente || 2;
 
             // Criar um novo pedido com os IDs de usuário e cliente
             const pedido = pedidoRepository.create({
@@ -41,8 +36,6 @@ class PedidoController {
                 quantidade,
                 volume,
                 distancia,
-                user_id, // Passa o ID do usuário
-                cliente_id // Passa o ID do cliente
             });
 
             // Salvar o pedido no banco de dados
