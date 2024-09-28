@@ -15,6 +15,7 @@ import CardList from './pages/CardList'
 import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento';
 import CadastrarEtapas from './components/cadastros/CadastrarEtapas'
 import SolicitacaoDeServico from './components/cadastros/SolicitacaoDeServico';
+import Timeline from './pages/Timeline';
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/Cadastro/Departamento' exact element={<CadastrarDepartamentos/>}></Route> 
           <Route path='/Cadastro/Etapas' exact element={<CadastrarEtapas/>}></Route> 
           <Route path='/Cadastro/Pedido' exact element={<SolicitacaoDeServico/>}></Route> 
+          <Route path="/timeline/:pedidoId" element={<Timeline />} />
 
 {/* 
           <Route path='Monitoramento' exact element={<Timeline/>}></Route>
