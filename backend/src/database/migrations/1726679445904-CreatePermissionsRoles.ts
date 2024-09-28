@@ -21,7 +21,7 @@ export class CreatePermissionsRoles1726679445904 implements MigrationInterface {
                 referencedTableName: 'permissions',
                 name: 'fk_permissions_roles_',
                 onDelete: 'CASCADE',
-                onUpdate: 'SET NULL'
+                onUpdate: 'CASCADE'
             })
         )
 
@@ -33,7 +33,7 @@ export class CreatePermissionsRoles1726679445904 implements MigrationInterface {
                 referencedTableName: 'roles',
                 name: 'fk_roles_permissions_',
                 onDelete: 'CASCADE',
-                onUpdate: 'SET NULL'
+                onUpdate: 'CASCADE'
             })
         )
     }

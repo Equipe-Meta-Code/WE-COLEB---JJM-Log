@@ -84,7 +84,7 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
             referencedColumnNames: ['id'],
             name: 'fk_cliente_pedido_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
 
         await queryRunner.createForeignKey('pedidos', new TableForeignKey({
@@ -93,7 +93,7 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
             referencedColumnNames: ['id'],
             name: 'fk_user_pedido_',
             onDelete: 'CASCADE',
-            onUpdate: 'SET NULL',
+            onUpdate: 'CASCADE',
         }));
     }
 
