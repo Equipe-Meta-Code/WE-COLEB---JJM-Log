@@ -406,12 +406,14 @@ const LicensePlateCard = () => {
           {/* Informações adicionais*/}
 {/*           <DriverCard />
           <LicensePlateCard /> */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <SmallCard title="Carga" value={`${pedido.peso}kg`} icon={<CardGiftcardIcon sx={{ color: 'white' }} />} />
-            <SmallCard title="Volume" value={`${pedido.volume}m³`} icon={<StorageIcon sx={{ color: 'white' }} />} />
-            <SmallCard title="Distância" value={`${pedido.distancia}km`} icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
-            {/* <SmallCard title="Tempo Estimado" value="2h" icon={<CalendarTodayIcon sx={{ color: 'white' }} />} /> */}
-          </Box>
+          {pedido.categoria === "entrega" && (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <SmallCard title="Carga" value={`${pedido.peso}kg`} icon={<CardGiftcardIcon sx={{ color: 'white' }} />} />
+              <SmallCard title="Volume" value={`${pedido.volume}m³`} icon={<StorageIcon sx={{ color: 'white' }} />} />
+              <SmallCard title="Distância" value={`${pedido.distancia}km`} icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
+              {/* <SmallCard title="Tempo Estimado" value="2h" icon={<CalendarTodayIcon sx={{ color: 'white' }} />} /> */}
+            </Box>
+          )}
         </Grid>
       </Grid>
     );
