@@ -37,6 +37,44 @@ class EtapaController {
             return res.status(500).json({ message: "Erro ao criar etapa", error });
         }
     }
+
+    // Listar todas as etapas associadas a pedidos
+    async getAll(req: Request, res: Response): Promise<Response> {
+        const etapaPedidoRepository = AppDataSource.getRepository(EtapaPedido);
+
+        try {
+            const etapasPedidos = await etapaPedidoRepository.find({
+                relations: ["pedido", "etapa"], // Ajustar as relações corretas
+            });
+
+            return res.status(200).json(etapasPedidos);
+        } catch (error) {
+            return res.status(500).json({ message: "Erro ao buscar etapas associadas a pedidos", error });
+        }
+    }
+
+    async getByPedidoId(req: Request, res: Response): Promise<Response> {
+        const { pedidoId } = req.params; // Captura o pedidoId da rota
+        const etapaPedidoRepository = AppDataSource.getRepository(EtapaPedido);
+
+        try {
+            // Buscar as etapas associadas ao pedidoId
+            const etapas = await etapaPedidoRepository.find({
+                where: { pedido: { id: Number(pedidoId) } }, // Filtra pelo pedidoId
+                relations: ["pedido", "etapa", "etapa.departamento"], // Carrega as relações necessárias
+            });
+
+            if (!etapas.length) {
+                return res.status(404).json({ message: "Nenhuma etapa encontrada para este pedido" });
+            }
+
+            return res.status(200).json(etapas);
+        } catch (error) {
+            console.error("Erro ao buscar etapas por pedidoId:", error);
+            return res.status(500).json({ message: "Erro ao buscar etapas", error });
+        }
+    }
+
 }
 
 export default new EtapaController();
