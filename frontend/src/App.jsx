@@ -16,19 +16,22 @@ import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento
 import CadastrarEtapas from './components/cadastros/CadastrarEtapas'
 import SolicitacaoDeServico from './components/cadastros/SolicitacaoDeServico';
 import Timeline from './pages/Timeline';
+/* import Login from './pages/login/Login';
+import CadastroUsuario from './pages/login/CadastroUsuario'; */
 
 
 const App = () => {
   return (
     <BrowserRouter>
-        {/* rotas que não precisam do sidebar podem ser definidas aqui */}
-        
-        {/* <Route path='Login' exact element={<Login/>}></Route> */}
-        {/* <Route path="Cadastro" element={<Cadastro />} /> */}
-      
-      <BaseLayout/>
+               
       <Routes>
-        <Route>
+
+        {/* rotas que não precisam do sidebar podem ser definidas aqui */}
+{/*         <Route path="/" exact element={<Login />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/cadastro" exact element={<CadastroUsuario />} /> */}
+
+        <Route element={<BaseLayout />}>
           {/* <Route path="*" element={<PageNotFound />} /> */}
 
           <Route path='/' exact element={<CardList/>}></Route> 

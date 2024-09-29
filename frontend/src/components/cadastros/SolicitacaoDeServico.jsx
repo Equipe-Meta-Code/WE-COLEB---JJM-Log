@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from './Cadastros.module.css';
 import api from '../../services/api';
+import CadastroConcluido from './CadastroConcluido';
 
 function SolicitacaoDeServico() {
     const [departamentos, setDepartamentos] = useState([]);
     const [pedidos, setPedidos] = useState([]);
     const [etapas, setEtapas] = useState([]);
+    const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
 
     const [dadosPedido, setDadosPedido] = useState({
         nome: '',
@@ -83,10 +85,41 @@ function SolicitacaoDeServico() {
             console.log(response);
 
             await cadastrarEtapasPorDepartamento();
+            setShowCadastroConcluido(true);
+            setDadosPedido({
+                nome: '',
+                descricao: '',
+                dataInicial: '',
+                dataFinal: '',
+                categoria: '',
+                tipo: '',
+                peso: '',
+                quantidade: '',
+                volume: '',
+                distancia: '',
+                departamentos: [
+                    {
+                        idPedido: 1,
+                        idDepartamento: '',
+                        etapas: [
+                            {
+                                pedidoId: 1,
+                                etapaId: '',
+                                estado: 'Não Iniciado',
+                                departamento: ''
+                            }
+                        ]
+                    }
+                ],
+            });
 
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
         }
+    }
+
+    function handleCloseCadastroConcluido() {
+        setShowCadastroConcluido(false);
     }
 
     // Função para cadastrar em etapasPedido
@@ -385,9 +418,16 @@ function SolicitacaoDeServico() {
                     </div>
                 ))}
 
-                <button onClick={cadastrarPedido} className={styles.botaoCadastrar}>Cadastrar</button>
-                <button onClick={console.log(dadosPedido)} className={styles.botaoCadastrar}>testar</button>
+                <button onClick={cadastrarPedido} className={styles.botaoCadastrar}>
+                    Cadastrar
+                </button>
+                
             </div>
+            
+            {showCadastroConcluido && (
+                <CadastroConcluido onClose={handleCloseCadastroConcluido} />
+            )}
+
         </div>
     );
 }
