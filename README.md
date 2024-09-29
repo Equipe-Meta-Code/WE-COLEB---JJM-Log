@@ -60,13 +60,22 @@ Em andamento.
 ![image](https://github.com/user-attachments/assets/2926ddf4-333b-4291-8241-c478edf2a769)
 
 <span id="Vídeo">
- 
+  
+ ## 🖼 Protótipo Figma
+
+ <details>
+https://www.figma.com/design/cLvxtdAwY5JHZP9VonyJeV/dashboard-(Copy)?node-id=0-1&t=DR6TnYwYdQLy0fZv-1
+ </details>
+  
 ## 📽️ Vídeo das Sprints
 <details>
   <summary>VÍDEOS</summary>
   <details>
      <summary>SPRINT 1</summary>
       <div align="center">
+
+https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b
+
   </details>
   
   <details>
