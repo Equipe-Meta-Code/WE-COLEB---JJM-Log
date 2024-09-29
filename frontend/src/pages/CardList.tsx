@@ -50,7 +50,7 @@ export default function CardList() {
           />
         ))
       ) : (
-        <h1>Ainda não foi cadastrado nenhum pedido</h1>
+        <p>Ainda não foi cadastrado nenhum pedido</p>
       )}
     </div>
   );

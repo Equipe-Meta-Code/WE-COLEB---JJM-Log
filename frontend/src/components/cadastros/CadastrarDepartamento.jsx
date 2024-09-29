@@ -1,26 +1,33 @@
 import { useState } from 'react';
 import styles from './Cadastros.module.css';
-import api from '../../services/api'
+import api from '../../services/api';
+import CadastroConcluido from './CadastroConcluido';
 
 function CadastrarDepartamentos() {
-    
-    const [nome , setDepartamento] = useState(''); 
+    const [nome, setDepartamento] = useState('');
+    const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
 
     async function cadastrarDepartamento() {
-        console.log("Cadastrar Pedido");
+        console.log("Cadastrar Departamento");
         console.log(nome);
-    
+
         try {
             const response = await api.post("/departamentos", {
                 nome,
-
             });
-            console.log(response)
+
+            console.log(response);
+
+            setShowCadastroConcluido(true);
+            setDepartamento('');
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
         }
     }
-    
+
+    function handleCloseCadastroConcluido() {
+        setShowCadastroConcluido(false);
+    }
 
     return (
         <div className={styles.pagina}>
@@ -42,7 +49,13 @@ function CadastrarDepartamentos() {
                 <button className={styles.botaoCadastrar} onClick={cadastrarDepartamento}>
                     Cadastrar
                 </button>
+          
             </div>
+
+            {showCadastroConcluido && (
+                <CadastroConcluido onClose={handleCloseCadastroConcluido} />
+            )}
+
         </div>
     );
 }

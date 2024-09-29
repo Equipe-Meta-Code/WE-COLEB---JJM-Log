@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './Cadastros.module.css';
 import api from '../../services/api';
+import CadastroConcluido from './CadastroConcluido';
 
 function CadastrarEtapas() {
     const [departamentos, setDepartamentos] = useState([]);
+    const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
 
     const [etapa, setEtapa] = useState({
         nome: '',
@@ -27,14 +29,24 @@ function CadastrarEtapas() {
                 nome: etapa.nome,
                 id_departamento: etapa.id_departamento,
             });
+            setShowCadastroConcluido(true);
+            setEtapa({
+                nome: '',
+                id_departamento: '',
+            });
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
         }
     }
 
+    function handleCloseCadastroConcluido() {
+        setShowCadastroConcluido(false);
+    }
+
     useEffect(() => {
         buscarDepartamentos();
     }, []);
+    
 
     return (
         <div className={styles.pagina}>
@@ -77,6 +89,11 @@ function CadastrarEtapas() {
                     Cadastrar
                 </button>
             </div>
+
+            {showCadastroConcluido && (
+                <CadastroConcluido onClose={handleCloseCadastroConcluido} />
+            )}
+
         </div>
     );
 }
