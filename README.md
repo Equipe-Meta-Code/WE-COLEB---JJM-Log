@@ -50,6 +50,7 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 <span id="MVP">
  
 ## 📋 MVP
+Em andamento.
 
 
 <span id="Diagrama de classes">
@@ -60,9 +61,29 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 <span id="Vídeo">
  
-## 📽️ Vídeo final
-
-
+## 📽️ Vídeo das Sprints
+<details>
+  <summary>VÍDEOS</summary>
+  <details>
+     <summary>SPRINT 1</summary>
+      <div align="center">
+  </details>
+  
+  <details>
+     <summary>SPRINT 2</summary>
+      <div align="center">
+  </details>
+  
+  <details>
+     <summary>SPRINT 3</summary>
+      <div align="center">
+  </details>
+  
+  <details>
+     <summary>SPRINT 4</summary>
+      <div align="center">
+  </details>  
+</details>
 
 
 # Guia de Instalação
