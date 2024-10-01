@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    padding: 0;
+}
+label,h1{
+    margin: 0px;
+}
+.pagina{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+   /*  flex-wrap: wrap; */
+    align-items: center;
+}
+.container{
+    width: 100%;
+    max-width: 600px;
+    border: 0px;
+    background-color: #1B4215;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 0px;
+}
+.titulo{
+    margin: 16px 16px 0px 16px;
+    font-size: 28px;
+    color: white;
+}
