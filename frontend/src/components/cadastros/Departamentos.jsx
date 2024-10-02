@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import styles from './Departamentos.module.css';
 import api from '../../services/api';
-import CadastroConcluido from './CadastroConcluido';
+import Edicao from '../modal/Edicao';
 
 function Departamentos() {
     const [departamentos, setDepartamentos] = useState([]);
     const [etapas, setEtapas] = useState([]);
-    const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
-
-/*     const [etapa, setEtapa] = useState({
-        nome: '',
-        id_departamento: '',
-    }); */
+    const [showModal, setShowModal] = useState(false);
+    const [etapaEditada, setEtapaEditada] = useState(null);
 
     async function buscarDepartamentos() {
         try {
@@ -32,30 +28,37 @@ function Departamentos() {
         }
     }
 
-    async function cadastrarEtapa() {
+    async function deletarEtapa(id) {
         try {
-            console.log(etapa);
-            const response = await api.post("/etapas", {
-                nome: etapa.nome,
-                id_departamento: etapa.id_departamento,
-            });
-            setShowCadastroConcluido(true);
-            setEtapa({
-                nome: '',
-                id_departamento: '',
-            });
+            await api.delete(`/etapas/${id}`);
+            setEtapas(etapas.filter((etapa) => etapa.id !== id));
         } catch (error) {
-            console.error("Erro ao cadastrar:", error);
+            console.error("Erro ao deletar etapa:", error);
         }
     }
 
-    function handleCloseCadastroConcluido() {
-        setShowCadastroConcluido(false);
+    function mostrarModal(id, nome, departamento_id, departamento_nome) {
+
+        setEtapaEditada({ id, nome, departamento_id, departamento_nome });
+        setShowModal(true)
+    }
+
+    function handleCloseModal() {
+        setShowModal(false);
     }
 
     useEffect(() => {
+
         buscarDepartamentos();
         buscarEtapas();
+
+        const intervalId = setInterval(() => {
+            buscarDepartamentos();
+            buscarEtapas();
+        }, 1000);
+
+
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
@@ -63,18 +66,35 @@ function Departamentos() {
             {departamentos.map((departamento) => (
                 <div key={departamento.id} className={styles.container}>
                     <h1 className={styles.titulo}>{departamento.nome}</h1>
-                    {etapas
-                        .filter(etapa => etapa.departamento.id === departamento.id) // Filtra as etapas pelo departamento
+                    
+                    {etapas.filter(etapa => etapa.departamento.id === departamento.id)
                         .map((etapa) => (
-                            <div key={etapa.id}>
-                                <p>{etapa.nome}</p> {/* Mostra o nome da etapa */}
+                            <div key={etapa.id} className={styles.etapas}>
+                                <button>x</button>
+                                <p className={styles.etapa}>{etapa.nome}</p>
+
+                                <div className={styles.botoes}>
+                                
+                                    <button onClick={() => deletarEtapa(etapa.id)}>Remover</button>
+                                   
+                                    <button onClick={() => mostrarModal(etapa.id, etapa.nome, etapa.departamento.id, etapa.departamento.nome)}>Editar</button>
+                                    <button>Ordem</button>
+                                </div>
                             </div>
                         ))}
+
+                    <button>Cadastrar nova Etapa</button>
                 </div>
             ))}
 
-            {showCadastroConcluido && (
-                <CadastroConcluido onClose={handleCloseCadastroConcluido} />
+            {showModal && (
+                <Edicao 
+                    id={etapaEditada.id} 
+                    nome={etapaEditada.nome} 
+                    departamento_id={etapaEditada.departamento_id} 
+                    departamento_nome={etapaEditada.departamento_nome}
+                    onClose={handleCloseModal}
+                />
             )}
         </div>
     );
