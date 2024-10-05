@@ -49,7 +49,7 @@ class EtapaController {
 
     async update(req: Request, res: Response): Promise<Response> {
         const { id } = req.params;
-        const { nome, id_departamento } = req.body;
+        const { nome, fixo, id_departamento } = req.body;
         const etapasRepository = AppDataSource.getRepository(Etapas);
         const departamentosRepository = AppDataSource.getRepository(Departamentos);
 
@@ -69,6 +69,7 @@ class EtapaController {
             }
 
             if (nome) etapa.nome = nome;
+            if (fixo) etapa.fixo = fixo;
 
             await etapasRepository.save(etapa);
 

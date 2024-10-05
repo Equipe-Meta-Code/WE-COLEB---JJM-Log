@@ -19,6 +19,10 @@ export class CreateEtapas1727122773821 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
+                        name: 'fixo',
+                        type: 'varchar',
+                    },
+                    {
                         name: 'id_departamento',
                         type: 'int',
                         isNullable: true, // Permitir valores nulos

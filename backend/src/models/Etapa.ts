@@ -9,6 +9,9 @@ class Etapa {
 
     @Column({ type: 'varchar', nullable: false })
     nome: string;
+    
+    @Column({ type: 'varchar', nullable: false })
+    fixo: string;
 
     @ManyToOne(() => Departamento)
     @JoinColumn({ name: 'departamento_id' })
