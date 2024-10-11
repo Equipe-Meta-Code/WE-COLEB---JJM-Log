@@ -37,7 +37,7 @@ function Login() {
         }
         try {
             await signIn({ login, senha });
-            navigate('/dashboard');
+            navigate('/portalFuncionario');
         } catch (error) {
             setError("Credenciais inválidas. Por favor, verifique seu login e senha."); // Define a mensagem de erro em caso de falha no login
         }
@@ -69,7 +69,7 @@ function Login() {
 
     return (
         <div className="login">
-            <h2>Login</h2>
+            <h2>Login para portal de funcionários</h2>
             <form onSubmit={handleSubmit}>
                 <div className="label-container">
                     <label>Usuário:</label>
