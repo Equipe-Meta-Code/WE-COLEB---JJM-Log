@@ -137,7 +137,7 @@ export default function Sidebar() {
                     justifyContent: "center",
                   }}
                 >
-                  <Link to="/Portal" className="menu-link-icon">
+                  <Link to="/login" className="menu-link-icon">
                     <ListItemIcon
                       sx={{
                         justifyContent: "center",

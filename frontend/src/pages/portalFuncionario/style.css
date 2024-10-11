@@ -1,0 +1,50 @@
+.pasta-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: inline;
+}
+
+.arquivo-div {
+  width: 260px;
+  height: 210px;
+  background-color: #1B4215;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin: 50px;
+}   
+
+.arquivo-div:hover {
+    transform: scale(1.05);
+}
+
+.image {
+  max-width: 55%;
+  max-height: 55%;
+  margin-bottom: 5px;
+}
+
+.image-atestado {
+    max-width: 56%;
+    max-height: 56%;
+    margin-bottom: 5px;
+}
+
+.nome-pasta {
+    color: white;
+}
+
+.titulo {
+    color: black;
+    padding-bottom: 15px;
+}
+
+.titulo-seg {
+    text-align: center;
+    padding: 5px;
+}
+
