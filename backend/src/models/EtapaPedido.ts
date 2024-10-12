@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import Pedido from "./Pedido";
-import Etapa from "./Etapa";
 
 @Entity('etapa_pedido')
 class EtapaPedido {
@@ -9,14 +8,20 @@ class EtapaPedido {
     id: number;
 
     @Column({ type: 'varchar', nullable: false })
+    nome: string;
+
+    @Column({ type: 'varchar', nullable: false })
+    departamento: string;
+
+    @Column({ type: 'varchar', nullable: false })
     estado: string;
+
+    @Column({ type: 'timestamp', nullable: false })
+    data_conclusao: Date;
 
     @ManyToOne(() => Pedido)  
     @JoinColumn({ name: 'pedido_id' })
     pedido: Pedido;
-
-    @ManyToOne(() => Etapa)
-    @JoinColumn({ name: 'etapa_id' })
-    etapa: Etapa;
 }
+
 export default EtapaPedido;
