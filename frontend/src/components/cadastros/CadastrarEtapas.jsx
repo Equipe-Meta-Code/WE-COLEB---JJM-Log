@@ -9,6 +9,8 @@ function CadastrarEtapas() {
 
     const [etapa, setEtapa] = useState({
         nome: '',
+        fixo: 'nao',
+        ordem: 0,
         id_departamento: '',
     });
 
