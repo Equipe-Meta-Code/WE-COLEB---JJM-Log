@@ -38,9 +38,8 @@ function Departamentos() {
     }
 
     function mostrarModal(id, nome, departamento_id, departamento_nome) {
-
         setEtapaEditada({ id, nome, departamento_id, departamento_nome });
-        setShowModal(true)
+        setShowModal(true);
     }
 
     function handleCloseModal() {
@@ -48,7 +47,6 @@ function Departamentos() {
     }
 
     useEffect(() => {
-
         buscarDepartamentos();
         buscarEtapas();
 
@@ -74,28 +72,31 @@ function Departamentos() {
                                 <p className={styles.etapa}>{etapa.nome}</p>
 
                                 <div className={styles.botoes}>
-                                
                                     <button onClick={() => deletarEtapa(etapa.id)}>Remover</button>
-                                   
                                     <button onClick={() => mostrarModal(etapa.id, etapa.nome, etapa.departamento.id, etapa.departamento.nome)}>Editar</button>
                                     <button>Ordem</button>
                                 </div>
                             </div>
                         ))}
-
                     <button>Cadastrar nova Etapa</button>
                 </div>
             ))}
 
             {showModal && (
-                <Edicao 
-                    id={etapaEditada.id} 
-                    nome={etapaEditada.nome} 
-                    departamento_id={etapaEditada.departamento_id} 
-                    departamento_nome={etapaEditada.departamento_nome}
-                    onClose={handleCloseModal}
-                />
+                <>
+                    <div className={styles['blur-background']} onClick={handleCloseModal}></div>
+                    <div className={styles.modal}>
+                        <Edicao 
+                            id={etapaEditada.id} 
+                            nome={etapaEditada.nome} 
+                            departamento_id={etapaEditada.departamento_id} 
+                            departamento_nome={etapaEditada.departamento_nome}
+                            onClose={handleCloseModal}
+                        />
+                    </div>
+                </>
             )}
+
         </div>
     );
 }

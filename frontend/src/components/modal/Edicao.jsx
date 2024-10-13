@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
-
+import styles from '../cadastros/Cadastros.module.css'
 function Edicao({ id, nome, departamento_id, departamento_nome }) {
     const [etapa, setEtapa] = useState({
         id: id,
@@ -69,7 +69,7 @@ function Edicao({ id, nome, departamento_id, departamento_nome }) {
         <div>
             <h3>Edição de Etapa</h3>
             
-            <label>ID da Etapa:</label>
+            <label className={styles.textoBotoes}>ID da Etapa:</label>
             <input 
                 type="number" 
                 name="id" 
@@ -78,7 +78,7 @@ function Edicao({ id, nome, departamento_id, departamento_nome }) {
                 disabled 
             />
             
-            <label>Nome da Etapa:</label>
+            <label className={styles.textoBotoes}>Nome da Etapa:</label>
             <input 
                 type="text" 
                 name="nome" 
@@ -86,7 +86,7 @@ function Edicao({ id, nome, departamento_id, departamento_nome }) {
                 onChange={handleInputChange} 
             />
 
-            <label>Departamento:</label>
+            <label className={styles.textoBotoes}>Departamento:</label>
             <select 
                 name="id_departamento" 
                 value={etapa.id_departamento} 

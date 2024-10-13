@@ -16,7 +16,7 @@ class EtapaPedido {
     @Column({ type: 'varchar', nullable: false })
     estado: string;
 
-    @Column({ type: 'timestamp', nullable: false })
+    @Column({ type: 'timestamp', nullable: true })
     data_conclusao: Date;
 
     @ManyToOne(() => Pedido)  

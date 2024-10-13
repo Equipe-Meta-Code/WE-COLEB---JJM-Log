@@ -37,7 +37,7 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
                 {
                     name: 'data_conclusao',
                     type: 'timestamp',
-                    isNullable: false,
+                    isNullable: true,
                 },
             ],
         }), true);
