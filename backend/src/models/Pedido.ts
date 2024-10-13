@@ -21,6 +21,9 @@ class Pedido {
     data_entrega: Date;
 
     @Column({ type: 'varchar', nullable: false })
+    estado: string;
+
+    @Column({ type: 'varchar', nullable: false })
     categoria: string;
 
     @Column({ type: 'varchar', nullable: true })

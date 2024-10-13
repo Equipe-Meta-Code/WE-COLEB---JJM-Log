@@ -22,14 +22,18 @@ router.post("/pedidos", PedidoController.create);
 router.post("/etapapedido", EtapaPedidoController.create);
 
 
-router.get("/pedidos", PedidoController.getAll); // Buscar todos os pedidos
-router.get("/pedidos/:id", PedidoController.getById); // Buscar pedido por ID
+router.get("/pedidos", PedidoController.getAll);
+router.get("/pedidos/:id", PedidoController.getById);
 router.get("/etapas", EtapaController.getAll);
 router.get("/departamentos", DepartamentoController.getAll);
 router.get("/etapapedido", EtapaPedidoController.getAll);
 router.get('/etapapedido/pedido/:pedidoId', EtapaPedidoController.getByPedidoId);
 
+router.put("/etapas/:id", EtapaController.update);
 router.put('/etapapedido/:id', EtapaPedidoController.update);
+
+router.delete("/etapas/:id", EtapaController.delete);
+
 
 router.get("/users/roles", UserController.roles);
 router.put("/updatePassword", UserController.updatePassword);

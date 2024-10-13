@@ -46,6 +46,11 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: 'estado',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
                     name: 'categoria',
                     type: 'varchar',
                     isNullable: false,

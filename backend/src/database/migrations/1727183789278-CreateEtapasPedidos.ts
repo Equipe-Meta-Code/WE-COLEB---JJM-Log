@@ -20,14 +20,24 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: 'etapa_id',
-                    type: 'int',
+                    name: 'nome',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'departamento',
+                    type: 'varchar',
                     isNullable: false,
                 },
                 {
                     name: 'estado',
                     type: 'varchar',
                     isNullable: false,
+                },
+                {
+                    name: 'data_conclusao',
+                    type: 'timestamp',
+                    isNullable: true,
                 },
             ],
         }), true);
@@ -40,20 +50,10 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
         }));
-
-        await queryRunner.createForeignKey('etapa_pedido', new TableForeignKey({
-            columnNames: ['etapa_id'],
-            referencedTableName: 'etapas',
-            referencedColumnNames: ['id'],
-            name: 'fk_etapa_etapa_pedido_',
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-        }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('etapa_pedido', 'fk_pedido_etapa_pedido_');
-        await queryRunner.dropForeignKey('etapa_pedido', 'fk_etapa_etapa_pedido_');
         await queryRunner.dropTable("etapa_pedido");
     }
 
