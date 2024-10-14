@@ -34,10 +34,9 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 > Acesse o link do Backlog [[Clique aqui](https://docs.google.com/spreadsheets/d/1G1RpuldGR_GSwHeFtfj1lwCNR8tH11c9/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/909aef2a-802f-4f94-9556-c58c3a05eb1c" width="500"  />
-  <img src="https://github.com/user-attachments/assets/a582ae84-9e07-4252-9e17-6a05277a7d8f" width="500" />
+  <img src="https://github.com/user-attachments/assets/bd151721-f5e1-4aaa-8008-4e1ec3d5380a" width="500"  />
+  <img src="https://github.com/user-attachments/assets/4ad147ba-5767-490f-a998-4f68bd447a7d" width="500" />
 </div>
-
 
 
 <span id="user">
