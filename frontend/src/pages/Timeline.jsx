@@ -11,6 +11,8 @@ import PhoneIcon from '@mui/icons-material/Phone'; // Ícone de telefone
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useParams } from 'react-router-dom';
 import api from '../services/api';
+import DownloadButton from '../components/relatorio/GenerateReport';
+import GenerateReport from '../components/relatorio/GenerateReport';
 
 /* const timelineStepsEntrega = [
   { label: "Entrega saiu da cidade base", city: "Kyoto, Japão" },
@@ -174,8 +176,6 @@ const TimelineCard = ({ steps, title }) => {
     </Card>
   );
 };
-
-
 
 // Card de informações do motorista
 const DriverCard = () => {
@@ -414,9 +414,13 @@ const LicensePlateCard = () => {
               {/* <SmallCard title="Tempo Estimado" value="2h" icon={<CalendarTodayIcon sx={{ color: 'white' }} />} /> */}
             </Box>
           )}
+          <GenerateReport />
         </Grid>
       </Grid>
     );
+  
+
+    
   };
   
   export default Timeline;
