@@ -25,8 +25,8 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: 'departamento',
-                    type: 'varchar',
+                    name: 'departamento_id',
+                    type: 'int',
                     isNullable: false,
                 },
                 {
@@ -56,10 +56,20 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
         }));
+
+        await queryRunner.createForeignKey('etapa_pedido', new TableForeignKey({
+            columnNames: ['departamento_id'],
+            referencedTableName: 'departamentos',
+            referencedColumnNames: ['id'],
+            name: 'fk_departamento_etapa_pedido_',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+        }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('etapa_pedido', 'fk_pedido_etapa_pedido_');
+        await queryRunner.dropForeignKey('etapa_pedido', 'fk_departamento_etapa_pedido_');
         await queryRunner.dropTable("etapa_pedido");
     }
 

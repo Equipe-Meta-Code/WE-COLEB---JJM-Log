@@ -6,7 +6,6 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -45,17 +44,24 @@ const ControleEtapa = () => {
 
   return (
     <div>
+        <h1 className="titulo">Desfazer etapas</h1>
+        <h3 className="titulo-seg">Bem-vindo à aba de desfazer etapas</h3>
+        <h4 className="titulo-seg">Abaixo estão os pedidos e suas respectivas etapas. Caso 
+            necessário, você poderá acessar uma etapa e desfazê-la.
+        </h4>
+        <h4 className="titulo-obs">OBS: A etapa precisa estar com status "Finalizado" para
+            ser desfeita.</h4> 
       {pedidos.map((pedido) => (
         <Accordion
-          key={pedido.id}
-          expanded={expanded === pedido.id}
-          onChange={handleAccordionChange(pedido.id)}
+          key={pedido?.id}
+          expanded={expanded === pedido?.id}
+          onChange={handleAccordionChange(pedido?.id)}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>#{pedido.id} - {pedido.nome}</Typography>
+            <Typography>#{pedido?.id} - {pedido?.nome}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <EtapasAccordion pedidoId={pedido.id} />
+            <EtapasControle pedidoId={pedido?.id} />
           </AccordionDetails>
         </Accordion>
       ))}
@@ -63,28 +69,32 @@ const ControleEtapa = () => {
   );
 };
 
-const EtapasAccordion = ({ pedidoId }) => {
+const EtapasControle = ({ pedidoId }) => {
   const [etapas, setEtapas] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedEtapa, setSelectedEtapa] = useState(null);
 
+  const fetchEtapas = async () => {
+    setLoading(true);
+    try {
+      const response = await api.get(`/etapaPedido/pedido/${pedidoId}`);
+      const data = response.data;
+      setEtapas(data);
+    } catch (error) {
+      console.error('Erro ao buscar etapas:', error);
+    }
+    setLoading(false);
+  };
+  
   useEffect(() => {
-    const fetchEtapas = async () => {
-      setLoading(true);
-      try {
-        const response = await api.get(`/etapaPedido/pedido/${pedidoId}`);
-        const data = response.data;
-        setEtapas(data);
-      } catch (error) {
-        console.error('Erro ao buscar etapas:', error);
-      }
-      setLoading(false);
-    };
-
     fetchEtapas();
   }, [pedidoId]);
+
+  if (loading) {
+    return <CircularProgress />;
+  }
 
   const handleEtapaChange = (etapaId) => (event, isExpanded) => {
     setExpanded(isExpanded ? etapaId : false);
@@ -99,9 +109,20 @@ const EtapasAccordion = ({ pedidoId }) => {
     setOpenDialog(false);
   };
 
-  const handleConfirmDesfazer = () => {
-    // Aqui você pode adicionar a lógica para desfazer a etapa selecionada
-    console.log('Desfazer etapa:', selectedEtapa.id);
+  const handleConfirmDesfazer = async (id) => {
+    try {
+        await api.put(`/etapapedido/${id}`, {
+          etapa_desfeita: "Desfeita",
+          data_conclusao: null,
+          estado: "Não Iniciado"
+        });
+        
+        console.log('Etapa desfeita com sucesso');
+        fetchEtapas();
+      } catch (error) {
+        console.error('Erro ao desfazer a etapa:', error);
+        throw error;
+      }
     setOpenDialog(false);
   };
 
@@ -113,21 +134,21 @@ const EtapasAccordion = ({ pedidoId }) => {
     <div>
       {etapas.map((etapa) => (
         <Accordion
-          key={etapa.id}
-          expanded={expanded === etapa.id}
-          onChange={handleEtapaChange(etapa.id)}
+          key={etapa?.id}
+          expanded={expanded === etapa?.id}
+          onChange={handleEtapaChange(etapa?.id)}
           sx={{
-            backgroundColor: etapa.estado === 'Finalizado' ? '#d3eac4' : 'white',
+            backgroundColor: etapa?.estado === 'Finalizado' ? '#d3eac4' : 'white',
             transition: 'background-color 0.3s ease',
           }}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{etapa.id}. Departamento: {etapa.etapa.departamento.nome} {'->'} Etapa: { }
-                {etapa.etapa.nome} - {etapa.estado}</Typography>
+            <Typography>Departamento: {etapa?.departamento?.nome} - Etapa: { }
+                {etapa?.nome} </Typography>
           </AccordionSummary>
           <AccordionDetails className="etapa-details">
-            <Typography>Status da etapa: {etapa.estado}</Typography>
-            {etapa.estado === 'Finalizado' ? (
+            <Typography>Status da etapa: {etapa?.estado}</Typography>
+            {etapa?.estado === 'Finalizado' ? (
               <button className="desfazer-button" onClick={() => handleOpenDialog(etapa)}>
                 Desfazer
               </button>
@@ -140,14 +161,14 @@ const EtapasAccordion = ({ pedidoId }) => {
         <DialogTitle>Confirmar ação</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Tem certeza que deseja desfazer a etapa "{selectedEtapa?.etapa?.nome}" do departamento {selectedEtapa?.etapa?.departamento?.nome}?
+            Tem certeza que deseja desfazer a etapa "{selectedEtapa?.nome}" do departamento {selectedEtapa?.departamento?.nome}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <button className="cancel-button" onClick={handleCloseDialog}>
             Cancelar
           </button>
-          <button className="confirm-button" onClick={handleConfirmDesfazer}>
+          <button className="confirm-button" onClick={() => handleConfirmDesfazer(selectedEtapa?.id)}>
             Confirmar
           </button>
         </DialogActions>

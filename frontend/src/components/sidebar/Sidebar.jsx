@@ -207,27 +207,29 @@ export default function Sidebar() {
               </Menu>
             </ListItem>
 
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Etapas" placement="right" arrow>
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: "center",
-                  }}
-                >
-                  <Link to="/controleEtapa" className="menu-link-icon">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: 'white',
-                      }}
-                    >
-                      <ChecklistIcon size={19} />
-                    </ListItemIcon>
-                  </Link>
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+            <PermissionComponent role="Admin_Role">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip title="Etapas" placement="right" arrow>
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Link to="/controleEtapa" className="menu-link-icon">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: 'white',
+                        }}
+                      >
+                        <ChecklistIcon size={19} />
+                      </ListItemIcon>
+                    </Link>
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
             
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
               <ListItem 

@@ -42,3 +42,18 @@
   .cancel-button:hover {
     background-color: #e29292; 
   }
+
+  .titulo {
+    color: black;
+    padding-bottom: 15px;
+}
+
+.titulo-seg {
+    text-align: center;
+ 
+}
+
+.titulo-obs {
+  text-align: left;
+  margin-bottom: 25px;
+}

@@ -60,7 +60,7 @@ class EtapaController {
 
             const etapas = await etapaPedidoRepository.find({
                 where: { pedido: { id: Number(pedidoId) } },
-                relations: ["pedido"],
+                relations: ["pedido", "departamento"],
             });
 
             if (!etapas.length) {
@@ -77,7 +77,7 @@ class EtapaController {
     
     async update(req: Request, res: Response): Promise<Response> {
         const { id } = req.params;
-        const { estado, nome, departamento, data_conclusao } = req.body;
+        const { estado, nome, departamento_id, data_conclusao, etapa_desfeita } = req.body;
         const etapasRepository = AppDataSource.getRepository(EtapaPedido);
 
         try {
@@ -92,8 +92,9 @@ class EtapaController {
             
             etapaPedido.estado = estado;
             etapaPedido.nome = nome;
-            etapaPedido.departamento = departamento;
+            etapaPedido.departamento = departamento_id;
             etapaPedido.data_conclusao = data_conclusao;
+            etapaPedido.etapa_desfeita = etapa_desfeita;
 
             
             await etapasRepository.save(etapaPedido);
