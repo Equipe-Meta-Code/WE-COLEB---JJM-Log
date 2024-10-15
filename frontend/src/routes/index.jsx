@@ -18,6 +18,8 @@ import Timeline from '../pages/Timeline';
 import Login from '../pages/login/Login';
 import CadastroUsuario from '../pages/login/CadastroUsuario';
 import PortalFuncionario from '../pages/portalFuncionario/portalFuncionario';
+import PrivateRoutes from './privateRoutes';
+import ControleEtapa from '../pages/controleEtapa/controleEtapa';
 
 
 const AppRoutes = () => {
@@ -40,7 +42,13 @@ const AppRoutes = () => {
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/cadastro" exact element={<CadastroUsuario />} />
-          <Route path="/portalFuncionario" exact element={<PortalFuncionario />} />
+
+          <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
+            <Route path="/portalFuncionario" element={<PortalFuncionario />} />
+          </Route>
+          <Route element={<PrivateRoutes role="Admin_Role" />} >
+            <Route path="/controleEtapa" element={<ControleEtapa />} />
+          </Route>
 
 {/* 
           <Route path='Monitoramento' exact element={<Timeline/>}></Route>
