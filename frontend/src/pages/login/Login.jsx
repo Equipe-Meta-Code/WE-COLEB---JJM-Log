@@ -38,6 +38,7 @@ function Login() {
         try {
             await signIn({ login, senha });
             navigate('/portalFuncionario');
+            window.location.reload();
         } catch (error) {
             setError("Credenciais inválidas. Por favor, verifique seu login e senha."); // Define a mensagem de erro em caso de falha no login
         }

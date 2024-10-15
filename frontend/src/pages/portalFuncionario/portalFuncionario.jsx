@@ -12,7 +12,7 @@ function PortalFuncionario() {
   return (
     <>
         <h1 className="titulo">Portal do funcionário</h1>
-        <h3 className="titulo-seg">Bem vindo ao portal do funcionário</h3>
+        <h3 className="titulo-seg">Bem-vindo ao portal do funcionário</h3>
         <h4 className="titulo-seg">Utilize o portal para checar seus holerites, registro de ponto, atestados e
             armazenar arquivos importantes para a empresa.
         </h4>

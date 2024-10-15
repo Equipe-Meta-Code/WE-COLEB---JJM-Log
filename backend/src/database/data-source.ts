@@ -23,8 +23,6 @@ import { CreateDepartamentos1727183720141 } from "./migrations/1727183720141-Cre
 import { CreateEtapas1727183768483 } from "./migrations/1727183768483-CreateEtapas";
 import { CreateEtapasPedidos1727183789278 } from "./migrations/1727183789278-CreateEtapasPedidos";
 
-
-
 export const AppDataSource = new DataSource({
     type: "mysql",
     host: "localhost",
