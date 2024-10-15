@@ -39,6 +39,12 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
                     type: 'timestamp',
                     isNullable: true,
                 },
+                {
+                    name: 'etapa_desfeita',
+                    type: ' varchar',
+                    length: '255',
+                    isNullable: true,
+                },
             ],
         }), true);
 
