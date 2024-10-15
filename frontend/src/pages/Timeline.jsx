@@ -51,6 +51,7 @@ const TimelineCard = ({ steps, title }) => {
       await api.put(`/etapapedido/${id}`, {
         estado: "Finalizado", // Ou o valor correto que você deseja atualizar
       });
+      fetchEtapas();
       console.log('Estado da etapa atualizado com sucesso');
     } catch (error) {
       console.error('Erro ao atualizar o estado da etapa:', error);
