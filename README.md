@@ -100,30 +100,30 @@ https://www.figma.com/design/cLvxtdAwY5JHZP9VonyJeV/dashboard-(Copy)?node-id=0-1
 <details>
   <summary>Ver todos os vídeos das sprints</summary>
 
-  ##### SPRINT 1
+  ##### SPRINT 1 - Assistir ao vídeo da Sprint 1
   <div align="center">
-    <a href="https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b" target="_blank">🎥 Assistir ao vídeo da Sprint 1</a>
+https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b
   </div>
 
   ---
   
-  ##### SPRINT 2
+  ##### SPRINT 2 - O vídeo da Sprint 2 ainda não foi adicionado.
   <div align="center">
-    <p>O vídeo da Sprint 2 ainda não foi adicionado.</p>
+   
   </div>
 
   ---
   
-  ##### SPRINT 3
+  ##### SPRINT 3 - O vídeo da Sprint 3 ainda não foi adicionado.
   <div align="center">
-    <p>O vídeo da Sprint 3 ainda não foi adicionado.</p>
+    
   </div>
 
   ---
   
-  ##### SPRINT 4
+  ##### SPRINT 4 - O vídeo da Sprint 4 ainda não foi adicionado.
   <div align="center">
-    <p>O vídeo da Sprint 4 ainda não foi adicionado.</p>
+   
   </div>
 
 </details>
