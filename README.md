@@ -1,5 +1,23 @@
-
 <h1 align="center"> Projeto API - 4  º Semestre </h1>
+
+## Índice
+<details>
+  <summary>Mostrar Índice Completo</summary>
+
+* [Objetivo](#-objetivo)
+* [Requisitos funcionais](#-requisitos-funcionais)
+* [Requisitos não-funcionais](#-requisitos-não-funcionais)
+* [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+* [Sprints e Backlog](#-sprints-e-backlog)
+* [User Stories](#-user-stories)
+* [MVP](#-mvp)
+* [Diagrama-DER](#-diagrama-der)
+* [Protótipo Figma](#-protótipo-figma)
+* [Vídeos das Sprints](#️-vídeos-das-sprints)
+* [Guia de Instalação](#guia-de-instalação)
+
+</details>
+
 
 ## 🎯 Objetivo
 Desenvolver um sistema Web com regra de negócio complexa em ambiente de produção (Deploy), com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes, para a empresa **JJM Log**.
@@ -77,31 +95,37 @@ Em andamento.
 https://www.figma.com/design/cLvxtdAwY5JHZP9VonyJeV/dashboard-(Copy)?node-id=0-1&t=DR6TnYwYdQLy0fZv-1
  </details>
   
-## 📽️ Vídeo das Sprints
+## 📽️ Vídeos das Sprints
+
 <details>
-  <summary>VÍDEOS</summary>
-  <details>
-     <summary>SPRINT 1</summary>
-      <div align="center">
+  <summary>Ver todos os vídeos das sprints</summary>
 
-https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b
+  ##### SPRINT 1
+  <div align="center">
+    <a href="https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b" target="_blank">🎥 Assistir ao vídeo da Sprint 1</a>
+  </div>
 
-  </details>
+  ---
   
-  <details>
-     <summary>SPRINT 2</summary>
-      <div align="center">
-  </details>
+  ##### SPRINT 2
+  <div align="center">
+    <p>O vídeo da Sprint 2 ainda não foi adicionado.</p>
+  </div>
+
+  ---
   
-  <details>
-     <summary>SPRINT 3</summary>
-      <div align="center">
-  </details>
+  ##### SPRINT 3
+  <div align="center">
+    <p>O vídeo da Sprint 3 ainda não foi adicionado.</p>
+  </div>
+
+  ---
   
-  <details>
-     <summary>SPRINT 4</summary>
-      <div align="center">
-  </details>  
+  ##### SPRINT 4
+  <div align="center">
+    <p>O vídeo da Sprint 4 ainda não foi adicionado.</p>
+  </div>
+
 </details>
 
 
