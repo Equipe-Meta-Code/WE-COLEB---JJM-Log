@@ -1,0 +1,61 @@
+.pagina {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: transparent; /* Fundo da página */
+}
+
+.container {
+    background-color: #00274d; /* Azul escuro para o card */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 500px; /* Largura do card aumentada */
+    transition: transform 0.2s; /* Efeito de hover */
+}
+
+.container:hover {
+    transform: scale(1.05); /* Aumenta um pouco o card ao passar o mouse */
+}
+
+.tituloCard {
+    color: #ffffff; /* Cor do texto do título */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+    text-align: center; /* Centraliza o título */
+}
+
+.campos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputTexto {
+    margin-bottom: 15px; /* Espaço entre os campos */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda dos inputs */
+    border-radius: 5px; /* Bordas arredondadas */
+    width: auto;
+}
+
+.botaoCadastrar {
+    background-color: #007bff; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer; /* Muda o cursor para pointer */
+    transition: background-color 0.2s; /* Efeito de transição */
+}
+
+.botaoCadastrar:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
+.selectTipoDocumento {
+    margin-bottom: 15px; /* Espaço entre o select e o input */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda do select */
+    border-radius: 5px; /* Bordas arredondadas */
+}

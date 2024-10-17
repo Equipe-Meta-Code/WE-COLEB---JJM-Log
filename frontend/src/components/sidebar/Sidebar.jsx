@@ -13,6 +13,7 @@ import { FaGear, FaBuildingUser } from "react-icons/fa6";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiOrganizationChart } from "react-icons/ri";
 import { ImUserPlus } from "react-icons/im";
+import { BiUserPlus } from "react-icons/bi"; // Importando o ícone
 import { Tooltip, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './sideBar.css';  
@@ -151,7 +152,30 @@ export default function Sidebar() {
               </Tooltip>
             </ListItem>
 
-            <Divider/>
+            <Divider />
+
+            {/* Botão separado para Cadastro de Usuário */}
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip title="Cadastro de Usuário" placement="right" arrow>
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link to="/Cadastro/CadastroUsuario" className="menu-link-icon">
+                    <ListItemIcon
+                      sx={{
+                        justifyContent: "center",
+                        color: 'white',
+                      }}
+                    >
+                      <BiUserPlus size={19} /> {/* Usando o novo ícone aqui */}
+                    </ListItemIcon>
+                  </Link>
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
 
             <ListItem disablePadding sx={{ display: "block" }}>
               <Tooltip title="Cadastro" placement="right" arrow>
@@ -167,9 +191,9 @@ export default function Sidebar() {
                       justifyContent: "center",
                       color: 'white',
                     }}
-                    >
-                      <ImUserPlus size={19} />
-                    </ListItemIcon>
+                  >
+                    <ImUserPlus size={19} />
+                  </ListItemIcon>
                 </ListItemButton>
               </Tooltip>
 
@@ -195,6 +219,9 @@ export default function Sidebar() {
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <Link to="/Cadastro/Pedido" className="no-link-style">Cadastro de Pedido</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="/Cadastro/Cliente" className="no-link-style">Cadastro de Cliente</Link> {/* Nova Página */}
                 </MenuItem>
               </Menu>
             </ListItem>

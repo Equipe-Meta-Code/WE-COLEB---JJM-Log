@@ -9,6 +9,7 @@ import DepartamentoController from './controllers/DepartamentoController';
 import EtapaController from './controllers/EtapaController';
 import PedidoController from './controllers/PedidoController';
 import EtapaPedidoController from './controllers/EtapaPedido.Controller';
+import ClienteController from './controllers/ClienteController';
 
 const router = Router();
 //router.post("/users", is(['Admin_Role', 'Admin/Vendedor_Role']), UserController.create);
@@ -33,6 +34,12 @@ router.put('/etapapedido/:id', EtapaPedidoController.update);
 
 router.get("/users/roles", UserController.roles);
 router.put("/updatePassword", UserController.updatePassword);
+
+router.post("/clientes", ClienteController.create); // Cadastrar cliente
+router.get("/clientes", ClienteController.list); // Listar clientes
+router.get("/clientes/:id", ClienteController.getClienteById); // Buscar cliente por ID
+router.put("/clientes/:id", ClienteController.update); // Atualizar cliente
+router.delete("/clientes/:id", ClienteController.delete); // Deletar cliente
 
 
 export { router };

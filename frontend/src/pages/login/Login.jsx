@@ -1,101 +1,132 @@
-import { useState, useCallback } from "react";
+import React, { useState } from 'react';
+import './style.css'; // Certifique-se de que o CSS correspondente esteja atualizado
 import api from '../../services/api';
-import './style.css'; 
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal'; // Você pode instalar react-modal com `npm install react-modal`
 
-function Login() {
-    const [novoUsuario, setNovoUsuario] = useState({
-        usuario: "",
-        senha: "",
-    });
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: '#162447', // Mesma cor do card
+        borderRadius: '10px',
+        padding: '20px',
+        width: '400px', // Aumentar a largura do modal
+        color: '#ffffff', // Texto em branco
+    },
+    overlay: {
+        backgroundColor: 'transparent', // Remove o fundo acinzentado
+    },
+};
 
-    const [error, setError] = useState(''); // Adicionado o estado para armazenar o erro
-    const navigate = useNavigate();
+Modal.setAppElement('#root'); // Define o elemento pai para o modal
 
-    async function LoginUsuario() {
+function LoginPage() {
+    const [email, setEmail] = useState(''); // Estado para o email
+    const [password, setPassword] = useState(''); // Estado para a senha
+    const [error, setError] = useState(''); // Estado para mensagem de erro
+    const [successMessage, setSuccessMessage] = useState(''); // Estado para mensagem de sucesso
+    const [showPassword, setShowPassword] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar a abertura do modal
+    const [recoveryEmail, setRecoveryEmail] = useState(''); // Estado para o email de recuperação
+
+    const handleLoginClick = async () => {
+        setError(''); // Limpar mensagens de erro
+        setSuccessMessage(''); // Limpar mensagens de sucesso
+
         try {
-            console.log("Logando", novoUsuario);
-            const response = await api.post("/sessions", {
-                login: novoUsuario.usuario,
-                senha: novoUsuario.senha,
-            });            
+            const response = await api.post('/login', {
+                email: email,
+                senha: password,
+            });
+
+            console.log('Login bem-sucedido:', response.data);
+            setSuccessMessage('Login bem-sucedido!');
+            setTimeout(() => {
+                // Redirecionar para a página inicial ou dashboard
+                // navigate('/dashboard');
+            }, 2000);
         } catch (error) {
-            console.error("Erro ao logar:", error);
-        }
-    }
-
-    const { signIn } = useAuth();
-
-    const handleSubmit = useCallback(async(event) => {
-        event.preventDefault();
-        const { usuario: login, senha } = novoUsuario;
-        if (!login || !senha) {
-            setError("Por favor, preencha todos os campos."); // Chama setError se houver campos vazios
-            return;
-        }
-        try {
-            await signIn({ login, senha });
-            navigate('/dashboard');
-        } catch (error) {
-            setError("Credenciais inválidas. Por favor, verifique seu login e senha."); // Define a mensagem de erro em caso de falha no login
-        }
-    }, [novoUsuario, signIn, navigate]);
-
-    const handleLoginChange = (event) => {
-        const value = event.target.value;
-        if (value.length === 11) {
-            const formattedCPF = formatCPF(value);
-            setNovoUsuario({...novoUsuario, usuario: formattedCPF})
-        } else {
-            setNovoUsuario({...novoUsuario, usuario: value})
+            console.error('Erro ao fazer login:', error);
+            setError('Erro ao fazer login. Verifique suas credenciais.');
         }
     };
 
-    const handleSenhaChange = (event) => {
-        const value = event.target.value;
-        setNovoUsuario({...novoUsuario, senha: value});
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
-    const formatCPF = (input) => {
-        const cleaned = input.replace(/[^\d]/g, '');
-        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})$/);
-        if (match) {
-            return [match[1], match[2], match[3], match[4]].filter(Boolean).join('.').replace(/\.$/, '').replace(/\.(?=\d{1,2}$)/, '-');
+    const handleRecoverySubmit = async (e) => {
+        e.preventDefault();
+        // Chame a API para enviar um email de recuperação de senha
+        try {
+            const response = await api.post('/recover-password', {
+                email: recoveryEmail,
+            });
+
+            console.log('E-mail de recuperação enviado:', response.data);
+            setRecoveryEmail(''); // Limpar campo após envio
+            setIsModalOpen(false); // Fechar modal
+            alert('E-mail de recuperação enviado!'); // Mensagem de sucesso
+        } catch (error) {
+            console.error('Erro ao enviar e-mail de recuperação:', error);
+            alert('Erro ao enviar e-mail de recuperação. Tente novamente.'); // Mensagem de erro
         }
-        return input;
     };
 
     return (
-        <div className="login">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="label-container">
-                    <label>Usuário:</label>
-                    <input 
-                        value={novoUsuario.usuario} 
-                        onChange={handleLoginChange} 
-                        placeholder="Usuário" 
+        <div className="container" id="container">
+            <div className="form-container sign-in">
+                <div className="card">
+                    <h1>Login</h1>
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
+                    <div className="password-container02">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button type="button" onClick={togglePasswordVisibility} className="password-toggle">
+                            {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                        </button>
+                    </div>
+                    <button className="recovery-link" onClick={() => setIsModalOpen(true)}>Esqueceu a senha?</button>
+                    <button className="login-button" onClick={handleLoginClick}>Entrar</button>
                 </div>
-                <div className="label-container">
-                    <label>Senha:</label>
-                    <input 
-                        type="password"
-                        value={novoUsuario.senha} 
-                        onChange={handleSenhaChange} 
-                        placeholder="Senha" 
+            </div>
+
+            {/* Modal para recuperação de senha */}
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={() => setIsModalOpen(false)}
+                style={customStyles}
+            >
+                <h2 style={{ color: '#ffffff' }}>Recuperar Senha</h2>
+                <form onSubmit={handleRecoverySubmit}>
+                    <input
+                        type="email"
+                        placeholder="Digite seu e-mail"
+                        value={recoveryEmail}
+                        onChange={(e) => setRecoveryEmail(e.target.value)}
+                        required
+                        className="recovery-input" // Classe para borda
                     />
-                </div>
-                {error && <p className="error-message">{error}</p>} {/* Exibir a mensagem de erro */}
-                <button type="submit" className="botaoLogin">Login</button>
-            </form>
-            <Link to="/cadastro">
-                <button className="botaoLogin">Cadastre-se</button>
-            </Link>
+                    <div className="modal-buttons">
+                        <button type="submit" className="submit-button">Enviar E-mail</button>
+                        <button onClick={() => setIsModalOpen(false)} className="close-button">Fechar</button>
+                    </div>
+                </form>
+            </Modal>
         </div>
     );
 }
 
-export default Login;
+export default LoginPage;

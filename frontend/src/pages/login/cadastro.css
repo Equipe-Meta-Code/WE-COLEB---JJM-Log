@@ -1,0 +1,110 @@
+.card-container {
+    background-color: #2b3a67; /* Cor azul escura */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+}
+
+h2 {
+    text-align: center;
+    color: #f1f1f1;
+}
+
+.label-container {
+    margin-bottom: 15px;
+}
+
+.label-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f1f1f1;
+}
+
+.label-container input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.password-container {
+    margin-bottom: 15px;
+}
+
+.password-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f1f1f1;
+}
+
+.password-container input {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1e2d5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4a5f9b;
+}
+
+.error-message, .success-message {
+    color: #ff4d4f;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    color: #4caf50;
+}
+
+.botaoLogin {
+    margin-top: 10px;
+}
+
+.dropdown {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1; /* Cor de fundo do dropdown */
+    color: #333; /* Cor do texto do dropdown */
+    appearance: none; /* Remove o estilo padrão do dropdown */
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20"%3E%3Cpath stroke="%23333" stroke-width="2" d="M5 7l5 5 5-5" /%3E%3C/svg%3E'); /* Ícone do dropdown */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posiciona o ícone */
+    background-size: 12px; /* Tamanho do ícone */
+    cursor: pointer; /* Muda o cursor para pointer ao passar sobre o dropdown */
+}
+
+.dropdown:focus {
+    outline: none; /* Remove o contorno padrão */
+    border: 2px solid #1e2d5f; /* Adiciona uma borda ao focar */
+}
+
+.dropdown:hover {
+    background-color: #e0e0e0; /* Cor ao passar o mouse sobre o dropdown */
+}

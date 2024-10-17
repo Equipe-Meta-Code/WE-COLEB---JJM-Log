@@ -8,7 +8,7 @@ import BaseLayout from './components/layout/BaseLayout';
 /* import SetorFinanceiro from './pages/SetorFinanceiro';
 import PageNotFound from './screens/PageNotFound'; */
 import { useState } from 'react'
-
+import LoginPage from './pages/login/Login';'./pages/login/Login'
 import './App.css'
 import FluxoCard from './pages/FluxoCard'
 import CardList from './pages/CardList'
@@ -16,8 +16,8 @@ import CadastrarDepartamentos from './components/cadastros/CadastrarDepartamento
 import CadastrarEtapas from './components/cadastros/CadastrarEtapas'
 import SolicitacaoDeServico from './components/cadastros/SolicitacaoDeServico';
 import Timeline from './pages/Timeline';
-/* import Login from './pages/login/Login';
-import CadastroUsuario from './pages/login/CadastroUsuario'; */
+import CadastroUsuario from './pages/login/CadastroUsuario';
+import CadastrarCliente from './components/cadastros/CadastroCliente';
 
 
 const App = () => {
@@ -25,20 +25,27 @@ const App = () => {
     <BrowserRouter>
                
       <Routes>
+      <Route path='/Login' exact element={<LoginPage/>}></Route>
+
+
+
 
         {/* rotas que não precisam do sidebar podem ser definidas aqui */}
-{/*         <Route path="/" exact element={<Login />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/cadastro" exact element={<CadastroUsuario />} /> */}
+        {/*<Route path="/" exact element={<Login />} />
+        <Route path="/login" exact element={<Login />} />*/}
+
+      
+
 
         <Route element={<BaseLayout />}>
           {/* <Route path="*" element={<PageNotFound />} /> */}
-
           <Route path='/' exact element={<CardList/>}></Route> 
           <Route path='/Cadastro/Departamento' exact element={<CadastrarDepartamentos/>}></Route> 
           <Route path='/Cadastro/Etapas' exact element={<CadastrarEtapas/>}></Route> 
-          <Route path='/Cadastro/Pedido' exact element={<SolicitacaoDeServico/>}></Route> 
+          <Route path='/Cadastro/Pedido' exact element={<SolicitacaoDeServico/>}></Route>  
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
+          <Route path="/Cadastro/Cliente" element={<CadastrarCliente />} />
+          <Route path="/Cadastro/CadastroUsuario" element={<CadastroUsuario/>}></Route>
 
 {/* 
           <Route path='Monitoramento' exact element={<Timeline/>}></Route>
