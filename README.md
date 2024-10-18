@@ -85,7 +85,7 @@ Em andamento.
  
 ## 📁 Diagrama (DER)
 
-![image](https://github.com/user-attachments/assets/2926ddf4-333b-4291-8241-c478edf2a769)
+![image](https://github.com/user-attachments/assets/816f28e9-0a20-4d14-b6ef-3354e086951a)
 
 <span id="Vídeo">
   
