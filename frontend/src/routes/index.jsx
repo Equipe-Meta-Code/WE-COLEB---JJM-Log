@@ -1,15 +1,6 @@
 import React from 'react';
-import {Routes, Route, BrowserRouter} from "react-router-dom";
-/* import Dashboard from "./pages/Dashboard";
-import Portal from "./pages/Portal";
-import Settings from "./pages/Settings"; */
-/* import Timeline from "./pages/Timeline"; */
+import {Routes, Route} from "react-router-dom";
 import BaseLayout from '../components/layout/BaseLayout';
-/* import SetorFinanceiro from './pages/SetorFinanceiro';
-import PageNotFound from './screens/PageNotFound'; */
-import { useState } from 'react'
-
-import FluxoCard from '../pages/FluxoCard'
 import CardList from '../pages/CardList'
 import CadastrarDepartamentos from '../components/cadastros/CadastrarDepartamento';
 import CadastrarEtapas from '../components/cadastros/CadastrarEtapas'
@@ -27,11 +18,6 @@ const AppRoutes = () => {
                
       <Routes>
 
-        {/* rotas que não precisam do sidebar podem ser definidas aqui */}
-{/*         <Route path="/" exact element={<Login />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/cadastro" exact element={<CadastroUsuario />} /> */}
-
         <Route element={<BaseLayout />}>
           {/* <Route path="*" element={<PageNotFound />} /> */}
 
@@ -41,7 +27,10 @@ const AppRoutes = () => {
           <Route path='/Cadastro/Pedido' exact element={<SolicitacaoDeServico/>}></Route> 
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
           <Route path="/login" exact element={<Login />} />
-          <Route path="/cadastro" exact element={<CadastroUsuario />} />
+
+          <Route element={<PrivateRoutes role="Admin_Role" />} >
+            <Route path="/cadastro" exact element={<CadastroUsuario />} />
+          </Route>
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
             <Route path="/portalFuncionario" element={<PortalFuncionario />} />
