@@ -15,7 +15,7 @@ import { RiOrganizationChart } from "react-icons/ri";
 import { ImUserPlus } from "react-icons/im";
 import { BiUserPlus } from "react-icons/bi"; // Importando o ícone
 import { Tooltip, Menu, MenuItem } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './sideBar.css';  
 import PermissionComponent from '../PermissionComponent';
 import { useAuth } from '../../context/AuthContext';
@@ -44,7 +44,16 @@ export default function Sidebar() {
   // estado para abrir e fechar as opções de cadastro
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const { signOut } = useAuth();
+  const { signOut, userLogged } = useAuth();
+  const navigate = useNavigate();
+
+  const handlePortalFunc = () => {
+    if (userLogged()) {
+        navigate('/portalFuncionario');
+    } else {
+        navigate('/login');
+    }
+};
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -145,8 +154,8 @@ export default function Sidebar() {
                   sx={{
                     justifyContent: "center",
                   }}
+                  onClick={() => handlePortalFunc()}
                 >
-                  <Link to="/login" className="menu-link-icon">
                     <ListItemIcon
                       sx={{
                         justifyContent: "center",
@@ -155,7 +164,6 @@ export default function Sidebar() {
                     >
                       <FaBuildingUser size={19} />
                     </ListItemIcon>
-                  </Link>
                 </ListItemButton>
               </Tooltip>
             </ListItem>

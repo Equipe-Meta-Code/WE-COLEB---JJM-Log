@@ -39,7 +39,6 @@ function LoginPage() {
 
 
     const handleLoginClick = useCallback(async() => {
-        event.preventDefault();
         if (!login || !senha) {
             setError("Por favor, preencha todos os campos.");
             return;
@@ -47,6 +46,7 @@ function LoginPage() {
         try {
             await signIn({ login, senha });
             navigate('/portalFuncionario');
+            window.location.reload();
         } catch (error) {
             setError("Credenciais inválidas. Por favor, verifique seu login e senha.");
             console.log("Erro login")
