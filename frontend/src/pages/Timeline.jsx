@@ -50,11 +50,13 @@ const TimelineCard = ({ steps, title }) => {
     try {
       await api.put(`/etapapedido/${id}`, {
         estado: "Finalizado", // Ou o valor correto que você deseja atualizar
+        data_conclusao: new Date().toISOString()
       });
+      fetchEtapas();
       console.log('Estado da etapa atualizado com sucesso');
     } catch (error) {
       console.error('Erro ao atualizar o estado da etapa:', error);
-      throw error; // Repassa o erro para ser tratado na função chamadora
+      throw error;
     }
   };
 
@@ -64,25 +66,24 @@ const TimelineCard = ({ steps, title }) => {
     console.log('StepData:', stepData);
 
     if (!stepData || !stepData.id) {
-        console.error('Step Data ou Step ID indefinido:', stepData);
-        return;
+      console.error('Step Data ou Step ID indefinido:', stepData);
+      return;
     }
 
     if (step === activeStep || step < activeStep) { // Permitir clicar se a etapa atual ou anterior
-        await updateEtapaState(stepData.id);
-        
-        // Atualiza o estado localmente para que a interface reaja imediatamente
-        steps[step - 1].estado = "Finalizado"; // Marca a etapa como finalizada
+      await updateEtapaState(stepData.id);
 
-        // Verifica se o step é o último e atualiza o activeStep
-        if (step === steps.length) {
-            setActiveStep(step); // Se for o último, não avança, apenas atualiza
-        } else {
-            setActiveStep(step + 1); // Avança para a próxima etapa
-        }
+      // Atualiza o estado localmente para que a interface reaja imediatamente
+      steps[step - 1].estado = "Finalizado"; // Marca a etapa como finalizada
+
+      // Verifica se o step é o último e atualiza o activeStep
+      if (step === steps.length) {
+        setActiveStep(step); // Se for o último, não avança, apenas atualiza
+      } else {
+        setActiveStep(step + 1); // Avança para a próxima etapa
+      }
     }
   };
-
 
   // Função para verificar se o botão deve estar desativado
   const isStepDisabled = (index) => {
@@ -105,12 +106,7 @@ const TimelineCard = ({ steps, title }) => {
       }}
     >
       <CardContent>
-        <Typography
-          variant="h5"
-          component="div"
-          onClick={() => setExpanded(!expanded)}
-          sx={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}
-        >
+        <Typography variant="h5" component="div" onClick={() => setExpanded(!expanded)} sx={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           {title}
           <IconButton>
             <ExpandMoreIcon sx={{ color: 'white' }} />
@@ -364,7 +360,7 @@ const LicensePlateCard = () => {
         try {
           const response = await api.get(`/etapapedido/pedido/${pedidoId}`);
           setEtapas(response.data);
-          console.log(response)
+          console.log("Etapas por pedido", response);
         } catch (error) {
           console.error('Erro ao buscar as etapas:', error);
         }
@@ -377,18 +373,25 @@ const LicensePlateCard = () => {
     if (!pedido) {
       return <div>Carregando...</div>; // Pode adicionar um loading spinner aqui
     }
-
+  
+    // Mapeamento simples para resolver IDs de departamento para nomes (substitua conforme necessário)
+    const departamentoNomes = {
+      1: 'Logística',
+      2: 'Financeiro',
+      // Adicione mais conforme necessário
+    };
+  
     // Agrupar as etapas por departamento
     const etapasPorDepartamento = etapas.reduce((acc, etapa) => {
-      const departamento = etapa.etapa.departamento.nome; // Nome do departamento
-      if (!acc[departamento]) {
-        acc[departamento] = [];
+      const departamentoNome = departamentoNomes[etapa.departamento] || `Departamento ${etapa.departamento}`;
+      if (!acc[departamentoNome]) {
+        acc[departamentoNome] = [];
       }
-      acc[departamento].push({
+      acc[departamentoNome].push({
         id: etapa.id, // Adicione o ID aqui
-        label: etapa.etapa.nome,
-        city: etapa.etapa.departamento.nome,
-        estado: etapa.estado // Adicione o estado se necessário
+        label: etapa.nome,
+        city: departamentoNome, // Nome do departamento
+        estado: etapa.estado // Adicione o estado da etapa
       });
       return acc;
     }, {});
@@ -418,7 +421,7 @@ const LicensePlateCard = () => {
       </Grid>
     );
   };
-  
+   
   export default Timeline;
   
   

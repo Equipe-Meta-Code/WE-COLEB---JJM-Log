@@ -20,7 +20,12 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: 'etapa_id',
+                    name: 'nome',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'departamento_id',
                     type: 'int',
                     isNullable: false,
                 },
@@ -28,6 +33,17 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
                     name: 'estado',
                     type: 'varchar',
                     isNullable: false,
+                },
+                {
+                    name: 'data_conclusao',
+                    type: 'timestamp',
+                    isNullable: true,
+                },
+                {
+                    name: 'etapa_desfeita',
+                    type: ' varchar',
+                    length: '255',
+                    isNullable: true,
                 },
             ],
         }), true);
@@ -42,10 +58,10 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
         }));
 
         await queryRunner.createForeignKey('etapa_pedido', new TableForeignKey({
-            columnNames: ['etapa_id'],
-            referencedTableName: 'etapas',
+            columnNames: ['departamento_id'],
+            referencedTableName: 'departamentos',
             referencedColumnNames: ['id'],
-            name: 'fk_etapa_etapa_pedido_',
+            name: 'fk_departamento_etapa_pedido_',
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
         }));
@@ -53,7 +69,7 @@ export class CreateEtapasPedidos1727183789278 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('etapa_pedido', 'fk_pedido_etapa_pedido_');
-        await queryRunner.dropForeignKey('etapa_pedido', 'fk_etapa_etapa_pedido_');
+        await queryRunner.dropForeignKey('etapa_pedido', 'fk_departamento_etapa_pedido_');
         await queryRunner.dropTable("etapa_pedido");
     }
 

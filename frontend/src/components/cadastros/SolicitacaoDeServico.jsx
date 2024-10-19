@@ -14,6 +14,7 @@ function SolicitacaoDeServico() {
         descricao: '',
         dataInicial: '',
         dataFinal: '',
+        estado: 'Em andamento',
         categoria: '',
         tipo: '',
         peso: '',
@@ -22,21 +23,21 @@ function SolicitacaoDeServico() {
         distancia: '',
         departamentos: [
             {
-                idPedido: pedidos.length + 1, 
-                idDepartamento: '', 
+                idPedido: pedidos.length + 1,
+                idDepartamento: '',
                 etapas: [
                     {
                         pedidoId: pedidos.length + 1,
-                        etapaId: '',
+                        nome: '',
                         estado: 'Não Iniciado', // Define o estado inicial da etapa
-                        departamento: ''
+                        departamento: '',
+                        data_conclusao: '' // Campo de data_conclusao adicionado
                     }
                 ]
             }
         ],
     });
 
-    // Função para buscar departamentos
     async function buscarDepartamentos() {
         try {
             const response = await api.get("/departamentos");
@@ -46,7 +47,6 @@ function SolicitacaoDeServico() {
         }
     }
 
-    // Função para buscar pedidos
     async function buscarPedidos() {
         try {
             const response = await api.get("/pedidos");
@@ -56,7 +56,6 @@ function SolicitacaoDeServico() {
         }
     }
 
-    // Função para buscar etapas
     async function buscarEtapas() {
         try {
             const response = await api.get("/etapas"); // Corrigido para a rota de etapas
@@ -66,7 +65,6 @@ function SolicitacaoDeServico() {
         }
     }
 
-    // Função para cadastrar pedido
     async function cadastrarPedido() {
         console.log(dadosPedido);
         try {
@@ -75,6 +73,7 @@ function SolicitacaoDeServico() {
                 descricao: dadosPedido.descricao,
                 data_inicial: dadosPedido.dataInicial,
                 data_entrega: dadosPedido.dataFinal,
+                estado: dadosPedido.estado,
                 categoria: dadosPedido.categoria,
                 tipo: dadosPedido.tipo,
                 peso: dadosPedido.peso,
@@ -82,15 +81,22 @@ function SolicitacaoDeServico() {
                 volume: dadosPedido.volume,
                 distancia: dadosPedido.distancia,
             });
+    
             console.log(response);
-
-            await cadastrarEtapasPorDepartamento();
+            const pedidoId = response.data.id;
+    
+            await cadastrarEtapasPorDepartamento(pedidoId); // Passar o pedidoId para cadastrar as etapas
+    
             setShowCadastroConcluido(true);
+            buscarPedidos();
+    
+            // Resetar o estado dos dados
             setDadosPedido({
                 nome: '',
                 descricao: '',
                 dataInicial: '',
                 dataFinal: '',
+                estado: 'Em andamento',
                 categoria: '',
                 tipo: '',
                 peso: '',
@@ -99,45 +105,47 @@ function SolicitacaoDeServico() {
                 distancia: '',
                 departamentos: [
                     {
-                        idPedido: 1,
+                        idPedido: pedidos.length + 1, 
                         idDepartamento: '',
                         etapas: [
                             {
-                                pedidoId: 1,
+                                pedidoId: pedidos.length + 1,
                                 etapaId: '',
                                 estado: 'Não Iniciado',
-                                departamento: ''
+                                departamento: '',
+                                data_conclusao: '' 
                             }
                         ]
                     }
                 ],
             });
-
+    
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
         }
     }
+    
 
     function handleCloseCadastroConcluido() {
         setShowCadastroConcluido(false);
     }
 
     // Função para cadastrar em etapasPedido
-    async function cadastrarEtapasPorDepartamento() {
+    async function cadastrarEtapasPorDepartamento(pedidoId) {
         try {
-
             for (const departamento of dadosPedido.departamentos) {
-
                 if (departamento.etapas && departamento.etapas.length > 0) {
-
                     for (const etapa of departamento.etapas) {
                         const resp = await api.post("/etapapedido", {
                             estado: etapa.estado,
-                            etapa_id: etapa.etapaId,
-                            pedido_id: etapa.pedidoId
+                            nome: etapa.nome,
+                            departamento: departamento.idDepartamento,
+                            data_conclusao: etapa.data_conclusao || null,
+                            pedido_id: pedidoId,
                         });
-    
-                        console.log(`Etapa ${etapa.etapaId} do Departamento ${departamento.idDepartamento} cadastrada com sucesso.`);
+                        
+
+                        console.log(`Etapa ${etapa.nome} do Departamento ${departamento.idDepartamento} cadastrada com sucesso.`);
                         console.log(resp);
                     }
                 }
@@ -147,13 +155,12 @@ function SolicitacaoDeServico() {
         }
     }
 
-    // Função para adicionar um novo departamento
     function adicionarDepartamento() {
-        const novoIdPedido = pedidos.length + 1; // Número de pedidos + 1
+        const novoIdPedido = pedidos.length + 1;
         const novoDepartamento = {
             idPedido: novoIdPedido,
-            idDepartamento: '', 
-            etapas: [] // Cada departamento agora tem um array de etapas
+            idDepartamento: '',
+            etapas: []
         };
     
         setDadosPedido((prevState) => ({
@@ -162,17 +169,16 @@ function SolicitacaoDeServico() {
         }));
     }
 
-    // Função para adicionar uma nova etapa para um departamento específico
     function adicionarEtapa(departamentoId) {
         const novoIdPedido = pedidos.length + 1;
         const novaEtapa = {
             pedidoId: novoIdPedido,
             etapaId: '',
             estado: 'Não Iniciado',
-            departamento: departamentoId
+            departamento: departamentoId,
+            data_conclusao: '' // Campo data_conclusao inicializado vazio
         };
 
-        // Atualizar o departamento correspondente
         const novosDepartamentos = dadosPedido.departamentos.map(departamento => {
             if (departamento.idDepartamento === departamentoId) {
                 return {
@@ -189,13 +195,21 @@ function SolicitacaoDeServico() {
         }));
     }
 
-    // Função para atualizar uma etapa em um departamento
     function atualizarEtapa(departamentoId, etapaIndex, etapaId) {
+        const etapaSelecionada = etapas.find(etapa => etapa.id === parseInt(etapaId));
+        const departamentoSelecionado = departamentos.find(dep => dep.id === parseInt(departamentoId));
+
         const novosDepartamentos = dadosPedido.departamentos.map(departamento => {
             if (departamento.idDepartamento === departamentoId) {
                 const novasEtapas = departamento.etapas.map((etapa, index) => {
                     if (index === etapaIndex) {
-                        return { ...etapa, etapaId: etapaId }; // Atualiza a etapa específica
+                        return {
+                            ...etapa,
+                            etapaId: etapaId,
+                            nome: etapaSelecionada.nome,
+                            departamento: departamentoSelecionado.nome,
+                            data_conclusao: '' // Definir data_conclusao como vazio inicialmente
+                        };
                     }
                     return etapa;
                 });
@@ -209,11 +223,12 @@ function SolicitacaoDeServico() {
             departamentos: novosDepartamentos
         }));
     }
+
     
     useEffect(() => {
         buscarDepartamentos();
         buscarPedidos();
-        buscarEtapas(); // Buscar as etapas quando o componente carregar
+        buscarEtapas();
     }, []);
 
     return (

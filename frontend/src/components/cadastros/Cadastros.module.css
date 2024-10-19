@@ -4,7 +4,7 @@
     padding: 0;
 }
 label,h1{
-    color: white;
+    color: white; /* arrumar */
     margin: 0px;
 }
 .pagina{
@@ -28,6 +28,7 @@ label,h1{
 .titulo{
     margin: 16px 16px 0px 16px;
     font-size: 28px;
+    color: white;
 }
 .campos{
     display: flex;

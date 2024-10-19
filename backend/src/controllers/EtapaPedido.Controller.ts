@@ -1,34 +1,33 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../database/data-source";
 import EtapaPedido from "../models/EtapaPedido";
-import Etapa from "../models/Etapa";
 import Pedido from "../models/Pedido";
 
 class EtapaController {
 
     // Criar uma nova etapa associada a um pedido
     async create(req: Request, res: Response): Promise<Response> {
-        const { estado, etapa_id, pedido_id } = req.body;
-        const etapasRepository = AppDataSource.getRepository(EtapaPedido); // Repositório correto para EtapaPedido
-        const etapaRepository = AppDataSource.getRepository(Etapa);
+        const { estado, nome, departamento, data_conclusao, pedido_id } = req.body;
+        const etapasRepository = AppDataSource.getRepository(EtapaPedido);
         const pedidoRepository = AppDataSource.getRepository(Pedido);
 
         try {
-            // Buscar a etapa e o pedido pelo ID
-            const etapa = await etapaRepository.findOneBy({ id: etapa_id });
+            // Buscar o pedido pelo ID
             const pedido = await pedidoRepository.findOneBy({ id: pedido_id });
             
-            // Verificar se o pedido e a etapa existem
+            // Verificar se o pedido existe
             if (!pedido) {
                 return res.status(404).json({ message: "Pedido não encontrado" });
             }
 
-            if (!etapa) {
-                return res.status(404).json({ message: "Etapa não encontrada" });
-            }
+            const novaEtapaPedido = etapasRepository.create({
+                estado,
+                nome,
+                departamento,
+                data_conclusao,
+                pedido
+            });
 
-            // Criar nova etapa associada ao pedido
-            const novaEtapaPedido = etapasRepository.create({ estado, pedido, etapa });
             await etapasRepository.save(novaEtapaPedido);
 
             return res.status(201).json(novaEtapaPedido);
@@ -38,13 +37,13 @@ class EtapaController {
         }
     }
 
-    // Listar todas as etapas associadas a pedidos
+
     async getAll(req: Request, res: Response): Promise<Response> {
         const etapaPedidoRepository = AppDataSource.getRepository(EtapaPedido);
 
         try {
             const etapasPedidos = await etapaPedidoRepository.find({
-                relations: ["pedido", "etapa"], // Ajustar as relações corretas
+                relations: ["pedido"], // Ajustar as relações corretas (não mais precisa da relação 'etapa')
             });
 
             return res.status(200).json(etapasPedidos);
@@ -58,10 +57,10 @@ class EtapaController {
         const etapaPedidoRepository = AppDataSource.getRepository(EtapaPedido);
 
         try {
-            // Buscar as etapas associadas ao pedidoId
+
             const etapas = await etapaPedidoRepository.find({
-                where: { pedido: { id: Number(pedidoId) } }, // Filtra pelo pedidoId
-                relations: ["pedido", "etapa", "etapa.departamento"], // Carrega as relações necessárias
+                where: { pedido: { id: Number(pedidoId) } },
+                relations: ["pedido", "departamento"],
             });
 
             if (!etapas.length) {
@@ -75,30 +74,35 @@ class EtapaController {
         }
     }
 
+    
     async update(req: Request, res: Response): Promise<Response> {
-        const { id } = req.params; // Captura o ID da EtapaPedido da URL
-        const { estado } = req.body; // Captura o novo estado do corpo da requisição
+        const { id } = req.params;
+        const { estado, nome, departamento_id, data_conclusao, etapa_desfeita } = req.body;
         const etapasRepository = AppDataSource.getRepository(EtapaPedido);
 
         try {
-            // Buscar a etapa associada ao pedido pelo ID
+
             const etapaPedido = await etapasRepository.findOneBy({ id: Number(id) });
 
-            // Verificar se a etapa associada ao pedido foi encontrada
+            
             if (!etapaPedido) {
                 return res.status(404).json({ message: "Etapa associada ao pedido não encontrada" });
             }
 
-            // Atualizar o estado da etapa associada ao pedido
+            
             etapaPedido.estado = estado;
+            etapaPedido.nome = nome;
+            etapaPedido.departamento = departamento_id;
+            etapaPedido.data_conclusao = data_conclusao;
+            etapaPedido.etapa_desfeita = etapa_desfeita;
 
-            // Salvar a etapa atualizada no banco de dados
+            
             await etapasRepository.save(etapaPedido);
 
             return res.status(200).json(etapaPedido);
 
         } catch (error) {
-            return res.status(500).json({ message: "Erro ao atualizar o estado da etapa", error });
+            return res.status(500).json({ message: "Erro ao atualizar a etapa associada ao pedido", error });
         }
     }
 

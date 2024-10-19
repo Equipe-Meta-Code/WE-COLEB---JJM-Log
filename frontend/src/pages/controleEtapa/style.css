@@ -1,0 +1,59 @@
+.etapa-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .desfazer-button {
+    background-color: white;
+    color: black; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 30px; 
+    cursor: pointer; 
+  }
+  
+  .desfazer-button:hover {
+    background-color: #86b179; 
+  }
+
+  .confirm-button {
+    background-color: white;
+    color: black; 
+    border: 1px solid; 
+    padding: 8px 16px; 
+    border-radius: 30px; 
+    cursor: pointer; 
+  }
+  
+  .confirm-button:hover {
+    background-color: #86b179; 
+  }
+
+  .cancel-button {
+    background-color: white;
+    color: black; 
+    border: 1px solid; 
+    padding: 8px 16px; 
+    border-radius: 30px; 
+    cursor: pointer; 
+  }
+  
+  .cancel-button:hover {
+    background-color: #e29292; 
+  }
+
+  .titulo {
+    color: black;
+    padding-bottom: 15px;
+}
+
+.titulo-seg {
+    text-align: center;
+ 
+}
+
+.titulo-obs {
+  text-align: left;
+  margin-bottom: 25px;
+}

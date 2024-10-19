@@ -17,6 +17,9 @@ import { BiUserPlus } from "react-icons/bi"; // Importando o ícone
 import { Tooltip, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './sideBar.css';  
+import PermissionComponent from '../PermissionComponent';
+import { useAuth } from '../../context/AuthContext';
+import ChecklistIcon from '@mui/icons-material/Checklist';
 
 const drawerWidth = 80;
 
@@ -41,6 +44,7 @@ export default function Sidebar() {
   // estado para abrir e fechar as opções de cadastro
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const { signOut } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,6 +52,10 @@ export default function Sidebar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    signOut(); 
   };
 
   return (
@@ -138,7 +146,7 @@ export default function Sidebar() {
                     justifyContent: "center",
                   }}
                 >
-                  <Link to="/Portal" className="menu-link-icon">
+                  <Link to="/login" className="menu-link-icon">
                     <ListItemIcon
                       sx={{
                         justifyContent: "center",
@@ -226,27 +234,55 @@ export default function Sidebar() {
               </Menu>
             </ListItem>
 
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Sair" placement="right" arrow>
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: "center",
-                  }}
-                >
-                  <Link to="/Login" className="menu-link-icon">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: 'white',
-                      }}
-                    >
-                      <FaSignOutAlt size={19} />
-                    </ListItemIcon>
-                  </Link>
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+            <PermissionComponent role="Admin_Role">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip title="Etapas" placement="right" arrow>
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Link to="/controleEtapa" className="menu-link-icon">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: 'white',
+                        }}
+                      >
+                        <ChecklistIcon size={19} />
+                      </ListItemIcon>
+                    </Link>
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
+            
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
+              <ListItem 
+                disablePadding sx={{ display: "block" }}
+                onClick={handleLogout}>
+                <Tooltip title="Sair" placement="right" arrow>
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Link to="/" className="menu-link-icon">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: 'white',
+                        }}
+                      >
+                        <FaSignOutAlt size={19} />
+                      </ListItemIcon>
+                    </Link>
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
 
             <ListItem disablePadding sx={{ display: "block" }}>
               <Tooltip title="Configurações" placement="right" arrow>
@@ -256,7 +292,7 @@ export default function Sidebar() {
                     justifyContent: "center",
                   }}
                 >
-                  <Link to="/Configurações" className="menu-link-icon">
+                  <Link to="/departamentos" className="menu-link-icon">
                     <ListItemIcon
                       sx={{
                         justifyContent: "center",

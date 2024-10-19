@@ -20,6 +20,14 @@ export class CreateEtapas1727183768483 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: 'fixo',
+                    type: 'varchar',
+                },
+                {
+                    name: 'ordem',
+                    type: 'int',
+                },
+                {
                     name: 'departamento_id',
                     type: 'int',
                     isNullable: false,
