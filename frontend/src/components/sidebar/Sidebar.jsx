@@ -171,27 +171,29 @@ export default function Sidebar() {
             <Divider />
 
             {/* Botão separado para Cadastro de Usuário */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Cadastro de Usuário" placement="right" arrow>
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: "center",
-                  }}
-                >
-                  <Link to="/cadastro" className="menu-link-icon">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: 'white',
-                      }}
-                    >
-                      <BiUserPlus size={19} /> {/* Usando o novo ícone aqui */}
-                    </ListItemIcon>
-                  </Link>
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+            <PermissionComponent role="Admin_Role">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip title="Cadastro de Usuário" placement="right" arrow>
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Link to="/cadastro" className="menu-link-icon">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: 'white',
+                        }}
+                      >
+                        <BiUserPlus size={19} /> {/* Usando o novo ícone aqui */}
+                      </ListItemIcon>
+                    </Link>
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
 
             <ListItem disablePadding sx={{ display: "block" }}>
               <Tooltip title="Cadastro" placement="right" arrow>
