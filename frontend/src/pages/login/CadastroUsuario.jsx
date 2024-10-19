@@ -11,7 +11,7 @@ function CadastroUsuario() {
         usuario: "",
         senha: "",
     });
-    const [nivelAcesso, setNivelAcesso] = useState(1); // Valor padrão como 'Usuário comum'
+    const [roles, setRoles] = useState(""); 
     const [error, setError] = useState(""); // State for error message
     const [successMessage, setSuccessMessage] = useState(""); // State for success message
     const navigate = useNavigate(); // Hook para redirecionar após o cadastro
@@ -48,13 +48,13 @@ function CadastroUsuario() {
         }
 
         try {
-            console.log("Cadastrando", novoUsuario);
+            console.log("Cadastrando", novoUsuario, roles);
             const response = await api.post("/users", {
                 nome: novoUsuario.nome,
                 cpf: novoUsuario.cpf,
                 login: novoUsuario.usuario,
                 senha: novoUsuario.senha,
-                roles: nivelAcesso // Enviar o nível de acesso selecionado
+                roles: roles // Enviar o nível de acesso selecionado
             });
 
             console.log(response.data);
@@ -100,12 +100,13 @@ function CadastroUsuario() {
                 <label>Nível de Acesso:</label>
                 <select
                     className="dropdown" // Adicionando a classe para aplicar o estilo
-                    value={nivelAcesso}
-                    onChange={(e) => setNivelAcesso(Number(e.target.value))}
+                    value={roles}
+                    onChange={(event) => setRoles(event.target.value)}
                 >
-                    <option value={1}>Usuário Comum</option>
-                    <option value={2}>Administrador</option>
-                    <option value={3}>Recursos Humanos</option>
+                     <option value={""}>Selecione</option>
+                    <option value={"1"}>Usuário Comum</option>
+                    <option value={"2"}>Administrador</option>
+                    <option value={"3"}>Recursos Humanos</option>
                 </select>
             </div>
 

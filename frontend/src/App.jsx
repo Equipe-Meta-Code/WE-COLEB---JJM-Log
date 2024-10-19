@@ -25,16 +25,10 @@ const App = () => {
     <BrowserRouter>
                
       <Routes>
-      <Route path='/Login' exact element={<LoginPage/>}></Route>
-
-
-
 
         {/* rotas que não precisam do sidebar podem ser definidas aqui */}
         {/*<Route path="/" exact element={<Login />} />
         <Route path="/login" exact element={<Login />} />*/}
-
-      
 
 
         <Route element={<BaseLayout />}>
@@ -46,6 +40,7 @@ const App = () => {
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
           <Route path="/Cadastro/Cliente" element={<CadastrarCliente />} />
           <Route path="/Cadastro/CadastroUsuario" element={<CadastroUsuario/>}></Route>
+          <Route path='/Login' exact element={<LoginPage/>}></Route>
 
 {/* 
           <Route path='Monitoramento' exact element={<Timeline/>}></Route>

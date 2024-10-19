@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './style.css'; // Certifique-se de que o CSS correspondente esteja atualizado
 import api from '../../services/api';
 import Modal from 'react-modal'; // Você pode instalar react-modal com `npm install react-modal`
+import {useAuth} from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const customStyles = {
     content: {
@@ -24,21 +28,23 @@ const customStyles = {
 Modal.setAppElement('#root'); // Define o elemento pai para o modal
 
 function LoginPage() {
-    const [email, setEmail] = useState(''); // Estado para o email
-    const [password, setPassword] = useState(''); // Estado para a senha
+    const [login, setLogin] = useState(''); // Estado para o email
+    const [senha, setSenha] = useState(''); // Estado para a senha
     const [error, setError] = useState(''); // Estado para mensagem de erro
     const [successMessage, setSuccessMessage] = useState(''); // Estado para mensagem de sucesso
     const [showPassword, setShowPassword] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar a abertura do modal
     const [recoveryEmail, setRecoveryEmail] = useState(''); // Estado para o email de recuperação
+    const navigate = useNavigate();
+    const { signIn } = useAuth();
 
-    const handleLoginClick = async () => {
+    /*const handleLoginClick = async () => {
         setError(''); // Limpar mensagens de erro
         setSuccessMessage(''); // Limpar mensagens de sucesso
 
         try {
             const response = await api.post('/login', {
-                email: email,
+                login: email,
                 senha: password,
             });
 
@@ -52,7 +58,22 @@ function LoginPage() {
             console.error('Erro ao fazer login:', error);
             setError('Erro ao fazer login. Verifique suas credenciais.');
         }
-    };
+    };*/
+
+    const handleLoginClick = useCallback(async() => {
+        event.preventDefault();
+        if (!login || !senha) {
+            setError("Por favor, preencha todos os campos.");
+            return;
+        }
+        try {
+            await signIn({ login, senha });
+            navigate('dashboard');
+        } catch (error) {
+            setError("Credenciais inválidas. Por favor, verifique seu login e senha.");
+            console.log("Erro login")
+        }
+    }, [login, senha, signIn, navigate]);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -63,7 +84,7 @@ function LoginPage() {
         // Chame a API para enviar um email de recuperação de senha
         try {
             const response = await api.post('/recover-password', {
-                email: recoveryEmail,
+                login: recoveryEmail,
             });
 
             console.log('E-mail de recuperação enviado:', response.data);
@@ -84,15 +105,15 @@ function LoginPage() {
                     <input
                         type="text"
                         placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={login}
+                        onChange={(e) => setLogin(e.target.value)}
                     />
                     <div className="password-container02">
                         <input
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword ? 'text' : 'senha'}
                             placeholder="Senha"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
                         />
                         <button type="button" onClick={togglePasswordVisibility} className="password-toggle">
                             {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
