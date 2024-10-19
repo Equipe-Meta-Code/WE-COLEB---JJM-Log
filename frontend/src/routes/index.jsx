@@ -11,6 +11,7 @@ import CadastroUsuario from '../pages/login/CadastroUsuario';
 import PortalFuncionario from '../pages/portalFuncionario/portalFuncionario';
 import PrivateRoutes from './privateRoutes';
 import ControleEtapa from '../pages/controleEtapa/controleEtapa';
+import CadastrarCliente from '../components/cadastros/CadastroCliente';
 
 
 const AppRoutes = () => {
@@ -27,6 +28,7 @@ const AppRoutes = () => {
           <Route path='/Cadastro/Pedido' exact element={<SolicitacaoDeServico/>}></Route> 
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
           <Route path="/login" exact element={<Login />} />
+          <Route path="/Cadastro/Cliente" exact element={<CadastrarCliente />} />
 
           <Route element={<PrivateRoutes role="Admin_Role" />} >
             <Route path="/cadastro" exact element={<CadastroUsuario />} />
