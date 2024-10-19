@@ -6,7 +6,6 @@ import {useAuth} from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 
-
 const customStyles = {
     content: {
         top: '50%',
@@ -38,27 +37,6 @@ function LoginPage() {
     const navigate = useNavigate();
     const { signIn } = useAuth();
 
-    /*const handleLoginClick = async () => {
-        setError(''); // Limpar mensagens de erro
-        setSuccessMessage(''); // Limpar mensagens de sucesso
-
-        try {
-            const response = await api.post('/login', {
-                login: email,
-                senha: password,
-            });
-
-            console.log('Login bem-sucedido:', response.data);
-            setSuccessMessage('Login bem-sucedido!');
-            setTimeout(() => {
-                // Redirecionar para a página inicial ou dashboard
-                // navigate('/dashboard');
-            }, 2000);
-        } catch (error) {
-            console.error('Erro ao fazer login:', error);
-            setError('Erro ao fazer login. Verifique suas credenciais.');
-        }
-    };*/
 
     const handleLoginClick = useCallback(async() => {
         event.preventDefault();
@@ -68,7 +46,7 @@ function LoginPage() {
         }
         try {
             await signIn({ login, senha });
-            navigate('dashboard');
+            navigate('/portalFuncionario');
         } catch (error) {
             setError("Credenciais inválidas. Por favor, verifique seu login e senha.");
             console.log("Erro login")
