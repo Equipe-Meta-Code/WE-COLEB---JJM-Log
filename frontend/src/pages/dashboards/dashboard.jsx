@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [pageTitle, setPageTitle] = useState('Dashboard');
 
   useEffect(() => {
-    const updateTitle = async () => {
+    const updateTitle = () => {
       try {
         document.title = pageTitle;
       } catch (error) {
@@ -22,10 +22,10 @@ const Dashboard = () => {
       <div className={styles["vendas-gerais"]}>
         <AreaBarChart />
       </div>
-      <div className={styles["linhaQuebrada"]}></div>
+      {/* <div className={styles["linhaQuebrada"]}></div>
       <div className={styles["vendas-por-vendedor"]}>
         <AreaLineChart />
-      </div>
+      </div> */}
     </div>
   );
 };
