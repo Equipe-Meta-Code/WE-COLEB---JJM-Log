@@ -11,7 +11,7 @@
 * [Sprints e Backlog](#-sprints-e-backlog)
 * [User Stories](#-user-stories)
 * [MVP](#-mvp)
-* [Diagrama-DER](#-diagrama-der)
+* [Diagrama](#-diagrama)
 * [Protótipo Figma](#-protótipo-figma)
 * [Vídeos das Sprints](#️-vídeos-das-sprints)
 * [Guia de Instalação](#guia-de-instalação)
@@ -83,7 +83,7 @@ Em andamento.
 
 <span id="Diagrama de classes">
  
-## 📁 Diagrama (DER)
+## 📁 Diagrama 
 
 ![image](https://github.com/user-attachments/assets/816f28e9-0a20-4d14-b6ef-3354e086951a)
 
