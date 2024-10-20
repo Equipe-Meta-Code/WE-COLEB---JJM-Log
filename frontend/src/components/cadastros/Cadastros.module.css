@@ -12,29 +12,26 @@ label,h1{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
+    height: 100vh;
 }
-.container{
-    width: 100%;
-    max-width: 600px;
-    border: 0px;
-    background-color: #1B4215;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px 0px;
+.container {
+    background-color: rgba(0, 58, 102, 0.671); /* Azul escuro para o card */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 500px; /* Largura do card aumentada */
 }
 .titulo{
-    margin: 16px 16px 0px 16px;
-    font-size: 28px;
-    color: white;
+    margin: 0px 16px 5px 16px;
+    font-size: 26px;
+    color: #ffffff; 
+    text-align: center; 
 }
 .campos{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 56px);
-    text-align: left;
 }
 .campoData{
     display: flex;
@@ -47,32 +44,30 @@ label,h1{
     flex-direction: row;
     gap: 16px;
     text-align: left;
-    width: calc(100% - 56px);
+    width: 100%;
 }
 .conjuntoDuplas{
     display: flex;
     flex-direction: row;
     gap: 16px;
-    text-align: left;
-    width: calc(100% - 56px);
+    width: 100%;
 }
 .inputTexto, .inputDatas, .inputEntrega{
-    padding: 5px 0px;
-    text-indent: 10px;
-    border-radius: 8px;
-    border: 0px;
-    background-color: #ffffff;
-    font-size: 16px;
-    color: #000000; 
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 15px; /* Espaço entre os campos */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda dos inputs */
+    border-radius: 5px; /* Bordas arredondadas */
+    width: auto;
+}
+.inputEtapas{
+    margin: 0;
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda dos inputs */
+    border-radius: 5px; /* Bordas arredondadas */
+    width: auto;
 }
 .inputEntrega{
     width: 100%;
-}
-.inputDatas, .inputEntrega{
-    padding: 5px 0px 5px 0px;
-    text-indent: 10px;
 }
 .inputDatas::-webkit-calendar-picker-indicator {
     position: relative;
@@ -84,7 +79,7 @@ label,h1{
     font-size: 14px;
 }
 .inputTexto:hover, .inputEntrega:hover, .inputDatas:hover {
-    background-color: #86b179;
+    background-color: #e6f7ff;
 }
 
 .entrega{
@@ -95,27 +90,21 @@ label,h1{
     justify-content: center;
     gap: 16px;
 }
-.conjuntoEntrega{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
 .botaoCadastrar{
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: 0px;
-    background-color: #ffffff;
-    font-size: 16px;
-    color: #000000;
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    margin-bottom: 16px;
+    width: 100%;
+    padding: 10px;
+    background-color: #293f69;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 #adicionarEtapa{
     margin: 0px;
 }
 .botaoCadastrar:hover{
-    background-color: #86b179;
+    background-color: #4a5f9b;
 }
 .etapasAdicionadas{
     display: flex;
@@ -123,19 +112,19 @@ label,h1{
     gap: 10px;
 }
 .departamentos{
-    gap: 16px;
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #5f7957;
+    background-color: #044485;
     border-radius: 16px;
+    margin-bottom: 16px;
 }
 .cadastro-concluido {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #4caf50;
+    background-color: #044485;
     color: white;
     padding: 20px;
     border-radius: 8px;
