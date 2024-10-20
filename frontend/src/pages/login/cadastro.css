@@ -110,3 +110,16 @@ h2 {
 .dropdown:hover {
     background-color: #e0e0e0; /* Cor ao passar o mouse sobre o dropdown */
 }
+
+.password-toggle2 {
+    width: 90px;
+    position: absolute;
+    right: 0px; /* Para manter o botão ao lado do input */
+    top: 10px;
+    background: none;
+    border: none;
+    color: #00adb5; /* Azul claro */
+    cursor: pointer;
+    background-color: transparent;
+    padding-top: 35px;
+}

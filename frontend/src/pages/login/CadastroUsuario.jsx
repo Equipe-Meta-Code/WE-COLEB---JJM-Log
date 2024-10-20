@@ -96,7 +96,7 @@ function CadastroUsuario() {
                     />
                     <button 
                         type="button" 
-                        className="password-toggle" 
+                        className="password-toggle2" 
                         onClick={() => setMostrarSenha(!mostrarSenha)}
                     >
                         {mostrarSenha ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
