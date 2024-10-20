@@ -126,6 +126,28 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip title="Dashboards" placement="right" arrow>
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link to="/Dashboard" className="menu-link-icon">
+                    <ListItemIcon
+                      sx={{
+                        justifyContent: "center",
+                        color: 'white',
+                      }}
+                    >
+                      <MdOutlineDashboard size={19} />
+                    </ListItemIcon>
+                  </Link>
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
+
+            <ListItem disablePadding sx={{ display: "block" }}>
               <Tooltip title="Setor Financeiro" placement="right" arrow>
                 <ListItemButton
                   className="menu-link"

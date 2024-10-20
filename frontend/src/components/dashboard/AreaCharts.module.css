@@ -1,0 +1,88 @@
+/* Container dos gráficos */
+.content-area-charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+@media (max-width: 992px) {
+    .content-area-charts {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Gráfico de linha */
+.line-chart, .bar-chart {
+    flex: 1;
+    min-width: 45%;
+    height: 337px;
+    background-color: var(--chart-secondary-color);
+    padding: 16px;
+    border-radius: 5px;
+    box-shadow: var(--light-shadow1);
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .line-chart, .bar-chart {
+        min-width: 100%;
+        padding: 12px;
+    }
+}
+
+.line-chart-wrapper, .bar-chart-wrapper {
+    width: 100%;
+    height: 250px;
+}
+
+.recharts-yAxis {
+    font-size: 14px;
+}
+
+.line-chart-info, .bar-chart-info {
+    margin-bottom: 30px;
+}
+
+.line-chart-title, .bar-chart-title {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--light-color);
+}
+
+.chart-info-data {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+}
+
+.info-data-value {
+    color: var(--side-text-color);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.info-data-text {
+    display: flex;
+    align-items: center;
+    column-gap: 3px;
+    color: var(--green-color);
+}
+
+.recharts-default-legend {
+    position: absolute;
+    right: 0;
+}
+
+.recharts-tooltip-label {
+    color: var(--fourth-color) !important;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Estilos adicionais */
+.recharts-wrapper {
+    margin-left: 10px;
+}
