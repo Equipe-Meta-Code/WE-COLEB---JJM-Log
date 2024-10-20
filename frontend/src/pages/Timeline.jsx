@@ -66,7 +66,7 @@ const TimelineCard = ({ steps, title, refetchEtapas }) => {
   };
 
   return (
-    <Card sx={{ width: '100%', maxWidth: '600px', backgroundColor: '#1B4215', color: 'white', borderRadius: '10px', marginBottom: 2 }}>
+    <Card sx={{ width: '100%', maxWidth: '600px', backgroundColor: 'rgba(0, 58, 102, 0.671)', color: 'white', borderRadius: '10px', marginBottom: 2 }}>
       <CardContent>
         <Typography variant="h5" component="div" onClick={() => setExpanded(!expanded)} sx={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           {title}
@@ -151,7 +151,7 @@ const DriverCard = () => {
       }}>
         {/* Card interno em destaque */}
         <Box sx={{
-          backgroundColor: '#1B4215',
+          backgroundColor: 'rgba(0, 58, 102, 0.671)',
           borderRadius: '30px',
           padding: 3,
           height: '140px',
@@ -216,7 +216,7 @@ const LicensePlateCard = () => {
       <Card sx={{ 
         width: '100%', 
         maxWidth: '200px', 
-        backgroundColor: '#1B4215',
+        backgroundColor: 'rgba(0, 58, 102, 0.671)',
         color: 'white', 
         borderRadius: '10px',
         display: 'flex',
@@ -253,7 +253,7 @@ const LicensePlateCard = () => {
       <Card sx={{
         height: '130px',
         width: '100%',
-        backgroundColor: '#1B4215',
+        backgroundColor: 'rgba(0, 58, 102, 0.671)',
         color: 'white',
         borderRadius: '10px',
         display: 'flex',
