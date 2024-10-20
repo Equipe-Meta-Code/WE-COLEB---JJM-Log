@@ -91,6 +91,7 @@ input {
     color: #00adb5; /* Azul claro */
     cursor: pointer;
     background-color: transparent;
+    padding-top: 10px;
 }
 
 .password-toggle:hover {
