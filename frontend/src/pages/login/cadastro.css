@@ -29,31 +29,34 @@ h2 {
     color: #f1f1f1;
 }
 
-.label-container input {
+.label-container input,
+.password-container input,
+.dropdown {
+    width: 100%; /* Todos os inputs e dropdown terão 100% de largura */
     padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #f1f1f1;
     color: #333;
+    box-sizing: border-box; /* Garante que o padding e a borda sejam incluídos na largura */
 }
 
 .password-container {
     margin-bottom: 15px;
-}
-
-.password-container label {
-    display: block;
-    margin-bottom: 5px;
-    color: #f1f1f1;
+    position: relative; /* Adiciona o position relative para o contêiner */
 }
 
 .password-container input {
-    width: 90%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    color: #333;
+    padding-right: 40px; /* Espaço para o ícone do olhinho */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333; /* Cor do ícone */
 }
 
 button {
@@ -86,7 +89,6 @@ button:hover {
 }
 
 .dropdown {
-    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;

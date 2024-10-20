@@ -86,13 +86,22 @@ function CadastroUsuario() {
             </div>
             <div className="password-container">
                 <label>Senha:</label>
-                <input 
-                    type={mostrarSenha ? "text" : "password"} 
-                    placeholder="Senha" 
-                    value={novoUsuario.senha} 
-                    onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
-                    onKeyDown={aoApertarEnter}
-                />
+                <div className="password-input-container">
+                    <input 
+                        type={mostrarSenha ? "text" : "password"} 
+                        placeholder="Senha" 
+                        value={novoUsuario.senha} 
+                        onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
+                        onKeyDown={aoApertarEnter}
+                    />
+                    <button 
+                        type="button" 
+                        className="password-toggle" 
+                        onClick={() => setMostrarSenha(!mostrarSenha)}
+                    >
+                        {mostrarSenha ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                    </button>
+                </div>
             </div>
 
             {/* Dropdown para escolher o nível de acesso */}
@@ -109,7 +118,6 @@ function CadastroUsuario() {
                     <option value={"3"}>Recursos Humanos</option>
                 </select>
             </div>
-
 
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}

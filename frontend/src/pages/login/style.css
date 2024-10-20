@@ -10,6 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column; /* Alinhar verticalmente */
 }
 
 /* Estilo do Card */
@@ -18,8 +19,30 @@ body {
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    width: 500px;
     text-align: center;
+    height: fit-content;
+}
+
+/* Estilo dos Títulos */
+.welcome-title {
+    font-size: 2.5rem; /* Tamanho grande para o título */
+    color: #000000; /* Texto preto */
+    margin-bottom: 10px; /* Espaço abaixo do título */
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.2rem; /* Tamanho médio para o subtítulo */
+    color: #ffffff; /* Texto branco */
+    margin-bottom: 20px; /* Espaço abaixo do subtítulo */
+    text-align: center;
+}
+
+/* Estilo da Ilustração (opcional) */
+.illustration {
+    width: 150px; /* Tamanho da imagem */
+    margin-bottom: 20px; /* Espaço abaixo da imagem */
 }
 
 /* Estilo dos Inputs */
@@ -59,7 +82,7 @@ input {
 }
 
 .password-toggle {
-    width: fit-content;
+    width: 90px;
     position: absolute;
     right: 0px; /* Para manter o botão ao lado do input */
     top: 10px;
@@ -68,6 +91,11 @@ input {
     color: #00adb5; /* Azul claro */
     cursor: pointer;
     background-color: transparent;
+}
+
+.password-toggle:hover {
+    background-color: transparent; /* Mantém o fundo transparente no hover */
+    color: #00adb5; /* Mantém a cor azul clara no hover */
 }
 
 /* Estilo do Input de Recuperação com borda preta */
@@ -104,3 +132,33 @@ input {
     color: #00adb5; /* Azul claro */
     border: 1px solid #00adb5; /* Borda azul clara */
 }
+
+/* Estilo do Card com fundo branco */
+.card-welcome {
+    background-color: #ffffff; /* Fundo branco */
+    color: #000000; /* Texto preto */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Borda arredondada suave */
+    padding: 20px;
+    width: 400px; /* Largura do card */
+    text-align: justify;
+    margin: 20px auto; /* Centraliza o card horizontalmente e adiciona espaço vertical */
+    box-shadow: none; /* Remove sombra */
+    position: absolute; /* Posiciona o card em relação à tela */
+    top: 20px; /* Distância do topo da tela */
+    left: 53%; /* Posiciona horizontalmente no meio */
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+}
+
+/* Títulos do card */
+.welcome-title {
+    font-size: 36px; /* Aumenta o tamanho do título */
+    margin: 0; /* Remove margem */
+}
+
+.subtitle {
+    font-size: 20px; /* Tamanho do subtítulo */
+    color: #000000; /* Texto preto */
+    margin: 20px 0 0; /* Margem superior para espaçar do título */
+}
+
