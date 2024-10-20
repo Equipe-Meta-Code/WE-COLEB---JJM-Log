@@ -48,3 +48,103 @@
     padding: 5px;
 }
 
+.titulo-funcionarios{
+  width: max-content;
+  color: black;
+}
+.lista-funcionarios {
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabela-de-funcionarios{
+  background-color: rgb(247, 247, 247);
+}
+
+.input-pesquisa {
+  width: 300px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.tabela-funcionarios {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.cabecalho-tabela {
+  background-color: #f4f6f9;
+}
+
+.cabecalho-tabela th, .corpo-tabela td {
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.corpo-tabela tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.corpo-tabela tr:hover {
+  background-color: #e3f2fd; /* Azul claro ao passar o mouse */
+}
+
+.linha-tabela {
+  position: relative;
+}
+
+.coluna-nome, .coluna-email, .coluna-papel, .coluna-acoes {
+  color: #333;
+}
+
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.botao-menu {
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: rgb(37, 37, 255);
+  padding: 0px;
+}
+
+.botao-menu:hover{
+  background-color: transparent;
+}
+
+.menu-opcoes {
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.opcao-menu {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: none;
+  text-align: left;
+  width: 100%;
+  color: black;
+}
+
+.opcao-menu:hover {
+  background-color: #bfd0ff;
+}

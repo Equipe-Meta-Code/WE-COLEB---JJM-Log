@@ -113,9 +113,9 @@ function CadastroUsuario() {
 
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <button onClick={cadastrarUsuario}>Cadastrar</button> 
+            <button className="botao-cadastro-users"onClick={cadastrarUsuario}>Cadastrar</button> 
             <Link to="/login">
-                <button className="botaoLogin">Entrar</button>
+                <button className="botao-cadastro-users" id="botaoLogin">Entrar</button>
             </Link>
         </div>
     );
