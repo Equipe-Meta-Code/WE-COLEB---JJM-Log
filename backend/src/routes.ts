@@ -9,6 +9,8 @@ import DepartamentoController from './controllers/DepartamentoController';
 import EtapaController from './controllers/EtapaController';
 import PedidoController from './controllers/PedidoController';
 import EtapaPedidoController from './controllers/EtapaPedido.Controller';
+import ClienteController from './controllers/ClienteController';
+import UserFilesController from './controllers/UserFilesController';
 
 const router = Router();
 //router.post("/users", is(['Admin_Role', 'Admin/Vendedor_Role']), UserController.create);
@@ -20,19 +22,31 @@ router.post("/departamentos", DepartamentoController.create);
 router.post("/etapas", EtapaController.create);
 router.post("/pedidos", PedidoController.create);
 router.post("/etapapedido", EtapaPedidoController.create);
+router.post("/upload-pdf", UserFilesController.create);
 
 
-router.get("/pedidos", PedidoController.getAll); // Buscar todos os pedidos
-router.get("/pedidos/:id", PedidoController.getById); // Buscar pedido por ID
+router.get("/users", UserController.getAll);
+router.get("/pedidos", PedidoController.getAll);
+router.get("/pedidos/:id", PedidoController.getById);
 router.get("/etapas", EtapaController.getAll);
 router.get("/departamentos", DepartamentoController.getAll);
 router.get("/etapapedido", EtapaPedidoController.getAll);
 router.get('/etapapedido/pedido/:pedidoId', EtapaPedidoController.getByPedidoId);
 
+router.put("/etapas/:id", EtapaController.update);
 router.put('/etapapedido/:id', EtapaPedidoController.update);
+
+router.delete("/etapas/:id", EtapaController.delete);
+
 
 router.get("/users/roles", UserController.roles);
 router.put("/updatePassword", UserController.updatePassword);
+
+router.post("/clientes", ClienteController.create); // Cadastrar cliente
+router.get("/clientes", ClienteController.list); // Listar clientes
+router.get("/clientes/:id", ClienteController.getClienteById); // Buscar cliente por ID
+router.put("/clientes/:id", ClienteController.update); // Atualizar cliente
+router.delete("/clientes/:id", ClienteController.delete); // Deletar cliente
 
 
 export { router };

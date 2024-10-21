@@ -58,3 +58,11 @@
   color: inherit;       
   display: block;
 }
+
+@font-face {
+  font-family: 'VIPNAGORGIALLA';
+  src: url('./fonts/VIPNAGORGIALLA-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+

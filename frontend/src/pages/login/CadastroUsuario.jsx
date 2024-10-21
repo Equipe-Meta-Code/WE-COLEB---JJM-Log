@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from '../../services/api';
-import './style.css'; 
-import { Link } from 'react-router-dom';
+import './cadastro.css'; 
+import { Link, useNavigate } from 'react-router-dom';
 
 function CadastroUsuario() {
     const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -11,8 +11,10 @@ function CadastroUsuario() {
         usuario: "",
         senha: "",
     });
+    const [roles, setRoles] = useState(""); 
     const [error, setError] = useState(""); // State for error message
     const [successMessage, setSuccessMessage] = useState(""); // State for success message
+    const navigate = useNavigate(); // Hook para redirecionar após o cadastro
 
     const formatarCPF = (value) => {
         const cpfDigits = value.replace(/\D/g, ''); // Remove all non-numeric characters
@@ -46,20 +48,19 @@ function CadastroUsuario() {
         }
 
         try {
-            console.log("Cadastrando", novoUsuario);
+            console.log("Cadastrando", novoUsuario, roles);
             const response = await api.post("/users", {
                 nome: novoUsuario.nome,
                 cpf: novoUsuario.cpf,
                 login: novoUsuario.usuario,
                 senha: novoUsuario.senha,
-                roles: '2'
+                roles: roles // Enviar o nível de acesso selecionado
             });
 
             console.log(response.data);
 
             setSuccessMessage("Usuário cadastrado com sucesso!");
             setTimeout(() => {
-                // Assuming navigate is imported from somewhere else in your code
                 navigate("/dashboard");
             }, 2000);
         } catch (error) {
@@ -69,8 +70,8 @@ function CadastroUsuario() {
     };
 
     return (
-        <div className="cadastro">
-            <h2>Cadastro</h2>
+        <div className="card-container">
+            <h2 className="titulo-usuario">Cadastro de Usuário</h2>
             <div className="label-container">
                 <label>Nome:</label>
                 <input value={novoUsuario.nome} onChange={(e) => setNovoUsuario({...novoUsuario, nome: e.target.value})} placeholder="Nome" />
@@ -80,24 +81,49 @@ function CadastroUsuario() {
                 <input value={novoUsuario.cpf} onChange={(event) => formatarCPF(event.target.value)} placeholder="CPF" />
             </div>
             <div className="label-container">
-                <label>Usuário:</label>
+                <label>Email:</label>
                 <input value={novoUsuario.usuario} onChange={(e) => setNovoUsuario({...novoUsuario, usuario: e.target.value})} placeholder="Usuário" />
             </div>
-            <div className="label-container">
+            <div className="password-container">
                 <label>Senha:</label>
-                <input 
-                    type={mostrarSenha ? "text" : "password"} 
-                    placeholder="Senha" 
-                    value={novoUsuario.senha} 
-                    onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
-                    onKeyDown={aoApertarEnter}
-                />
+                <div className="password-input-container">
+                    <input 
+                        type={mostrarSenha ? "text" : "password"} 
+                        placeholder="Senha" 
+                        value={novoUsuario.senha} 
+                        onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
+                        onKeyDown={aoApertarEnter}
+                    />
+                    <button 
+                        type="button" 
+                        className="password-toggle2" 
+                        onClick={() => setMostrarSenha(!mostrarSenha)}
+                    >
+                        {mostrarSenha ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                    </button>
+                </div>
             </div>
+
+            {/* Dropdown para escolher o nível de acesso */}
+            <div className="label-container">
+                <label>Nível de Acesso:</label>
+                <select
+                    className="dropdown" // Adicionando a classe para aplicar o estilo
+                    value={roles}
+                    onChange={(event) => setRoles(event.target.value)}
+                >
+                     <option value={""}>Selecione</option>
+                    <option value={"1"}>Usuário Comum</option>
+                    <option value={"2"}>Administrador</option>
+                    <option value={"3"}>Recursos Humanos</option>
+                </select>
+            </div>
+
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <button onClick={cadastrarUsuario}>Cadastrar</button> 
+            <button className="botao-cadastro-users"onClick={cadastrarUsuario}>Cadastrar</button> 
             <Link to="/login">
-                <button className="botaoLogin">Entrar</button>
+                <button className="botao-cadastro-users" id="botaoLogin">Entrar</button>
             </Link>
         </div>
     );
