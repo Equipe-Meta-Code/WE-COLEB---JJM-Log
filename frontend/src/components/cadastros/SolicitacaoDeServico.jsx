@@ -378,7 +378,7 @@ function SolicitacaoDeServico() {
                         <label>Selecione o Departamento: </label>
                         <div className={styles.departamentos}>
                             <select
-                                className={styles.inputTexto}
+                                className={styles.inputEtapas}
                                 id={styles.selectCategorias}
                                 value={departamento.idDepartamento}
                                 onChange={(e) => {
@@ -401,7 +401,7 @@ function SolicitacaoDeServico() {
                                         <div key={etapaIndex} className={styles.campos}>
                                             <label>Selecione a Etapa: </label>
                                             <select
-                                                className={styles.inputTexto}
+                                                className={styles.inputEtapas}
                                                 id={styles.selectCategorias}
                                                 value={etapa.etapaId}
                                                 onChange={(e) => {

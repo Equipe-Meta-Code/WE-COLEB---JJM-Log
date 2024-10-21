@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import './style.css'; // Certifique-se de que o CSS correspondente esteja atualizado
 import api from '../../services/api';
-import Modal from 'react-modal'; // Você pode instalar react-modal com `npm install react-modal`
-import {useAuth} from '../../context/AuthContext';
+import Modal from 'react-modal';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
 
 const customStyles = {
     content: {
@@ -16,7 +15,7 @@ const customStyles = {
         backgroundColor: '#162447', // Mesma cor do card
         borderRadius: '10px',
         padding: '20px',
-        width: '400px', // Aumentar a largura do modal
+        width: '400px',
         color: '#ffffff', // Texto em branco
     },
     overlay: {
@@ -24,7 +23,7 @@ const customStyles = {
     },
 };
 
-Modal.setAppElement('#root'); // Define o elemento pai para o modal
+Modal.setAppElement('#root');
 
 function LoginPage() {
     const [login, setLogin] = useState(''); // Estado para o email
@@ -37,8 +36,7 @@ function LoginPage() {
     const navigate = useNavigate();
     const { signIn } = useAuth();
 
-
-    const handleLoginClick = useCallback(async() => {
+    const handleLoginClick = useCallback(async () => {
         if (!login || !senha) {
             setError("Por favor, preencha todos os campos.");
             return;
@@ -59,73 +57,80 @@ function LoginPage() {
 
     const handleRecoverySubmit = async (e) => {
         e.preventDefault();
-        // Chame a API para enviar um email de recuperação de senha
         try {
             const response = await api.post('/recover-password', {
                 login: recoveryEmail,
             });
-
             console.log('E-mail de recuperação enviado:', response.data);
-            setRecoveryEmail(''); // Limpar campo após envio
-            setIsModalOpen(false); // Fechar modal
-            alert('E-mail de recuperação enviado!'); // Mensagem de sucesso
+            setRecoveryEmail('');
+            setIsModalOpen(false);
+            alert('E-mail de recuperação enviado!');
         } catch (error) {
             console.error('Erro ao enviar e-mail de recuperação:', error);
-            alert('Erro ao enviar e-mail de recuperação. Tente novamente.'); // Mensagem de erro
+            alert('Erro ao enviar e-mail de recuperação. Tente novamente.');
         }
     };
 
-    return (
-        <div className="container" id="container">
-            <div className="form-container sign-in">
-                <div className="card">
-                    <h1>Login</h1>
-                    <input
-                        type="text"
-                        placeholder="Email"
-                        value={login}
-                        onChange={(e) => setLogin(e.target.value)}
-                    />
-                    <div className="password-container02">
-                        <input
-                            type={showPassword ? 'text' : 'senha'}
-                            placeholder="Senha"
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                        />
-                        <button type="button" onClick={togglePasswordVisibility} className="password-toggle">
-                            {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
-                        </button>
-                    </div>
-                    <button className="recovery-link" onClick={() => setIsModalOpen(true)}>Esqueceu a senha?</button>
-                    <button className="login-button" onClick={handleLoginClick}>Entrar</button>
-                </div>
-            </div>
+// JSX Atualizado
 
-            {/* Modal para recuperação de senha */}
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={() => setIsModalOpen(false)}
-                style={customStyles}
-            >
-                <h2 style={{ color: '#ffffff' }}>Recuperar Senha</h2>
-                <form onSubmit={handleRecoverySubmit}>
-                    <input
-                        type="email"
-                        placeholder="Digite seu e-mail"
-                        value={recoveryEmail}
-                        onChange={(e) => setRecoveryEmail(e.target.value)}
-                        required
-                        className="recovery-input" // Classe para borda
-                    />
-                    <div className="modal-buttons">
-                        <button type="submit" className="submit-button">Enviar E-mail</button>
-                        <button onClick={() => setIsModalOpen(false)} className="close-button">Fechar</button>
-                    </div>
-                </form>
-            </Modal>
+return (
+    <div className="container" id="container">
+        {/* Card com fundo branco para o título e subtítulo */}
+        <div className="card card-welcome">
+            <h1 className="welcome-title">Bem-vindo ao Portal do Funcionário!</h1>
+            <h3 className="subtitle">Faça login para acessar o portal</h3>
         </div>
-    );
+        
+        <div className="form-container sign-in">
+            <div className="card">
+                <h1>Login</h1>
+                <input
+                    type="text"
+                    placeholder="Email"
+                    value={login}
+                    onChange={(e) => setLogin(e.target.value)}
+                />
+                <div className="password-container02">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Senha"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                    />
+                    <button type="button" onClick={togglePasswordVisibility} className="password-toggle">
+                        {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                    </button>
+                </div>
+                <button className="recovery-link" onClick={() => setIsModalOpen(true)}>Esqueceu a senha?</button>
+                <button className="login-button" onClick={handleLoginClick}>Entrar</button>
+            </div>
+        </div>
+
+        {/* Modal para recuperação de senha */}
+        <Modal
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            style={customStyles}
+        >
+            <h2 style={{ color: '#ffffff' }}>Recuperar Senha</h2>
+            <form onSubmit={handleRecoverySubmit}>
+                <input
+                    type="email"
+                    placeholder="Digite seu e-mail"
+                    value={recoveryEmail}
+                    onChange={(e) => setRecoveryEmail(e.target.value)}
+                    required
+                    className="recovery-input"
+                />
+                <div className="modal-buttons">
+                    <button type="submit" className="submit-button">Enviar E-mail</button>
+                    <button onClick={() => setIsModalOpen(false)} className="close-button">Fechar</button>
+                </div>
+            </form>
+        </Modal>
+    </div>
+);
+
 }
 
 export default LoginPage;

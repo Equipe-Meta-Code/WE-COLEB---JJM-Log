@@ -111,5 +111,22 @@ class UserController {
             return response.status(500).json({ message: 'Erro ao atualizar senha' });
         }
     }
+
+    async getAll(request: Request, response: Response) {
+        const userRepository = AppDataSource.getRepository(User);
+        try {
+            const users = await userRepository.find({ relations: ['roles'] });
+            const usersResponse = users.map(user => {
+                return { 
+                    ...user, 
+                    senha: undefined
+                };
+            });
+            return response.status(200).json(usersResponse);
+        } catch (error) {
+            return response.status(500).json({ message: 'Erro ao buscar usuários' });
+        }
+    }
+    
 }
 export default new UserController();
