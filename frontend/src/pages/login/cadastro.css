@@ -1,5 +1,5 @@
 .card-container {
-    background-color: #2b3a67; /* Cor azul escura */
+    background-color: rgba(0, 58, 102, 0.671); /* Cor azul escura */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -14,7 +14,7 @@
     transform: scale(1.05);
 }
 
-h2 {
+.titulo-usuario {
     text-align: center;
     color: #f1f1f1;
 }
@@ -62,7 +62,7 @@ h2 {
 .botao-cadastro-users {
     width: 100%;
     padding: 10px;
-    background-color: #1e2d5f;
+    background-color: #293f69;
     color: white;
     border: none;
     border-radius: 5px;
@@ -71,7 +71,7 @@ h2 {
 }
 
 .botao-cadastro-users:hover {
-    background-color: #4a5f9b;
+    background-color: #3a55a0;
 }
 
 .error-message, .success-message {
@@ -118,7 +118,7 @@ h2 {
     top: 10px;
     background: none;
     border: none;
-    color: #00adb5; /* Azul claro */
+    color: #293f69; /* Azul claro */
     cursor: pointer;
     background-color: transparent;
     padding-top: 35px;

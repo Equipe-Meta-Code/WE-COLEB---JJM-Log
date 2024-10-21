@@ -80,11 +80,23 @@ const TimelineCard = ({ steps, title, refetchEtapas }) => {
               <Box key={index} sx={{ display: 'flex', alignItems: 'center', position: 'relative', mb: 2 }}>
                 <Button
                   onClick={() => handleStepClick(index + 1, stepData)}
-                  sx={{ minWidth: '40px', height: '40px', backgroundColor: stepData.estado === "Finalizado" ? 'green' : 'grey', color: 'white', borderRadius: '50%', zIndex: 1 }}
+                  sx={{
+                    minWidth: '40px',
+                    height: '40px',
+                    backgroundColor: stepData.estado === "Finalizado" 
+                      ? '#293f69' 
+                      : stepData.etapa_desfeita === null 
+                        ? 'white'  // Se etapa_desfeita for null, usa branco
+                        : '#aaa229', // Se etapa_desfeita não for null, usa amarelo
+                    color: 'white',
+                    borderRadius: '50%',
+                    zIndex: 1
+                  }} 
                   disabled={stepData.estado === "Finalizado" || isStepDisabled(index)}
                 >
                   <FiberManualRecordIcon />
                 </Button>
+
                 {index < steps.length - 1 && (
                   <Box sx={{ position: 'absolute', top: '20px', left: '19px', height: '40px', width: '2px', backgroundColor: 'grey' }} />
                 )}
@@ -322,17 +334,28 @@ const LicensePlateCard = () => {
     // Agrupar as etapas por departamento
     const etapasPorDepartamento = etapas.reduce((acc, etapa) => {
       const departamentoNome = departamentoNomes[etapa.departamento.nome] || ` ${etapa.departamento.nome}`;
+    
+      // Função para formatar a data no formato desejado ou retornar uma string vazia se a data for null
+      const formatarDataConclusao = (data) => {
+        if (!data) return ""; // Se data for null, retorna uma string vazia
+        const dataObj = new Date(data);
+        const horas = dataObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const dataFormatada = dataObj.toLocaleDateString('pt-BR'); // Formato DD/MM/YYYY para o Brasil
+        return `${horas} ${dataFormatada.split('/').reverse().join('-')}`; // Reorganizando a data para o formato DD-MM-YYYY
+      };
+    
       if (!acc[departamentoNome]) {
         acc[departamentoNome] = [];
       }
       acc[departamentoNome].push({
         id: etapa.id,
         label: etapa.nome,
-        city: departamentoNome,
+        city: formatarDataConclusao(etapa.data_conclusao), // Chamando a função de formatação de data
         estado: etapa.estado,
       });
       return acc;
     }, {});
+    
   
     return (
       <Grid container spacing={2} sx={{ padding: 2 }}>

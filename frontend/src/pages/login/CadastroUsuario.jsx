@@ -71,7 +71,7 @@ function CadastroUsuario() {
 
     return (
         <div className="card-container">
-            <h2>Cadastro de Usuário</h2>
+            <h2 className="titulo-usuario">Cadastro de Usuário</h2>
             <div className="label-container">
                 <label>Nome:</label>
                 <input value={novoUsuario.nome} onChange={(e) => setNovoUsuario({...novoUsuario, nome: e.target.value})} placeholder="Nome" />

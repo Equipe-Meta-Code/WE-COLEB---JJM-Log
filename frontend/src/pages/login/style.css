@@ -15,7 +15,7 @@ body {
 
 /* Estilo do Card */
 .card {
-    background-color: #162447; /* Azul escuro */
+    background-color: rgba(0, 58, 102, 0.671); /* Azul escuro */
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -58,14 +58,16 @@ input {
 .recovery-link {
     background: none;
     border: none;
-    color: #00adb5; /* Azul claro */
+    color: #293f69; /* Azul claro */
     cursor: pointer;
     text-decoration: underline;
 }
-
+.recovery-link:hover {
+    color: #3a55a0;
+}
 /* Estilo do Botão de Login */
 .login-button {
-    background-color: #00adb5; /* Azul claro */
+    background-color: #293f69; /* Azul claro */
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -73,7 +75,9 @@ input {
     cursor: pointer;
     width: 100%;
 }
-
+.login-button:hover{
+    background-color: #3a55a0;
+}
 /* Estilo da Visibilidade da Senha */
 .password-container02 {
     position: relative;
@@ -88,7 +92,7 @@ input {
     top: 10px;
     background: none;
     border: none;
-    color: #00adb5; /* Azul claro */
+    color: #293f69; /* Azul claro */
     cursor: pointer;
     background-color: transparent;
     padding-top: 10px;
@@ -96,7 +100,7 @@ input {
 
 .password-toggle:hover {
     background-color: transparent; /* Mantém o fundo transparente no hover */
-    color: #00adb5; /* Mantém a cor azul clara no hover */
+    color: #3a55a0; /* Mantém a cor azul clara no hover */
 }
 
 /* Estilo do Input de Recuperação com borda preta */
@@ -119,7 +123,7 @@ input {
 
 .submit-button,
 .close-button {
-    background-color: #00adb5; /* Azul claro */
+    background-color: #293f69; /* Azul claro */
     color: #ffffff; /* Texto em branco */
     border: none;
     border-radius: 5px;
@@ -130,8 +134,8 @@ input {
 
 .close-button {
     background-color: transparent; /* Fundo transparente para o botão fechar */
-    color: #00adb5; /* Azul claro */
-    border: 1px solid #00adb5; /* Borda azul clara */
+    color: #293f69; /* Azul claro */
+    border: 1px solid #293f69; /* Borda azul clara */
 }
 
 /* Estilo do Card com fundo branco */

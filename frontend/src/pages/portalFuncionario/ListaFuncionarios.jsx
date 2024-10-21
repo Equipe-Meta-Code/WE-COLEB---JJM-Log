@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from '../../services/api'; // Importe seu arquivo de configuração da API
-import { FaListUl } from "react-icons/fa";
 import './style.css'; 
 
 function ListaFuncionarios() {
@@ -41,7 +40,7 @@ function ListaFuncionarios() {
     };
 
     // Função para abrir/fechar o menu de opções
-    const toggleMenu = (id) => {
+    const clickArquivos = (id) => {
         setMenuAtivo(menuAtivo === id ? null : id);
     };
 
@@ -82,9 +81,10 @@ function ListaFuncionarios() {
                                 <td className="coluna-acoes">
                                     {/* Botão de menu */}
                                     <div className="menu-container">
-                                        <button className="botao-menu" onClick={() => toggleMenu(funcionario.id)}>
-                                            &#x22EE; {/* Código para ícone de três pontos verticais */}
-                                        </button>
+                                    <button className="botao-menu" onClick={() => clickArquivos(funcionario.id)}>
+                                        Arquivos
+                                    </button>
+
 
 
                                     </div>
