@@ -244,6 +244,7 @@ export default function Sidebar() {
                       <FaRoute size={19} />
                     </ListItemIcon>
 
+                  </Link>
                     <ListItemText
                       primary="Monitoramento de Pacote"
                       sx={{
@@ -251,7 +252,6 @@ export default function Sidebar() {
                         opacity: open ? 1 : 0, // Texto visível somente quando sidebar estiver aberto
                       }}
                     />
-                  </Link>
                 </ListItemButton>
               </Tooltip>
             </ListItem>
@@ -282,6 +282,7 @@ export default function Sidebar() {
                     >
                       <MdOutlineDashboard size={19} />
                     </ListItemIcon>
+                  </Link>
                     <ListItemText
                       primary="Desempenho de Vendas"
                       sx={{
@@ -289,14 +290,13 @@ export default function Sidebar() {
                         opacity: open ? 1 : 0,
                       }}
                     />
-                  </Link>
                 </ListItemButton>
               </Tooltip>
             </ListItem>
 
             {/* Setor Financeiro */}
             <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
+            <Tooltip
                 title="Setor Financeiro"
                 placement="right"
                 arrow
@@ -320,6 +320,7 @@ export default function Sidebar() {
                     >
                       <RiOrganizationChart size={19} />
                     </ListItemIcon>
+                  </Link>
                     <ListItemText
                       primary="Setor Financeiro"
                       sx={{
@@ -327,7 +328,6 @@ export default function Sidebar() {
                         opacity: open ? 1 : 0,
                       }}
                     />
-                  </Link>
                 </ListItemButton>
               </Tooltip>
             </ListItem>
