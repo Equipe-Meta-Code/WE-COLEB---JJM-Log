@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css'; 
 
@@ -7,8 +7,12 @@ import api from '../../services/api';
 function PortalFuncionario() {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/outra-pagina');
+  const [holerites, setHolerites] = useState([]);
+  const [registrosPonto, setRegistrosPonto] = useState([]);
+  const [atestados, setAtestados] = useState([]);
+
+  const handleClick = (type) => {
+    navigate(`/outra-pagina/${type}`);
   };
 
   const handleFileUpload = async (event, type) => {
@@ -17,14 +21,15 @@ function PortalFuncionario() {
   
     if (file) {
       console.log(`Arquivo selecionado: ${file.name}`);
-  
+      
       const formData = new FormData();
       formData.append('pdf', file);
       formData.append('userId', userId);
 
+      
       try {
         const response = await api.post("/upload-pdf", {
-            file,
+            file: file.name,
             userId
         });
 
@@ -33,26 +38,9 @@ function PortalFuncionario() {
       } catch (error) {
           console.error("Erro ao cadastrar:", error);
       }
-  
-      /* try {
-        const response = await fetch('http://localhost:3333/upload-pdf', {
-          method: 'POST',
-          body: formData,
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          console.log(result.message);
-        } else {
-          console.error('Erro ao enviar o arquivo');
-        }
-      } catch (error) {
-        console.error('Erro na requisição:', error);
-      } */
     }
   };
   
-
   return (
     <>
         <h1 className="titulo">Portal do funcionário</h1>

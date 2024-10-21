@@ -129,3 +129,28 @@
 .opcao-menu:hover {
   background-color: #bfd0ff;
 }
+.upload-button {
+  display: inline-block; 
+  padding: 10px 25px; 
+  background-color: #4CAF50;
+  color: white; 
+  border: none; 
+  border-radius: 3px; 
+  cursor: pointer;
+  margin-top: 5px; 
+}
+
+.small-button {
+  width: 220px; 
+  text-align: center;
+}
+
+.upload-button:hover {
+  background-color: #45a049; /* Tom mais escuro ao passar o mouse */
+}
+
+.div-img {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
