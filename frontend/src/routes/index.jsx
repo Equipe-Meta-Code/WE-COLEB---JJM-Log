@@ -13,6 +13,8 @@ import PrivateRoutes from './privateRoutes';
 import ControleEtapa from '../pages/controleEtapa/controleEtapa';
 import CadastrarCliente from '../components/cadastros/CadastroCliente';
 
+import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
+
 
 const AppRoutes = () => {
   return (
@@ -30,12 +32,14 @@ const AppRoutes = () => {
           <Route path="/login" exact element={<Login />} />
           <Route path="/Cadastro/Cliente" exact element={<CadastrarCliente />} />
 
+            
           <Route element={<PrivateRoutes role="Admin_Role" />} >
             <Route path="/cadastro" exact element={<CadastroUsuario />} />
           </Route>
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
             <Route path="/portalFuncionario" element={<PortalFuncionario />} />
+            <Route path="/funcionarios" exact element={<ListaFuncionarios />} />
           </Route>
           <Route element={<PrivateRoutes role="Admin_Role" />} >
             <Route path="/controleEtapa" element={<ControleEtapa />} />
