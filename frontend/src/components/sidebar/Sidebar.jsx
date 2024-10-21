@@ -490,19 +490,29 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: "center",
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
                     }}
                   >
                     <Link to="/controleEtapa" className="menu-link-icon">
                       <ListItemIcon
                         sx={{
                           justifyContent: "center",
-                          color: "white",
+                          color: "#666666",
+                          minWidth: 0,
+                          mr: open ? 3 : "auto",
                         }}
                       >
                         <ChecklistIcon size={19} />
                       </ListItemIcon>
                     </Link>
+                    <ListItemText
+                      primary="Etapas"
+                      sx={{
+                        color: "#666666",
+                        opacity: open ? 1 : 0,
+                      }}
+                    />
                   </ListItemButton>
                 </Tooltip>
               </ListItem>
@@ -514,19 +524,29 @@ export default function Sidebar() {
                     <ListItemButton
                       className="menu-link"
                       sx={{
-                        justifyContent: "center",
+                        justifyContent: open ? "initial" : "center",
+                        px: 2.5,
                       }}
                     >
                       <Link to="/funcionarios" className="menu-link-icon">
                         <ListItemIcon
                           sx={{
                             justifyContent: "center",
-                            color: "white",
+                            color: "#666666",
+                            minWidth: 0,
+                            mr: open ? 3 : "auto",
                           }}
                         >
                           <ChecklistIcon size={19} />
                         </ListItemIcon>
                       </Link>
+                      <ListItemText
+                        primary="Lista de Funcionários"
+                        sx={{
+                          color: "#666666",
+                          opacity: open ? 1 : 0,
+                        }}
+                      />
                     </ListItemButton>
                   </Tooltip>
                 </ListItem>
