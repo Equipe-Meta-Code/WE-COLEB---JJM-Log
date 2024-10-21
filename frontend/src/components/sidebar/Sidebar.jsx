@@ -20,13 +20,14 @@ import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
-import { FaRoute, FaSignOutAlt } from "react-icons/fa";
-import { FaGear, FaBuildingUser } from "react-icons/fa6";
+import { FaSignOutAlt } from "react-icons/fa";
+import { FaTruckFast, FaGear, FaBuildingUser, FaMoneyCheckDollar } from "react-icons/fa6";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiOrganizationChart } from "react-icons/ri";
 import { ImUserPlus } from "react-icons/im";
-import { BiUserPlus } from "react-icons/bi";
+import { BsBuildingFillAdd  } from "react-icons/bs";
 import { FaTruck } from "react-icons/fa";
+import { PiUserListBold } from "react-icons/pi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -238,10 +239,10 @@ export default function Sidebar() {
                         justifyContent: "center",
                         color: "#666666",
                         minWidth: 0,
-                        mr: open ? 3 : "auto", // Margem direita ajustada ao estado
+                        mr: open ? 1.5 : "auto", // Margem direita ajustada ao estado
                       }}
                     >
-                      <FaRoute size={19} />
+                      <FaTruckFast size={19} />
                     </ListItemIcon>
 
                   </Link>
@@ -277,7 +278,7 @@ export default function Sidebar() {
                         justifyContent: "center",
                         color: "#666666",
                         minWidth: 0,
-                        mr: open ? 3 : "auto",
+                        mr: open ? 1.5 : "auto",
                       }}
                     >
                       <MdOutlineDashboard size={19} />
@@ -315,10 +316,10 @@ export default function Sidebar() {
                         justifyContent: "center",
                         color: "#666666",
                         minWidth: 0,
-                        mr: open ? 3 : "auto",
+                        mr: open ? 1.5 : "auto",
                       }}
                     >
-                      <RiOrganizationChart size={19} />
+                      <FaMoneyCheckDollar size={19} />
                     </ListItemIcon>
                   </Link>
                     <ListItemText
@@ -331,85 +332,6 @@ export default function Sidebar() {
                 </ListItemButton>
               </Tooltip>
             </ListItem>
-
-            {/* Portal do Funcionário */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
-                title="Portal do Funcionário"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                  onClick={() => handlePortalFunc()}
-                >
-                  <ListItemIcon
-                    sx={{
-                      justifyContent: "center",
-                      color: "#666666",
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                    }}
-                  >
-                    <FaBuildingUser size={19} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Portal do Funcionário"
-                    sx={{
-                      color: "#666666",
-                      opacity: open ? 1 : 0,
-                    }}
-                  />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
-
-            <Divider />
-
-            {/* Botão separado para Cadastro de Usuário */}
-            <PermissionComponent role="Admin_Role">
-              <ListItem disablePadding sx={{ display: "block" }}>
-                <Tooltip
-                  title="Cadastro de Usuário"
-                  placement="right"
-                  arrow
-                  disableHoverListener={open}
-                >
-                  <ListItemButton
-                    className="menu-link"
-                    sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
-                    }}
-                  >
-                    <Link to="/cadastro" className="no-link-style">
-                      <ListItemIcon
-                        sx={{
-                          justifyContent: "center",
-                          color: "#666666",
-                          minWidth: 0,
-                          mr: open ? 3 : "auto",
-                        }}
-                      >
-                        <BiUserPlus size={19} />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary="Cadastro"
-                        sx={{
-                          color: "#666666",
-                          opacity: open ? 1 : 0,
-                        }}
-                      />
-                    </Link>
-                  </ListItemButton>
-                </Tooltip>
-              </ListItem>
-            </PermissionComponent>
 
             <ListItem disablePadding sx={{ display: "block" }}>
               <Tooltip
@@ -431,10 +353,10 @@ export default function Sidebar() {
                       justifyContent: "center",
                       color: "#666666",
                       minWidth: 0,
-                      mr: open ? 3 : "auto",
+                      mr: open ? 1.5 : "auto",
                     }}
                   >
-                    <ImUserPlus size={19} />
+                    <BsBuildingFillAdd size={19} />
                   </ListItemIcon>
                   <ListItemText
                     primary="Cadastro"
@@ -483,10 +405,91 @@ export default function Sidebar() {
                 </MenuItem>
               </Menu>
             </ListItem>
+            
+            <h8>.</h8>
+            <Divider />
+            <h8>.</h8>
+
+            {/* Botão separado para Cadastro de Usuário */}
+            <PermissionComponent role="Admin_Role">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip
+                  title="Cadastro de Usuário"
+                  placement="right"
+                  arrow
+                  disableHoverListener={open}
+                >
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <Link to="/cadastro" className="no-link-style">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: "#666666",
+                          minWidth: 0,
+                          mr: open ? 1.5 : "auto",
+                        }}
+                      >
+                        <ImUserPlus size={19} />
+                      </ListItemIcon>
+                    </Link>
+                      <ListItemText
+                        primary="Cadastro"
+                        sx={{
+                          color: "#666666",
+                          opacity: open ? 1 : 0,
+                        }}
+                      />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
+
+            {/* Portal do Funcionário */}
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip
+                title="Portal do Funcionário"
+                placement="right"
+                arrow
+                disableHoverListener={open}
+              >
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                  onClick={() => handlePortalFunc()}
+                >
+                  <ListItemIcon
+                    sx={{
+                      justifyContent: "center",
+                      color: "#666666",
+                      minWidth: 0,
+                      mr: open ? 1.5 : "auto",
+                    }}
+                  >
+                    <FaBuildingUser size={19} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Portal do Funcionário"
+                    sx={{
+                      color: "#666666",
+                      opacity: open ? 1 : 0,
+                    }}
+                  />
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
 
             <PermissionComponent role="Admin_Role">
               <ListItem disablePadding sx={{ display: "block" }}>
-                <Tooltip title="Etapas" placement="right" arrow>
+                <Tooltip title="Controle Etapas" placement="right" arrow>
                   <ListItemButton
                     className="menu-link"
                     sx={{
@@ -500,14 +503,14 @@ export default function Sidebar() {
                           justifyContent: "center",
                           color: "#666666",
                           minWidth: 0,
-                          mr: open ? 3 : "auto",
+                          mr: open ? 1 : "auto",
                         }}
                       >
                         <ChecklistIcon size={19} />
                       </ListItemIcon>
                     </Link>
                     <ListItemText
-                      primary="Etapas"
+                      primary="Controle Etapas"
                       sx={{
                         color: "#666666",
                         opacity: open ? 1 : 0,
@@ -534,10 +537,10 @@ export default function Sidebar() {
                             justifyContent: "center",
                             color: "#666666",
                             minWidth: 0,
-                            mr: open ? 3 : "auto",
+                            mr: open ? 1.5 : "auto",
                           }}
                         >
-                          <ChecklistIcon size={19} />
+                          <PiUserListBold size={19} />
                         </ListItemIcon>
                       </Link>
                       <ListItemText
@@ -573,7 +576,7 @@ export default function Sidebar() {
                         justifyContent: "center",
                         color: "#666666",
                         minWidth: 0,
-                        mr: open ? 3 : "auto",
+                        mr: open ? 1.5 : "auto",
                       }}
                     >
                       <FaSignOutAlt size={19} />

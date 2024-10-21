@@ -29,7 +29,7 @@ export const AppDataSource = new DataSource({
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "sofia",
+    password: "",
     database: "wecollab",
     synchronize: true,
     logging: false,
