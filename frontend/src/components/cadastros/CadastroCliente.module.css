@@ -2,12 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     background-color: transparent; /* Fundo da página */
 }
 
 .container {
-    background-color: #00274d; /* Azul escuro para o card */
+    background-color: rgba(0, 58, 102, 0.671); /* Azul escuro para o card */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -40,17 +40,18 @@
 }
 
 .botaoCadastrar {
-    background-color: #007bff; /* Cor do botão */
-    color: white; /* Cor do texto do botão */
-    border: none; /* Remove a borda */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 10px; /* Espaçamento interno */
-    cursor: pointer; /* Muda o cursor para pointer */
-    transition: background-color 0.2s; /* Efeito de transição */
+    width: 100%;
+    padding: 10px;
+    background-color: #293f69;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .botaoCadastrar:hover {
-    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+    background-color: #4a5f9b;
 }
 
 .selectTipoDocumento {
