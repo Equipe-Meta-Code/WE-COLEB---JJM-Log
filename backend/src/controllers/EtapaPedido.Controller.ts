@@ -43,7 +43,7 @@ class EtapaController {
 
         try {
             const etapasPedidos = await etapaPedidoRepository.find({
-                relations: ["pedido"], // Ajustar as relações corretas (não mais precisa da relação 'etapa')
+                relations: ["pedido", "departamento"], // Ajustar as relações corretas (não mais precisa da relação 'etapa')
             });
 
             return res.status(200).json(etapasPedidos);
