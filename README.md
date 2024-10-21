@@ -102,7 +102,11 @@ https://www.figma.com/design/cLvxtdAwY5JHZP9VonyJeV/dashboard-(Copy)?node-id=0-1
 
   ##### SPRINT 1 - Assistir ao vídeo da Sprint 1
   <div align="center">
-https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b
+
+
+https://github.com/user-attachments/assets/5a88baa1-954c-4877-bab0-7c3ef3dfdd97
+
+
   </div>
 
   ---
