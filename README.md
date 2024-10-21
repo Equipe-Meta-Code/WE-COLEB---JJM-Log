@@ -114,6 +114,10 @@ https://github.com/user-attachments/assets/5a88baa1-954c-4877-bab0-7c3ef3dfdd97
   ##### SPRINT 2 - O vídeo da Sprint 2 ainda não foi adicionado.
   <div align="center">
    
+
+https://github.com/user-attachments/assets/7563efdb-d8d6-45cf-85b5-071ceb0a85ca
+
+
   </div>
 
   ---
