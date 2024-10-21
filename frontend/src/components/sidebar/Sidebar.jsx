@@ -406,9 +406,9 @@ export default function Sidebar() {
               </Menu>
             </ListItem>
             
-            <h8>.</h8>
+     
             <Divider />
-            <h8>.</h8>
+          
 
             {/* Botão separado para Cadastro de Usuário */}
             <PermissionComponent role="Admin_Role">

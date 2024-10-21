@@ -132,7 +132,7 @@
 .upload-button {
   display: inline-block; 
   padding: 10px 25px; 
-  background-color: #4CAF50;
+  background-color: #293f69;
   color: white; 
   border: none; 
   border-radius: 3px; 
@@ -146,7 +146,7 @@
 }
 
 .upload-button:hover {
-  background-color: #45a049; /* Tom mais escuro ao passar o mouse */
+  background-color: #4a5f9b; /* Tom mais escuro ao passar o mouse */
 }
 
 .div-img {

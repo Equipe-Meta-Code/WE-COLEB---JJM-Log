@@ -41,25 +41,30 @@ const TimelineCard = ({ steps, title, refetchEtapas }) => {
       console.error('Step Data ou Step ID indefinido:', stepData);
       return;
     }
-
+  
+    // Atualiza a etapa apenas se o step atual for o ativo ou anterior
     if (step === activeStep || step < activeStep) {
       await updateEtapaState(stepData.id);
-
-      steps[step - 1].estado = "Finalizado";
-
+  
+      steps[step - 1].estado = "Finalizado"; // Marca a etapa como "Finalizada"
+  
       if (step === steps.length) {
         setActiveStep(step);
-        // Força o re-fetch das etapas quando for a última
+        // Força o re-fetch das etapas quando for a última etapa
         if (refetchEtapas) {
           refetchEtapas();
         }
       } else {
-        setActiveStep(step + 1);
+        setActiveStep(step + 1); // Avança para o próximo step
       }
-
-      setEtapas([...steps]);
+      if (refetchEtapas) {
+        refetchEtapas();
+      }
+      setEtapas([...steps]); // Atualiza o estado local com as novas etapas
+      refetchEtapas(); // Chama o re-fetch das etapas após qualquer mudança
     }
   };
+  
 
   const isStepDisabled = (index) => {
     return index + 1 > activeStep && steps.slice(0, index).some(step => step.estado !== "Finalizado");
@@ -85,13 +90,13 @@ const TimelineCard = ({ steps, title, refetchEtapas }) => {
                     height: '40px',
                     backgroundColor: stepData.estado === "Finalizado" 
                       ? '#293f69' 
-                      : stepData.etapa_desfeita === null 
-                        ? 'white'  // Se etapa_desfeita for null, usa branco
-                        : '#aaa229', // Se etapa_desfeita não for null, usa amarelo
-                    color: 'white',
+                      : stepData.etapa_desfeita === "Desfeita"
+                        ? '#aaa229' 
+                        : 'white',
                     borderRadius: '50%',
                     zIndex: 1
-                  }} 
+                  }}
+                  
                   disabled={stepData.estado === "Finalizado" || isStepDisabled(index)}
                 >
                   <FiberManualRecordIcon />
