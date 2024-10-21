@@ -508,6 +508,30 @@ export default function Sidebar() {
               </ListItem>
             </PermissionComponent>
 
+            <PermissionComponent role="Admin_Role,Rh_Role">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                  <Tooltip title="Lista de Funcionários" placement="right" arrow>
+                    <ListItemButton
+                      className="menu-link"
+                      sx={{
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Link to="/funcionarios" className="menu-link-icon">
+                        <ListItemIcon
+                          sx={{
+                            justifyContent: "center",
+                            color: "white",
+                          }}
+                        >
+                          <ChecklistIcon size={19} />
+                        </ListItemIcon>
+                      </Link>
+                    </ListItemButton>
+                  </Tooltip>
+                </ListItem>
+              </PermissionComponent>
+
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
               {/* Sair */}
               <ListItem disablePadding sx={{ display: "block" }}>
