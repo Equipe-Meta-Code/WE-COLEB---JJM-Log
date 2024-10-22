@@ -25,25 +25,12 @@ import { FaTruckFast, FaGear, FaBuildingUser, FaMoneyCheckDollar } from "react-i
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiOrganizationChart } from "react-icons/ri";
 import { ImUserPlus } from "react-icons/im";
-import { BiUserPlus } from "react-icons/bi"; // Importando o ícone
-import { Tooltip, Menu, MenuItem } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import './sideBar.css';  
-import PermissionComponent from '../PermissionComponent';
-import { useAuth } from '../../context/AuthContext';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import BarChartIcon from '@mui/icons-material/BarChart';
-
-const drawerWidth = 80;
-
-const Drawer = styled(MuiDrawer)(({ theme }) => ({
-  width: drawerWidth,
-=======
 import { BsBuildingFillAdd  } from "react-icons/bs";
 import { FaTruck } from "react-icons/fa";
 import { PiUserListBold } from "react-icons/pi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 import "./sideBar.css";
 
@@ -308,32 +295,47 @@ export default function Sidebar() {
                 </ListItemButton>
               </Tooltip>
             </ListItem>
-
-            {/* Setor Financeiro */}
+            
+            {/* Dashboard */}
             <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Dashboards" placement="right" arrow>
+              <Tooltip
+                title="Dashboard"
+                placement="right"
+                arrow
+                disableHoverListener={open}
+              >
                 <ListItemButton
                   className="menu-link"
                   sx={{
-                    justifyContent: "center",
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
                 >
-                  <Link to="/Dashboard" className="menu-link-icon">
+                  <Link to="/Dashboard" className="no-link-style">
                     <ListItemIcon
                       sx={{
                         justifyContent: "center",
-                        color: 'white',
+                        color: "#666666",
+                        minWidth: 0,
+                        mr: open ? 1.5 : "auto",
                       }}
                     >
                       <BarChartIcon size={19} />
                     </ListItemIcon>
                   </Link>
+                    <ListItemText
+                      primary="Dashboard"
+                      sx={{
+                        color: "#666666",
+                        opacity: open ? 1 : 0,
+                      }}
+                    />
                 </ListItemButton>
               </Tooltip>
             </ListItem>
 
+            {/* Setor Financeiro */}
             <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Setor Financeiro" placement="right" arrow>
             <Tooltip
                 title="Setor Financeiro"
                 placement="right"
