@@ -31,6 +31,7 @@ import { PiUserListBold } from "react-icons/pi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import BarChartIcon from '@mui/icons-material/BarChart';
+import ListIcon from '@mui/icons-material/List';
 
 import "./sideBar.css";
 
@@ -443,6 +444,45 @@ export default function Sidebar() {
                   {/* Nova Página */}
                 </MenuItem>
               </Menu>
+            </ListItem>
+
+            {/* Lista de Clientes */}
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip
+                title="Lista de Clientes"
+                placement="right"
+                arrow
+                disableHoverListener={open}
+              >
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <Link to="/clientes" className="no-link-style">
+                    <ListItemIcon
+                      sx={{
+                        justifyContent: "center",
+                        color: "#666666",
+                        minWidth: 0,
+                        mr: open ? 1.5 : "auto",
+                      }}
+                    >
+                      <ListIcon size={19} />
+                    </ListItemIcon>
+                  </Link>
+
+                    <ListItemText
+                      primary="Lista de Clientes"
+                      sx={{
+                        color: "#666666",
+                        opacity: open ? 1 : 0,
+                      }}
+                    />
+                </ListItemButton>
+              </Tooltip>
             </ListItem>
             
      
