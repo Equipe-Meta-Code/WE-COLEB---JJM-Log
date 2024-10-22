@@ -82,7 +82,7 @@ const Drawer = styled(MuiDrawer)(({ theme, open }) => ({
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  background: "rgba(0, 58, 102, 0.8)",
+  background: "#336184",
   boxShadow: "none",
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {

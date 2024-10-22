@@ -14,6 +14,7 @@ import ControleEtapa from '../pages/controleEtapa/controleEtapa';
 import CadastrarCliente from '../components/cadastros/CadastroCliente';
 
 import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
+import ListaArquivos from '../pages/portalFuncionario/ListaArquivos';
 
 
 const AppRoutes = () => {
@@ -39,6 +40,7 @@ const AppRoutes = () => {
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
             <Route path="/portalFuncionario" element={<PortalFuncionario />} />
+            <Route path="/arquivos/:tipo" element={<ListaArquivos />} />
             <Route path="/funcionarios" exact element={<ListaFuncionarios />} />
           </Route>
           <Route element={<PrivateRoutes role="Admin_Role" />} >

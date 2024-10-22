@@ -13,6 +13,10 @@ function PortalFuncionario() {
   const handleClick = (type) => {
     navigate(`/outra-pagina/${type}`);
   };
+    const tipoArquivo = type; // Armazena o tipo que será passado
+    navigate(`/arquivos/${tipoArquivo}`);
+};
+
 
   const handleFileUpload = async (event, type) => {
     const file = event.target.files[0];
@@ -59,7 +63,7 @@ function PortalFuncionario() {
       <div className="pasta-div">
         {/* Holerites */}
         <div className='div-img'>
-          <div className="arquivo-div" onClick={() => handleClick('Holerites')}>
+          <div className="arquivo-div" onClick={() => handleClick('1')}>
             <img src="/src/assets/holerite.png" alt="Arquivos" className="image" />
             <h2 className="nome-pasta">Holerites</h2>
           </div>
@@ -80,7 +84,7 @@ function PortalFuncionario() {
 
         {/* Registro de ponto */}
         <div className='div-img'>
-          <div className="arquivo-div" onClick={() => handleClick('RegistroPonto')}>
+          <div className="arquivo-div" onClick={() => handleClick('2')}>
             <img src="/src/assets/registroPonto.png" alt="Arquivos" className="image" />
             <h2 className="nome-pasta">Registro de ponto</h2>
           </div>
@@ -101,7 +105,7 @@ function PortalFuncionario() {
 
         {/* Atestados */}
         <div className='div-img'>
-          <div className="arquivo-div" onClick={() => handleClick('Atestados')}>
+          <div className="arquivo-div" onClick={() => handleClick('3')}>
             <img src="/src/assets/atestado.png" alt="Arquivos" className="image-atestado" />
             <h2 className="nome-pasta">Atestado</h2>
           </div>
