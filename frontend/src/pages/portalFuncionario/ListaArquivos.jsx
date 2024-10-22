@@ -37,7 +37,21 @@ function ListaArquivos() {
         navigate(`/portalFuncionario`);
     };
 
- 
+    // Função para baixar o arquivo
+    const baixarArquivo = (arquivo) => {
+        // Cria o caminho completo para o arquivo no backend
+        const url = `http://localhost:3333/uploads/pdf/${arquivo.rota}`; // Ajustado para 'uploads'
+        
+        // Cria um link de download e clica nele automaticamente
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = arquivo.nome; // Nome do arquivo para download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Remove o link após o clique
+    };
+    
+    
 
     // Função para upload de arquivos
     const handleFileUpload = async (event) => {
@@ -107,7 +121,7 @@ function ListaArquivos() {
                     : arquivo.nome;
 
                 return (
-                    <div className={styles.card} key={arquivo.id}>
+                    <div className={styles.card} key={arquivo.id} onClick={() => baixarArquivo(arquivo)}>
                         <div className={styles.conteudoCard}>
                             <img src="/src/assets/file_icon.png" alt="Arquivos" className={styles.imagem} />
                         </div>

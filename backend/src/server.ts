@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
+import path from 'path';
 
 import { AppDataSource } from './database/data-source';
 import { router } from './routes';
@@ -7,6 +8,8 @@ import "./database/data-source";
 
 import cors from 'cors';
 const app = express();
+
+app.use('/uploads', express.static(path.join(__dirname, 'public/upload')));
 
 app.use((req, res, next) => {
 
