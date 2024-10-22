@@ -1,5 +1,6 @@
 import styles from './ListaArquivo.module.css';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { RiDeleteBin5Fill, RiDownloadCloudFill } from "react-icons/ri";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
@@ -10,17 +11,15 @@ function ListaArquivos() {
     const [arquivos, setArquivos] = useState([]);
     const [tipoArquivo, setTipoArquivo] = useState("");
 
-    // Função para buscar arquivos da API
     async function buscarArquivos() {
         try {
             const response = await api.get("/arquivos");
-            setArquivos(response.data); // Atualiza o estado com os dados da API
+            setArquivos(response.data);
         } catch (error) {
             console.error("Erro ao buscar arquivos:", error);
         }
     }
 
-    // Define o tipo de arquivo com base no parâmetro da URL
     useEffect(() => {
         buscarArquivos();
         if (tipo == 1) {
@@ -32,30 +31,53 @@ function ListaArquivos() {
         }
     }, [tipo]);
 
-    // Função para navegação
     const botaoVoltar = () => {
         navigate(`/portalFuncionario`);
     };
 
-    // Função para baixar o arquivo
-    const baixarArquivo = (arquivo) => {
-        // Cria o caminho completo para o arquivo no backend
-        const url = `http://localhost:3333/uploads/pdf/${arquivo.rota}`; // Ajustado para 'uploads'
+    const visualizarArquivo = (arquivo) => {
+
+        const url = `http://localhost:3333/uploads/pdf/${arquivo.rota}`;
         
-        // Cria um link de download e clica nele automaticamente
         const link = document.createElement('a');
         link.href = url;
-        link.download = arquivo.nome; // Nome do arquivo para download
+        link.download = arquivo.nome;
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link); // Remove o link após o clique
+        document.body.removeChild(link);
+    };
+
+    
+
+    const baixarArquivo = async (arquivo) => {
+        const url = `http://localhost:3333/uploads/pdf/${arquivo.rota}`;
+    
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error("Erro ao baixar o arquivo");
+            }
+    
+            const blob = await response.blob();
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute('download', arquivo.nome);  // Define o nome do arquivo a ser baixado
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+    
+            // Libera o objeto URL após o uso
+            URL.revokeObjectURL(link.href);
+        } catch (error) {
+            console.error("Erro ao baixar o arquivo:", error);
+        }
     };
     
     
+    
 
-    // Função para upload de arquivos
     const handleFileUpload = async (event) => {
-        const file = event.target.files[0]; // Aqui você garante que o arquivo foi selecionado
+        const file = event.target.files[0]; 
         const formData = new FormData();
         console.log(file)
         if (!file) {
@@ -63,7 +85,7 @@ function ListaArquivos() {
             return;
         }
 
-        const userId = 123; // Certifique-se de que este ID está correto
+        const userId = 123;
         const origem = 1;
 
         formData.append('pdf', file);
@@ -84,7 +106,6 @@ function ListaArquivos() {
         buscarArquivos()
     };
 
-    // Filtra os arquivos com base no tipo de arquivo
     const arquivosFiltrados = arquivos.filter(arquivo => arquivo.tipo === tipoArquivo);
 
     return (
@@ -121,7 +142,12 @@ function ListaArquivos() {
                     : arquivo.nome;
 
                 return (
-                    <div className={styles.card} key={arquivo.id} onClick={() => baixarArquivo(arquivo)}>
+                    <div className={styles.card} key={arquivo.id} /* onClick={() => visualizarArquivo(arquivo)} */>
+                        <div className={styles.botoes}>
+                            <RiDeleteBin5Fill className={styles.botaoApagar} onClick={() => apagarArquivo(arquivo.id)}/>
+                            <RiDownloadCloudFill className={styles.botaoDownload} onClick={() => baixarArquivo(arquivo)}/>
+                        </div>
+
                         <div className={styles.conteudoCard}>
                             <img src="/src/assets/file_icon.png" alt="Arquivos" className={styles.imagem} />
                         </div>
