@@ -11,46 +11,50 @@ function PortalFuncionario() {
   const [atestados, setAtestados] = useState([]);
 
   const handleClick = (type) => {
-    navigate(`/outra-pagina/${type}`);
-  };
     const tipoArquivo = type; // Armazena o tipo que será passado
     navigate(`/arquivos/${tipoArquivo}`);
-};
+  };
+/*   try {
+    const response = await api.post("http://localhost:3333/upload", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+    console.log(response.data); // Exibe a resposta do backend
+} */
 
-
-  const handleFileUpload = async (event, type) => {
-    const file = event.target.files[0];
-    const userId = '123'; // Defina o userId aqui
-  
-    if (file) {
-      console.log(`Arquivo selecionado: ${file.name}`);
-      
+    const handleFileUpload = async (event, type) => {
+      const file = event.target.files[0]; // Aqui você garante que o arquivo foi selecionado
       const formData = new FormData();
+    
+      if (!file) {
+        console.error("Nenhum arquivo selecionado.");
+        return;
+      }
+    
+      const userId = 123; // Certifique-se de que este ID está correto
+      const origem = 1;
+    
       formData.append('pdf', file);
       formData.append('userId', userId);
-      
+      formData.append('origem', origem);
+    
       try {
-        const response = await api.post("/upload-pdf", {
-          file: file.name,
-          userId
+        const response = await api.post("/upload", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
         });
-
-        console.log(response);
-
-        // Dependendo do tipo, atualizamos o estado apropriado
-        if (type === 'Holerites') {
-          setHolerites(prev => [...prev, { file_path: file.name }]);
-        } else if (type === 'Registro de ponto') {
-          setRegistrosPonto(prev => [...prev, { file_path: file.name }]);
-        } else if (type === 'Atestado') {
-          setAtestados(prev => [...prev, { file_path: file.name }]);
-        }
-
+        console.log("Resposta do servidor:", response);
       } catch (error) {
-        console.error("Erro ao cadastrar:", error);
+        console.error("Erro ao enviar o arquivo:", error);
       }
-    }
-  };
+    };
+    
+    
+  
+
+  
   
   return (
     <>
@@ -77,7 +81,7 @@ function PortalFuncionario() {
           />
           <ul>
             {holerites.map((file, index) => (
-              <li key={index}>{file.file_path}</li>
+              <li key={index}>{file.rota}</li>
             ))}
           </ul>
         </div>
@@ -98,7 +102,7 @@ function PortalFuncionario() {
           />
           <ul>
             {registrosPonto.map((file, index) => (
-              <li key={index}>{file.file_path}</li>
+              <li key={index}>{file.rota}</li>
             ))}
           </ul>
         </div>
@@ -119,7 +123,7 @@ function PortalFuncionario() {
           />
           <ul>
             {atestados.map((file, index) => (
-              <li key={index}>{file.file_path}</li>
+              <li key={index}>{file.rota}</li>
             ))}
           </ul>
         </div>

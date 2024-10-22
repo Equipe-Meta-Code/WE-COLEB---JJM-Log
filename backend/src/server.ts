@@ -5,7 +5,7 @@ import { AppDataSource } from './database/data-source';
 import { router } from './routes';
 import "./database/data-source";
 
-const cors = require('cors');
+import cors from 'cors';
 const app = express();
 
 app.use((req, res, next) => {

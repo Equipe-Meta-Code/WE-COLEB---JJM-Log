@@ -7,10 +7,13 @@ class UserFiles {
     id: number;
 
     @Column({ type: 'varchar', nullable: false })
-    file_path: string;
+    rota: string;
 
     @Column({ type: 'int', nullable: false })
     user_id: number;
+
+    @Column({ type: 'int', nullable: false })
+    origem: number;
 }
 
 export default UserFiles;
