@@ -1,94 +1,113 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import React, { useEffect, useState } from 'react';
+import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import api from '../../services/api';
-import styles from './AreaCharts.module.css';
+import moment from 'moment';
+import 'moment/locale/pt-br'; 
 
 const AreaLineChart = () => {
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [yDomain, setYDomain] = useState([0, 10000]);
+  const [yDomain, setYDomain] = useState([0, 20]);
+
+  const processChartData = (data) => {
+    moment.locale('pt-br');
+    
+    const mesesEmPortugues = [
+      'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 
+      'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    ];
+  
+    const ordersByMonth = data.reduce((acc, order) => {
+      const monthIndex = moment(order.data_criacao, 'DD/MM/YYYY').month();
+  
+      if (!acc[monthIndex]) {
+        acc[monthIndex] = { mes: monthIndex, total_pedidos: 0 }; 
+      }
+      acc[monthIndex].total_pedidos += 1;
+      return acc;
+    }, {});
+  
+    return Object.entries(ordersByMonth).map(([mes, valor]) => ({
+      mes: mesesEmPortugues[mes], 
+      total_pedidos: valor.total_pedidos
+    })).sort((a, b) => a.mes - b.mes); 
+
+  };  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response;
-        // Presume-se que a permissão seja verificada de outra forma
-        // ou remova isso se não for necessário
-        response = await api.get('/pedidosDashboard');
-        console.log('Dados retornados da API:', response.data);
-
-        const data = response.data.items || []; // Verifique se há uma propriedade `items`, por exemplo
-
-        if (Array.isArray(data)) {
-          // Aqui você pode processar os dados conforme necessário.
-          const processedData = data.map(item => ({
-            month: item.month, // Supondo que os meses estejam no item
-            total_pedidos: item.total_pedidos, // Supondo que o total de pedidos seja retornado
-          }));
-          setChartData(processedData);
-        } else {
-          console.error('Erro: A resposta da API não contém um array válido.', response.data);
-        }
-
+        setLoading(true);
+        const response = await api.get('/pedidosDashboard');
+        const processedData = processChartData(response.data);
+        setChartData(processedData);
+        setYDomain([0, Math.max(...processedData.map(item => item.total_pedidos), 20)]);
         setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
-        setError(true);
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []); // Passa uma dependência vazia para executar o useEffect apenas uma vez
+  }, []);
 
   return (
-    <div className={styles['line-chart']}>
-    <div className={styles['line-chart-info']}>
-      <h5 className={styles['line-chart-title']}>Pedidos por Mês</h5>
+    <div style={{
+      backgroundColor: '#fff',          
+      borderRadius: '15px',               
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', 
+      padding: '20px',                   
+      margin: '20px 0'                   
+    }}>
+      <div className="line-chart-info">
+        <h5 className="line-chart-title" style={{ color: '#000' }}>Pedidos por Mês</h5>
+      </div>
+      <div className="line-chart-wrapper">
+        {loading ? (
+          <p style={{ color: '#000' }}>Carregando...</p>
+        ) : error ? (
+          <p style={{ color: '#000' }}>Erro ao carregar os dados.</p>
+        ) : (
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart
+              data={chartData}
+              margin={{
+                top: 10,
+                right: 30,
+                left: 20,
+                bottom: 0,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
+              <XAxis dataKey="mes" stroke="#000" />
+              <YAxis domain={yDomain} tickCount={6} stroke="#000" tickFormatter={(value) => value.toLocaleString('pt-BR')} />
+              <Tooltip formatter={(value, name) => [`${value}`, 'Pedidos']} />
+              {chartData.length === 0 && (
+                <text
+                  x="50%"
+                  y="50%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="black"
+                >
+                  Não há dados para exibir no gráfico.
+                </text>
+              )}
+              <Line
+                type="monotone"
+                dataKey="total_pedidos"
+                name="Quantidade de pedidos"
+                stroke="#1E90FF" 
+                fill="rgba(30, 144, 255, 0.5)" 
+                fillOpacity={1}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </div>
     </div>
-    <div className={styles['line-chart-wrapper']}>
-      {loading ? (
-        <p>Carregando...</p>
-      ) : error ? (
-        <p>Erro ao carregar os dados.</p>
-      ) : (
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart
-            data={chartData}
-            margin={{
-              top: 5,
-              right: 40,
-              left: 20,
-              bottom: 20,
-            }}
-          >
-            <XAxis dataKey="month" />
-            <YAxis domain={yDomain} tickCount={6} tickFormatter={(value) => value.toLocaleString('pt-BR')} />
-            <Tooltip formatter={(value, name) => [`${value}`, 'Pedidos']} />
-            {chartData.length === 0 && (
-              <text
-                x="50%"
-                y="50%"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fill="white"
-              >
-                Não há dados para exibir no gráfico.
-              </text>
-            )}
-            <Line
-              type="monotone"
-              dataKey="total_pedidos"
-              name="Total Pedidos"
-              stroke="#fcb859"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      )}
-    </div>
-  </div>
   );
 };
 

@@ -22,10 +22,9 @@ const Dashboard = () => {
       <div className={styles["vendas-gerais"]}>
         <AreaBarChart />
       </div>
-      {/* <div className={styles["linhaQuebrada"]}></div>
       <div className={styles["vendas-por-vendedor"]}>
         <AreaLineChart />
-      </div> */}
+      </div>
     </div>
   );
 };

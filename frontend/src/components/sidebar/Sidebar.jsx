@@ -20,6 +20,7 @@ import './sideBar.css';
 import PermissionComponent from '../PermissionComponent';
 import { useAuth } from '../../context/AuthContext';
 import ChecklistIcon from '@mui/icons-material/Checklist';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 const drawerWidth = 80;
 
@@ -140,7 +141,7 @@ export default function Sidebar() {
                         color: 'white',
                       }}
                     >
-                      <MdOutlineDashboard size={19} />
+                      <BarChartIcon size={19} />
                     </ListItemIcon>
                   </Link>
                 </ListItemButton>
