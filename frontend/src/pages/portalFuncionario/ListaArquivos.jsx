@@ -47,6 +47,19 @@ function ListaArquivos() {
         document.body.removeChild(link);
     };
 
+    const apagarArquivo = async (arquivoId) => {
+        console.log(arquivoId)
+/*         try {
+            // Faz a requisição DELETE para o servidor
+            await api.delete(`/arquivos/${arquivoId}`);
+            console.log(`Arquivo ${arquivoId} apagado com sucesso`);
+    
+            // Após deletar, atualiza a lista de arquivos removendo o apagado
+            setArquivos(prevArquivos => prevArquivos.filter(arquivo => arquivo.id !== arquivoId));
+        } catch (error) {
+            console.error("Erro ao apagar o arquivo:", error);
+        } */
+    };
     
 
     const baixarArquivo = async (arquivo) => {
