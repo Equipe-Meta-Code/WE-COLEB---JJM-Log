@@ -12,35 +12,12 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useParams } from 'react-router-dom';
 import api from '../services/api';
 
-/* const timelineStepsEntrega = [
-  { label: "Entrega saiu da cidade base", city: "Kyoto, Japão" },
-  { label: "Pacote chegou no centro de distribuição", city: "Kyoto, Japão" },
-  { label: "Pacote saiu para a entrega", city: "Kyoto, Japão" },
-  { label: "Pacote foi entregue", city: "Kyoto, Japão" }
-];
-
-const timelineStepsLogistico = [
-  { label: "Solicitação de documento em triagem", city: "Kyoto, Japão" },
-  { label: "O documento está sendo gerado", city: "Kyoto, Japão" },
-  { label: "Documento finalizado em revisão", city: "Kyoto, Japão" },
-  { label: "Documento emitido", city: "Kyoto, Japão" }
-];
-
-const timelineStepsFinanceiro = [
-  { label: "Documentos recebidos", city: "Kyoto, Japão" },
-  { label: "Análise de gastos de entrega", city: "Kyoto, Japão" },
-  { label: "Análises de lucro de entrega", city: "Kyoto, Japão" },
-  { label: "Finalização de relatório financeiro", city: "Kyoto, Japão" }
-]; */
-
-const TimelineCard = ({ steps, title }) => {
+const TimelineCard = ({ steps, title, refetchEtapas }) => {
   const [expanded, setExpanded] = useState(title.includes("Entregas"));
   const [activeStep, setActiveStep] = useState(() => {
-    // Inicializa activeStep contando as etapas finalizadas
     return steps.filter(step => step.estado === "Finalizado").length + 1;
   });
 
-  // Função para atualizar o estado da etapa no banco de dados
   const updateEtapaState = async (id) => {
     if (!id) {
       console.error('ID indefinido');
@@ -49,10 +26,9 @@ const TimelineCard = ({ steps, title }) => {
 
     try {
       await api.put(`/etapapedido/${id}`, {
-        estado: "Finalizado", // Ou o valor correto que você deseja atualizar
-        data_conclusao: new Date().toISOString()
+        estado: "Finalizado",
+        data_conclusao: new Date().toISOString(),
       });
-      fetchEtapas();
       console.log('Estado da etapa atualizado com sucesso');
     } catch (error) {
       console.error('Erro ao atualizar o estado da etapa:', error);
@@ -60,51 +36,42 @@ const TimelineCard = ({ steps, title }) => {
     }
   };
 
-  // Função chamada quando um step é clicado
   const handleStepClick = async (step, stepData) => {
-    console.log('Step:', step);
-    console.log('StepData:', stepData);
-
     if (!stepData || !stepData.id) {
       console.error('Step Data ou Step ID indefinido:', stepData);
       return;
     }
-
-    if (step === activeStep || step < activeStep) { // Permitir clicar se a etapa atual ou anterior
+  
+    // Atualiza a etapa apenas se o step atual for o ativo ou anterior
+    if (step === activeStep || step < activeStep) {
       await updateEtapaState(stepData.id);
-
-      // Atualiza o estado localmente para que a interface reaja imediatamente
-      steps[step - 1].estado = "Finalizado"; // Marca a etapa como finalizada
-
-      // Verifica se o step é o último e atualiza o activeStep
+  
+      steps[step - 1].estado = "Finalizado"; // Marca a etapa como "Finalizada"
+  
       if (step === steps.length) {
-        setActiveStep(step); // Se for o último, não avança, apenas atualiza
+        setActiveStep(step);
+        // Força o re-fetch das etapas quando for a última etapa
+        if (refetchEtapas) {
+          refetchEtapas();
+        }
       } else {
-        setActiveStep(step + 1); // Avança para a próxima etapa
+        setActiveStep(step + 1); // Avança para o próximo step
       }
+      if (refetchEtapas) {
+        refetchEtapas();
+      }
+      setEtapas([...steps]); // Atualiza o estado local com as novas etapas
+      refetchEtapas(); // Chama o re-fetch das etapas após qualquer mudança
     }
   };
+  
 
-  // Função para verificar se o botão deve estar desativado
   const isStepDisabled = (index) => {
-    // Desativa o passo se ele não for o ativo e os anteriores não estiverem finalizados
     return index + 1 > activeStep && steps.slice(0, index).some(step => step.estado !== "Finalizado");
   };
 
   return (
-    <Card
-      sx={{
-        width: '100%',
-        maxWidth: '600px',
-        backgroundColor: '#1B4215',
-        color: 'white',
-        borderRadius: '10px',
-        marginBottom: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-      }}
-    >
+    <Card sx={{ width: '100%', maxWidth: '600px', backgroundColor: 'rgba(0, 58, 102, 0.671)', color: 'white', borderRadius: '10px', marginBottom: 2 }}>
       <CardContent>
         <Typography variant="h5" component="div" onClick={() => setExpanded(!expanded)} sx={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           {title}
@@ -112,44 +79,31 @@ const TimelineCard = ({ steps, title }) => {
             <ExpandMoreIcon sx={{ color: 'white' }} />
           </IconButton>
         </Typography>
-        <Box sx={{ height: '2px', backgroundColor: 'white', my: 1 }} />
-        <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
-          <Typography variant="body2" sx={{ backgroundColor: 'white', color: 'black', borderRadius: '12px', padding: '4px 8px' }}>
-            Em processo
-          </Typography>
-          <Typography variant="body2" sx={{ backgroundColor: 'white', color: 'black', borderRadius: '12px', padding: '4px 8px' }}>
-            Mercadoria
-          </Typography>
-        </Box>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2 }}>
             {steps.map((stepData, index) => (
               <Box key={index} sx={{ display: 'flex', alignItems: 'center', position: 'relative', mb: 2 }}>
                 <Button
-                  onClick={() => handleStepClick(index + 1, stepData)} // Passando `stepData` com o ID correto
+                  onClick={() => handleStepClick(index + 1, stepData)}
                   sx={{
                     minWidth: '40px',
                     height: '40px',
-                    backgroundColor: stepData.estado === "Finalizado" ? 'green' : 'grey',
-                    color: 'white',
+                    backgroundColor: stepData.estado === "Finalizado" 
+                      ? '#293f69' 
+                      : stepData.etapa_desfeita === "Desfeita"
+                        ? '#aaa229' 
+                        : 'white',
                     borderRadius: '50%',
-                    zIndex: 1,
+                    zIndex: 1
                   }}
-                  disabled={stepData.estado === "Finalizado" || isStepDisabled(index)} // Lógica de desativação ajustada
+                  
+                  disabled={stepData.estado === "Finalizado" || isStepDisabled(index)}
                 >
                   <FiberManualRecordIcon />
                 </Button>
+
                 {index < steps.length - 1 && (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      top: '20px',
-                      left: '19px',
-                      height: '40px',
-                      width: '2px',
-                      backgroundColor: 'grey',
-                    }}
-                  />
+                  <Box sx={{ position: 'absolute', top: '20px', left: '19px', height: '40px', width: '2px', backgroundColor: 'grey' }} />
                 )}
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', ml: 4 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -170,6 +124,7 @@ const TimelineCard = ({ steps, title }) => {
     </Card>
   );
 };
+
 
 
 
@@ -213,7 +168,7 @@ const DriverCard = () => {
       }}>
         {/* Card interno em destaque */}
         <Box sx={{
-          backgroundColor: '#1B4215',
+          backgroundColor: 'rgba(0, 58, 102, 0.671)',
           borderRadius: '30px',
           padding: 3,
           height: '140px',
@@ -278,7 +233,7 @@ const LicensePlateCard = () => {
       <Card sx={{ 
         width: '100%', 
         maxWidth: '200px', 
-        backgroundColor: '#1B4215',
+        backgroundColor: 'rgba(0, 58, 102, 0.671)',
         color: 'white', 
         borderRadius: '10px',
         display: 'flex',
@@ -315,7 +270,7 @@ const LicensePlateCard = () => {
       <Card sx={{
         height: '130px',
         width: '100%',
-        backgroundColor: '#1B4215',
+        backgroundColor: 'rgba(0, 58, 102, 0.671)',
         color: 'white',
         borderRadius: '10px',
         display: 'flex',
@@ -346,6 +301,17 @@ const LicensePlateCard = () => {
     const [etapas, setEtapas] = useState([]);
     const [pedido, setPedido] = useState(null);
   
+    // Função para buscar etapas novamente
+    const fetchEtapas = async () => {
+      try {
+        const response = await api.get(`/etapapedido/pedido/${pedidoId}`);
+        setEtapas(response.data);
+        console.log("Etapas atualizadas:", response.data);
+      } catch (error) {
+        console.error('Erro ao buscar as etapas:', error);
+      }
+    };
+  
     useEffect(() => {
       const fetchPedido = async () => {
         try {
@@ -353,16 +319,6 @@ const LicensePlateCard = () => {
           setPedido(response.data);
         } catch (error) {
           console.error('Erro ao buscar o pedido:', error);
-        }
-      };
-  
-      const fetchEtapas = async () => {
-        try {
-          const response = await api.get(`/etapapedido/pedido/${pedidoId}`);
-          setEtapas(response.data);
-          console.log("Etapas por pedido", response);
-        } catch (error) {
-          console.error('Erro ao buscar as etapas:', error);
         }
       };
   
@@ -374,53 +330,63 @@ const LicensePlateCard = () => {
       return <div>Carregando...</div>; // Pode adicionar um loading spinner aqui
     }
   
-    // Mapeamento simples para resolver IDs de departamento para nomes (substitua conforme necessário)
+    // Mapeamento simples para resolver IDs de departamento para nomes
     const departamentoNomes = {
       1: 'Logística',
       2: 'Financeiro',
-      // Adicione mais conforme necessário
     };
   
     // Agrupar as etapas por departamento
     const etapasPorDepartamento = etapas.reduce((acc, etapa) => {
-      const departamentoNome = departamentoNomes[etapa.departamento] || `Departamento ${etapa.departamento}`;
+      const departamentoNome = departamentoNomes[etapa.departamento.nome] || ` ${etapa.departamento.nome}`;
+    
+      // Função para formatar a data no formato desejado ou retornar uma string vazia se a data for null
+      const formatarDataConclusao = (data) => {
+        if (!data) return ""; // Se data for null, retorna uma string vazia
+        const dataObj = new Date(data);
+        const horas = dataObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const dataFormatada = dataObj.toLocaleDateString('pt-BR'); // Formato DD/MM/YYYY para o Brasil
+        return `${horas} ${dataFormatada.split('/').reverse().join('-')}`; // Reorganizando a data para o formato DD-MM-YYYY
+      };
+    
       if (!acc[departamentoNome]) {
         acc[departamentoNome] = [];
       }
       acc[departamentoNome].push({
-        id: etapa.id, // Adicione o ID aqui
+        id: etapa.id,
         label: etapa.nome,
-        city: departamentoNome, // Nome do departamento
-        estado: etapa.estado // Adicione o estado da etapa
+        city: formatarDataConclusao(etapa.data_conclusao), // Chamando a função de formatação de data
+        estado: etapa.estado,
       });
       return acc;
     }, {});
-
+    
   
     return (
       <Grid container spacing={2} sx={{ padding: 2 }}>
         <Grid item xs={12} md={8}>
-          {/* Mapeando cada departamento e suas etapas em um TimelineCard */}
           {Object.entries(etapasPorDepartamento).map(([departamento, steps], index) => (
-            <TimelineCard key={index} steps={steps} title={`Card de ${departamento}`} />
+            <TimelineCard
+              key={index}
+              steps={steps}
+              title={`Card de ${departamento}`}
+              refetchEtapas={fetchEtapas} // Passa a função de re-fetch como prop
+            />
           ))}
         </Grid>
         <Grid item xs={12} md={4}>
-          {/* Informações adicionais*/}
-{/*           <DriverCard />
-          <LicensePlateCard /> */}
           {pedido.categoria === "entrega" && (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <SmallCard title="Carga" value={`${pedido.peso}kg`} icon={<CardGiftcardIcon sx={{ color: 'white' }} />} />
               <SmallCard title="Volume" value={`${pedido.volume}m³`} icon={<StorageIcon sx={{ color: 'white' }} />} />
               <SmallCard title="Distância" value={`${pedido.distancia}km`} icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
-              {/* <SmallCard title="Tempo Estimado" value="2h" icon={<CalendarTodayIcon sx={{ color: 'white' }} />} /> */}
             </Box>
           )}
         </Grid>
       </Grid>
     );
   };
+  
    
   export default Timeline;
   

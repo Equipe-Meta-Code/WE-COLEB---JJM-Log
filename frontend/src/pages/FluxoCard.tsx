@@ -23,7 +23,7 @@ export default function FluxoCard({ pedidoId, title, state, date, pending, delay
     <div>
       <Card sx={{
         width: 'auto',
-        backgroundColor: '#1B4215',
+        backgroundColor: 'rgba(0, 58, 102, 0.671)',
         color: 'white',
         borderRadius: '10px',
         marginBottom: 2,

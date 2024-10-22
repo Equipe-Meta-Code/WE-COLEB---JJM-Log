@@ -71,7 +71,7 @@ function CadastroUsuario() {
 
     return (
         <div className="card-container">
-            <h2>Cadastro de Usuário</h2>
+            <h2 className="titulo-usuario">Cadastro de Usuário</h2>
             <div className="label-container">
                 <label>Nome:</label>
                 <input value={novoUsuario.nome} onChange={(e) => setNovoUsuario({...novoUsuario, nome: e.target.value})} placeholder="Nome" />
@@ -86,13 +86,22 @@ function CadastroUsuario() {
             </div>
             <div className="password-container">
                 <label>Senha:</label>
-                <input 
-                    type={mostrarSenha ? "text" : "password"} 
-                    placeholder="Senha" 
-                    value={novoUsuario.senha} 
-                    onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
-                    onKeyDown={aoApertarEnter}
-                />
+                <div className="password-input-container">
+                    <input 
+                        type={mostrarSenha ? "text" : "password"} 
+                        placeholder="Senha" 
+                        value={novoUsuario.senha} 
+                        onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
+                        onKeyDown={aoApertarEnter}
+                    />
+                    <button 
+                        type="button" 
+                        className="password-toggle2" 
+                        onClick={() => setMostrarSenha(!mostrarSenha)}
+                    >
+                        {mostrarSenha ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                    </button>
+                </div>
             </div>
 
             {/* Dropdown para escolher o nível de acesso */}
@@ -110,12 +119,11 @@ function CadastroUsuario() {
                 </select>
             </div>
 
-
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <button onClick={cadastrarUsuario}>Cadastrar</button> 
+            <button className="botao-cadastro-users"onClick={cadastrarUsuario}>Cadastrar</button> 
             <Link to="/login">
-                <button className="botaoLogin">Entrar</button>
+                <button className="botao-cadastro-users" id="botaoLogin">Entrar</button>
             </Link>
         </div>
     );

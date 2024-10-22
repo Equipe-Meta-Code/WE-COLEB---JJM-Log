@@ -1,5 +1,5 @@
 .card-container {
-    background-color: #2b3a67; /* Cor azul escura */
+    background-color: rgba(0, 58, 102, 0.671); /* Cor azul escura */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -14,7 +14,7 @@
     transform: scale(1.05);
 }
 
-h2 {
+.titulo-usuario {
     text-align: center;
     color: #f1f1f1;
 }
@@ -29,37 +29,40 @@ h2 {
     color: #f1f1f1;
 }
 
-.label-container input {
+.label-container input,
+.password-container input,
+.dropdown {
+    width: 100%; /* Todos os inputs e dropdown terão 100% de largura */
     padding: 10px;
     border: none;
     border-radius: 5px;
     background-color: #f1f1f1;
     color: #333;
+    box-sizing: border-box; /* Garante que o padding e a borda sejam incluídos na largura */
 }
 
 .password-container {
     margin-bottom: 15px;
-}
-
-.password-container label {
-    display: block;
-    margin-bottom: 5px;
-    color: #f1f1f1;
+    position: relative; /* Adiciona o position relative para o contêiner */
 }
 
 .password-container input {
-    width: 90%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    color: #333;
+    padding-right: 40px; /* Espaço para o ícone do olhinho */
 }
 
-button {
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333; /* Cor do ícone */
+}
+
+.botao-cadastro-users {
     width: 100%;
     padding: 10px;
-    background-color: #1e2d5f;
+    background-color: #293f69;
     color: white;
     border: none;
     border-radius: 5px;
@@ -67,8 +70,8 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #4a5f9b;
+.botao-cadastro-users:hover {
+    background-color: #3a55a0;
 }
 
 .error-message, .success-message {
@@ -81,12 +84,11 @@ button:hover {
     color: #4caf50;
 }
 
-.botaoLogin {
+#botaoLogin {
     margin-top: 10px;
 }
 
 .dropdown {
-    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -107,4 +109,17 @@ button:hover {
 
 .dropdown:hover {
     background-color: #e0e0e0; /* Cor ao passar o mouse sobre o dropdown */
+}
+
+.password-toggle2 {
+    width: 90px;
+    position: absolute;
+    right: 0px; /* Para manter o botão ao lado do input */
+    top: 10px;
+    background: none;
+    border: none;
+    color: #293f69; /* Azul claro */
+    cursor: pointer;
+    background-color: transparent;
+    padding-top: 35px;
 }
