@@ -12,6 +12,7 @@ import PortalFuncionario from '../pages/portalFuncionario/portalFuncionario';
 import PrivateRoutes from './privateRoutes';
 import ControleEtapa from '../pages/controleEtapa/controleEtapa';
 import CadastrarCliente from '../components/cadastros/CadastroCliente';
+import Dashboard from '../pages/dashboards/dashboard';
 
 import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
 
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/Cadastro/Cliente" exact element={<CadastrarCliente />} />
+          <Route path="/Dashboard" exact element={<Dashboard />} />
 
             
           <Route element={<PrivateRoutes role="Admin_Role" />} >

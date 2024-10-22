@@ -25,6 +25,20 @@ import { FaTruckFast, FaGear, FaBuildingUser, FaMoneyCheckDollar } from "react-i
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiOrganizationChart } from "react-icons/ri";
 import { ImUserPlus } from "react-icons/im";
+import { BiUserPlus } from "react-icons/bi"; // Importando o ícone
+import { Tooltip, Menu, MenuItem } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import './sideBar.css';  
+import PermissionComponent from '../PermissionComponent';
+import { useAuth } from '../../context/AuthContext';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import BarChartIcon from '@mui/icons-material/BarChart';
+
+const drawerWidth = 80;
+
+const Drawer = styled(MuiDrawer)(({ theme }) => ({
+  width: drawerWidth,
+=======
 import { BsBuildingFillAdd  } from "react-icons/bs";
 import { FaTruck } from "react-icons/fa";
 import { PiUserListBold } from "react-icons/pi";
@@ -297,6 +311,29 @@ export default function Sidebar() {
 
             {/* Setor Financeiro */}
             <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip title="Dashboards" placement="right" arrow>
+                <ListItemButton
+                  className="menu-link"
+                  sx={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link to="/Dashboard" className="menu-link-icon">
+                    <ListItemIcon
+                      sx={{
+                        justifyContent: "center",
+                        color: 'white',
+                      }}
+                    >
+                      <BarChartIcon size={19} />
+                    </ListItemIcon>
+                  </Link>
+                </ListItemButton>
+              </Tooltip>
+            </ListItem>
+
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <Tooltip title="Setor Financeiro" placement="right" arrow>
             <Tooltip
                 title="Setor Financeiro"
                 placement="right"
