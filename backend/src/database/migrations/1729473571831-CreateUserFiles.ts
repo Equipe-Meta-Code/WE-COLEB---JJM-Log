@@ -15,6 +15,11 @@ export class CreateUserFiles1729473571831 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: 'nome',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
                     name: 'rota',
                     type: 'varchar',
                     isNullable: false,
@@ -28,6 +33,16 @@ export class CreateUserFiles1729473571831 implements MigrationInterface {
                     name: 'origem',
                     type: 'int',
                     isNullable: false,
+                },
+                {
+                    name: 'tipo',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: "data_criacao",
+                    type: "timestamp",
+                    default: "CURRENT_TIMESTAMP",
                 }
                 
             ]

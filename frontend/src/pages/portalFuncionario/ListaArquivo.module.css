@@ -55,6 +55,9 @@
     max-height: 39px;
     font-size: 13px;
     font-weight: 600;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dataArquivo{
@@ -78,6 +81,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    margin-right: 16px;
 }
 
 .botaoVoltar{

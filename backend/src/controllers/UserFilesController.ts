@@ -9,8 +9,8 @@ class UserFilesController {
         console.log("Requisição body:", req.body);
         console.log("Requisição file:", req.file);
     
-        const { userId, origem } = req.body; // Verifica se esses dados estão chegando corretamente
-        const file = req.file; // Arquivo enviado via multer
+        const { userId, origem, tipo } = req.body;
+        const file = req.file;
     
         if (!file) {
             console.error("Nenhum arquivo recebido.");
@@ -24,11 +24,18 @@ class UserFilesController {
         const userFilesRepository = AppDataSource.getRepository(UserFiles);
         console.log('Arquivo recebido:', file);
         console.log('Informações do usuário:', { userId, origem });
+    
+        // Gerar a data atual no formato YYYY-MM-DD
+        const dataAtual = new Date().toISOString().split('T')[0]; // Gera a data no formato YYYY-MM-DD
+    
         try {
             const userFiles = userFilesRepository.create({
-                rota: file.filename,
-                user_id: parseInt(userId), // Se necessário, transforme para número
+                nome: file.originalname, // Nome do arquivo
+                rota: file.filename, // filename gerado pelo multer
+                user_id: parseInt(userId),
                 origem: parseInt(origem),
+                tipo: tipo,
+                data_criacao: dataAtual, // Adicionando a data no formato correto
             });
     
             await userFilesRepository.save(userFiles);
@@ -37,6 +44,17 @@ class UserFilesController {
             console.error("Erro ao salvar no banco de dados:", error);
             return res.status(500).json({ message: "Erro ao salvar no banco de dados", error });
         }
+    }
+    
+    
+    
+
+    async getAll(req: Request, res: Response): Promise<Response> {
+        const UserFilesRepository = AppDataSource.getRepository(UserFiles);
+
+        const userFiles = await UserFilesRepository.find();
+
+        return res.status(200).json(userFiles);
     }
     
 }
