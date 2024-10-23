@@ -12,10 +12,12 @@ import PortalFuncionario from '../pages/portalFuncionario/portalFuncionario';
 import PrivateRoutes from './privateRoutes';
 import ControleEtapa from '../pages/controleEtapa/controleEtapa';
 import CadastrarCliente from '../components/cadastros/CadastroCliente';
+import Dashboard from '../pages/dashboards/dashboard';
 
 import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
 import ListaArquivos from '../pages/portalFuncionario/ListaArquivos';
 import Departamentos from '../components/cadastros/Departamentos';
+import ListaClientes from '../pages/listaClientes/ListaClientes';
 
 
 const AppRoutes = () => {
@@ -35,10 +37,12 @@ const AppRoutes = () => {
           <Route path="/Cadastro/Cliente" exact element={<CadastrarCliente />} />
           <Route path="/departamentos" exact element={<Departamentos />} />
 
+          <Route path="/Dashboard" exact element={<Dashboard />} />
+          <Route path="/clientes" exact element={<ListaClientes />} />
             
-            <Route path="/cadastro" exact element={<CadastroUsuario />} />
           <Route element={<PrivateRoutes role="Admin_Role" />} >
-          </Route>
+            <Route path="/cadastro" exact element={<CadastroUsuario />} />
+          </Route> 
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
             <Route path="/portalFuncionario" element={<PortalFuncionario />} />

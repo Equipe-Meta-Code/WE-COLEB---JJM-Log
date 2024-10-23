@@ -1,0 +1,11 @@
+.content-area {
+    display: flex;
+    flex-direction: column; /* Para empilhar os gráficos verticalmente */
+    gap: 20px; /* Espaçamento entre os gráficos */
+  }
+  
+  .linhaQuebrada {
+    height: 1px; /* Defina a altura da linha */
+    background-color: #ccc; /* Defina a cor da linha */
+  }
+  
