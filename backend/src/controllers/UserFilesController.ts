@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../database/data-source';
 import UserFiles from '../models/UserFiles';
 import 'reflect-metadata';
+import fs from 'fs';
+import path from 'path';
 
 class UserFilesController {
     async create(req: Request, res: Response): Promise<Response> {
@@ -55,6 +57,40 @@ class UserFilesController {
         const userFiles = await UserFilesRepository.find();
 
         return res.status(200).json(userFiles);
+    }
+
+    async delete(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params;
+        const userFilesRepository = AppDataSource.getRepository(UserFiles);
+
+        try {
+            // Encontrar o arquivo no banco de dados
+            const arquivo = await userFilesRepository.findOneBy({ id: parseInt(id) });
+
+            if (!arquivo) {
+                return res.status(404).json({ message: 'Arquivo não encontrado.' });
+            }
+
+            // Caminho do arquivo físico no servidor
+            const filePath = path.join(__dirname, '..', 'public', 'upload', 'pdf', arquivo.rota);
+
+            // Excluir o arquivo físico
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error('Erro ao excluir o arquivo no servidor:', err);
+                    return res.status(500).json({ message: 'Erro ao excluir o arquivo no servidor.' });
+                }
+                console.log('Arquivo excluído do servidor:', filePath);
+            });
+
+            // Excluir o arquivo do banco de dados
+            await userFilesRepository.delete(id);
+            return res.status(200).json({ message: 'Arquivo excluído com sucesso.' });
+
+        } catch (error) {
+            console.error('Erro ao excluir o arquivo:', error);
+            return res.status(500).json({ message: 'Erro ao excluir o arquivo.', error });
+        }
     }
     
 }

@@ -55,21 +55,24 @@ function ListaArquivos({tipoDoArquivo}) {
     };
 
     const apagarArquivo = async (arquivoId) => {
-        console.log(arquivoId)
-/*         try {
+        event.stopPropagation(); // Previne a execução do clique no card
+    
+        try {
             // Faz a requisição DELETE para o servidor
             await api.delete(`/arquivos/${arquivoId}`);
             console.log(`Arquivo ${arquivoId} apagado com sucesso`);
-    
+        
             // Após deletar, atualiza a lista de arquivos removendo o apagado
             setArquivos(prevArquivos => prevArquivos.filter(arquivo => arquivo.id !== arquivoId));
         } catch (error) {
             console.error("Erro ao apagar o arquivo:", error);
-        } */
+        }
     };
+    
     
 
     const baixarArquivo = async (arquivo) => {
+        event.stopPropagation();
         const url = `http://localhost:3333/uploads/pdf/${arquivo.rota}`;
     
         try {
@@ -166,8 +169,20 @@ function ListaArquivos({tipoDoArquivo}) {
                 return (
                     <div className={styles.card} key={arquivo.id} onClick={() => visualizarArquivo(arquivo)}>
                         <div className={styles.botoes}>
-                            <RiDeleteBin5Fill className={styles.botaoApagar} onClick={() => apagarArquivo(arquivo.id)}/>
-                            <RiDownloadCloudFill className={styles.botaoDownload} onClick={() => baixarArquivo(arquivo)}/>
+                            <RiDeleteBin5Fill
+                                className={styles.botaoApagar}
+                                onClick={(event) => {
+                                    event.stopPropagation(); // Previne o clique no card
+                                    apagarArquivo(arquivo.id);
+                                }}
+                            />
+                            <RiDownloadCloudFill
+                                className={styles.botaoDownload}
+                                onClick={(event) => {
+                                    event.stopPropagation(); // Previne o clique no card
+                                    baixarArquivo(arquivo, event);
+                                }}
+                            />
                         </div>
 
                         <div className={styles.conteudoCard}>
@@ -181,6 +196,8 @@ function ListaArquivos({tipoDoArquivo}) {
                     </div>
                 );
             })}
+
+
 
             </div>
         </div>

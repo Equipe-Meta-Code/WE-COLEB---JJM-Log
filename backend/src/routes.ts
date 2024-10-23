@@ -50,6 +50,6 @@ router.get("/clientes", ClienteController.list); // Listar clientes
 router.get("/clientes/:id", ClienteController.getClienteById); // Buscar cliente por ID
 router.put("/clientes/:id", ClienteController.update); // Atualizar cliente
 router.delete("/clientes/:id", ClienteController.delete); // Deletar cliente
-
+router.delete('/arquivos/:id', UserFilesController.delete);
 
 export { router };
