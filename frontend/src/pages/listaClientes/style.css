@@ -101,7 +101,7 @@
     position: relative;
   }
   
-  .coluna-nome, .coluna-email, .coluna-papel, .coluna-acoes {
+  .coluna-nome, .coluna-email, .coluna-papel, .coluna-acoes-clientes {
     color: #333;
   }
   
@@ -110,21 +110,27 @@
     display: inline-block;
   }
   
-  .botao-menu {
+  .botao-menu-clientes {
     width: 100%;
     padding: 10px;
-    background-color: #293f69;
-    color: white;
+    background-color: #f1f1f1;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .botao-menu:hover{
-    background-color: #4a5f9b;
+  .botao-menu-clientes:hover{
+    background-color: #e7e7e7;
+  } 
+
+  .coluna-acoes-clientes {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: flex-start;
   }
-  
   
   .opcao-menu:hover {
     background-color: #bfd0ff;

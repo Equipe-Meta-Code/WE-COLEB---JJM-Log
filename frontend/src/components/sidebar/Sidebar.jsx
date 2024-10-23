@@ -31,7 +31,7 @@ import { PiUserListBold } from "react-icons/pi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import BarChartIcon from '@mui/icons-material/BarChart';
-import ListIcon from '@mui/icons-material/List';
+import ListIcon from '@mui/icons-material/ListAlt';
 
 import "./sideBar.css";
 
