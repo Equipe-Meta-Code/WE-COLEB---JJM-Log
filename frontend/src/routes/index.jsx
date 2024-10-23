@@ -15,6 +15,8 @@ import CadastrarCliente from '../components/cadastros/CadastroCliente';
 import Dashboard from '../pages/dashboards/dashboard';
 
 import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
+import ListaArquivos from '../pages/portalFuncionario/ListaArquivos';
+import Departamentos from '../components/cadastros/Departamentos';
 import ListaClientes from '../pages/listaClientes/ListaClientes';
 
 
@@ -33,6 +35,8 @@ const AppRoutes = () => {
           <Route path="/timeline/:pedidoId" element={<Timeline />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/Cadastro/Cliente" exact element={<CadastrarCliente />} />
+          <Route path="/departamentos" exact element={<Departamentos />} />
+
           <Route path="/Dashboard" exact element={<Dashboard />} />
           <Route path="/clientes" exact element={<ListaClientes />} />
             
@@ -42,6 +46,7 @@ const AppRoutes = () => {
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
             <Route path="/portalFuncionario" element={<PortalFuncionario />} />
+            <Route path="/arquivos/:tipo" element={<ListaArquivos />} />
             <Route path="/funcionarios" exact element={<ListaFuncionarios />} />
           </Route>
           <Route element={<PrivateRoutes role="Admin_Role" />} >

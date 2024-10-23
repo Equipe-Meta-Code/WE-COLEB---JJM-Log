@@ -23,6 +23,7 @@ import { CreateDepartamentos1727183720141 } from "./migrations/1727183720141-Cre
 import { CreateEtapas1727183768483 } from "./migrations/1727183768483-CreateEtapas";
 import { CreateEtapasPedidos1727183789278 } from "./migrations/1727183789278-CreateEtapasPedidos";
 import { CreateUserFiles1729473571831 } from "./migrations/1729473571831-CreateUserFiles";
+import UserFiles from "../models/UserFiles";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -33,7 +34,7 @@ export const AppDataSource = new DataSource({
     database: "wecollab",
     synchronize: true,
     logging: false,
-    entities: [User, Role, Permission, Cliente, Departamento, Endereco, Etapa, EtapaPedido, Pedido, CreateUserFiles1729473571831],
+    entities: [User, Role, Permission, Cliente, Departamento, Endereco, Etapa, EtapaPedido, Pedido, UserFiles],
     migrations: [CreateUsers1726672168699,
                 CreatePermissions1726679330555,
                 CreateRoles1726679379911,

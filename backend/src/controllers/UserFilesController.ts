@@ -1,138 +1,61 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../database/data-source';
 import UserFiles from '../models/UserFiles';
-
-/* import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
-
-import 'reflect-metadata'; */
-
-
-
-
-// para salvar PDFs
-/* const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const dir = '../uploads/pdfs';
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        cb(null, dir);
-    },
-    filename: function (req, file, cb) {
-        const uniqueName = Date.now() + '-' + file.originalname;
-        cb(null, uniqueName);
-    }
-}); */
-
-/* const upload = multer({
-    storage,
-    fileFilter: (req, file, cb) => {
-        const fileTypes = /pdf/;
-        const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = fileTypes.test(file.mimetype);
-
-        if (extname && mimetype) {
-            return cb(null, true);
-        } else {
-            cb(new Error('Apenas arquivos PDF são permitidos'));
-        }
-    }
-}); */
+import 'reflect-metadata';
 
 class UserFilesController {
-/*     constructor(app) {
-        this.app = app;
-
-        // Define routes
-        this.routes();
-    } */
-
-    /* routes() {
-        // Endpoint to upload the PDF
-        this.app.post('/upload-pdf', upload.single('pdf'), this.uploadPDF.bind(this));
-
-        // Get methods for fetching files
-        this.app.get('/get-holerites/:userId', this.getHolerites.bind(this));
-        this.app.get('/get-atestados/:userId', this.getAtestados.bind(this));
-        this.app.get('/get-registros-ponto/:userId', this.getRegistrosPonto.bind(this));
-    } */
-
     async create(req: Request, res: Response): Promise<Response> {
-        const { file, userId} = req.body;
-        
+        console.log("Chegou no controller");
+        console.log("Requisição body:", req.body);
+        console.log("Requisição file:", req.file);
+    
+        const { userId, origem, tipo } = req.body;
+        const file = req.file;
+    
+        if (!file) {
+            console.error("Nenhum arquivo recebido.");
+            return res.status(400).json({ message: "Nenhum arquivo enviado" });
+        }
+    
+        if (!userId || !origem) {
+            return res.status(400).json({ message: "userId ou origem não fornecidos" });
+        }
+    
         const userFilesRepository = AppDataSource.getRepository(UserFiles);
-
-
+        console.log('Arquivo recebido:', file);
+        console.log('Informações do usuário:', { userId, origem });
+    
+        // Gerar a data atual no formato YYYY-MM-DD
+        const dataAtual = new Date().toISOString().split('T')[0]; // Gera a data no formato YYYY-MM-DD
+    
         try {
             const userFiles = userFilesRepository.create({
-                file_path: file,
-                user_id: 1,
+                nome: file.originalname, // Nome do arquivo
+                rota: file.filename, // filename gerado pelo multer
+                user_id: parseInt(userId),
+                origem: parseInt(origem),
+                tipo: tipo,
+                data_criacao: dataAtual, // Adicionando a data no formato correto
             });
-
+    
             await userFilesRepository.save(userFiles);
-
             return res.status(201).json(userFiles);
         } catch (error) {
-            return res.status(500).json({ message: "Erro ao criar pedido", error });
-        }
-
-
-    }
-
-/*     async uploadPDF(req: Request, res: Response) {
-        const { userId } = req.body;
-        const filePath = req.file?.path;
-
-        if (!filePath || !userId) {
-            console.error("File path or userId missing:", { filePath, userId });
-            return res.status(400).json({ message: 'Faltam dados' });
-        }
-
-        try {
-            await AppDataSource.query(
-                'INSERT INTO user_files (user_id, file_path) VALUES (?, ?)',
-                [userId, filePath]
-            );
-            res.status(200).json({ message: 'Arquivo enviado com sucesso!' });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Erro ao salvar no banco de dados' });
-        }
-    } */
-/* 
-    async getHolerites(req: Request, res: Response) {
-        const { userId } = req.params;
-        try {
-            const files = await AppDataSource.query('SELECT file_path FROM user_files WHERE file_type = "holerite" AND user_id = ?', [userId]);
-            res.json(files);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Erro ao buscar holerites' });
-        }
-    } */
-
-/*     async getAtestados(req: Request, res: Response) {
-        const { userId } = req.params;
-        try {
-            const files = await AppDataSource.query('SELECT file_path FROM user_files WHERE file_type = "atestados" AND user_id = ?', [userId]);
-            res.json(files);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Erro ao buscar atestados' });
+            console.error("Erro ao salvar no banco de dados:", error);
+            return res.status(500).json({ message: "Erro ao salvar no banco de dados", error });
         }
     }
+    
+    
+    
 
-    async getRegistrosPonto(req: Request, res: Response) {
-        const { userId } = req.params;
-        try {
-            const files = await AppDataSource.query('SELECT file_path FROM user_files WHERE file_type = "registros-ponto" AND user_id = ?', [userId]);
-            res.json(files);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: 'Erro ao buscar registros de ponto' });
-        }
-    } */
+    async getAll(req: Request, res: Response): Promise<Response> {
+        const UserFilesRepository = AppDataSource.getRepository(UserFiles);
+
+        const userFiles = await UserFilesRepository.find();
+
+        return res.status(200).json(userFiles);
+    }
+    
 }
 export default new UserFilesController();

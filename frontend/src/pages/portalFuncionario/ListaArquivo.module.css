@@ -1,0 +1,125 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    width: fit-content ;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    background-color: #efeff37e;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+}
+
+.card{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.123);
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    transition: 0.6s;
+    border-radius: 8px;
+}
+.card:hover{
+    background-color: rgb(189, 184, 184);
+    transition: 0.6s;
+    cursor: pointer;
+}
+
+.conteudoCard{
+    margin-top: 10px;
+    border-radius: 8px;
+    /* background-color: #ffffff; */
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.texto{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-self: flex-end;
+}
+.nomeArquivo {
+    height: 39px;
+    justify-self: center;
+    max-height: 39px;
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    word-wrap: break-word; 
+    word-break: break-all; 
+}
+
+.dataArquivo{
+    font-size: 11px;
+    font-weight: 600;
+    color: rgb(71, 71, 71);
+}
+
+.imagem{
+    width: 65px;
+}
+
+.titulo{
+    color: black;
+}
+
+.filtro{
+    width: 300px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 16px;
+}
+
+.botaoVoltar{
+    background-color: transparent;
+    border: 0px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.botaoVoltar:hover{
+   cursor: pointer;
+}
+
+.botoes{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 2px;
+    align-self: flex-end;
+    margin-bottom: 125px;
+    margin-right: 5px;
+    font-size: 20px;
+    visibility: hidden;
+    color: #293f69;
+}
+.botaoApagar:hover{
+    color: #bb1e1e;
+}
+.botaoDownload:hover{
+    color: #6191da;
+}
+
+.card:hover .botoes {
+    visibility: visible; /* Exibe os ícones quando o mouse estiver sobre o card */
+}
