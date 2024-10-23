@@ -10,7 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import { Tooltip, Menu, MenuItem } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -104,6 +104,7 @@ const AppBar = styled(MuiAppBar, {
 export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { userId } = useAuth();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -120,12 +121,20 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   const handlePortalFunc = () => {
+     // Pegando o userId do contexto
+
+    const origem = userId; // Certifique-se de que location.state está definido
     if (userLogged()) {
-      navigate("/portalFuncionario");
+      if (origem) {
+        navigate("/portalFuncionario", { state: { userId, origem } });
+      } else {
+        console.error("Origem não foi passada");
+      }
     } else {
       navigate("/login");
     }
   };
+  
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './style.css';
-import { useAuth } from '../../context/AuthContext';
 
 function PortalFuncionario() {
   const navigate = useNavigate();
@@ -10,15 +9,22 @@ function PortalFuncionario() {
   const [registrosPonto, setRegistrosPonto] = useState([]);
   const [atestados, setAtestados] = useState([]);
 
-  const { userId } = useAuth(); // Pegando o userId do contexto
+  /* const { userId } = useAuth(); */ // Pegando o userId do contexto
+  const location = useLocation();
+  const origem = location.state?.origem;
+  const userId = location.state?.userId;
   console.log("Id do usuario:", userId); // Log para verificar o userId
 
 
 
+
   const handleClick = (type) => {
-    const tipoArquivo = type; // Armazena o tipo que será passado
-    navigate(`/arquivos/${tipoArquivo}`);
+    const tipoArquivo = type;
+    navigate(`/arquivos/${tipoArquivo}`, { state: { userId, origem } });
   };
+
+  console.log("User:", userId, "origem:", origem)
+  
 
   return (
     <>

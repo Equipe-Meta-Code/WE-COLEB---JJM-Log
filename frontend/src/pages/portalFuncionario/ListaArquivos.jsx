@@ -2,12 +2,19 @@ import styles from './ListaArquivo.module.css';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { RiDeleteBin5Fill, RiDownloadCloudFill } from "react-icons/ri";
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import api from '../../services/api';
+
 
 function ListaArquivos({tipoDoArquivo}) {
     const navigate = useNavigate();
     const { tipo } = useParams();
+    const location = useLocation();
+    const userId = location.state?.userId;
+    const origem = location.state?.origem;
+
+    console.log("User:", userId, "origem:", origem)
+    
     const [arquivos, setArquivos] = useState([]);
     const [tipoArquivo, setTipoArquivo] = useState("");
 
@@ -21,7 +28,7 @@ function ListaArquivos({tipoDoArquivo}) {
     }
 
     useEffect(() => {
-        buscarArquivos();
+        buscarArquivos(); 
         if (tipo == 1) {
             setTipoArquivo("Holerites");
         } else if (tipo == 2) {
@@ -98,14 +105,12 @@ function ListaArquivos({tipoDoArquivo}) {
             return;
         }
 
-        const userId = 123;
-        const origem = 1;
 
         formData.append('pdf', file);
         formData.append('userId', userId);
         formData.append('origem', origem);
         formData.append('tipo', tipoArquivo);
-
+        console.log("enviando pro banco", userId, origem)
         try {
             const response = await api.post("/upload", formData, {
                 headers: {
@@ -119,7 +124,11 @@ function ListaArquivos({tipoDoArquivo}) {
         buscarArquivos()
     };
 
-    const arquivosFiltrados = arquivos.filter(arquivo => arquivo.tipo === tipoArquivo);
+    const arquivosFiltrados = arquivos.filter(arquivo => 
+        arquivo.tipo === tipoArquivo && arquivo.user_id == userId
+      );
+    console.log("Filtrado",arquivosFiltrados, "userId", userId)
+    console.log("sem filtro",arquivos, "userId", userId)
 
     return (
         <div>

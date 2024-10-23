@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from '../../services/api'; // Importe seu arquivo de configuração da API
 import './style.css'; 
+import { useAuth } from "../../context/AuthContext";
 
 function ListaFuncionarios() {
     const [funcionarios, setFuncionarios] = useState([]);
     const [busca, setBusca] = useState(''); // Estado para a busca
     const [menuAtivo, setMenuAtivo] = useState(null); // Controla qual menu está ativo
+    const { userId } = useAuth();
+    const origem = userId
+
+    const navigate = useNavigate();
 
     // Função para buscar os funcionários da API
     async function buscarFuncionarios() {
@@ -41,7 +47,9 @@ function ListaFuncionarios() {
 
     // Função para abrir/fechar o menu de opções
     const clickArquivos = (id) => {
-        setMenuAtivo(menuAtivo === id ? null : id);
+        const userId = id
+        
+        navigate("/portalFuncionario", { state: { userId, origem } });
     };
 
     return (
