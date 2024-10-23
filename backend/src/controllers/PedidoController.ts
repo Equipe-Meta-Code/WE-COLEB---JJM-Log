@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../database/data-source";
 import Pedido from "../models/Pedido";
+import { format } from "date-fns";
 /* import Users from "../models/Users"; 
 import Clientes from "../models/Clientes";  */
 
@@ -52,10 +53,19 @@ class PedidoController {
     // Buscar todos os pedidos
     async getAll(req: Request, res: Response): Promise<Response> {
         const pedidoRepository = AppDataSource.getRepository(Pedido);
-
+        
+        // Busca todos os pedidos
         const pedidos = await pedidoRepository.find();
 
-        return res.status(200).json(pedidos);
+        // Formata a data de criação de cada pedido
+        const pedidosFormatados = pedidos.map(pedido => ({
+            ...pedido,
+            data_criacao: format(new Date(pedido.data_criacao), 'dd/MM/yyyy'), // Formata a data como 'dd/MM/yyyy'
+            data_entrega: format(new Date(pedido.data_entrega), 'dd/MM/yyyy'), // Se precisar formatar a data de entrega também
+        }));
+
+        // Retorna os pedidos com a data formatada
+        return res.status(200).json(pedidosFormatados);
     }
 
     // Buscar um pedido por ID

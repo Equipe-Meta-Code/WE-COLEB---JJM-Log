@@ -1,0 +1,156 @@
+.pasta-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: inline;
+  }
+  
+  .arquivo-div {
+    width: 260px;
+    height: 210px;
+    background-color: #293f69;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin: 50px;
+  }   
+  
+  .arquivo-div:hover {
+      transform: scale(1.05);
+  }
+  
+  .image {
+    max-width: 55%;
+    max-height: 55%;
+    margin-bottom: 5px;
+  }
+  
+  .image-atestado {
+      max-width: 56%;
+      max-height: 56%;
+      margin-bottom: 5px;
+  }
+  
+  .nome-pasta {
+      color: white;
+  }
+  
+  .titulo {
+      color: black;
+      padding-bottom: 15px;
+  }
+  
+  .titulo-seg {
+      text-align: center;
+      padding: 5px;
+  }
+  
+  .titulo-clientes{
+    width: max-content;
+    color: black;
+  }
+  .lista-clientes {
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tabela-de-clientes{
+    background-color: rgb(247, 247, 247);
+  }
+  
+  .input-pesquisa {
+    width: 300px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .tabela-clientes {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+  }
+  
+  .cabecalho-tabela {
+    background-color: #f4f6f9;
+  }
+  
+  .cabecalho-tabela th, .corpo-tabela td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .corpo-tabela tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .corpo-tabela tr:hover {
+    background-color: #e3f2fd; /* Azul claro ao passar o mouse */
+  }
+  
+  .linha-tabela {
+    position: relative;
+  }
+  
+  .coluna-nome, .coluna-email, .coluna-papel, .coluna-acoes {
+    color: #333;
+  }
+  
+  .menu-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .botao-menu {
+    width: 100%;
+    padding: 10px;
+    background-color: #293f69;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botao-menu:hover{
+    background-color: #4a5f9b;
+  }
+  
+  
+  .opcao-menu:hover {
+    background-color: #bfd0ff;
+  }
+  .upload-button {
+    display: inline-block; 
+    padding: 10px 25px; 
+    background-color: #293f69;
+    color: white; 
+    border: none; 
+    border-radius: 3px; 
+    cursor: pointer;
+    margin-top: 5px; 
+  }
+  
+  .small-button {
+    width: 220px; 
+    text-align: center;
+  }
+  
+  .upload-button:hover {
+    background-color: #4a5f9b; /* Tom mais escuro ao passar o mouse */
+  }
+  
+  .div-img {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+  }
