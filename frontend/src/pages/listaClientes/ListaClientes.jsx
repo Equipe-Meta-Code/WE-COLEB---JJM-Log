@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import api from '../../services/api'; 
 import Modal from './modal'; // Certifique-se de que o caminho esteja correto
 import './style.css'; 
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
 
 function ListaClientes() {
     const [clientes, setClientes] = useState([]);
@@ -59,6 +61,21 @@ function ListaClientes() {
         );
     };
 
+    // Função para formatar CPF ou CNPJ
+    const formatarCPFouCNPJ = (value) => {
+        const cpfCnpjDigits = value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+        if (cpfCnpjDigits.length === 11) {
+            // Formatação de CPF: 000.000.000-00
+            return cpfCnpjDigits.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+        } else if (cpfCnpjDigits.length === 14) {
+            // Formatação de CNPJ: 00.000.000/0000-00
+            return cpfCnpjDigits.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+        }
+
+        return value; // Retorna o valor sem formatação caso não seja CPF ou CNPJ válido
+    };
+
     return (
         <div className="lista-clientes">
             <h1 className="titulo-clientes">Lista de Clientes</h1>
@@ -86,18 +103,17 @@ function ListaClientes() {
                         {filtrarClientes().map((cliente) => (
                             <tr key={cliente.id} className="linha-tabela">
                                 <td className="coluna-nome">{cliente.nome}</td>
-                                <td className="coluna-cpf">{cliente.cpf_cnpj}</td>
+                                <td className="coluna-cpf">{formatarCPFouCNPJ(cliente.cpf_cnpj)}</td>
                                 
-                                <td className="coluna-acoes">
-                                    {/* Botão para deletar o cliente */}
+                                <td className="coluna-acoes-clientes">
                                     <div className="menu-container">
-                                        <button className="botao-menu" onClick={() => deletarClientes(cliente.id)}>
-                                            deletar
+                                        <button className="botao-menu-clientes" onClick={() => deletarClientes(cliente.id)}>
+                                            <DeleteOutlineRoundedIcon style={{ marginRight: '4px' }} />
                                         </button>
                                     </div>
                                     <div className="menu-container">
-                                        <button className='botao-menu' onClick={() => handleEditClick(cliente)}>
-                                            editar
+                                        <button className='botao-menu-clientes' onClick={() => handleEditClick(cliente)}>
+                                            <DriveFileRenameOutlineRoundedIcon style={{ marginRight: '4px' }} />
                                         </button>
                                     </div>
                                 </td>
@@ -128,7 +144,7 @@ function ListaClientes() {
                                 <label>CPF/CNPJ</label>
                                 <input 
                                     type="text" 
-                                    value={clienteSelecionado.cpf_cnpj} 
+                                    value={formatarCPFouCNPJ(clienteSelecionado.cpf_cnpj)} // Aplica a formatação no campo
                                     onChange={(e) => setClienteSelecionado({...clienteSelecionado, cpf_cnpj: e.target.value})} 
                                 />
 
