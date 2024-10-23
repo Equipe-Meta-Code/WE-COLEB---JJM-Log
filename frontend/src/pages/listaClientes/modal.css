@@ -1,0 +1,78 @@
+/* Estilo para o fundo do modal */
+.background-modal {
+    position: fixed; /* Fixa o modal na tela */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    display: flex; /* Usado para centralizar o modal */
+    align-items: center; /* Alinha verticalmente no centro */
+    justify-content: center; /* Alinha horizontalmente no centro */
+    z-index: 999; /* Garante que o modal fique acima de outros elementos */
+}
+
+/* Estilo para o próprio modal */
+.modal {
+    background-color: white; /* Fundo branco para o modal */
+    border-radius: 8px; /* Cantos arredondados */
+    padding: 20px; /* Espaçamento interno */
+    max-width: 500px; /* Largura máxima do modal */
+    width: 100%; /* Largura total até o máximo */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para efeito de profundidade */
+    position: relative; /* Para posicionar o botão de fechar */
+}
+
+/* Estilo do botão de fechar */
+.botao-fechar {
+    position: absolute; /* Posiciona o botão no canto superior direito */
+    top: 10px;
+    right: 10px;
+    background: none; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 20px; /* Tamanho do ícone */
+    color: #333; /* Cor do ícone */
+}
+
+/* Estilo do conteúdo do modal */
+.modal-conteudo {
+    margin-top: 20px; /* Espaçamento acima do conteúdo */
+}
+
+/* Estilo para os formulários */
+form {
+    display: flex; /* Usado para layout flexível */
+    flex-direction: column; /* Coloca os elementos em coluna */
+}
+
+/* Estilo para os rótulos dos campos */
+label {
+    margin-bottom: 5px; /* Espaço abaixo dos rótulos */
+    font-weight: bold; /* Destaca os rótulos */
+}
+
+/* Estilo para os campos de entrada */
+input {
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 15px; /* Espaço abaixo de cada campo */
+    border: 1px solid #ccc; /* Borda leve */
+    border-radius: 4px; /* Cantos arredondados */
+    font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilo do botão de salvar */
+button[type="submit"] {
+    padding: 10px; /* Espaçamento interno */
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Cantos arredondados */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilo do botão de salvar ao passar o mouse */
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+}
