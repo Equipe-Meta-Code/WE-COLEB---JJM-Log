@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
 
-function ListaArquivos() {
+function ListaArquivos({tipoDoArquivo}) {
     const navigate = useNavigate();
     const { tipo } = useParams();
     const [arquivos, setArquivos] = useState([]);
@@ -155,7 +155,7 @@ function ListaArquivos() {
                     : arquivo.nome;
 
                 return (
-                    <div className={styles.card} key={arquivo.id} /* onClick={() => visualizarArquivo(arquivo)} */>
+                    <div className={styles.card} key={arquivo.id} onClick={() => visualizarArquivo(arquivo)}>
                         <div className={styles.botoes}>
                             <RiDeleteBin5Fill className={styles.botaoApagar} onClick={() => apagarArquivo(arquivo.id)}/>
                             <RiDownloadCloudFill className={styles.botaoDownload} onClick={() => baixarArquivo(arquivo)}/>
