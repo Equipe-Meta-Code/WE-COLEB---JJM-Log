@@ -27,6 +27,7 @@ router.post('/upload', uploadPdf.single('pdf'), UserFilesController.create);
 
 router.get("/arquivos", UserFilesController.getAll);
 router.get("/users", UserController.getAll);
+router.get("/users/:id", UserController.getById);
 router.get("/pedidos", PedidoController.getAll);
 router.get("/pedidos/:id", PedidoController.getById);
 router.get("/etapas", EtapaController.getAll);
