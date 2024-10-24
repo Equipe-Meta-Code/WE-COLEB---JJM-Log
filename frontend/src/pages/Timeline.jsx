@@ -305,7 +305,23 @@ const LicensePlateCard = () => {
     const fetchEtapas = async () => {
       try {
         const response = await api.get(`/etapapedido/pedido/${pedidoId}`);
-        setEtapas(response.data);
+        const etapasAtualizadas = response.data;
+        setEtapas(etapasAtualizadas);
+
+        const contEtapa = etapasAtualizadas.reduce((acc, etapa) => {
+          return etapa.estado === "Finalizado" ? acc + 1 : acc;
+        }, 0);
+
+        if (contEtapa === etapasAtualizadas.length) {
+          try {
+            const pedidoFinalizado = await api.put(`/pedidos/${pedidoId}`, {
+              estado: "Finalizado",
+            });
+            console.log("Pedido atualizado para 'Finalizado':", pedidoFinalizado);
+          } catch (error) {
+            console.error("Erro ao atualizar o estado do pedido:", error);
+          }
+        }
         console.log("Etapas atualizadas:", response.data);
       } catch (error) {
         console.error('Erro ao buscar as etapas:', error);

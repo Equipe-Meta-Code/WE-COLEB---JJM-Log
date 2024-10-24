@@ -2,14 +2,20 @@ import { useState, useEffect } from "react";
 import styles from './Cadastros.module.css';
 import api from '../../services/api';
 import CadastroConcluido from './CadastroConcluido';
+import { useAuth } from "../../context/AuthContext";
 
 function SolicitacaoDeServico() {
     const [departamentos, setDepartamentos] = useState([]);
     const [pedidos, setPedidos] = useState([]);
     const [etapas, setEtapas] = useState([]);
     const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
+    const [clientes, setClientes] = useState([]);
+
+    const { userId } = useAuth();
 
     const [dadosPedido, setDadosPedido] = useState({
+        user_id: userId,
+        cliente_id: '',
         nome: '',
         descricao: '',
         dataInicial: '',
@@ -47,6 +53,15 @@ function SolicitacaoDeServico() {
         }
     }
 
+    async function buscarClientes() {
+        try {
+            const response = await api.get("/clientes");
+            setClientes(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar clientes:", error);
+        }
+    }
+
     async function buscarPedidos() {
         try {
             const response = await api.get("/pedidos");
@@ -66,9 +81,10 @@ function SolicitacaoDeServico() {
     }
 
     async function cadastrarPedido() {
-        console.log(dadosPedido);
         try {
             const response = await api.post("/pedidos", {
+                user_id: dadosPedido.user_id,
+                cliente_id: dadosPedido.cliente_id,
                 nome: dadosPedido.nome,
                 descricao: dadosPedido.descricao,
                 data_inicial: dadosPedido.dataInicial,
@@ -92,6 +108,8 @@ function SolicitacaoDeServico() {
     
             // Resetar o estado dos dados
             setDadosPedido({
+                user_id: userId,
+                cliente_id: '',
                 nome: '',
                 descricao: '',
                 dataInicial: '',
@@ -217,7 +235,7 @@ function SolicitacaoDeServico() {
             }
             return departamento;
         });
-
+        console.log(dadosPedido);
         setDadosPedido((prevState) => ({
             ...prevState,
             departamentos: novosDepartamentos
@@ -229,6 +247,7 @@ function SolicitacaoDeServico() {
         buscarDepartamentos();
         buscarPedidos();
         buscarEtapas();
+        buscarClientes();
     }, []);
 
     return (
@@ -316,6 +335,29 @@ function SolicitacaoDeServico() {
                                 <option value="alimento">Alimento</option>
                                 <option value="recurso">Recurso</option>
                             </select>
+                        </div>
+
+                        <div className={styles.campos}>
+                            <label>Selecione o Cliente: </label>
+                            <div className={styles.departamentos}>
+                                <select
+                                    className={styles.inputEtapas}
+                                    id={styles.selectCategorias}
+                                    value={dadosPedido.cliente_id || ""}
+                                    onChange={(e) => {
+                                        const cliente_selected = e.target.value;
+                                        setDadosPedido({ ...dadosPedido, cliente_id: cliente_selected });
+                                        console.log(userId);
+                                    }}
+                                >
+                                    <option value="">-- Selecione um cliente --</option>
+                                    {clientes.map((cliente) => (
+                                        <option key={cliente.id} value={cliente.id}>
+                                            {cliente.nome} - {cliente.cpf_cnpj}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
 
                         <div className={styles.conjuntoDuplas}>
