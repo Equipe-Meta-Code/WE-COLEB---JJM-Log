@@ -12,11 +12,13 @@ function ListaArquivos({tipoDoArquivo}) {
     const location = useLocation();
     const userId = location.state?.userId;
     const origem = location.state?.origem;
+    const [funcionario, setFuncionario] = useState(null);
 
     console.log("User:", userId, "origem:", origem)
     
     const [arquivos, setArquivos] = useState([]);
     const [tipoArquivo, setTipoArquivo] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     async function buscarArquivos() {
         try {
@@ -38,6 +40,19 @@ function ListaArquivos({tipoDoArquivo}) {
         }
     }, [tipo]);
 
+    async function buscarFuncionario() {
+        try {
+            const response = await api.get(`/usersid/${userId}`);
+            setFuncionario(response.data); // Armazena os dados do usuário no estado
+        } catch (error) {
+            console.error("Erro ao buscar funcionário:", error);
+        }
+      }
+    
+      useEffect(() => {
+        buscarFuncionario();
+      }, []); 
+
     const botaoVoltar = () => {
         navigate(`/portalFuncionario`);
     };
@@ -55,20 +70,22 @@ function ListaArquivos({tipoDoArquivo}) {
     };
 
     const apagarArquivo = async (arquivoId) => {
-        event.stopPropagation(); // Previne a execução do clique no card
+        event.stopPropagation();
     
         try {
-            // Faz a requisição DELETE para o servidor
             await api.delete(`/arquivos/${arquivoId}`);
             console.log(`Arquivo ${arquivoId} apagado com sucesso`);
         
-            // Após deletar, atualiza a lista de arquivos removendo o apagado
             setArquivos(prevArquivos => prevArquivos.filter(arquivo => arquivo.id !== arquivoId));
         } catch (error) {
             console.error("Erro ao apagar o arquivo:", error);
         }
     };
     
+    
+    
+
+
     
 
     const baixarArquivo = async (arquivo) => {
@@ -84,12 +101,11 @@ function ListaArquivos({tipoDoArquivo}) {
             const blob = await response.blob();
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.setAttribute('download', arquivo.nome);  // Define o nome do arquivo a ser baixado
+            link.setAttribute('download', arquivo.nome);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
     
-            // Libera o objeto URL após o uso
             URL.revokeObjectURL(link.href);
         } catch (error) {
             console.error("Erro ao baixar o arquivo:", error);
@@ -124,25 +140,28 @@ function ListaArquivos({tipoDoArquivo}) {
         } catch (error) {
             console.error("Erro ao enviar o arquivo:", error);
         }
-        buscarArquivos()
+        buscarArquivos();
     };
 
-    const arquivosFiltrados = arquivos.filter(arquivo => 
-        arquivo.tipo === tipoArquivo && arquivo.user_id == userId
-      );
-    console.log("Filtrado",arquivosFiltrados, "userId", userId)
-    console.log("sem filtro",arquivos, "userId", userId)
+    const arquivosFiltrados = arquivos
+        .filter(arquivo => arquivo.tipo === tipoArquivo && arquivo.user_id == userId)
+        .filter(arquivo => arquivo.nome.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    console.log("Filtrado",arquivosFiltrados, "userId", userId);
+    console.log("sem filtro",arquivos, "userId", userId);
 
     return (
         <div>
             <button className={styles.botaoVoltar} onClick={botaoVoltar}>
                 <IoArrowBackCircleOutline />Voltar
             </button>
-            <h1 className={styles.titulo}>{tipoArquivo}</h1>
+            <h1 className={styles.titulo}>{tipoArquivo} de {funcionario ? funcionario.nome : 'Carregando...'}</h1>
 
             <input
                 className={styles.filtro}
                 placeholder='Pesquise o nome do arquivo'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
             />
 
             <label htmlFor="atestado-upload" className="upload-button small-button">Fazer Upload</label>
@@ -172,14 +191,14 @@ function ListaArquivos({tipoDoArquivo}) {
                             <RiDeleteBin5Fill
                                 className={styles.botaoApagar}
                                 onClick={(event) => {
-                                    event.stopPropagation(); // Previne o clique no card
+                                    event.stopPropagation();
                                     apagarArquivo(arquivo.id);
                                 }}
                             />
                             <RiDownloadCloudFill
                                 className={styles.botaoDownload}
                                 onClick={(event) => {
-                                    event.stopPropagation(); // Previne o clique no card
+                                    event.stopPropagation();
                                     baixarArquivo(arquivo, event);
                                 }}
                             />
