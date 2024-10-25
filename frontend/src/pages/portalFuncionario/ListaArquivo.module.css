@@ -123,3 +123,7 @@
 .card:hover .botoes {
     visibility: visible; /* Exibe os ícones quando o mouse estiver sobre o card */
 }
+
+.nomeDestaque{
+    color: #6191da;
+}

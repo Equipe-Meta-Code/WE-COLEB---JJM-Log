@@ -41,7 +41,12 @@ function PortalFuncionario() {
 
   return (
     <>
-      <h1 className="titulo">Portal do funcionário de {funcionario ? funcionario.nome : 'Carregando...'}</h1>
+      <h1 className="titulo">{"Portal do funcionário"}                 
+        <span className="nomeDestaque">
+          {funcionario ? ` de ${funcionario.nome}` : ' Usuário não encontrado...'}
+        </span>
+
+      </h1>
       <h3 className="titulo-seg">
         Bem-vindo ao portal do funcionário
       </h3>

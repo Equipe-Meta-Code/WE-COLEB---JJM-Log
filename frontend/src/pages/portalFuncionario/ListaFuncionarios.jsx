@@ -31,7 +31,7 @@ function ListaFuncionarios() {
     const getCargo = (roles) => {
         return roles.map((role) => {
             if (role.nome_role === "Admin_Role") return "Gerente";
-            if (role.nome_role === "Admin/Vendedor_Role") return "RH";
+            if (role.nome_role === "Rh_Role") return "RH";
             if (role.nome_role === "User_Role") return "Funcionário";
             return role.nome_role; // Retorna o nome original caso não haja correspondência
         }).join(', ');

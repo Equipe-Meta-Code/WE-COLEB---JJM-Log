@@ -54,7 +54,7 @@ function ListaArquivos({tipoDoArquivo}) {
       }, []); 
 
     const botaoVoltar = () => {
-        navigate(`/portalFuncionario`);
+        navigate("/portalFuncionario", { state: { userId, origem } });
     };
 
     const visualizarArquivo = (arquivo) => {
@@ -155,7 +155,13 @@ function ListaArquivos({tipoDoArquivo}) {
             <button className={styles.botaoVoltar} onClick={botaoVoltar}>
                 <IoArrowBackCircleOutline />Voltar
             </button>
-            <h1 className={styles.titulo}>{tipoArquivo} de {funcionario ? funcionario.nome : 'Carregando...'}</h1>
+            <h1 className={styles.titulo}>
+                {tipoArquivo} 
+                <span className={styles.nomeDestaque}>
+                    {funcionario ? ` de ${funcionario.nome}` : ' Usuário não encontrado...'}
+                </span>
+
+            </h1>
 
             <input
                 className={styles.filtro}
