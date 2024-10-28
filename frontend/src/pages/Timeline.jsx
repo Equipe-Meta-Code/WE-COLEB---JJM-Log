@@ -11,6 +11,8 @@ import PhoneIcon from '@mui/icons-material/Phone'; // Ícone de telefone
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useParams } from 'react-router-dom';
 import api from '../services/api';
+import DownloadButton from '../components/relatorio/GenerateReport';
+import GenerateReport from '../components/relatorio/GenerateReport';
 
 const TimelineCard = ({ steps, title, refetchEtapas }) => {
   const [expanded, setExpanded] = useState(title.includes("Entregas"));
@@ -104,6 +106,10 @@ const TimelineCard = ({ steps, title, refetchEtapas }) => {
 
                 {index < steps.length - 1 && (
                   <Box sx={{ position: 'absolute', top: '20px', left: '19px', height: '40px', width: '2px', backgroundColor: 'grey' }} />
+                  <Box
+                      position: 'absolute',
+                      backgroundColor: 'grey',
+                      height: '40px',
                 )}
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', ml: 4 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -383,9 +389,13 @@ const LicensePlateCard = () => {
               <SmallCard title="Distância" value={`${pedido.distancia}km`} icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
             </Box>
           )}
+          <GenerateReport />
         </Grid>
       </Grid>
     );
+  
+
+    
   };
   
    
