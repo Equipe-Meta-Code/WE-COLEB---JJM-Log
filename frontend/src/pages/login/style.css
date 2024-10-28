@@ -9,8 +9,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 500px;
     flex-direction: column; /* Alinhar verticalmente */
+    gap: 10px;
 }
 
 /* Estilo do Card */
@@ -149,10 +150,7 @@ input {
     text-align: justify;
     margin: 20px auto; /* Centraliza o card horizontalmente e adiciona espaço vertical */
     box-shadow: none; /* Remove sombra */
-    position: absolute; /* Posiciona o card em relação à tela */
-    top: 20px; /* Distância do topo da tela */
-    left: 53%; /* Posiciona horizontalmente no meio */
-    transform: translateX(-50%); /* Centraliza horizontalmente */
+
 }
 
 /* Títulos do card */

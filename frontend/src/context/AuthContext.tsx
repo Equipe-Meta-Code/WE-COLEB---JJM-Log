@@ -1,9 +1,10 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import api from "../services/api";
 
 interface AuthContextState {
     token: string;
     login: string | null;
+    userId: string | null;
     signIn(userData: UserData): Promise<void>;
     userLogged(): boolean;
     signOut(): void;
@@ -30,23 +31,45 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return localStorage.getItem('@Upload:login');
     });
 
+    const [userId, setUserId] = useState<string | null>(() => {
+        const storedUserId = localStorage.getItem('@Upload:userId');
+        console.log('Recovered userId from localStorage:', storedUserId); // Debug do localStorage
+        return storedUserId;
+    });
+
     const signIn = useCallback(async ({ login, senha }: UserData) => {
-        const response = await api.post('/sessions', { login, senha });
-        const { token } = response.data;
+        try {
+            const response = await api.post('/sessions', { login, senha });
+            console.log('API response:', response.data); // Log para verificar a resposta da API
 
-        setToken(token);
-        setLogin(login);
+            const { token, userId } = response.data; // `userId` deve estar agora na resposta
 
-        localStorage.setItem('@Upload:token', token);
-        localStorage.setItem('@Upload:login', login);
-        api.defaults.headers.authorization = `Bearer ${token}`;
+            if (!token || !userId) {
+                console.error('Missing token or userId in response');
+                return;
+            }
+
+            // Salva token e userId no estado e localStorage
+            setToken(token);
+            setLogin(login);
+            setUserId(userId);
+
+            localStorage.setItem('@Upload:token', token);
+            localStorage.setItem('@Upload:login', login);
+            localStorage.setItem('@Upload:userId', userId); // Salvando o userId no localStorage
+            api.defaults.headers.authorization = `Bearer ${token}`;
+        } catch (error) {
+            console.error('Error during signIn:', error);
+        }
     }, []);
 
     const signOut = useCallback(() => {
         setToken('');
         setLogin(null);
+        setUserId(null);
         localStorage.removeItem('@Upload:token');
         localStorage.removeItem('@Upload:login');
+        localStorage.removeItem('@Upload:userId');
         window.location.href = '/';
     }, []);
 
@@ -55,7 +78,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ token, login, signIn, userLogged, signOut }}>
+        <AuthContext.Provider value={{ token, login, userId, signIn, userLogged, signOut }}>
             {children}
         </AuthContext.Provider>
     );

@@ -127,6 +127,40 @@ class UserController {
             return response.status(500).json({ message: 'Erro ao buscar usuários' });
         }
     }
+
+    async getById(request: Request, response: Response) {
+        const { id } = request.params;
+        const userRepository = AppDataSource.getRepository(User);
+    
+        try {
+            // Converter o id para number
+            const userId = Number(id);
+    
+            if (isNaN(userId)) {
+                return response.status(400).json({ message: 'ID inválido' });
+            }
+    
+            const user = await userRepository.findOne({ 
+                where: { id: userId },
+                relations: ['roles']
+            });
+    
+            if (!user) {
+                return response.status(404).json({ message: 'Usuário não encontrado' });
+            }
+    
+            // Remover a senha antes de retornar o usuário
+            const userResponse = { 
+                ...user, 
+                senha: undefined 
+            };
+    
+            return response.status(200).json(userResponse);
+        } catch (error) {
+            return response.status(500).json({ message: 'Erro ao buscar usuário' });
+        }
+    }
+    
     
 }
 export default new UserController();

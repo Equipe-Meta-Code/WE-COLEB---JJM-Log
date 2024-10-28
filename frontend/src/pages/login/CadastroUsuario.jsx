@@ -61,7 +61,7 @@ function CadastroUsuario() {
 
             setSuccessMessage("Usuário cadastrado com sucesso!");
             setTimeout(() => {
-                navigate("/dashboard");
+                navigate("/funcionarios");
             }, 2000);
         } catch (error) {
             console.error("Erro ao cadastrar usuário:", error);

@@ -346,8 +346,9 @@ const LicensePlateCard = () => {
         const dataObj = new Date(data);
         const horas = dataObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const dataFormatada = dataObj.toLocaleDateString('pt-BR'); // Formato DD/MM/YYYY para o Brasil
-        return `${horas} ${dataFormatada.split('/').reverse().join('-')}`; // Reorganizando a data para o formato DD-MM-YYYY
+        return `${horas} ${dataFormatada}`; // Retorna no formato HH:MM DD/MM/YYYY
       };
+      
     
       if (!acc[departamentoNome]) {
         acc[departamentoNome] = [];
