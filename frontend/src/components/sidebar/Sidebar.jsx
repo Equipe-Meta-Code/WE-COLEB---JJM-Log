@@ -658,7 +658,7 @@ export default function Sidebar() {
                       justifyContent: open ? "initial" : "center",
                       px: 2.5,
                     }}
-                    onClick={handleLogout}
+                    onClick={() => handleLogout()}
                   >
                     <ListItemIcon
                       sx={{

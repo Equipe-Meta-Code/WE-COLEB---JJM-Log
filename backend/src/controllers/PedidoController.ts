@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../database/data-source";
 import Pedido from "../models/Pedido";
+import User from "../models/User";
+import Cliente from "../models/Cliente";
 import { format } from "date-fns";
-/* import Users from "../models/Users"; 
-import Clientes from "../models/Clientes";  */
+
 
 class PedidoController {
     // Criar um novo pedido
     async create(req: Request, res: Response): Promise<Response> {
         const {
+            user_id,
+            cliente_id,
             nome,
             descricao,
             data_criacao,
@@ -23,11 +26,22 @@ class PedidoController {
         } = req.body;
 
         const pedidoRepository = AppDataSource.getRepository(Pedido);
+        const userRepository = AppDataSource.getRepository(User);
+        const clienteRepository = AppDataSource.getRepository(Cliente);
 
         try {
+            const user = await userRepository.findOneBy({ id: user_id });
+            if (!user) {
+                return res.status(404).json({ message: "Usuário não encontrado" });
+            }
+            const cliente = await clienteRepository.findOneBy({ id: cliente_id });
+            if (!cliente) {
+                return res.status(404).json({ message: "Cliente não encontrado" });
+            }
 
-            // Criar um novo pedido com os IDs de usuário e cliente
             const pedido = pedidoRepository.create({
+                user,
+                cliente,
                 nome,
                 descricao,
                 data_criacao,
@@ -88,6 +102,55 @@ class PedidoController {
         } catch (error) {
             console.error("Erro ao buscar o pedido por ID:", error);
             return res.status(500).json({ message: "Erro ao buscar pedido", error });
+        }
+    }
+
+    async update(request: Request, response: Response) {
+        const pedidoRepository = AppDataSource.getRepository(Pedido);
+        const clienteRepository = AppDataSource.getRepository(Cliente);
+
+        const { id } = request.params;
+        const { cliente,
+                nome,
+                descricao,
+                data_criacao,
+                data_entrega,
+                estado,
+                categoria,
+                tipo,
+                peso,
+                quantidade,
+                volume,
+                distancia} = request.body;
+
+        try {
+            const pedido = await pedidoRepository.findOneBy({ id: Number(id) });
+            if (!pedido) {
+                return response.status(404).json({ message: 'Pedido não encontrado' });
+            }
+
+            const clienteFound = await clienteRepository.findOneBy({ id: cliente });
+            if (!clienteFound) {
+                return response.status(404).json({ message: "Cliente não encontrado" });
+            }
+            pedido.cliente = clienteFound;
+            pedido.nome = nome;
+            pedido.descricao = descricao;
+            pedido.data_criacao = data_criacao;
+            pedido.data_entrega = data_entrega;
+            pedido.estado = estado;
+            pedido.categoria = categoria;
+            pedido.tipo = tipo;
+            pedido.peso = peso;
+            pedido.quantidade = quantidade;
+            pedido.volume = volume;
+            pedido.distancia = distancia;
+
+            await pedidoRepository.save(pedido);
+
+            return response.status(200).json(pedido);
+        } catch (error) {
+            return response.status(500).json({ message: 'Erro ao atualizar pedido', error });
         }
     }
 }

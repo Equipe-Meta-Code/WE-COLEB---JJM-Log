@@ -30,6 +30,7 @@ router.get("/users", UserController.getAll);
 router.get("/usersid/:id", UserController.getById);
 router.get("/pedidos", PedidoController.getAll);
 router.get("/pedidos/:id", PedidoController.getById);
+router.put("/pedidos/:id", PedidoController.update);
 router.get("/etapas", EtapaController.getAll);
 router.get("/departamentos", DepartamentoController.getAll);
 router.get("/etapapedido", EtapaPedidoController.getAll);
