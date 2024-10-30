@@ -31,8 +31,8 @@ class ClienteController {
             ramo_atividade, 
             rntrc,
             validade_rntrc,
-            valor_adicional,
             valor_fixo,
+            valor_adicional,
         });
 
         await clienteRepository.save(cliente);
