@@ -43,7 +43,7 @@ function LoginPage() {
         }
         try {
             await signIn({ login, senha });
-            navigate('/portalFuncionario');
+            navigate('/');
             window.location.reload();
         } catch (error) {
             setError("Credenciais inválidas. Por favor, verifique seu login e senha.");
@@ -77,8 +77,8 @@ return (
     <div className="container" id="container">
         {/* Card com fundo branco para o título e subtítulo */}
         <div className="card card-welcome">
-            <h1 className="welcome-title">Bem-vindo ao Portal do Funcionário!</h1>
-            <h3 className="subtitle">Faça login para acessar o portal</h3>
+            <h1 className="welcome-title">Bem-vindo ao We Coleb!</h1>
+            <h3 className="subtitle">Faça login para acessar o site</h3>
         </div>
         
         <div className="form-container sign-in">
