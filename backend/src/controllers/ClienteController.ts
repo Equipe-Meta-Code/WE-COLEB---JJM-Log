@@ -8,10 +8,10 @@ class ClienteController {
     async create(request: Request, response: Response) {
         const clienteRepository = AppDataSource.getRepository(Cliente);
 
-        const { nome, cpf_cnpj } = request.body;
+        const { cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual, contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc, validade_rntrc, valor_adicional, valor_fixo } = request.body;
 
-        // Verifica se já existe um cliente com o mesmo CPF/CNPJ
-        const existCliente = await clienteRepository.findOneBy({ cpf_cnpj });
+        // Verifica se já existe um cliente com o mesmo CNPJ
+        const existCliente = await clienteRepository.findOneBy({ cnpj });
 
         if (existCliente) {
             return response.status(400).json({ message: 'Cliente já existe!' });
@@ -19,8 +19,20 @@ class ClienteController {
 
         // Cria o novo cliente no banco de dados
         const cliente = clienteRepository.create({
-            nome,
-            cpf_cnpj,
+            cnpj,
+            razao_social,
+            nome_fantasia, 
+            inscricao_municipal, 
+            inscricao_estadual, 
+            contribuinte, 
+            telefone,
+            email,
+            natureza_operacao,
+            ramo_atividade, 
+            rntrc,
+            validade_rntrc,
+            valor_adicional,
+            valor_fixo,
         });
 
         await clienteRepository.save(cliente);
@@ -62,7 +74,7 @@ class ClienteController {
     async update(request: Request, response: Response) {
         const clienteRepository = AppDataSource.getRepository(Cliente);
         const { id } = request.params;
-        const { nome, cpf_cnpj } = request.body;
+        const { cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual, contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc, validade_rntrc, valor_adicional, valor_fixo } = request.body;
 
         try {
             const cliente = await clienteRepository.findOneBy({ id: Number(id) });
@@ -71,8 +83,21 @@ class ClienteController {
                 return response.status(404).json({ message: 'Cliente não encontrado' });
             }
 
-            cliente.nome = nome;
-            cliente.cpf_cnpj = cpf_cnpj;
+            cliente.cnpj = cnpj;
+            cliente.razao_social = razao_social;
+            cliente.nome_fantasia = nome_fantasia;
+            cliente.inscricao_municipal = inscricao_municipal;
+            cliente.inscricao_estadual = inscricao_estadual;
+            cliente.contribuinte = contribuinte;
+            cliente.telefone = telefone;
+            cliente.email = email;
+            cliente.natureza_operacao = natureza_operacao;
+            cliente.ramo_atividade = ramo_atividade;
+            cliente.rntrc = rntrc;
+            cliente.validade_rntrc = validade_rntrc;
+            cliente.valor_adicional = valor_adicional;
+            cliente.valor_fixo = valor_fixo;
+
 
             await clienteRepository.save(cliente);
 
