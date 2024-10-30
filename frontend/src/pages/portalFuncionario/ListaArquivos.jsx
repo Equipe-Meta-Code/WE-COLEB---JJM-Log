@@ -4,7 +4,7 @@ import { RiDeleteBin5Fill, RiDownloadCloudFill } from "react-icons/ri";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import api from '../../services/api';
-
+import PermissionComponent from "../../components/PermissionComponent/";
 
 function ListaArquivos({tipoDoArquivo}) {
     const navigate = useNavigate();
@@ -170,14 +170,32 @@ function ListaArquivos({tipoDoArquivo}) {
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
 
-            <label htmlFor="atestado-upload" className="upload-button small-button">Fazer Upload</label>
-            <input
-                type="file"
-                accept=".pdf"
-                style={{ display: 'none' }}
-                onChange={handleFileUpload}
-                id="atestado-upload"
-            />
+            {(tipoArquivo === 'Holerites' || tipoArquivo === 'Registro de Ponto') ? (
+                <PermissionComponent role="Rh_Role">
+                    <label htmlFor="atestado-upload" className="upload-button small-button">Fazer Upload</label>
+                    <input
+                        type="file"
+                        accept=".pdf"
+                        style={{ display: 'none' }}
+                        onChange={handleFileUpload}
+                        id="atestado-upload"
+                    />
+                </PermissionComponent>
+            ) : (
+                <>
+                    <label htmlFor="atestado-upload" className="upload-button small-button">Fazer Upload</label>
+                    <input
+                        type="file"
+                        accept=".pdf"
+                        style={{ display: 'none' }}
+                        onChange={handleFileUpload}
+                        id="atestado-upload"
+                    />
+                </>
+            )}
+
+
+
 
             <div className={styles.container}>
             {arquivosFiltrados.map((arquivo) => {
