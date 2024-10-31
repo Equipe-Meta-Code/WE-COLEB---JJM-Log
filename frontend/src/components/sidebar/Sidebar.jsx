@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from 'react';
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -134,6 +135,18 @@ export default function Sidebar() {
       navigate("/login");
     }
   };
+
+  useEffect(() => {
+    if (userLogged()) {
+   
+        navigate("/"  );
+
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
+  
   
 
   const handleClick = (event) => {
@@ -146,6 +159,7 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     signOut();
+    navigate("/login")
   };
 
   return (
@@ -230,121 +244,132 @@ export default function Sidebar() {
             }}
           >
             {/* Monitoramento de Pacote */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
-                title="Monitoramento de Pacote"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <Link to="/" className="no-link-style">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: "#666666",
-                        minWidth: 0,
-                        mr: open ? 1.5 : "auto", // Margem direita ajustada ao estado
-                      }}
-                    >
-                      <FaTruckFast size={19} />
-                    </ListItemIcon>
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-                  </Link>
-                    <ListItemText
-                      primary="Monitoramento de Pacote"
-                      sx={{
-                        color: "#666666",
-                        opacity: open ? 1 : 0, // Texto visível somente quando sidebar estiver aberto
-                      }}
-                    />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip
+                  title="Monitoramento de Pacote"
+                  placement="right"
+                  arrow
+                  disableHoverListener={open}
+                >
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <Link to="/" className="no-link-style">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: "#666666",
+                          minWidth: 0,
+                          mr: open ? 1.5 : "auto", // Margem direita ajustada ao estado
+                        }}
+                      >
+                        <FaTruckFast size={19} />
+                      </ListItemIcon>
+
+                    </Link>
+                      <ListItemText
+                        primary="Monitoramento de Pacote"
+                        sx={{
+                          color: "#666666",
+                          opacity: open ? 1 : 0, // Texto visível somente quando sidebar estiver aberto
+                        }}
+                      />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
 
             {/* Desempenho de Vendas */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
-                title="Desempenho de Vendas"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
+
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip
+                  title="Desempenho de Vendas"
+                  placement="right"
+                  arrow
+                  disableHoverListener={open}
                 >
-                  <Link to="/Vendas" className="no-link-style">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: "#666666",
-                        minWidth: 0,
-                        mr: open ? 1.5 : "auto",
-                      }}
-                    >
-                      <MdOutlineDashboard size={19} />
-                    </ListItemIcon>
-                  </Link>
-                    <ListItemText
-                      primary="Desempenho de Vendas"
-                      sx={{
-                        color: "#666666",
-                        opacity: open ? 1 : 0,
-                      }}
-                    />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <Link to="/Vendas" className="no-link-style">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: "#666666",
+                          minWidth: 0,
+                          mr: open ? 1.5 : "auto",
+                        }}
+                      >
+                        <MdOutlineDashboard size={19} />
+                      </ListItemIcon>
+                    </Link>
+                      <ListItemText
+                        primary="Desempenho de Vendas"
+                        sx={{
+                          color: "#666666",
+                          opacity: open ? 1 : 0,
+                        }}
+                      />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
             
             {/* Dashboard */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
-                title="Dashboard"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
+
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip
+                  title="Dashboard"
+                  placement="right"
+                  arrow
+                  disableHoverListener={open}
                 >
-                  <Link to="/Dashboard" className="no-link-style">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: "#666666",
-                        minWidth: 0,
-                        mr: open ? 1.5 : "auto",
-                      }}
-                    >
-                      <BarChartIcon size={19} />
-                    </ListItemIcon>
-                  </Link>
-                    <ListItemText
-                      primary="Dashboard"
-                      sx={{
-                        color: "#666666",
-                        opacity: open ? 1 : 0,
-                      }}
-                    />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <Link to="/Dashboard" className="no-link-style">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: "#666666",
+                          minWidth: 0,
+                          mr: open ? 1.5 : "auto",
+                        }}
+                      >
+                        <BarChartIcon size={19} />
+                      </ListItemIcon>
+                    </Link>
+                      <ListItemText
+                        primary="Dashboard"
+                        sx={{
+                          color: "#666666",
+                          opacity: open ? 1 : 0,
+                        }}
+                      />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
 
             {/* Setor Financeiro */}
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
+
             <ListItem disablePadding sx={{ display: "block" }}>
             <Tooltip
                 title="Setor Financeiro"
@@ -381,6 +406,9 @@ export default function Sidebar() {
                 </ListItemButton>
               </Tooltip>
             </ListItem>
+            </PermissionComponent>
+            
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
             <ListItem disablePadding sx={{ display: "block" }}>
               <Tooltip
@@ -454,45 +482,49 @@ export default function Sidebar() {
                 </MenuItem>
               </Menu>
             </ListItem>
+            </PermissionComponent>
 
             {/* Lista de Clientes */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
-                title="Lista de Clientes"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <Link to="/clientes" className="no-link-style">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: "#666666",
-                        minWidth: 0,
-                        mr: open ? 1.5 : "auto",
-                      }}
-                    >
-                      <ListIcon size={19} />
-                    </ListItemIcon>
-                  </Link>
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-                    <ListItemText
-                      primary="Lista de Clientes"
-                      sx={{
-                        color: "#666666",
-                        opacity: open ? 1 : 0,
-                      }}
-                    />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip
+                  title="Lista de Clientes"
+                  placement="right"
+                  arrow
+                  disableHoverListener={open}
+                >
+                  <ListItemButton
+                    className="menu-link"
+                    sx={{
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <Link to="/clientes" className="no-link-style">
+                      <ListItemIcon
+                        sx={{
+                          justifyContent: "center",
+                          color: "#666666",
+                          minWidth: 0,
+                          mr: open ? 1.5 : "auto",
+                        }}
+                      >
+                        <ListIcon size={19} />
+                      </ListItemIcon>
+                    </Link>
+
+                      <ListItemText
+                        primary="Lista de Clientes"
+                        sx={{
+                          color: "#666666",
+                          opacity: open ? 1 : 0,
+                        }}
+                      />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
             
      
             <Divider />
@@ -539,41 +571,43 @@ export default function Sidebar() {
             </PermissionComponent>
 
             {/* Portal do Funcionário */}
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip
-                title="Portal do Funcionário"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                  onClick={() => handlePortalFunc()}
+            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <Tooltip
+                  title="Portal do Funcionário"
+                  placement="right"
+                  arrow
+                  disableHoverListener={open}
                 >
-                  <ListItemIcon
+                  <ListItemButton
+                    className="menu-link"
                     sx={{
-                      justifyContent: "center",
-                      color: "#666666",
-                      minWidth: 0,
-                      mr: open ? 1.5 : "auto",
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
                     }}
+                    onClick={() => handlePortalFunc()}
                   >
-                    <FaBuildingUser size={19} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Portal do Funcionário"
-                    sx={{
-                      color: "#666666",
-                      opacity: open ? 1 : 0,
-                    }}
-                  />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
+                    <ListItemIcon
+                      sx={{
+                        justifyContent: "center",
+                        color: "#666666",
+                        minWidth: 0,
+                        mr: open ? 1.5 : "auto",
+                      }}
+                    >
+                      <FaBuildingUser size={19} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Portal do Funcionário"
+                      sx={{
+                        color: "#666666",
+                        opacity: open ? 1 : 0,
+                      }}
+                    />
+                  </ListItemButton>
+                </Tooltip>
+              </ListItem>
+            </PermissionComponent>
 
             <PermissionComponent role="Admin_Role">
               <ListItem disablePadding sx={{ display: "block" }}>
