@@ -45,10 +45,6 @@
     height: 210px;
   }
   
-  /* recharts customização */
-  .recharts-wrapper {
-  }
-  
   @media (max-width: 1400px) {
     .recharts-wrapper {
       margin-left: 10px;
@@ -196,10 +192,6 @@
   .line-chart-wrapper {
     width: 100%;
     height: 250px;
-  }
-  
-  /* recharts customização */
-  .recharts-wrapper {
   }
   
   @media (max-width: 1400px) {
