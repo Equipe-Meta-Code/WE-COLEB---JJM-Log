@@ -66,7 +66,7 @@ class ClienteController {
 
             return response.status(200).json(cliente);
         } catch (error) {
-            return response.status(500).json({ message: 'Erro ao buscar cliente', error });
+            return response.status(500).json({ message: 'Erro ao buscar clientee', error });
         }
     }
 

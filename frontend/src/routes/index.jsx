@@ -26,17 +26,13 @@ const AppRoutes = () => {
       <Routes>
 
           <Route path="/login" exact element={<Login />} />
+            <Route path="/cadastro" exact element={<CadastroUsuario />} />
         <Route element={<BaseLayout />}>
           {/* <Route path="*" element={<PageNotFound />} /> */}
 
 
-
-
-
-
             
           <Route element={<PrivateRoutes role="Admin_Role" />} >
-            <Route path="/cadastro" exact element={<CadastroUsuario />} />
           </Route> 
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >

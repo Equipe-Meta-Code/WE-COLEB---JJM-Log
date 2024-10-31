@@ -136,7 +136,7 @@ export default function Sidebar() {
     }
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (userLogged()) {
    
         navigate("/"  );
@@ -144,7 +144,7 @@ export default function Sidebar() {
     } else {
       navigate("/login");
     }
-  }, []);
+  }, []); */
 
   
   

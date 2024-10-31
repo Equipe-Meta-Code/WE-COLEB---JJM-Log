@@ -12,6 +12,8 @@ function SolicitacaoDeServico() {
     const [clientes, setClientes] = useState([]);
 
     const { userId } = useAuth();
+    const [valorFixo, setValorFixo] = useState([]);
+    const [valor_adicional, setValor_adicional] = useState([]);
 
     const [dadosPedido, setDadosPedido] = useState({
         user_id: userId,
@@ -27,6 +29,8 @@ function SolicitacaoDeServico() {
         quantidade: '',
         volume: '',
         distancia: '',
+        total: 0,
+        lucro: 0,
         departamentos: [
             {
                 idPedido: pedidos.length + 1,
@@ -82,6 +86,23 @@ function SolicitacaoDeServico() {
 
     async function cadastrarPedido() {
         try {
+            let calculando = 0
+            let totalCalculado = 0
+            let lucroCalculado = 0
+            let consumoCaminhao = 2
+            let gasolina = 5.32
+
+            if(parseFloat(dadosPedido.distancia) > 125){
+                calculando = parseFloat(dadosPedido.distancia) - 125
+                totalCalculado = parseFloat(valorFixo) + (calculando* valor_adicional)
+                lucroCalculado = consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina
+    
+                setDadosPedido({ ...dadosPedido, total: totalCalculado })
+                setDadosPedido({ ...dadosPedido, lucro: lucroCalculado })
+                console.log(dadosPedido)
+            }
+
+            console.log("lucroCalculado:",lucroCalculado,"totalCalculado:",totalCalculado,"calculando:",calculando)
             const response = await api.post("/pedidos", {
                 user_id: dadosPedido.user_id,
                 cliente_id: dadosPedido.cliente_id,
@@ -96,6 +117,8 @@ function SolicitacaoDeServico() {
                 quantidade: dadosPedido.quantidade,
                 volume: dadosPedido.volume,
                 distancia: dadosPedido.distancia,
+                total: totalCalculado,
+                lucro: lucroCalculado,
             });
     
             console.log(response);
@@ -121,6 +144,8 @@ function SolicitacaoDeServico() {
                 quantidade: '',
                 volume: '',
                 distancia: '',
+                total: 0,
+                lucro: 0,
                 departamentos: [
                     {
                         idPedido: pedidos.length + 1, 
@@ -345,18 +370,26 @@ function SolicitacaoDeServico() {
                                     id={styles.selectCategorias}
                                     value={dadosPedido.cliente_id || ""}
                                     onChange={(e) => {
-                                        const cliente_selected = e.target.value;
-                                        setDadosPedido({ ...dadosPedido, cliente_id: cliente_selected });
-                                        console.log(userId);
+                                        const clienteId = e.target.value;
+                                        setDadosPedido({ ...dadosPedido, cliente_id: clienteId });
+                                        
+                                        const clienteSelecionado = clientes.find(cliente => cliente.id === parseInt(clienteId));
+                                        
+                                        if (clienteSelecionado) {
+                                            setValorFixo(clienteSelecionado.valor_fixo);
+                                            setValor_adicional(clienteSelecionado.valor_adicional);
+
+                                            console.log(`Valor Fixo: ${valorFixo}, Valor Adicional: ${valor_adicional}`);
+                                        }
                                     }}
                                 >
-                                    <option value="">-- Selecione um cliente --</option>
-                                    {clientes.map((cliente) => (
-                                        <option key={cliente.id} value={cliente.id}>
-                                            {cliente.nome} - {cliente.cpf_cnpj}
-                                        </option>
-                                    ))}
-                                </select>
+                            <option value="">-- Selecione um cliente --</option>
+                            {clientes.map((cliente) => (
+                                <option key={cliente.id} value={cliente.id}>
+                                    {cliente.nome_fantasia} - {cliente.natureza_operacao}
+                                </option>
+                            ))}
+                        </select>
                             </div>
                         </div>
 
