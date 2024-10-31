@@ -99,8 +99,8 @@ const AreaLineChart = () => {
                 type="monotone"
                 dataKey="total_pedidos"
                 name="Quantidade de pedidos"
-                stroke="#1E90FF" 
-                fill="rgba(30, 144, 255, 0.5)" 
+                stroke="#336184" 
+                fill="rgba(51,97,132,0.8)" 
                 fillOpacity={1}
               />
             </LineChart>
