@@ -83,8 +83,11 @@ Em andamento.
 
 <span id="Diagrama de classes">
  
-## 📁 Diagrama 
+## 📁 Diagramas
+### Modelo Conceitual
+![image](https://github.com/user-attachments/assets/e662640a-980d-4403-9770-0b7c0be9a209)
 
+### Modelo Lógico
 ![image](https://github.com/user-attachments/assets/816f28e9-0a20-4d14-b6ef-3354e086951a)
 
 <span id="Vídeo">
