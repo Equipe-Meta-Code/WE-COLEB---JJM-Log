@@ -89,18 +89,23 @@ function SolicitacaoDeServico() {
             let calculando = 0
             let totalCalculado = 0
             let lucroCalculado = 0
-            let consumoCaminhao = 2
+            let consumoCaminhao = 0.35
             let gasolina = 5.32
 
             if(parseFloat(dadosPedido.distancia) > 125){
-                calculando = parseFloat(dadosPedido.distancia) - 125
-                totalCalculado = parseFloat(valorFixo) + (calculando* valor_adicional)
-                lucroCalculado = consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina
+                calculando = (parseFloat(dadosPedido.distancia) - 125) * valorFixo
+                totalCalculado = (calculando + (125 * valor_adicional))
+                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
     
-                setDadosPedido({ ...dadosPedido, total: totalCalculado })
+                setDadosPedido({ ...dadosPedido, total: calculando })
                 setDadosPedido({ ...dadosPedido, lucro: lucroCalculado })
                 console.log(dadosPedido)
             }
+            else{
+                totalCalculado = (parseFloat(dadosPedido.distancia) * valorFixo)
+                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
+                console.log(dadosPedido)
+            }   
 
             console.log("lucroCalculado:",lucroCalculado,"totalCalculado:",totalCalculado,"calculando:",calculando)
             const response = await api.post("/pedidos", {
