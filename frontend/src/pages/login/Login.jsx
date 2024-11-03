@@ -59,7 +59,7 @@ function LoginPage() {
         e.preventDefault();
         try {
             const response = await api.post('/recover-password', {
-                login: recoveryEmail,
+                email: recoveryEmail, // Certifique-se de que está enviando o campo correto
             });
             console.log('E-mail de recuperação enviado:', response.data);
             setRecoveryEmail('');
@@ -70,6 +70,8 @@ function LoginPage() {
             alert('Erro ao enviar e-mail de recuperação. Tente novamente.');
         }
     };
+    
+    
 
 // JSX Atualizado
 
