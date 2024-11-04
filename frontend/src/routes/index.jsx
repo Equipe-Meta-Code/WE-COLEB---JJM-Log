@@ -18,6 +18,7 @@ import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
 import ListaArquivos from '../pages/portalFuncionario/ListaArquivos';
 import Departamentos from '../components/cadastros/Departamentos';
 import ListaClientes from '../pages/listaClientes/ListaClientes';
+import PaginaCliente from '../pages/listaClientes/PaginaCliente';
 
 
 const AppRoutes = () => {
@@ -39,6 +40,7 @@ const AppRoutes = () => {
 
           <Route path="/Dashboard" exact element={<Dashboard />} />
           <Route path="/clientes" exact element={<ListaClientes />} />
+          <Route path="/clientes/:id" exact element={<PaginaCliente />} />
             
           <Route element={<PrivateRoutes role="Admin_Role" />} >
             <Route path="/cadastro" exact element={<CadastroUsuario />} />

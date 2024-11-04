@@ -1,0 +1,61 @@
+/* Estilos para a página PaginaCliente */
+.container-paginaclientes {
+    max-width: 600px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #007bff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  strong {
+    color: #333;
+  }
+  
+  .container-paginaclientes div {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .container-paginaclientes div p {
+    margin: 8px 0;
+  }
+
+  .label-cliente {
+    color: black;
+  }
+  
+  .botao-voltar {
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .botao-voltar:hover {
+    background-color: #0056b3;
+  }  

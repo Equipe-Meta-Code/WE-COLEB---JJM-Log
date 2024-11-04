@@ -4,6 +4,7 @@ import styles from './CadastroCliente.module.css';
 import api from '../../services/api';
 import CadastroConcluido from './CadastroConcluido';
 import ModalFeedback from './ModalFeedback';
+import CurrencyInput from 'react-currency-input-field';
 
 function CadastrarCliente() {
     const [formData, setFormData] = useState({
@@ -76,8 +77,8 @@ function CadastrarCliente() {
             });
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
-            const errorMessage = error.response?.data?.message?.includes("CPF ou CNPJ já em uso") 
-                ? "CNPJ já está em uso." 
+            const errorMessage = error.response?.data?.message?.includes("CPF ou CNPJ já em uso")
+                ? "CNPJ já está em uso."
                 : "Houve um erro ao cadastrar o cliente. Tente novamente.";
             setFeedbackMessage(errorMessage);
             setShowModalFeedback(true);
@@ -99,7 +100,7 @@ function CadastrarCliente() {
             <div className={styles.container}>
                 <h1 className={styles.tituloCard}>Cadastro de Clientes</h1>
                 <div className={styles.campos}>
-                    <label className='label-cliente'>CNPJ:</label>
+                    <label>CNPJ:</label>
                     <InputMask
                         className={styles.inputTexto}
                         mask="99.999.999/9999-99"
@@ -108,7 +109,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="cnpj"
                     />
-                    <label className='label-cliente'>Razão Social:</label>
+                    <label>Razão Social:</label>
                     <input
                         className={styles.inputTexto}
                         type="text"
@@ -117,7 +118,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="razao_social"
                     />
-                    <label className='label-cliente'>Nome Fantasia:</label>
+                    <label>Nome Fantasia:</label>
                     <input
                         className={styles.inputTexto}
                         type="text"
@@ -126,7 +127,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="nome_fantasia"
                     />
-                    <label className='label-cliente'>Inscrição Municipal:</label>
+                    <label>Inscrição Municipal:</label>
                     <input
                         className={styles.inputTexto}
                         type="text"
@@ -135,7 +136,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="inscricao_municipal"
                     />
-                    <label className='label-cliente'>Inscrição Estadual:</label>
+                    <label>Inscrição Estadual:</label>
                     <input
                         className={styles.inputTexto}
                         type="text"
@@ -144,7 +145,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="inscricao_estadual"
                     />
-                    <label className='label-cliente'>Contribuinte:</label>
+                    <label>Contribuinte:</label>
                     <select
                         className={styles.selectTipoDocumento}
                         value={formData.contribuinte}
@@ -155,7 +156,7 @@ function CadastrarCliente() {
                         <option value="sim">SIM</option>
                         <option value="nao">NÃO</option>
                     </select>
-                    <label className='label-cliente'>Telefone:</label>
+                    <label>Telefone:</label>
                     <InputMask
                         className={styles.inputTexto}
                         type="text"
@@ -165,7 +166,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="telefone"
                     />
-                    <label className='label-cliente'>E-mail:</label>
+                    <label>E-mail:</label>
                     <input
                         className={styles.inputTexto}
                         type="email"
@@ -174,7 +175,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="email"
                     />
-                    <label className='label-cliente'>Natureza da operação:</label>
+                    <label>Natureza da operação:</label>
                     <select
                         className={styles.selectTipoDocumento}
                         value={formData.natureza_operacao}
@@ -182,15 +183,15 @@ function CadastrarCliente() {
                         name="natureza_operacao"
                     >
                         <option value="">Selecione</option>
-                        <option value="transportadora">Transportadora</option>
-                        <option value="estabelecimento_industrial">Estabelecimento industrial</option>
-                        <option value="estabelecimento_comercial">Estabelecimento comercial</option>
-                        <option value="serviço_de_comunicação">Serviço de comunicação</option>
-                        <option value="distribuidora_de_energia_elétrica">Distribuidora de energia elétrica</option>
-                        <option value="produtor_rural">Produtor rural</option>
-                        <option value="não_contribuinte">Não contribuinte</option>
+                        <option value="Transportadora">Transportadora</option>
+                        <option value="Estabelecimento industrial">Estabelecimento industrial</option>
+                        <option value="Estabelecimento comercial">Estabelecimento comercial</option>
+                        <option value="Serviço de comunicação">Serviço de comunicação</option>
+                        <option value="Distribuidora de energia elétrica">Distribuidora de energia elétrica</option>
+                        <option value="Produtor rural">Produtor rural</option>
+                        <option value="Não contribuinte">Não contribuinte</option>
                     </select>
-                    <label className='label-cliente'>Ramo de Atividade:</label>
+                    <label>Ramo de Atividade:</label>
                     <input
                         className={styles.inputTexto}
                         type="text"
@@ -199,7 +200,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="ramo_atividade"
                     />
-                    <label className='label-cliente'>RNTRC:</label>
+                    <label>RNTRC:</label>
                     <input
                         className={styles.inputTexto}
                         type="text"
@@ -208,7 +209,7 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="rntrc"
                     />
-                    <label className='label-cliente'>Validade RNTRC:</label>
+                    <label>Validade RNTRC:</label>
                     <input
                         className={styles.inputTexto}
                         type="date"
@@ -217,23 +218,35 @@ function CadastrarCliente() {
                         onChange={handleInputChange}
                         name="validade_rntrc"
                     />
-                    <label className='label-cliente'>Valor fixo:</label>
-                    <input
-                        className={styles.inputTexto}
-                        type="text"
-                        placeholder="Valor fixo"
-                        value={formData.valor_fixo}
-                        onChange={handleInputChange}
+                    <label>Valor fixo:</label>
+                    <CurrencyInput
+                        id="valor_fixo"
                         name="valor_fixo"
-                    />
-                    <label className='label-cliente'>Valor adicional:</label>
-                    <input
                         className={styles.inputTexto}
-                        type="text"
-                        placeholder="Valor adicional"
-                        value={formData.valor_adicional}
-                        onChange={handleInputChange}
+                        prefix="R$ "
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        placeholder="0,00"
+                        value={formData.valor_fixo}
+                        onValueChange={(value, name) => handleInputChange({
+                            target: { name, value }
+                        })}
+                    />
+                    <label>Valor adicional:</label>
+                    <CurrencyInput
+                        id="valor_adicional"
                         name="valor_adicional"
+                        className={styles.inputTexto}
+                        prefix="R$ "
+                        decimalsLimit={2}
+                        decimalSeparator=","
+                        groupSeparator="."
+                        placeholder="0,00"
+                        value={formData.valor_adicional}
+                        onValueChange={(value, name) => handleInputChange({
+                            target: { name, value }
+                        })}
                     />
                 </div>
 
@@ -247,9 +260,9 @@ function CadastrarCliente() {
             )}
 
             {showModalFeedback && (
-                <ModalFeedback 
-                    message={feedbackMessage} 
-                    onClose={handleCloseModalFeedback} 
+                <ModalFeedback
+                    message={feedbackMessage}
+                    onClose={handleCloseModalFeedback}
                 />
             )}
         </div>
