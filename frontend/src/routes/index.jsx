@@ -9,11 +9,10 @@ import Timeline from '../pages/Timeline';
 import Login from '../pages/login/Login';
 import CadastroUsuario from '../pages/login/CadastroUsuario';
 import PortalFuncionario from '../pages/portalFuncionario/portalFuncionario';
-import PrivateRoutes from './privateRoutes';
+import PrivateRoutes from '../routes/PrivateRoutes';
 import ControleEtapa from '../pages/controleEtapa/controleEtapa';
 import CadastrarCliente from '../components/cadastros/CadastroCliente';
 import Dashboard from '../pages/dashboards/dashboard';
-
 import ListaFuncionarios from '../pages/portalFuncionario/ListaFuncionarios';
 import ListaArquivos from '../pages/portalFuncionario/ListaArquivos';
 import Departamentos from '../components/cadastros/Departamentos';
@@ -25,8 +24,8 @@ const AppRoutes = () => {
                
       <Routes>
 
-          <Route path="/login" exact element={<Login />} />
             <Route path="/cadastro" exact element={<CadastroUsuario />} />
+          <Route path="/login" exact element={<Login />} />
         <Route element={<BaseLayout />}>
           {/* <Route path="*" element={<PageNotFound />} /> */}
 
