@@ -7,11 +7,13 @@
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(0, 58, 102, 0.671); /* Azul escuro para o card */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 500px; /* Largura do card aumentada */
+    width: 100%; /* Largura do card aumentada */
     transition: transform 0.2s; /* Efeito de hover */
 }
 
@@ -59,4 +61,15 @@
     padding: 10px; /* Espaçamento interno */
     border: 1px solid #ccc; /* Borda do select */
     border-radius: 5px; /* Bordas arredondadas */
+}
+
+.inputsCadastros{
+    display: flex;
+    flex-direction: column;
+}
+
+.conjuntosCadastros{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
