@@ -117,6 +117,7 @@ function CadastrarCliente() {
                     <div className={styles.inputsCadastros}>
                         <label>Razão Social:</label>
                         <input
+                            id={styles.razao}
                             className={styles.inputTexto}
                             type="text"
                             placeholder="Razão Social"
@@ -129,6 +130,7 @@ function CadastrarCliente() {
                     <div className={styles.inputsCadastros}>
                         <label>Nome Fantasia:</label>
                         <input
+                            id={styles.nomeFantasia}
                             className={styles.inputTexto}
                             type="text"
                             placeholder="Nome Fantasia"
@@ -138,6 +140,36 @@ function CadastrarCliente() {
                         />
 
                     </div>
+
+                    <div className={styles.inputsCadastros}>
+                        <label>Telefone:</label>
+                        <InputMask
+                            className={styles.inputTexto}
+                            type="text"
+                            mask="(99)99999-9999"
+                            placeholder="Telefone"
+                            value={formData.telefone}
+                            onChange={handleInputChange}
+                            name="telefone"
+                        />
+
+                    </div>
+
+                    <div className={styles.inputsCadastros}>
+                        <label>E-mail:</label>
+                        <input
+                            id={styles.email}
+                            className={styles.inputTexto}
+                            type="email"
+                            placeholder="Email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            name="email"
+                        />
+                        
+                    </div>
+                </div>
+                <div className={styles.conjuntosCadastros}>
                     <div className={styles.inputsCadastros}>
                         <label>Inscrição Municipal:</label>
                         <input
@@ -163,35 +195,6 @@ function CadastrarCliente() {
                         />
 
                     </div>
-
-                    <div className={styles.inputsCadastros}>
-                        <label>Telefone:</label>
-                        <InputMask
-                            className={styles.inputTexto}
-                            type="text"
-                            mask="(99)99999-9999"
-                            placeholder="Telefone"
-                            value={formData.telefone}
-                            onChange={handleInputChange}
-                            name="telefone"
-                        />
-
-                    </div>
-
-                    <div className={styles.inputsCadastros}>
-                        <label>E-mail:</label>
-                        <input
-                            className={styles.inputTexto}
-                            type="email"
-                            placeholder="Email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            name="email"
-                        />
-                        
-                    </div>
-                </div>
-                <div className={styles.conjuntosCadastros}>
                     <div className={styles.inputsCadastros}>
                         <label>Contribuinte:</label>
                         <select
@@ -227,71 +230,95 @@ function CadastrarCliente() {
 
                     </div>
 
+                    <div className={styles.inputsCadastros}>
+
+                        <label>Ramo de Atividade:</label>
+                        <input
+                            className={styles.inputTexto}
+                            type="text"
+                            placeholder="Ramo de Atividade"
+                            value={formData.ramo_atividade}
+                            onChange={handleInputChange}
+                            name="ramo_atividade"
+                        />
+                    </div>
 
                 </div>
+                <div className={styles.conjuntosCadastros}>
+                    <div className={styles.inputsCadastros}>
+                        <label>RNTRC:</label>
+                        <input
+                            className={styles.inputTexto}
+                            type="text"
+                            placeholder="RNTRC"
+                            value={formData.rntrc}
+                            onChange={handleInputChange}
+                            name="rntrc"
+                        />
 
-                    <label>Ramo de Atividade:</label>
-                    <input
-                        className={styles.inputTexto}
-                        type="text"
-                        placeholder="Ramo de Atividade"
-                        value={formData.ramo_atividade}
-                        onChange={handleInputChange}
-                        name="ramo_atividade"
-                    />
-                    <label>RNTRC:</label>
-                    <input
-                        className={styles.inputTexto}
-                        type="text"
-                        placeholder="RNTRC"
-                        value={formData.rntrc}
-                        onChange={handleInputChange}
-                        name="rntrc"
-                    />
-                    <label>Validade RNTRC:</label>
-                    <input
-                        className={styles.inputTexto}
-                        type="date"
-                        placeholder="Validade RNTRC"
-                        value={formData.validade_rntrc}
-                        onChange={handleInputChange}
-                        name="validade_rntrc"
-                    />
-                    <label>Valor fixo:</label>
-                    <CurrencyInput
-                        id="valor_fixo"
-                        name="valor_fixo"
-                        className={styles.inputTexto}
-                        prefix="R$ "
-                        decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
-                        placeholder="0,00"
-                        value={formData.valor_fixo}
-                        onValueChange={(value, name) => handleInputChange({
-                            target: { name, value }
-                        })}
-                    />
-                    <label>Valor adicional:</label>
-                    <CurrencyInput
-                        id="valor_adicional"
-                        name="valor_adicional"
-                        className={styles.inputTexto}
-                        prefix="R$ "
-                        decimalsLimit={2}
-                        decimalSeparator=","
-                        groupSeparator="."
-                        placeholder="0,00"
-                        value={formData.valor_adicional}
-                        onValueChange={(value, name) => handleInputChange({
-                            target: { name, value }
-                        })}
-                    />
+
+                    </div>
+                    <div className={styles.inputsCadastros}>
+
+                        <label>Validade RNTRC:</label>
+                        <input
+                            className={styles.inputTexto}
+                            type="date"
+                            placeholder="Validade RNTRC"
+                            value={formData.validade_rntrc}
+                            onChange={handleInputChange}
+                            name="validade_rntrc"
+                        />
+                    </div>
+
+                    <div className={styles.inputsCadastros}>
+
+                        <label>Valor fixo:</label>
+                        <CurrencyInput
+                            id="valor_fixo"
+                            name="valor_fixo"
+                            className={styles.inputTexto}
+                            prefix="R$ "
+                            decimalsLimit={2}
+                            decimalSeparator=","
+                            groupSeparator="."
+                            placeholder="0,00"
+                            value={formData.valor_fixo}
+                            onValueChange={(value, name) => handleInputChange({
+                                target: { name, value }
+                            })}
+                        />
+
+                    </div>
+
+                    <div className={styles.inputsCadastros}>
+
+                        <label>Valor adicional:</label>
+                        <CurrencyInput
+                            id="valor_adicional"
+                            name="valor_adicional"
+                            className={styles.inputTexto}
+                            prefix="R$ "
+                            decimalsLimit={2}
+                            decimalSeparator=","
+                            groupSeparator="."
+                            placeholder="0,00"
+                            value={formData.valor_adicional}
+                            onValueChange={(value, name) => handleInputChange({
+                                target: { name, value }
+                            })}
+                        />
+
+                    </div>
+
                 </div>
+                </div>
+                <div className={styles.botaoDeCadastrar}>
+                    <button className={styles.botaoCadastrar} onClick={cadastrarCliente} disabled={loading}>
+                        {loading ? "Cadastrando..." : "Cadastrar"}
+                    </button>
 
-                <button className={styles.botaoCadastrar} onClick={cadastrarCliente} disabled={loading}>
-                    {loading ? "Cadastrando..." : "Cadastrar"}
-                </button>
+                </div>
             </div>
 
             {showCadastroConcluido && (
