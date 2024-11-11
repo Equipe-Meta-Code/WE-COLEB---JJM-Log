@@ -11,7 +11,7 @@
 * [Sprints e Backlog](#-sprints-e-backlog)
 * [User Stories](#-user-stories)
 * [MVP](#-mvp)
-* [Diagrama](#-diagrama)
+* [Diagramas](#-diagramas)
 * [Protótipo Figma](#-protótipo-figma)
 * [Vídeos das Sprints](#️-vídeos-das-sprints)
 * [Guia de Instalação](#guia-de-instalação)
