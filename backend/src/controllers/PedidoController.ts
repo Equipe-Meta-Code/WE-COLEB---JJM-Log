@@ -23,6 +23,8 @@ class PedidoController {
             quantidade,
             volume,
             distancia,
+            total,
+            lucro,
         } = req.body;
 
         const pedidoRepository = AppDataSource.getRepository(Pedido);
@@ -53,6 +55,8 @@ class PedidoController {
                 quantidade,
                 volume,
                 distancia,
+                total,
+                lucro,
             });
 
             // Salvar o pedido no banco de dados
@@ -121,7 +125,10 @@ class PedidoController {
                 peso,
                 quantidade,
                 volume,
-                distancia} = request.body;
+                distancia,
+                total,
+                lucro,
+            } = request.body;
 
         try {
             const pedido = await pedidoRepository.findOneBy({ id: Number(id) });
@@ -145,6 +152,8 @@ class PedidoController {
             pedido.quantidade = quantidade;
             pedido.volume = volume;
             pedido.distancia = distancia;
+            pedido.total = total;
+            pedido.lucro = lucro;
 
             await pedidoRepository.save(pedido);
 

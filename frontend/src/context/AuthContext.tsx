@@ -70,7 +70,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.removeItem('@Upload:token');
         localStorage.removeItem('@Upload:login');
         localStorage.removeItem('@Upload:userId');
-        window.location.href = '/';
+        window.location.href = '/login';
     }, []);
 
     const userLogged = useCallback(() => {
