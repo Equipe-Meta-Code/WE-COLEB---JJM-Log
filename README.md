@@ -101,7 +101,7 @@ https://github.com/user-attachments/assets/5a88baa1-954c-4877-bab0-7c3ef3dfdd97
 
   ---
   
-  ##### SPRINT 2 - O vídeo da Sprint 2 ainda não foi adicionado.
+  ##### SPRINT 2 - Assistir ao vídeo da Sprint 2
   <div align="center">
    
 
@@ -112,8 +112,10 @@ https://github.com/user-attachments/assets/7563efdb-d8d6-45cf-85b5-071ceb0a85ca
 
   ---
   
-  ##### SPRINT 3 - O vídeo da Sprint 3 ainda não foi adicionado.
+  ##### SPRINT 3 - Assistir ao vídeo da Sprint 3
   <div align="center">
+
+https://github.com/user-attachments/assets/32db3e35-e153-484c-9ee1-89e6f6913bb0
     
   </div>
 
