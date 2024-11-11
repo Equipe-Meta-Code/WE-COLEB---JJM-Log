@@ -2,14 +2,22 @@ import { useState, useEffect } from "react";
 import styles from './Cadastros.module.css';
 import api from '../../services/api';
 import CadastroConcluido from './CadastroConcluido';
+import { useAuth } from "../../context/AuthContext";
 
 function SolicitacaoDeServico() {
     const [departamentos, setDepartamentos] = useState([]);
     const [pedidos, setPedidos] = useState([]);
     const [etapas, setEtapas] = useState([]);
     const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
+    const [clientes, setClientes] = useState([]);
+
+    const { userId } = useAuth();
+    const [valorFixo, setValorFixo] = useState([]);
+    const [valor_adicional, setValor_adicional] = useState([]);
 
     const [dadosPedido, setDadosPedido] = useState({
+        user_id: userId,
+        cliente_id: '',
         nome: '',
         descricao: '',
         dataInicial: '',
@@ -21,6 +29,8 @@ function SolicitacaoDeServico() {
         quantidade: '',
         volume: '',
         distancia: '',
+        total: 0,
+        lucro: 0,
         departamentos: [
             {
                 idPedido: pedidos.length + 1,
@@ -47,6 +57,15 @@ function SolicitacaoDeServico() {
         }
     }
 
+    async function buscarClientes() {
+        try {
+            const response = await api.get("/clientes");
+            setClientes(response.data);
+        } catch (error) {
+            console.error("Erro ao buscar clientes:", error);
+        }
+    }
+
     async function buscarPedidos() {
         try {
             const response = await api.get("/pedidos");
@@ -66,9 +85,32 @@ function SolicitacaoDeServico() {
     }
 
     async function cadastrarPedido() {
-        console.log(dadosPedido);
         try {
+            let calculando = 0
+            let totalCalculado = 0
+            let lucroCalculado = 0
+            let consumoCaminhao = 0.35
+            let gasolina = 5.32
+
+            if(parseFloat(dadosPedido.distancia) > 125){
+                calculando = (parseFloat(dadosPedido.distancia) - 125) * valorFixo
+                totalCalculado = (calculando + (125 * valor_adicional))
+                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
+    
+                setDadosPedido({ ...dadosPedido, total: calculando })
+                setDadosPedido({ ...dadosPedido, lucro: lucroCalculado })
+                console.log(dadosPedido)
+            }
+            else{
+                totalCalculado = (parseFloat(dadosPedido.distancia) * valorFixo)
+                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
+                console.log(dadosPedido)
+            }   
+
+            console.log("lucroCalculado:",lucroCalculado,"totalCalculado:",totalCalculado,"calculando:",calculando)
             const response = await api.post("/pedidos", {
+                user_id: dadosPedido.user_id,
+                cliente_id: dadosPedido.cliente_id,
                 nome: dadosPedido.nome,
                 descricao: dadosPedido.descricao,
                 data_inicial: dadosPedido.dataInicial,
@@ -80,6 +122,8 @@ function SolicitacaoDeServico() {
                 quantidade: dadosPedido.quantidade,
                 volume: dadosPedido.volume,
                 distancia: dadosPedido.distancia,
+                total: totalCalculado,
+                lucro: lucroCalculado,
             });
     
             console.log(response);
@@ -92,6 +136,8 @@ function SolicitacaoDeServico() {
     
             // Resetar o estado dos dados
             setDadosPedido({
+                user_id: userId,
+                cliente_id: '',
                 nome: '',
                 descricao: '',
                 dataInicial: '',
@@ -103,6 +149,8 @@ function SolicitacaoDeServico() {
                 quantidade: '',
                 volume: '',
                 distancia: '',
+                total: 0,
+                lucro: 0,
                 departamentos: [
                     {
                         idPedido: pedidos.length + 1, 
@@ -217,7 +265,7 @@ function SolicitacaoDeServico() {
             }
             return departamento;
         });
-
+        console.log(dadosPedido);
         setDadosPedido((prevState) => ({
             ...prevState,
             departamentos: novosDepartamentos
@@ -229,6 +277,7 @@ function SolicitacaoDeServico() {
         buscarDepartamentos();
         buscarPedidos();
         buscarEtapas();
+        buscarClientes();
     }, []);
 
     return (
@@ -316,6 +365,37 @@ function SolicitacaoDeServico() {
                                 <option value="alimento">Alimento</option>
                                 <option value="recurso">Recurso</option>
                             </select>
+                        </div>
+
+                        <div className={styles.campos}>
+                            <label>Selecione o Cliente: </label>
+                            <div className={styles.departamentos}>
+                                <select
+                                    className={styles.inputEtapas}
+                                    id={styles.selectCategorias}
+                                    value={dadosPedido.cliente_id || ""}
+                                    onChange={(e) => {
+                                        const clienteId = e.target.value;
+                                        setDadosPedido({ ...dadosPedido, cliente_id: clienteId });
+                                        
+                                        const clienteSelecionado = clientes.find(cliente => cliente.id === parseInt(clienteId));
+                                        
+                                        if (clienteSelecionado) {
+                                            setValorFixo(clienteSelecionado.valor_fixo);
+                                            setValor_adicional(clienteSelecionado.valor_adicional);
+
+                                            console.log(`Valor Fixo: ${valorFixo}, Valor Adicional: ${valor_adicional}`);
+                                        }
+                                    }}
+                                >
+                            <option value="">-- Selecione um cliente --</option>
+                            {clientes.map((cliente) => (
+                                <option key={cliente.id} value={cliente.id}>
+                                    {cliente.nome_fantasia} - {cliente.natureza_operacao}
+                                </option>
+                            ))}
+                        </select>
+                            </div>
                         </div>
 
                         <div className={styles.conjuntoDuplas}>

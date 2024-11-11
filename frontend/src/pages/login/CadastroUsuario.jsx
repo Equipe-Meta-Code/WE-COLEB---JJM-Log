@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from '../../services/api';
-import './cadastro.css'; 
+import './cadastro.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function CadastroUsuario() {
@@ -11,18 +11,19 @@ function CadastroUsuario() {
         usuario: "",
         senha: "",
     });
-    const [roles, setRoles] = useState(""); 
+    const [roles, setRoles] = useState("");
     const [error, setError] = useState(""); // State for error message
     const [successMessage, setSuccessMessage] = useState(""); // State for success message
-    const navigate = useNavigate(); // Hook para redirecionar após o cadastro
+    const navigate = useNavigate(); // Hook para redirecionar após o cadastro]
+    const [emailError, setEmailError] = useState('');
 
     const formatarCPF = (value) => {
         const cpfDigits = value.replace(/\D/g, ''); // Remove all non-numeric characters
         let formattedCPF = cpfDigits.slice(0, 11); // Ensures CPF has at most 11 digits
-    
+
         // Apply CPF formatting mask
         formattedCPF = formattedCPF.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-        setNovoUsuario({...novoUsuario, cpf: formattedCPF})
+        setNovoUsuario({ ...novoUsuario, cpf: formattedCPF })
     };
 
     const aoApertarEnter = (event) => {
@@ -61,11 +62,25 @@ function CadastroUsuario() {
 
             setSuccessMessage("Usuário cadastrado com sucesso!");
             setTimeout(() => {
-                navigate("/dashboard");
+                navigate("/funcionarios");
             }, 2000);
         } catch (error) {
             console.error("Erro ao cadastrar usuário:", error);
             setError("Erro ao cadastrar usuário. Por favor, tente novamente.");
+        }
+    };
+
+
+    const handleEmailChange = (e) => {
+        const email = e.target.value;
+        setNovoUsuario({ ...novoUsuario, usuario: email });
+
+        // Regex para validar e-mail
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setEmailError('Por favor, insira um e-mail válido.');
+        } else {
+            setEmailError('');
         }
     };
 
@@ -74,7 +89,7 @@ function CadastroUsuario() {
             <h2 className="titulo-usuario">Cadastro de Usuário</h2>
             <div className="label-container">
                 <label>Nome:</label>
-                <input value={novoUsuario.nome} onChange={(e) => setNovoUsuario({...novoUsuario, nome: e.target.value})} placeholder="Nome" />
+                <input value={novoUsuario.nome} onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })} placeholder="Nome" />
             </div>
             <div className="label-container">
                 <label>CPF:</label>
@@ -82,21 +97,26 @@ function CadastroUsuario() {
             </div>
             <div className="label-container">
                 <label>Email:</label>
-                <input value={novoUsuario.usuario} onChange={(e) => setNovoUsuario({...novoUsuario, usuario: e.target.value})} placeholder="Usuário" />
+                <input
+                    value={novoUsuario.usuario}
+                    onChange={handleEmailChange}
+                    placeholder="Usuário"
+                />
+                {emailError && <p style={{ color: 'white' }}>{emailError}</p>}
             </div>
             <div className="password-container">
                 <label>Senha:</label>
                 <div className="password-input-container">
-                    <input 
-                        type={mostrarSenha ? "text" : "password"} 
-                        placeholder="Senha" 
-                        value={novoUsuario.senha} 
-                        onChange={(e) => setNovoUsuario({...novoUsuario, senha: e.target.value})} 
+                    <input
+                        type={mostrarSenha ? "text" : "password"}
+                        placeholder="Senha"
+                        value={novoUsuario.senha}
+                        onChange={(e) => setNovoUsuario({ ...novoUsuario, senha: e.target.value })}
                         onKeyDown={aoApertarEnter}
                     />
-                    <button 
-                        type="button" 
-                        className="password-toggle2" 
+                    <button
+                        type="button"
+                        className="password-toggle2"
                         onClick={() => setMostrarSenha(!mostrarSenha)}
                     >
                         {mostrarSenha ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
@@ -112,7 +132,7 @@ function CadastroUsuario() {
                     value={roles}
                     onChange={(event) => setRoles(event.target.value)}
                 >
-                     <option value={""}>Selecione</option>
+                    <option value={""}>Selecione</option>
                     <option value={"1"}>Usuário Comum</option>
                     <option value={"2"}>Administrador</option>
                     <option value={"3"}>Recursos Humanos</option>
@@ -121,7 +141,7 @@ function CadastroUsuario() {
 
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <button className="botao-cadastro-users"onClick={cadastrarUsuario}>Cadastrar</button> 
+            <button className="botao-cadastro-users" onClick={cadastrarUsuario}>Cadastrar</button>
             <Link to="/login">
                 <button className="botao-cadastro-users" id="botaoLogin">Entrar</button>
             </Link>

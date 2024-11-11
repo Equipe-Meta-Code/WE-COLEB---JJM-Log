@@ -7,10 +7,23 @@ class UserFiles {
     id: number;
 
     @Column({ type: 'varchar', nullable: false })
-    file_path: string;
+    nome: string;
+
+    @Column({ type: 'varchar', nullable: false })
+    rota: string;
 
     @Column({ type: 'int', nullable: false })
     user_id: number;
+
+    @Column({ type: 'int', nullable: false })
+    origem: number;
+
+    @Column({ type: 'varchar', nullable: false })
+    tipo: string;
+
+    @Column('timestamp', { default: 'CURRENT_TIMESTAMP'} )
+    data_criacao: Date;
+    
 }
 
 export default UserFiles;

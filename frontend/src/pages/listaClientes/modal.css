@@ -17,8 +17,10 @@
     background-color: white; /* Fundo branco para o modal */
     border-radius: 8px; /* Cantos arredondados */
     padding: 20px; /* Espaçamento interno */
-    max-width: 500px; /* Largura máxima do modal */
+    max-width: 800px; /* Largura máxima do modal */
     width: 100%; /* Largura total até o máximo */
+    max-height: 600px; /* Altura máxima do modal */
+    overflow: auto; /* Permite rolagem se o conteúdo exceder a altura máxima */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para efeito de profundidade */
     position: relative; /* Para posicionar o botão de fechar */
 }

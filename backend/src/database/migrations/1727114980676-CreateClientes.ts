@@ -15,12 +15,72 @@ export class CreateClientes1727114980676 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: 'nome',
+                    name: 'cnpj',
                     type: 'varchar',
                     isNullable: false,
                 },
                 {
-                    name: 'cpf_cnpj',
+                    name: 'razao_social',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'nome_fantasia',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'inscricao_municipal',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'inscricao_estadual',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'contribuinte',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'telefone',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'email',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'natureza_operacao',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'ramo_atividade',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'rntrc',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'validade_rntrc',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'valor_fixo',
+                    type: 'varchar',
+                    isNullable: false,
+                },
+                {
+                    name: 'valor_adicional',
                     type: 'varchar',
                     isNullable: false,
                 },

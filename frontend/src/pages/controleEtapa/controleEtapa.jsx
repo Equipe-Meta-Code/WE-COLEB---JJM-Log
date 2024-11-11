@@ -124,6 +124,16 @@ const EtapasControle = ({ pedidoId }) => {
         throw error;
       }
     setOpenDialog(false);
+    try {
+      await api.put(`/pedidos/${pedidoId}`, {
+        estado: "Em andamento"
+      });
+      
+      console.log('Estado do pedido alterado com sucesso');
+    } catch (error) {
+      console.error('Erro ao alterar estado do pedido:', error);
+      throw error;
+    }
   };
 
   if (loading) {

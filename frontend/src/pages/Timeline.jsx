@@ -9,8 +9,11 @@ import StorageIcon from '@mui/icons-material/Storage';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import PhoneIcon from '@mui/icons-material/Phone'; // Ícone de telefone
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useParams } from 'react-router-dom';
 import api from '../services/api';
+import DownloadButton from '../components/relatorio/GenerateReport';
+import GenerateReport from '../components/relatorio/GenerateReport';
 
 const TimelineCard = ({ steps, title, refetchEtapas }) => {
   const [expanded, setExpanded] = useState(title.includes("Entregas"));
@@ -268,7 +271,7 @@ const LicensePlateCard = () => {
   const SmallCard = ({ title, value, icon }) => {
     return (
       <Card sx={{
-        height: '130px',
+        height: '100%',
         width: '100%',
         backgroundColor: 'rgba(0, 58, 102, 0.671)',
         color: 'white',
@@ -305,7 +308,23 @@ const LicensePlateCard = () => {
     const fetchEtapas = async () => {
       try {
         const response = await api.get(`/etapapedido/pedido/${pedidoId}`);
-        setEtapas(response.data);
+        const etapasAtualizadas = response.data;
+        setEtapas(etapasAtualizadas);
+
+        const contEtapa = etapasAtualizadas.reduce((acc, etapa) => {
+          return etapa.estado === "Finalizado" ? acc + 1 : acc;
+        }, 0);
+
+        if (contEtapa === etapasAtualizadas.length) {
+          try {
+            const pedidoFinalizado = await api.put(`/pedidos/${pedidoId}`, {
+              estado: "Finalizado",
+            });
+            console.log("Pedido atualizado para 'Finalizado':", pedidoFinalizado);
+          } catch (error) {
+            console.error("Erro ao atualizar o estado do pedido:", error);
+          }
+        }
         console.log("Etapas atualizadas:", response.data);
       } catch (error) {
         console.error('Erro ao buscar as etapas:', error);
@@ -346,8 +365,9 @@ const LicensePlateCard = () => {
         const dataObj = new Date(data);
         const horas = dataObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const dataFormatada = dataObj.toLocaleDateString('pt-BR'); // Formato DD/MM/YYYY para o Brasil
-        return `${horas} ${dataFormatada.split('/').reverse().join('-')}`; // Reorganizando a data para o formato DD-MM-YYYY
+        return `${horas} ${dataFormatada}`; // Retorna no formato HH:MM DD/MM/YYYY
       };
+      
     
       if (!acc[departamentoNome]) {
         acc[departamentoNome] = [];
@@ -360,7 +380,6 @@ const LicensePlateCard = () => {
       });
       return acc;
     }, {});
-    
   
     return (
       <Grid container spacing={2} sx={{ padding: 2 }}>
@@ -380,11 +399,22 @@ const LicensePlateCard = () => {
               <SmallCard title="Carga" value={`${pedido.peso}kg`} icon={<CardGiftcardIcon sx={{ color: 'white' }} />} />
               <SmallCard title="Volume" value={`${pedido.volume}m³`} icon={<StorageIcon sx={{ color: 'white' }} />} />
               <SmallCard title="Distância" value={`${pedido.distancia}km`} icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
+              <SmallCard title="Custos"  value={
+        <>
+          {`Total: ${pedido.total}`} <br />
+          {`Gastos: ${pedido.gastos}`} <br />
+          {`Lucro: ${pedido.lucro}`}
+        </>
+      } icon={<AttachMoneyIcon sx={{ color: 'white' }} />} />
             </Box>
           )}
+          <GenerateReport />
         </Grid>
       </Grid>
     );
+  
+
+    
   };
   
    

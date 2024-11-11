@@ -7,11 +7,13 @@
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(0, 58, 102, 0.671); /* Azul escuro para o card */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 500px; /* Largura do card aumentada */
+    width: 85%; /* Largura do card aumentada */
     transition: transform 0.2s; /* Efeito de hover */
 }
 
@@ -36,11 +38,12 @@
     padding: 10px; /* Espaçamento interno */
     border: 1px solid #ccc; /* Borda dos inputs */
     border-radius: 5px; /* Bordas arredondadas */
-    width: auto;
+    width: 100%;
+    min-width: 230px;
 }
 
 .botaoCadastrar {
-    width: 100%;
+    width: 300px;
     padding: 10px;
     background-color: #293f69;
     color: white;
@@ -54,9 +57,40 @@
     background-color: #4a5f9b;
 }
 
+.botaoDeCadastrar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .selectTipoDocumento {
+    margin-top: 10px;
     margin-bottom: 15px; /* Espaço entre o select e o input */
     padding: 10px; /* Espaçamento interno */
     border: 1px solid #ccc; /* Borda do select */
     border-radius: 5px; /* Bordas arredondadas */
+}
+
+.inputsCadastros{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.conjuntosCadastros{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#razao{
+    width: 320px !important;
+}
+#nomeFantasia{
+    width: 320px !important;
+}
+
+#email{
+    width: 320px !important;
 }
