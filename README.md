@@ -129,56 +129,62 @@ https://github.com/user-attachments/assets/32db3e35-e153-484c-9ee1-89e6f6913bb0
 </details>
 
 
-# Guia de Instalação
+## Guia de Instalação
 
 Este guia oferece instruções detalhadas sobre como baixar, configurar e executar este projeto em sua máquina local.
 
-## • Pré-requisitos
+###  Pré-requisitos
   * VSCode: Editor de código para visualização e edição do projeto.
   * MySQL: Banco de dados para armazenar informações necessárias ao sistema.
     
 
-## • Instalação
-1) Faça o download do ZIP do projeto no GitHub
-    * No repositório do GitHub, clique em "Code" e selecione "Download ZIP".
-   ![image](https://github.com/user-attachments/assets/2834e1c6-111a-4630-8c37-ab520353d53e)
-
-2) Extraia o arquivo
-    * Localize o arquivo ZIP baixado e extraia-o para uma pasta de sua escolha.
-
-3) Abra o projeto no VSCode
-    * Inicie o VSCode.
-    * Clique em File > Open Folder... e selecione a pasta extraída para abrir o projeto.
-
-
-## • Passos para Executar o Backend
-1) Configuração do Banco de Dados
-   * Inicie o MySQL e crie uma conexão com um database chamado "wecollab".
-   * No MySQL, execute os inserts de dados localizados na pasta database/banco.
-2) Configuração de Credenciais no Projeto
-   * No arquivo backend/src/database/data-source.ts, adicione a senha do seu MySQL no campo password para conectar ao banco de dados.
-3) Preparação do Projeto no VSCode
-   * Abra o terminal no VSCode e navegue até a pasta do backend: ```cd backend```
-4) Instalação de Dependências
-   * No terminal, instale as dependências do projeto com o comando: ```npm install```
-5) Executando as Migrations
-   * Aplique as migrations para configurar as tabelas no banco de dados: ```npm run typeorm -- -d ./src/database/data-source.ts migration:run```
-6) Inserindo Dados no Banco
-   * Execute novamente os inserts localizados na pasta database/banco para popular o banco com dados iniciais.
-7) Iniciando o Servidor Backend
-   * Inicie o servidor backend com o comando: ```npm run dev:server```
-  
-
-## • Passos para Executar o Frontend
-1) Abrindo um Novo Terminal
-   * Abra um novo terminal no VSCode para configurar o frontend.
-2) Configuração e Execução do Frontend
-   * Navegue até a pasta do frontend: ```cd frontend```
-   * Instale as dependências do frontend com: ```npm install```
-   * Inicie o frontend com o comando: ```npm run dev```
-3) Acessando a Aplicação
-   * No terminal, copie o link que aparece e abra-o no navegador de sua preferência para acessar a aplicação.
-
-
-     
+###  Instalação
+ <details>
    
+  1) Faça o download do ZIP do projeto no GitHub
+      * No repositório do GitHub, clique em "Code" e selecione "Download ZIP".
+     ![image](https://github.com/user-attachments/assets/2834e1c6-111a-4630-8c37-ab520353d53e)
+  
+  2) Extraia o arquivo
+      * Localize o arquivo ZIP baixado e extraia-o para uma pasta de sua escolha.
+  
+  3) Abra o projeto no VSCode
+      * Inicie o VSCode.
+      * Clique em File > Open Folder... e selecione a pasta extraída para abrir o projeto.
+        
+ </details>
+
+###  Passos para Executar o Backend
+  <details>
+    
+  1) Configuração do Banco de Dados
+       * Inicie o MySQL e crie uma conexão com um database chamado "wecollab".
+       * No MySQL, execute os inserts de dados localizados na pasta database/banco.
+  2) Configuração de Credenciais no Projeto
+       * No arquivo backend/src/database/data-source.ts, adicione a senha do seu MySQL no campo password para conectar ao banco de dados.
+  3) Preparação do Projeto no VSCode
+       * Abra o terminal no VSCode e navegue até a pasta do backend: ```cd backend```
+  4) Instalação de Dependências
+       * No terminal, instale as dependências do projeto com o comando: ```npm install```
+  5) Executando as Migrations
+       * Aplique as migrations para configurar as tabelas no banco de dados: ```npm run typeorm -- -d ./src/database/data-source.ts migration:run```
+  6) Inserindo Dados no Banco
+       * Execute novamente os inserts localizados na pasta database/banco para popular o banco com dados iniciais.
+  7) Iniciando o Servidor Backend
+       * Inicie o servidor backend com o comando: ```npm run dev:server```
+       
+  </details> 
+
+###  Passos para Executar o Frontend
+  <details>
+    
+  1) Abrindo um Novo Terminal
+       * Abra um novo terminal no VSCode para configurar o frontend.
+  2) Configuração e Execução do Frontend
+       * Navegue até a pasta do frontend: ```cd frontend```
+       * Instale as dependências do frontend com: ```npm install```
+       * Inicie o frontend com o comando: ```npm run dev```
+  3) Acessando a Aplicação
+       * No terminal, copie o link que aparece e abra-o no navegador de sua preferência para acessar a aplicação.
+       
+  </details>
