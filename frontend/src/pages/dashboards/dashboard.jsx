@@ -26,9 +26,9 @@ const Dashboard = () => {
       <div className={styles["vendas-por-vendedor"]}>
         <AreaLineChart />
       </div>
-      <div className={styles["vendas-por-vendedor"]}>
+      {/* <div className={styles["vendas-por-vendedor"]}>
         <SalesDashboard />
-      </div>
+      </div> */}
     </div>
   );
 };

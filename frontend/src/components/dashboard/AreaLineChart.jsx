@@ -23,18 +23,18 @@ const AreaLineChart = () => {
 
   const dadosDepartamentos = {
     ADM: [
-      { mes: 'Jan', total_pedidos: 15, data: '2024-01-01' },
-      { mes: 'Fev', total_pedidos: 18, data: '2024-02-01' },
-      { mes: 'Mar', total_pedidos: 12, data: '2024-03-01' },
-      { mes: 'Abr', total_pedidos: 20, data: '2024-04-01' },
-      { mes: 'Mai', total_pedidos: 25, data: '2024-05-01' },
-      { mes: 'Jun', total_pedidos: 17, data: '2024-06-01' },
-      { mes: 'Jul', total_pedidos: 23, data: '2024-07-01' },
-      { mes: 'Ago', total_pedidos: 14, data: '2024-08-01' },
-      { mes: 'Set', total_pedidos: 19, data: '2024-09-01' },
-      { mes: 'Out', total_pedidos: 22, data: '2024-10-01' },
-      { mes: 'Nov', total_pedidos: 21, data: '2024-11-01' },
-      { mes: 'Dez', total_pedidos: 16, data: '2024-12-01' },
+      { mes: 'Jan', novos_clientes: 15, data: '2024-01-01' },
+      { mes: 'Fev', novos_clientes: 18, data: '2024-02-01' },
+      { mes: 'Mar', novos_clientes: 12, data: '2024-03-01' },
+      { mes: 'Abr', novos_clientes: 20, data: '2024-04-01' },
+      { mes: 'Mai', novos_clientes: 25, data: '2024-05-01' },
+      { mes: 'Jun', novos_clientes: 17, data: '2024-06-01' },
+      { mes: 'Jul', novos_clientes: 23, data: '2024-07-01' },
+      { mes: 'Ago', novos_clientes: 14, data: '2024-08-01' },
+      { mes: 'Set', novos_clientes: 19, data: '2024-09-01' },
+      { mes: 'Out', novos_clientes: 22, data: '2024-10-01' },
+      { mes: 'Nov', novos_clientes: 21, data: '2024-11-01' },
+      { mes: 'Dez', novos_clientes: 16, data: '2024-12-01' },
     ],
     FINANCEIRO: [
       { mes: 'Jan', fluxo_caixa: 10000, data: '2024-01-01' },
@@ -88,24 +88,28 @@ const AreaLineChart = () => {
     });
   };
 
-  let dataKey, chartData;
+  let dataKey, chartData, yAxisLabel;
 
   switch (departamento) {
     case 'ADM':
-      dataKey = "total_pedidos";
+      dataKey = "novos_clientes";
       chartData = filtrarDadosPorData(dadosDepartamentos.ADM);
+      yAxisLabel = "Novos Clientes";
       break;
     case 'FINANCEIRO':
       dataKey = "fluxo_caixa";
       chartData = filtrarDadosPorData(dadosDepartamentos.FINANCEIRO);
+      yAxisLabel = "Fluxo de Caixa (R$)";
       break;
     case 'OPERACIONAL':
       dataKey = "tempo_entrega";
       chartData = filtrarDadosPorData(dadosDepartamentos.OPERACIONAL);
+      yAxisLabel = "Tempo de Entrega (dias)";
       break;
     case 'RH':
       dataKey = "turnover";
       chartData = filtrarDadosPorData(dadosDepartamentos.RH);
+      yAxisLabel = "Turnover (%)";
       break;
     default:
       chartData = [];
@@ -140,14 +144,51 @@ const AreaLineChart = () => {
         </div>
       </div>
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={chartData} margin={{ top: 10, right: 30, left: 20, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-          <XAxis dataKey="mes" stroke="#000" />
-          <YAxis stroke="#000" tickFormatter={(value) => value.toLocaleString('pt-BR')} />
-          <Tooltip formatter={(value, name) => [`${value}`, name]} />
-          <Line type="monotone" dataKey={dataKey} stroke="#336184" fill="rgba(51,97,132,0.8)" fillOpacity={1} />
-        </LineChart>
-      </ResponsiveContainer>
+          <LineChart data={chartData} margin={{ top: 10, right: 30, left: 70, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
+            <XAxis dataKey="mes" stroke="#000" />
+            <YAxis
+              label={{
+                value: yAxisLabel,
+                angle: -90,
+                position: 'insideLeft', // Posiciona o título dentro do gráfico, mais para a esquerda
+                dy: 50,
+                dx: -30, 
+              }}
+              stroke="#000"
+              tickFormatter={(value) => {
+                if (departamento === 'FINANCEIRO') {
+                  return `R$ ${value.toLocaleString('pt-BR')}`;
+                } else if (departamento === 'OPERACIONAL') {
+                  return `${value} dias`;
+                } else if (departamento === 'RH') {
+                  return `${value}%`;
+                }
+                return value.toLocaleString('pt-BR');
+              }}
+            />
+            <Tooltip
+              formatter={(value, name) => {
+                if (departamento === 'FINANCEIRO') {
+                  return [`R$ ${value.toLocaleString('pt-BR')}`, name];
+                } else if (departamento === 'OPERACIONAL') {
+                  return [`${value} dias`, name];
+                } else if (departamento === 'RH') {
+                  return [`${value}%`, name];
+                }
+                return [value, name];
+              }}
+            />
+            <Line
+              type="monotone"
+              dataKey={dataKey}
+              stroke="#336184"
+              fill="rgba(51,97,132,0.8)"
+              fillOpacity={1}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+
     </div>
   );
 };
