@@ -90,12 +90,13 @@ export default function App() {
         disabled={jsonData.length === 0}
         style={{
           padding: "10px 20px",
-          backgroundColor: "#1B4215",
+          backgroundColor: "rgba(0, 58, 102, 0.671)",
           color: "#fff",
           border: "none",
           borderRadius: "5px",
           cursor: "pointer",
           fontSize: "16px",
+
         }}
       >
         Baixar Relatório
