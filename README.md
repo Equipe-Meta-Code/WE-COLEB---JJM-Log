@@ -8,9 +8,7 @@
 * [Requisitos funcionais](#-requisitos-funcionais)
 * [Requisitos não-funcionais](#-requisitos-não-funcionais)
 * [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-* [Sprints e Backlog](#-sprints-e-backlog)
-* [User Stories](#-user-stories)
-* [MVP](#-mvp)
+* [Backlog e User Stories](#-backlog-e-user-stories)
 * [Diagramas](#-diagramas)
 * [Protótipo Figma](#-protótipo-figma)
 * [Vídeos das Sprints](#️-vídeos-das-sprints)
@@ -48,25 +46,14 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 <span id="sprints">
 
-## 📊 Sprints e Backlog
-> Acesse o link do Backlog [[Clique aqui](https://docs.google.com/spreadsheets/d/1G1RpuldGR_GSwHeFtfj1lwCNR8tH11c9/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
+## 📊 Backlog e User Stories
+
+* Acesse o link do Backlog e da User Stories [[Clique aqui](https://docs.google.com/spreadsheets/d/1G1RpuldGR_GSwHeFtfj1lwCNR8tH11c9/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
 
 <div style="display: flex;">
   <img src="https://github.com/user-attachments/assets/0f709c8a-b040-46d6-8b17-5d17a32ddf02" width="500"  />
   <img src="https://github.com/user-attachments/assets/cb88aeb9-6f15-42dc-8f1f-cdecaf705088" width="500" />
 </div>
-
-<span id="user">
-
-## 📊 User Stories
-
-![Rank](https://github.com/user-attachments/assets/f47fcab4-051f-4cd0-8607-d9a9678483e7)
-
-<span id="MVP">
- 
-## 📋 MVP
-Em andamento.
-
 
 <span id="Diagrama de classes">
  
@@ -134,70 +121,81 @@ https://github.com/user-attachments/assets/32db3e35-e153-484c-9ee1-89e6f6913bb0
 Este guia oferece instruções detalhadas sobre como baixar, configurar e executar este projeto em sua máquina local.
 
 ### Pré-requisitos
-- **VSCode**: Editor de código para visualização e edição do projeto.
-- **MySQL**: Banco de dados para armazenar informações necessárias ao sistema.
+- **VSCode**: Editor de código para visualização e edição do projeto. [Baixe o VSCode](https://code.visualstudio.com/download)
+- **MySQL**: Banco de dados para armazenar informações necessárias ao sistema. [Baixe o MYSQL](https://dev.mysql.com/downloads/installer/)
+
+---
 
 ### Instalação
 
 #### 1. Baixando o Projeto
-- No repositório do GitHub, clique em **"Code"** e selecione **"Download ZIP"**.
+- No repositório do GitHub, clique em **"Code"** e selecione **"Download ZIP"** ou [Clique aqui](https://github.com/Equipe-Meta-Code/WE-COLEB-JJM-Log/archive/refs/heads/main.zip).
 - Localize o arquivo ZIP baixado e extraia-o para uma pasta de sua escolha.
 
 #### 2. Abrindo o Projeto no VSCode
 - Inicie o VSCode.
 - Clique em **File > Open Folder...** e selecione a pasta extraída para abrir o projeto.
-  
+
+---
 
 ### Passos para Executar o Backend
   
 #### 1. Configuração do Banco de Dados
-- Inicie o MySQL e crie um database chamado `wecollab`.
-- No MySQL, execute os scripts de inserção de dados localizados na pasta `database/banco` para configurar o banco.
+> Inicie o MySQL e crie um database chamado `wecollab`.
+  ```bash
+  create database wecollab;
+  ```  
 
 #### 2. Configuração de Credenciais no Projeto
-- No arquivo `backend/src/database/data-source.ts`, adicione a senha do seu MySQL no campo `password` para conectar ao banco de dados.
+> No arquivo [data-source.ts](./backend/src/database/data-source.ts) que está localizado em `backend/src/database/data-source.ts`, adicione a senha do seu MySQL no campo `password` para conectar ao banco de dados.
+  ```bash
+  password: " ", #coloque a senha do seu MySQL entre as aspas
+  ```  
 
 #### 3. Preparação do Projeto no VSCode
-- Abra o terminal no VSCode e navegue até a pasta do backend:
+> Abra o terminal no VSCode e navegue até a pasta do backend:
   ```bash
   cd backend
   ```
 #### 4. Instalação de Dependências
-- No terminal, instale as dependências do projeto:
+> No terminal, instale as dependências do projeto:
   ```bash
   npm install
   ```
 #### 5. Executando as Migrations
-- Aplique as migrations para configurar as tabelas no banco de dados:
+> Aplique as migrations para configurar as tabelas no banco de dados:
   ```bash
   npm run typeorm -- -d ./src/database/data-source.ts migration:run
   ```
 #### 6. Inserindo Dados no Banco
-- Execute novamente os scripts de inserção localizados na pasta `database/banco` para popular o banco com dados iniciais.
+> No MySQL, execute os scripts de inserção de dados localizados na pasta `database/banco` para configurar o banco.
+> Acesse o aruqivo [banco](./database/banco)
   
 #### 7. Iniciando o Servidor Backend
-- Inicie o servidor backend com o comando:
+> Inicie o servidor backend com o comando:
   ```bash
   npm run dev:server
   ```
 
+---
+
 ###  Passos para Executar o Frontend
     
 #### 1. Abrindo um Novo Terminal
-- Abra um novo terminal no VSCode para configurar o frontend.
+> Abra um novo terminal no VSCode para configurar o frontend.
 
 #### 2. Configuração e Execução do Frontend
-- Navegue até a pasta do frontend:
+> Navegue até a pasta do frontend:
   ```bash
   cd frontend
   ```
-- Instale as dependências do frontend:
+> Instale as dependências do frontend:
   ```bash
   npm install
   ```
-- Inicie o frontend com o comando:
+> Inicie o frontend com o comando:
   ```bash
   npm run dev
   ```
 #### 3. Acessando a Aplicação
-- No terminal, copie o link que aparece e abra-o no navegador de sua preferência para acessar a aplicação.
+> No terminal, copie o link que aparece e abra-o no navegador de sua preferência para acessar a aplicação.
