@@ -1,10 +1,10 @@
-Inserts para fazer no banco de dados na tabela wecollab
+--Inserts para fazer no banco de dados na tabela wecollab.
 
-Esses inserts precisam ser feitos para que você consiga cadastrar um administrador 
+--Esses inserts precisam ser feitos para que você consiga cadastrar um administrador 
 ou um administrador/RH/user no frontend, no cadastro escolha a role de acordo com o id
-da tabela roles
+da tabela roles.
 
-//INSIRA NA TABELA PERMISSIONS
+--INSIRA NA TABELA PERMISSIONS
 INSERT INTO wecollab.permissions (nome_permission, descricao, data_criacao, id)
 VALUES
   ('create_product', 'Create product', '2024-05-03', 1),
@@ -12,14 +12,14 @@ VALUES
   ('view_product', 'View product', '2024-05-03', 3),
   ('edit_product', 'Edit product', '2024-05-03', 4);
 
-//INSIRA NA TABELA ROLES 
+--INSIRA NA TABELA ROLES 
 INSERT INTO wecollab.roles (nome_role, descricao, data_criacao, id)
 VALUES
   ('User_Role', 'User', '2024-05-03', 1),
   ('Admin_Role', 'Administrator', '2024-05-03', 2),
   ('Rh_Role', 'Recursos humanos', '2024-05-03', 3);
 
-//INSIRA NA TABELA PERMISSIONS_ROLES
+--INSIRA NA TABELA PERMISSIONS_ROLES
 INSERT INTO wecollab.permissions_roles (role_id, permission_id)
 VALUES
   ('1', '3'),
