@@ -102,7 +102,11 @@ https://github.com/user-attachments/assets/7563efdb-d8d6-45cf-85b5-071ceb0a85ca
   ##### SPRINT 3 - Assistir ao vídeo da Sprint 3
   <div align="center">
 
-https://github.com/user-attachments/assets/32db3e35-e153-484c-9ee1-89e6f6913bb0
+
+
+https://github.com/user-attachments/assets/547da2f8-306b-4a3d-9580-b75a900d852b
+
+
     
   </div>
 
