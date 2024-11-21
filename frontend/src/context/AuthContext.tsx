@@ -60,6 +60,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             api.defaults.headers.authorization = `Bearer ${token}`;
         } catch (error) {
             console.error('Error during signIn:', error);
+            throw error;
         }
     }, []);
 

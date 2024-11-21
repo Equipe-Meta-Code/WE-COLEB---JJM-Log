@@ -136,18 +136,6 @@ export default function Sidebar() {
     }
   };
 
-/*   useEffect(() => {
-    if (userLogged()) {
-   
-        navigate("/"  );
-
-    } else {
-      navigate("/login");
-    }
-  }, []); */
-
-  
-  
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -260,7 +248,7 @@ export default function Sidebar() {
                       px: 2.5,
                     }}
                   >
-                    <Link to="/" className="no-link-style">
+                    <Link to="/cardList" className="no-link-style">
                       <ListItemIcon
                         sx={{
                           justifyContent: "center",
