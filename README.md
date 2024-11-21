@@ -48,11 +48,11 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 ## 📊 Backlog e User Stories
 
-* Acesse o link do Backlog e da User Stories [[Clique aqui](https://docs.google.com/spreadsheets/d/1G1RpuldGR_GSwHeFtfj1lwCNR8tH11c9/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
+* Acesse o link do Backlog e da User Stories [[Clique aqui](https://docs.google.com/spreadsheets/d/1g18uVSJqFhiE9HOQwmeEbCcnJMawdrVH/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/5faec0e7-6f5d-47f4-ab3a-b7aa71255859" width="500"  />
-  <img src="https://github.com/user-attachments/assets/d1b734fb-3014-4949-ab32-9face1c00936" width="500" />
+  <img src="https://github.com/user-attachments/assets/61ceab49-c9a7-4d8c-a5bf-4e2e964d9ad9" width="450"  />
+  <img src="https://github.com/user-attachments/assets/43466187-9d3a-42a8-852e-3caf43cb5d3a" width="450" />
 </div>
 
 <span id="Diagrama de classes">
