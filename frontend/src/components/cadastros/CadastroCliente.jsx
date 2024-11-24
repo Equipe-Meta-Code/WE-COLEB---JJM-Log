@@ -22,6 +22,7 @@ function CadastrarCliente() {
         validade_rntrc: '',
         valor_fixo: '',
         valor_adicional: '',
+        data_criacao: '',
     });
 
     const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
@@ -45,18 +46,24 @@ function CadastrarCliente() {
     }
 
     async function cadastrarCliente() {
-        const isFormComplete = Object.values(formData).every(value => value);
+          const isFormComplete = Object.entries(formData)
+        .filter(([key, value]) => key !== 'data_criacao') // Exclui 'data_criacao' da verificação
+        .every(([key, value]) => value); // Verifica se todos os outros campos têm valor
+
         if (!isFormComplete) {
             setFeedbackMessage("Por favor, preencha todos os campos.");
             setShowModalFeedback(true);
             return;
         }
 
-        const cleanedData = cleanFormData(formData);
+        const cleanedData = cleanFormData({
+            ...formData,
+            data_criacao: new Date().toISOString(), // Adiciona a data atual
+        });
 
         setLoading(true);
         try {
-            const response = await api.post("/clientes", cleanedData);
+            const response = await api.post("/clientes", cleanedData );
             console.log(response);
             setShowCadastroConcluido(true);
             setFormData({
@@ -74,6 +81,7 @@ function CadastrarCliente() {
                 validade_rntrc: '',
                 valor_fixo: '',
                 valor_adicional: '',
+                data_criacao: '',
             });
         } catch (error) {
             console.error("Erro ao cadastrar:", error);
