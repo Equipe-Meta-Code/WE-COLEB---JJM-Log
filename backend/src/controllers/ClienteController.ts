@@ -8,7 +8,7 @@ class ClienteController {
     async create(request: Request, response: Response) {
         const clienteRepository = AppDataSource.getRepository(Cliente);
 
-        const { cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual, contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc, validade_rntrc, valor_adicional, valor_fixo } = request.body;
+        const { cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual, contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc, validade_rntrc, valor_adicional, valor_fixo, data_criacao } = request.body;
 
         // Verifica se já existe um cliente com o mesmo CNPJ
         const existCliente = await clienteRepository.findOneBy({ cnpj });
@@ -33,6 +33,7 @@ class ClienteController {
             validade_rntrc,
             valor_fixo,
             valor_adicional,
+            data_criacao,
         });
 
         await clienteRepository.save(cliente);

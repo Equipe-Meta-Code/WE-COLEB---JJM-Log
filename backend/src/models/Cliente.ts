@@ -47,6 +47,10 @@ class Cliente {
 
     @Column({ type: 'varchar', nullable: false })
     valor_adicional: string;
+
+    @Column({ type: 'varchar', nullable: false })
+    data_criacao: Date;
+
 }
 
 export default Cliente;
