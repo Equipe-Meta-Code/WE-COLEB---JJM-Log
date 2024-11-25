@@ -64,6 +64,10 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 ### Modelo Lógico
 ![image](https://github.com/user-attachments/assets/304453c5-f21c-4051-b852-db7e22acf293)
 
+### MVC
+![model-view-controller-architecture](https://github.com/user-attachments/assets/8d0d6e5f-19f7-482a-a640-edb0a06bc0c3)
+
+
 <span id="Vídeo">
   
  ## 🖼 Protótipo Figma
