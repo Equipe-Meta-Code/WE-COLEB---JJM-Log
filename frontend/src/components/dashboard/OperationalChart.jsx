@@ -38,9 +38,6 @@ const OperationalChart = ({ startDate, endDate }) => {
   
     filtered = filtered.sort((a, b) => (b.total - b.lucro) - (a.total - a.lucro)).slice(0, 10);
     setFilteredPedidos(filtered);
-    console.log("Start Date:", startDate);
-    console.log("End Date:", endDate);
-    console.log("Pedidos Filtrados:", filtered);
   };
 
 
@@ -71,7 +68,7 @@ const OperationalChart = ({ startDate, endDate }) => {
 
   return (
     <div>
-      <h3>Gráfico de Custo de Transporte por Pedido</h3>
+      <h3>Gráfico de Custo por Pedido</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={dadosOperacional}  margin={{ top: 20, right: 30, left: 50, bottom: 50 }}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -80,7 +77,7 @@ const OperationalChart = ({ startDate, endDate }) => {
             label={{ value: 'Pedidos', position: 'insideBottom', offset: -10 }}  
           />
           <YAxis 
-            label={{ value: 'Custo de Transporte (R$)', angle: -90, position: 'insideLeft', dy: 80, dx: -30 }} 
+            label={{ value: 'Custo (R$)', angle: -90, position: 'insideLeft', dy: 80, dx: -30 }} 
             tickFormatter={(value) => formatCurrency(value)} 
           />
           <Tooltip formatter={(value) => formatCurrency(value)} />

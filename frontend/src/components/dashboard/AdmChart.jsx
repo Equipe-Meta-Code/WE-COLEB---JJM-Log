@@ -59,26 +59,29 @@ const AdmChart = ({ startDate, endDate }) => {
   });
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={dadosFiltrados} margin={{ top: 10, right: 30, left: 70, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-        <XAxis dataKey="mes" stroke="#000" />
-        <YAxis
-          label={{
-            value: 'Novos Clientes',
-            angle: -90,
-            position: 'insideLeft',
-            dy: 50,
-            dx: -30,
-          }}
-          stroke="#000"
-          domain={[0, 'dataMax + 1']} // Para garantir que o Y comece em 0 e vá até o máximo + 1
-            tickFormatter={(tick) => Math.floor(tick)} // Para garantir que os ticks sejam inteiros
-        />
-        <Tooltip />
-        <Line type="monotone" dataKey="novos_clientes" stroke="#336184" fill="rgba(51,97,132,0.8)" fillOpacity={1} />
-      </LineChart>
-    </ResponsiveContainer>
+    <div>
+      <h3>Crescimento Mensal de Novos Clientes</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={dadosFiltrados} margin={{ top: 10, right: 30, left: 70, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
+          <XAxis dataKey="mes" stroke="#000" />
+          <YAxis
+            label={{
+              value: 'Novos Clientes',
+              angle: -90,
+              position: 'insideLeft',
+              dy: 50,
+              dx: -30,
+            }}
+            stroke="#000"
+            domain={[0, 'dataMax + 1']} // Para garantir que o Y comece em 0 e vá até o máximo + 1
+              tickFormatter={(tick) => Math.floor(tick)} // Para garantir que os ticks sejam inteiros
+          />
+          <Tooltip />
+          <Line type="monotone" dataKey="novos_clientes" stroke="#336184" fill="rgba(51,97,132,0.8)" fillOpacity={1} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
