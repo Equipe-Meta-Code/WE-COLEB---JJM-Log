@@ -1,43 +1,47 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../database/data-source';
 import Cliente from '../models/Cliente';
+import Endereco from '../models/Endereco';
 
 class ClienteController {
 
-    // Método para cadastrar um novo cliente
+    // Criação do cliente com endereços
     async create(request: Request, response: Response) {
         const clienteRepository = AppDataSource.getRepository(Cliente);
+        const enderecoRepository = AppDataSource.getRepository(Endereco); // Repositório de Endereço
 
-        const { cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual, contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc, validade_rntrc, valor_adicional, valor_fixo } = request.body;
+        const { cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual,
+            contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc,
+            validade_rntrc, valor_adicional, valor_fixo, enderecos } = request.body;
 
-        // Verifica se já existe um cliente com o mesmo CNPJ
+        // Verifica se o cliente já existe
         const existCliente = await clienteRepository.findOneBy({ cnpj });
-
         if (existCliente) {
             return response.status(400).json({ message: 'Cliente já existe!' });
         }
 
-        // Cria o novo cliente no banco de dados
-        const cliente = clienteRepository.create({
-            cnpj,
-            razao_social,
-            nome_fantasia, 
-            inscricao_municipal, 
-            inscricao_estadual, 
-            contribuinte, 
-            telefone,
-            email,
-            natureza_operacao,
-            ramo_atividade, 
-            rntrc,
-            validade_rntrc,
-            valor_fixo,
-            valor_adicional,
-        });
+        try {
+            // Criação do cliente
+            const cliente = clienteRepository.create({
+                cnpj, razao_social, nome_fantasia, inscricao_municipal, inscricao_estadual,
+                contribuinte, telefone, email, natureza_operacao, ramo_atividade, rntrc,
+                validade_rntrc, valor_fixo, valor_adicional,
+            });
 
-        await clienteRepository.save(cliente);
+            await clienteRepository.save(cliente);
 
-        return response.status(201).json(cliente);
+            // Salva os endereços associados, se existirem
+            if (enderecos && enderecos.length > 0) {
+                const enderecoEntities = enderecos.map((endereco: any) => {
+                    return enderecoRepository.create({ ...endereco, cliente });
+                });
+                await enderecoRepository.save(enderecoEntities);
+            }
+
+            return response.status(201).json(cliente);
+        } catch (error) {
+            return response.status(500).json({ message: 'Erro ao criar cliente', error });
+        }
     }
 
     // Método para listar todos os clientes

@@ -1,9 +1,10 @@
 .pagina {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Organiza os cards em coluna */
     align-items: center;
     height: 100%;
     background-color: transparent; /* Fundo da página */
+    gap: 20px; /* Espaçamento entre os cards */
 }
 
 .container {
@@ -92,5 +93,32 @@
 }
 
 #email{
-    width: 320px !important;
+    width: 300px !important;
+}
+
+.titulo-cliente {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+button[type="button-cliente"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #ccc; /* Cor da linha */
+    margin: 15px 0; /* Espaçamento vertical */
 }
