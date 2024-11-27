@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './style.css';
 import api from '../../services/api';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function PortalFuncionario() {
   const navigate = useNavigate();
@@ -28,25 +29,55 @@ function PortalFuncionario() {
 
   async function buscarFuncionario() {
     try {
-        const response = await api.get(`/usersid/${userId}`);
-        setFuncionario(response.data); // Armazena os dados do usuário no estado
+      const response = await api.get(`/usersid/${userId}`);
+      setFuncionario(response.data); // Armazena os dados do usuário no estado
     } catch (error) {
-        console.error("Erro ao buscar funcionário:", error);
+      console.error("Erro ao buscar funcionário:", error);
     }
   }
 
   useEffect(() => {
     buscarFuncionario();
-  }, []); 
+  }, []);
 
   return (
     <>
-      <h1 className="titulo">{"Portal do funcionário"}                 
+      <h1 className="titulo">{"Portal do funcionário"}
         <span className="nomeDestaque">
           {funcionario ? ` de ${funcionario.nome}` : ' Usuário não encontrado...'}
         </span>
-
       </h1>
+
+      {/*  Mural de avisos */}
+      <div id="carouselExampleIndicators" className="carousel slide custom-carousel" data-bs-ride="carousel">
+        <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+          <div className="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src="/src/assets/morango.jpg" className="d-block w-100" alt="Morango" />
+            </div>
+            <div className="carousel-item">
+              <img src="..." className="d-block w-100" alt="..." />
+            </div>
+            <div className="carousel-item">
+              <img src="..." className="d-block w-100" alt="..." />
+            </div>
+          </div>
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
       <h3 className="titulo-seg">
         Bem-vindo ao portal do funcionário
       </h3>
@@ -61,7 +92,7 @@ function PortalFuncionario() {
             <img src="/src/assets/holerite.png" alt="Arquivos" className="image" />
             <h2 className="nome-pasta">Holerites</h2>
           </div>
-          
+
           <ul>
             {holerites.map((file, index) => (
               <li key={index}>{file.rota}</li>
@@ -75,7 +106,7 @@ function PortalFuncionario() {
             <img src="/src/assets/registroPonto.png" alt="Arquivos" className="image" />
             <h2 className="nome-pasta">Registro de ponto</h2>
           </div>
-          
+
           <ul>
             {registrosPonto.map((file, index) => (
               <li key={index}>{file.rota}</li>
@@ -89,7 +120,7 @@ function PortalFuncionario() {
             <img src="/src/assets/atestado.png" alt="Arquivos" className="image-atestado" />
             <h2 className="nome-pasta">Atestado</h2>
           </div>
-          
+
           <ul>
             {atestados.map((file, index) => (
               <li key={index}>{file.rota}</li>

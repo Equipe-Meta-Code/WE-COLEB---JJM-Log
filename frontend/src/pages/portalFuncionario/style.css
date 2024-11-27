@@ -158,3 +158,14 @@
 .nomeDestaque{
   color: #6191da;
 }
+
+.custom-carousel {
+  max-width: 800px; /* Define a largura máxima */
+  max-height: 400px; /* Define a altura máxima */
+  margin: 0 auto; /* Centraliza o carrossel */
+  margin-bottom: 70px;
+}
+.custom-carousel img {
+  object-fit: cover; /* Ajusta a imagem ao espaço disponível */
+  height: 100%; /* Garante que a imagem respeite a altura definida */
+}
