@@ -14,6 +14,9 @@ interface Data {
   quantidade: number;
   volume: number;
   distancia: number;
+  total: number;
+  gastos: number;
+  lucro: number;
 }
 
 export default function App() {
@@ -57,6 +60,9 @@ export default function App() {
       new Paragraph({ children: [new TextRun(`Quantidade: ${item.quantidade}`)] }),
       new Paragraph({ children: [new TextRun(`Volume: ${item.volume}m³`)] }),
       new Paragraph({ children: [new TextRun(`Distância: ${item.distancia}km`)] }),
+      new Paragraph({ children: [new TextRun(`Total: ${item.total}km`)] }),
+      new Paragraph({ children: [new TextRun(`Gastos: ${item.gastos}km`)] }),
+      new Paragraph({ children: [new TextRun(`Lucro: ${item.lucro}km`)] }),
       new Paragraph({ children: [new TextRun("")] }),
     ]);
 
