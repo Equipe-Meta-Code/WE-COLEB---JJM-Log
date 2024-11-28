@@ -109,6 +109,32 @@ class PedidoController {
         }
     }
 
+    async getTurnoverByClient(req: Request, res: Response): Promise<Response> {
+        const pedidoRepository = AppDataSource.getRepository(Pedido);
+
+        try {
+            // Busca todos os pedidos agrupados por cliente
+            const pedidosPorCliente = await pedidoRepository
+                .createQueryBuilder("pedido")
+                .select("pedido.cliente_id", "clienteId")
+                .addSelect("COUNT(pedido.id)", "totalPedidos")
+                .groupBy("pedido.cliente_id")
+                .getRawMany();
+
+            // Calcula o turnover para cada cliente (simulado entre 5% e 15%)
+            const turnoverData = pedidosPorCliente.map((pedido) => ({
+                clienteId: pedido.clienteId,
+                totalPedidos: parseInt(pedido.totalPedidos, 10),
+                turnover: Math.min(15, Math.max(5, Math.round(Math.random() * 10 + 5))), // Simulação de valores
+            }));
+
+            return res.status(200).json(turnoverData);
+        } catch (error) {
+            console.error("Erro ao calcular turnover:", error);
+            return res.status(500).json({ message: "Erro ao calcular turnover", error });
+        }
+    }
+
     async update(request: Request, response: Response) {
         const pedidoRepository = AppDataSource.getRepository(Pedido);
         const clienteRepository = AppDataSource.getRepository(Cliente);

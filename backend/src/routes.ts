@@ -37,6 +37,9 @@ router.get("/etapapedido", EtapaPedidoController.getAll);
 router.get('/etapapedido/pedido/:pedidoId', EtapaPedidoController.getByPedidoId);
 
 router.get("/pedidosDashboard", PedidoController.getAll);
+router.get("/clientesDashboard", ClienteController.list);
+router.get("/RhDashboard", PedidoController.getTurnoverByClient);
+
 
 router.put("/etapas/:id", EtapaController.update);
 router.put('/etapapedido/:id', EtapaPedidoController.update);

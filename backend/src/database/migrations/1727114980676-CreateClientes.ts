@@ -84,6 +84,12 @@ export class CreateClientes1727114980676 implements MigrationInterface {
                     type: 'varchar',
                     isNullable: false,
                 },
+                {
+                    name: 'data_criacao',
+                    type: 'timestamp',
+                    default: 'CURRENT_TIMESTAMP',
+                    isNullable: false,
+                },
             ],
         }), true);
     }
