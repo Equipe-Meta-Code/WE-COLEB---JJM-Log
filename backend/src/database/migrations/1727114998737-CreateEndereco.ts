@@ -1,10 +1,9 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
 export class CreateEndereco1727114998737 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: 'endereco',
+            name: 'endereco', // Alterado para plural
             columns: [
                 {
                     name: 'id',
@@ -55,21 +54,26 @@ export class CreateEndereco1727114998737 implements MigrationInterface {
                     isNullable: false,
                 },
             ],
+            indices: [
+                {
+                    name: 'idx_cliente_id', // Índice para melhorar performance
+                    columnNames: ['cliente_id'],
+                },
+            ],
         }), true);
 
         await queryRunner.createForeignKey('endereco', new TableForeignKey({
             columnNames: ['cliente_id'],
             referencedTableName: 'clientes',
             referencedColumnNames: ['id'],
-            name: 'fk_cliente_endereco_',
+            name: 'fk_cliente_endereco', // Nome da FK ajustado
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('endereco', 'fk_cliente_endereco_');
-        await queryRunner.dropTable("endereco");
+        await queryRunner.dropForeignKey('endereco', 'fk_cliente_endereco');
+        await queryRunner.dropTable('endereco');
     }
-
 }

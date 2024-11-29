@@ -144,7 +144,7 @@ function CadastrarCliente() {
             valor_fixo: '',
             valor_adicional: '',
         });
-        setAddressData({
+        setAddressData([{
             cep: '',
             rua: '',
             numero: '',
@@ -152,7 +152,7 @@ function CadastrarCliente() {
             cidade: '',
             estado: '',
             complemento: ''
-        });
+        }]);        
     }
 
     function addNewAddress() {
