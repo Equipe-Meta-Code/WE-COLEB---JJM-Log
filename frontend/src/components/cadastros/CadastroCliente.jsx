@@ -83,39 +83,39 @@ function CadastrarCliente() {
         const isFormComplete =
             Object.values(formData).every((value) => value) &&
             addressData.every((addr) => Object.values(addr).every((value) => value));
-    
+
         if (!isFormComplete) {
             setFeedbackMessage('Por favor, preencha todos os campos.');
             setShowModalFeedback(true);
             return;
         }
-    
+
         const cleanedClientData = cleanFormData(formData);
         setLoading(true);
-    
+
         try {
             // Cadastrar o cliente
             const clienteResponse = await api.post('/clientes', cleanedClientData);
             const clienteId = clienteResponse.data.id;
-    
+
             // Formatar e enviar os endereços
             const formattedAddresses = addressData.map((address) => ({
                 ...address,
                 cliente_id: clienteId, // Certifique-se de associar o ID do cliente ao endereço
                 cep: address.cep.replace(/[^0-9]/g, ''), // Limpar caracteres não numéricos do CEP
             }));
-    
+
             // Enviar todos os endereços
             for (const address of formattedAddresses) {
                 await api.post(`/clientes/${clienteId}/enderecos`, address);
             }
-    
+
             // Mostrar feedback de sucesso
             setShowCadastroConcluido(true);
             resetForm();
         } catch (error) {
             console.error('Erro ao cadastrar:', error);
-    
+
             const errorMessage =
                 error.response?.data?.message?.includes('CPF ou CNPJ já em uso')
                     ? 'CNPJ já está em uso.'
@@ -125,7 +125,7 @@ function CadastrarCliente() {
         } finally {
             setLoading(false);
         }
-    }    
+    }
 
     function resetForm() {
         setFormData({
@@ -152,7 +152,7 @@ function CadastrarCliente() {
             cidade: '',
             estado: '',
             complemento: ''
-        }]);        
+        }]);
     }
 
     function addNewAddress() {
@@ -385,11 +385,6 @@ function CadastrarCliente() {
 
                     </div>
                 </div>
-                <div className={styles.botaoDeCadastrar}>
-                    <button className={styles.botaoCadastrar} onClick={cadastrarCliente} disabled={loading || emailError}>
-                        {loading ? "Cadastrando..." : "Cadastrar"}
-                    </button>
-                </div>
             </div>
 
             <div className={styles.container}>
@@ -495,12 +490,11 @@ function CadastrarCliente() {
                     </div>
                 ))}
 
-                <div className={styles.botaoDeCadastrar}>
-                    <button className={styles.botaoCadastrar} onClick={cadastrarCliente} disabled={loading}>
-                        {loading ? "Cadastrando..." : "Cadastrar"}
-                    </button>
-
-                </div>
+            </div>
+            <div className={styles.botaoDeCadastrar}>
+                <button className={styles.botaoCadastrar} onClick={cadastrarCliente} disabled={loading || emailError}>
+                    {loading ? "Cadastrando..." : "Cadastrar"}
+                </button>
             </div>
 
             {showCadastroConcluido && (

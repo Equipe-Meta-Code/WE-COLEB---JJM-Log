@@ -6,7 +6,7 @@ import Cliente from "../models/Cliente";
 class EnderecoController {
     async create(req: Request, res: Response): Promise<Response> {
         const { id } = req.params; // ID do cliente vindo da rota
-        const { rua, numero, bairro, cidade, estado, cep } = req.body;
+        const { rua, numero, bairro, cidade, estado, cep, complemento } = req.body;
 
         try {
             const enderecoRepository = AppDataSource.getRepository(Endereco);
@@ -27,6 +27,7 @@ class EnderecoController {
                 cidade,
                 estado,
                 cep,
+                complemento,
                 cliente, // Relacionamento com o cliente
             });
 
@@ -64,7 +65,7 @@ class EnderecoController {
 
     async update(req: Request, res: Response): Promise<Response> {
         const { id } = req.params; // ID do endereço vindo da rota
-        const { rua, numero, bairro, cidade, estado, cep } = req.body;
+        const { rua, numero, bairro, cidade, estado, cep, complemento} = req.body;
 
         try {
             const enderecoRepository = AppDataSource.getRepository(Endereco);
@@ -77,7 +78,7 @@ class EnderecoController {
             }
 
             // Atualizar os dados do endereço
-            enderecoRepository.merge(endereco, { rua, numero, bairro, cidade, estado, cep });
+            enderecoRepository.merge(endereco, { rua, numero, bairro, cidade, estado, cep, complemento });
 
             await enderecoRepository.save(endereco);
 

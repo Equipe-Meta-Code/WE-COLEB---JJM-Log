@@ -9,13 +9,13 @@
   margin: 20px auto;
 }
 
-h1 {
+.titulo-principalCliente {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
 }
 
-h2 {
+.titulo-paginaCliente {
   color: #3673a1;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -102,4 +102,27 @@ strong {
 .botao-voltar:hover::after {
   opacity: 1;
   transform: translateY(0);
+}
+
+.column.endereco {
+  flex-basis: 100%; /* Garante que a coluna ocupe 100% da largura */
+  min-width: 0;    /* Reseta o mínimo para prevenir problemas */
+}
+
+.enderecos {
+  margin-top: 20px;
+}
+
+.endereco-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.endereco-item button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }

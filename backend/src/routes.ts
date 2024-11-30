@@ -58,7 +58,7 @@ router.delete('/arquivos/:id', UserFilesController.delete);
 // Rotas de Endereços
 router.post('/clientes/:id/enderecos', EnderecoController.create); // Adiciona endereço para cliente
 router.get('/clientes/:id/enderecos', EnderecoController.getByClienteId); // Lista endereços de um cliente
-router.put('/enderecos/:id', EnderecoController.update); // Atualizar endereço
-router.delete('/enderecos/:id', EnderecoController.delete); // Excluir endereço
+router.put('/clientes/:id/enderecos', EnderecoController.update); // Atualizar endereço
+router.delete('/clientes/:id/enderecos', EnderecoController.delete); // Excluir endereço
 
 export { router };
