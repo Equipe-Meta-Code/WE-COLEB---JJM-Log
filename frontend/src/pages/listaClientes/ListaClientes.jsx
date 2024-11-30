@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import { FormLabel } from "react-bootstrap";
 
 function ListaClientes() {
     const [clientes, setClientes] = useState([]);
@@ -273,6 +274,7 @@ function ListaClientes() {
                                     <h4>Endereços</h4>
                                     {clienteSelecionado.enderecos && clienteSelecionado.enderecos.map((endereco, index) => (
                                         <div key={index} className="endereco-item">
+                                            <FormLabel htmlFor={`endereco-${index + 1}`}>{`ENDEREÇO ${index + 1}:`}</FormLabel>
                                             <label>Rua</label>
                                             <input
                                                 type="text"

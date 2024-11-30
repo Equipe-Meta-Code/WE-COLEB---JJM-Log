@@ -27,7 +27,6 @@ function CadastrarCliente() {
     });
 
     const [emailError, setEmailError] = useState('');
-
     const [addressData, setAddressData] = useState([{
         cep: '',
         rua: '',
@@ -37,7 +36,6 @@ function CadastrarCliente() {
         estado: '',
         complemento: ''
     }]);
-
     const [showCadastroConcluido, setShowCadastroConcluido] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showModalFeedback, setShowModalFeedback] = useState(false);
@@ -45,9 +43,7 @@ function CadastrarCliente() {
 
     function handleInputChange(e) {
         const { name, value } = e.target;
-
         if (name === 'email') {
-            // Regex para validar e-mail
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(value)) {
                 setEmailError('Por favor, insira um e-mail válido.');
@@ -55,7 +51,6 @@ function CadastrarCliente() {
                 setEmailError('');
             }
         }
-
         setFormData(prevState => ({ ...prevState, [name]: value }));
     }
 
@@ -74,8 +69,8 @@ function CadastrarCliente() {
             cnpj: data.cnpj.replace(/[^0-9]/g, ''),
             telefone: data.telefone.replace(/[^0-9]/g, ''),
             validade_rntrc: data.validade_rntrc,
-            valor_fixo: data.valor_fixo.replace(/[^\d,]/g, '').replace(',', '.'), // Limpa e formata valor_fixo
-            valor_adicional: data.valor_adicional.replace(/[^\d,]/g, '').replace(',', '.'), // Limpa e formata valor_adicional
+            valor_fixo: data.valor_fixo.replace(/[^\d,]/g, '').replace(',', '.'),
+            valor_adicional: data.valor_adicional.replace(/[^\d,]/g, '').replace(',', '.'),
         };
     }
 
@@ -94,28 +89,23 @@ function CadastrarCliente() {
         setLoading(true);
 
         try {
-            // Cadastrar o cliente
             const clienteResponse = await api.post('/clientes', cleanedClientData);
             const clienteId = clienteResponse.data.id;
 
-            // Formatar e enviar os endereços
             const formattedAddresses = addressData.map((address) => ({
                 ...address,
-                cliente_id: clienteId, // Certifique-se de associar o ID do cliente ao endereço
-                cep: address.cep.replace(/[^0-9]/g, ''), // Limpar caracteres não numéricos do CEP
+                cliente_id: clienteId,
+                cep: address.cep.replace(/[^0-9]/g, ''),
             }));
 
-            // Enviar todos os endereços
             for (const address of formattedAddresses) {
                 await api.post(`/clientes/${clienteId}/enderecos`, address);
             }
 
-            // Mostrar feedback de sucesso
             setShowCadastroConcluido(true);
             resetForm();
         } catch (error) {
             console.error('Erro ao cadastrar:', error);
-
             const errorMessage =
                 error.response?.data?.message?.includes('CPF ou CNPJ já em uso')
                     ? 'CNPJ já está em uso.'
@@ -157,6 +147,10 @@ function CadastrarCliente() {
 
     function addNewAddress() {
         setAddressData([...addressData, { cep: '', rua: '', numero: '', bairro: '', cidade: '', estado: '', complemento: '' }]);
+    }
+
+    function removeAddress(index) {
+        setAddressData(prevState => prevState.filter((_, i) => i !== index));
     }
 
     function handleCloseCadastroConcluido() {
@@ -388,10 +382,15 @@ function CadastrarCliente() {
             </div>
 
             <div className={styles.container}>
-                <div className='titulo-cliente'>
+                <div className="titulo-cliente">
                     <h1 className={styles.tituloCard}>Cadastro de Endereço</h1>
-                    <button type="button-cliente" onClick={addNewAddress}>
+                    <button
+                        type="button"
+                        onClick={addNewAddress}
+                        className={styles.botaoAddEndereco}
+                    >
                         <AddCircleRoundedIcon style={{ marginRight: '4px' }} />
+                        Adicionar Endereço
                     </button>
                 </div>
                 {addressData.map((address, index) => (
@@ -486,11 +485,23 @@ function CadastrarCliente() {
                                 />
                             </div>
                         </div>
+
+                        {/* Botão de excluir o endereço */}
+                        {addressData.length > 1 && (
+                            <button
+                                type="button"
+                                onClick={() => removeAddress(index)}
+                                className={styles.botaoExcluirEndereco}
+                            >
+                                Excluir Endereço
+                            </button>
+                        )}
+
                         {index < addressData.length - 1 && <hr className={styles.separator} />}
                     </div>
                 ))}
-
             </div>
+
             <div className={styles.botaoDeCadastrar}>
                 <button className={styles.botaoCadastrar} onClick={cadastrarCliente} disabled={loading || emailError}>
                     {loading ? "Cadastrando..." : "Cadastrar"}

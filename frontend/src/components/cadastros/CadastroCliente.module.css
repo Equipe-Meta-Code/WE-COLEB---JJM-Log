@@ -104,21 +104,49 @@
     position: relative;
 }
 
-button[type="button-cliente"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 10px;
-    margin-top: 10px;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-
 .separator {
     border: 0;
     height: 1px;
     background-color: #ccc; /* Cor da linha */
     margin: 15px 0; /* Espaçamento vertical */
+}
+
+/* Estilo para o botão de adicionar endereço */
+.botaoAddEndereco {
+    display: flex;
+    align-items: center; 
+    justify-content: center;  
+    background-color: #6ea0c7;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 250px;
+    text-align: center; 
+    gap: 10px;
+}
+
+.botaoAddEndereco:hover {
+    background-color: #578ab1;
+}
+
+/* Estilo para o botão de excluir endereço */
+.botaoExcluirEndereco {
+    background-color: #6ea0c7;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+}
+
+.botaoExcluirEndereco:hover {
+    background-color: #578ab1;
 }

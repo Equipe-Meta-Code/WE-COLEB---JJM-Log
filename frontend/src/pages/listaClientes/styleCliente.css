@@ -22,7 +22,7 @@
   font-size: 1.2em;
 }
 
-.p-paginacliente{
+.p-paginacliente {
   margin: 5px 0;
   color: #555;
 }
@@ -111,4 +111,71 @@
 
 .enderecos {
   margin-top: 20px;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 1024px) {
+  .container-columns {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .column {
+    flex: 1 1 100%; /* Cada coluna ocupará 100% da largura */
+  }
+
+  .botao-voltar {
+    padding: 10px;
+  }
+
+  .titulo-principalCliente {
+    font-size: 1.5em;
+  }
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+  .container-paginaclientes {
+    padding: 15px;
+  }
+
+  .titulo-principalCliente {
+    font-size: 1.2em;
+  }
+
+  .titulo-paginaCliente {
+    font-size: 1em;
+  }
+
+  .p-paginacliente {
+    font-size: 0.9em;
+  }
+
+  .botao-voltar {
+    font-size: 0.8em;
+    padding: 8px;
+  }
+
+  .botao-voltar::after {
+    font-size: 0.75em;
+  }
+}
+
+/* Ajustes para dispositivos muito pequenos */
+@media (max-width: 480px) {
+  .container-paginaclientes {
+    margin: 10px;
+  }
+
+  .titulo-principalCliente {
+    font-size: 1em;
+  }
+
+  .titulo-paginaCliente {
+    font-size: 0.9em;
+  }
+
+  .p-paginacliente {
+    font-size: 0.8em;
+  }
 }
