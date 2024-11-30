@@ -42,48 +42,44 @@ function PortalFuncionario() {
 
   return (
     <>
-      <h1 className="titulo">{"Portal do funcionário"}
+      <h1 className="titulo">{"Bem-vindo ao portal do funcionário de"}
         <span className="nomeDestaque">
-          {funcionario ? ` de ${funcionario.nome}` : ' Usuário não encontrado...'}
+          {funcionario ? ` ${funcionario.nome}` : ' Usuário não encontrado...'}
         </span>
       </h1>
+      
+      <h4 className="titulo-seg">
+        Utilize o portal para checar avisos importantes, seus holerites, registro de ponto, atestados e armazenar arquivos importantes para a empresa.
+      </h4>
 
-      {/*  Mural de avisos */}
+      {/* Mural de avisos */}
       <div id="carouselExampleIndicators" className="carousel slide custom-carousel" data-bs-ride="carousel">
-        <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-          <div className="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img src="/src/assets/morango.jpg" className="d-block w-100" alt="Morango" />
-            </div>
-            <div className="carousel-item">
-              <img src="..." className="d-block w-100" alt="..." />
-            </div>
-            <div className="carousel-item">
-              <img src="..." className="d-block w-100" alt="..." />
-            </div>
-          </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
+        <div className="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src="./src/assets/morango.jpg" className="d-block w-100" alt="Morango" />
+          </div>
+          <div className="carousel-item">
+            <img src="./src/assets/kiwi.jpg" className="d-block w-100" alt="Kiwi" />
+          </div>
+          <div className="carousel-item">
+            <img src="./src/assets/manga.jpg" className="d-block w-100" alt="Manga" />
+          </div>
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
       </div>
 
-      <h3 className="titulo-seg">
-        Bem-vindo ao portal do funcionário
-      </h3>
-      <h4 className="titulo-seg">
-        Utilize o portal para checar seus holerites, registro de ponto, atestados e armazenar arquivos importantes para a empresa.
-      </h4>
 
       <div className="pasta-div">
         {/* Holerites */}

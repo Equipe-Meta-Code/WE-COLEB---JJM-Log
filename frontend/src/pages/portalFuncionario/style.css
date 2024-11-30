@@ -39,13 +39,22 @@
 }
 
 .titulo {
-    color: black;
-    padding-bottom: 15px;
+  padding: 5px;
+  text-align: center; 
+  margin: 5px auto; 
+  max-width: 800px;
+  color: black; 
+  line-height: 1.2;
 }
 
 .titulo-seg {
-    text-align: center;
     padding: 5px;
+    text-align: center; 
+    margin: 20px auto; 
+    max-width: 750px;
+    color: black; 
+    font-size: 1.3rem;
+    line-height: 1.6;
 }
 
 .titulo-funcionarios{
@@ -164,8 +173,10 @@
   max-height: 400px; /* Define a altura máxima */
   margin: 0 auto; /* Centraliza o carrossel */
   margin-bottom: 70px;
+  margin-top: 30px;
 }
 .custom-carousel img {
   object-fit: cover; /* Ajusta a imagem ao espaço disponível */
-  height: 100%; /* Garante que a imagem respeite a altura definida */
+  height: 400px; /* Altura fixa do carrossel */
+  width: 100%; /* Certifique-se de que ocupa toda a largura */
 }
