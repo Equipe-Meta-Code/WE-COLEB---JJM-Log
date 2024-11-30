@@ -5,6 +5,14 @@ const multer  = require('multer');
 // O módulo path permite interagir com o sistema de arquivos
 const path = require('path');
 
+const fs = require('fs');
+
+// Verifica se o diretório existe, caso contrário, cria
+const dir = './src/public/upload/pdf';
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+
 // Realizar upload do arquivo
 module.exports = multer({
     storage: multer.diskStorage({
