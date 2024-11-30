@@ -43,7 +43,7 @@ function PaginaCliente() {
 
   function formatCEP(cep) {
     return cep.replace(/^(\d{5})(\d{3})$/, '$1-$2');
-  }  
+  }
 
   return (
     <div className="container-paginaclientes">
@@ -57,56 +57,56 @@ function PaginaCliente() {
       <div className="container-columns">
         <div className="column">
           <h2 className='titulo-paginaCliente'>Informações Básicas</h2>
-          <p><strong>CNPJ:</strong> {formatCNPJ(cliente.cnpj)}</p>
-          <p><strong>Razão Social:</strong> {cliente.razao_social}</p>
-          <p><strong>Nome Fantasia:</strong> {cliente.nome_fantasia}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>CNPJ:</strong> {formatCNPJ(cliente.cnpj)}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Razão Social:</strong> {cliente.razao_social}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Nome Fantasia:</strong> {cliente.nome_fantasia}</p>
         </div>
 
         <div className="column">
           <h2 className='titulo-paginaCliente'>Informações de Contato</h2>
-          <p><strong>Telefone:</strong> {formatTelefone(cliente.telefone)}</p>
-          <p><strong>Email:</strong> {cliente.email}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Telefone:</strong> {formatTelefone(cliente.telefone)}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Email:</strong> {cliente.email}</p>
         </div>
 
         <div className="column">
           <h2 className='titulo-paginaCliente'>Inscrições e Contribuições</h2>
-          <p><strong>Inscrição Municipal:</strong> {cliente.inscricao_municipal}</p>
-          <p><strong>Inscrição Estadual:</strong> {cliente.inscricao_estadual}</p>
-          <p><strong>Contribuinte:</strong> {cliente.contribuinte}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Inscrição Municipal:</strong> {cliente.inscricao_municipal}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Inscrição Estadual:</strong> {cliente.inscricao_estadual}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Contribuinte:</strong> {cliente.contribuinte}</p>
         </div>
 
         <div className="column">
           <h2 className='titulo-paginaCliente'>Operação e Atividades</h2>
-          <p><strong>Natureza da Operação:</strong> {cliente.natureza_operacao}</p>
-          <p><strong>Ramo de Atividade:</strong> {cliente.ramo_atividade}</p>
-          <p><strong>RNTRC:</strong> {cliente.rntrc}</p>
-          <p><strong>Validade RNTRC: </strong>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Natureza da Operação:</strong> {cliente.natureza_operacao}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Ramo de Atividade:</strong> {cliente.ramo_atividade}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>RNTRC:</strong> {cliente.rntrc}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Validade RNTRC: </strong>
             {cliente.validade_rntrc ? format(new Date(cliente.validade_rntrc), 'dd/MM/yyyy') : ''}
           </p>
         </div>
 
         <div className="column">
           <h2 className='titulo-paginaCliente'>Valores</h2>
-          <p><strong>Valor Fixo:</strong> R$ {cliente.valor_fixo}</p>
-          <p><strong>Valor Adicional:</strong> R$ {cliente.valor_adicional}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Valor Fixo:</strong> R$ {cliente.valor_fixo}</p>
+          <p className='p-paginacliente'><strong className='strong-paginacliente'>Valor Adicional:</strong> R$ {cliente.valor_adicional}</p>
         </div>
 
         <div className="column endereco">
           <h2 className='titulo-paginaCliente'>Endereços</h2>
           {addressData.length > 0 ? (
             addressData.map((endereco, index) => (
-              <div key={index} className="endereco-item">
-                <p><strong>CEP:</strong> {formatCEP(endereco.cep)}</p>
-                <p><strong>Estado:</strong> {endereco.estado}</p>
-                <p><strong>Cidade:</strong> {endereco.cidade}</p>
-                <p><strong>Rua:</strong> {endereco.rua}</p>
-                <p><strong>Bairro:</strong> {endereco.bairro}</p>
-                <p><strong>Número:</strong> {endereco.numero}</p>
-                <p><strong>Complemento:</strong> {endereco.complemento}</p>
-              </div>
+              <div key={index} className="column">
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>CEP:</strong> {formatCEP(endereco.cep)}</p>
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>Estado:</strong> {endereco.estado}</p>
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>Cidade:</strong> {endereco.cidade}</p>
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>Rua:</strong> {endereco.rua}</p>
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>Bairro:</strong> {endereco.bairro}</p>
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>Número:</strong> {endereco.numero}</p>
+                  <p className='p-paginacliente'><strong className='strong-paginacliente'>Complemento:</strong> {endereco.complemento}</p>
+                </div>
             ))
           ) : (
-            <p>Nenhum endereço cadastrado.</p>
+            <p className='p-paginacliente'>Nenhum endereço cadastrado.</p>
           )}
         </div>
 

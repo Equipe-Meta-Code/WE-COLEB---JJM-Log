@@ -22,12 +22,12 @@
   font-size: 1.2em;
 }
 
-p {
+.p-paginacliente{
   margin: 5px 0;
   color: #555;
 }
 
-strong {
+.strong-paginacliente {
   color: #333;
 }
 
@@ -111,18 +111,4 @@ strong {
 
 .enderecos {
   margin-top: 20px;
-}
-
-.endereco-item {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.endereco-item button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
 }
