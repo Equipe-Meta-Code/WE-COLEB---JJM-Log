@@ -64,24 +64,30 @@ class EnderecoController {
     }
 
     async update(req: Request, res: Response): Promise<Response> {
-        const { id } = req.params; // ID do endereço vindo da rota
-        const { rua, numero, bairro, cidade, estado, cep, complemento} = req.body;
-
+        const { clienteId, enderecoId } = req.params; // IDs do cliente e do endereço
+        const { rua, numero, bairro, cidade, estado, cep, complemento } = req.body;
+    
         try {
             const enderecoRepository = AppDataSource.getRepository(Endereco);
-
-            // Verificar se o endereço existe
-            const endereco = await enderecoRepository.findOneBy({ id: Number(id) });
-
+    
+            // Buscar o endereço pelo ID e verificar se pertence ao cliente
+            const endereco = await enderecoRepository.findOne({
+                where: {
+                    id: Number(enderecoId),
+                    cliente: { id: Number(clienteId) }, // Verifica se o endereço pertence ao cliente
+                },
+                relations: ["cliente"],
+            });
+    
             if (!endereco) {
-                return res.status(404).json({ error: "Endereço não encontrado" });
+                return res.status(404).json({ error: "Endereço não encontrado ou não pertence ao cliente" });
             }
-
+    
             // Atualizar os dados do endereço
             enderecoRepository.merge(endereco, { rua, numero, bairro, cidade, estado, cep, complemento });
-
+    
             await enderecoRepository.save(endereco);
-
+    
             return res.status(200).json(endereco); // Retorna o endereço atualizado
         } catch (error) {
             return res.status(400).json({
