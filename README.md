@@ -16,7 +16,6 @@
 
 </details>
 
-
 ## 🎯 Objetivo
 Desenvolver um sistema Web com regra de negócio complexa em ambiente de produção (Deploy), com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes, para a empresa **JJM Log**.
 
@@ -51,7 +50,7 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 * Acesse o link do Backlog e da User Stories [[Clique aqui](https://docs.google.com/spreadsheets/d/1g18uVSJqFhiE9HOQwmeEbCcnJMawdrVH/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/22e3c8b1-2adf-452f-8eb6-daea70ef1156" width="450"  />
+  <img src="https://github.com/user-attachments/assets/877a88c8-4b13-4020-82cd-ccf5dd72ab4c" width="450"  />
   <img src="https://github.com/user-attachments/assets/43466187-9d3a-42a8-852e-3caf43cb5d3a" width="450" />
 </div>
 
