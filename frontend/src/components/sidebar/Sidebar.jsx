@@ -256,7 +256,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                   >
@@ -277,7 +277,7 @@ export default function Sidebar() {
                         primary="Monitorar Pacote"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0, // Texto visível somente quando sidebar estiver aberto
+                          display: open ? "block" : "none", // Texto visível somente quando sidebar estiver aberto
                         }}
                       />
                   </ListItemButton>
@@ -298,8 +298,8 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      justifyContent: open ? "initial" : "flex",
+                      px: 2.4,
                     }}
                   >
                     <Link to="/Vendas" className="no-link-style">
@@ -318,7 +318,7 @@ export default function Sidebar() {
                         primary="Desempenho Vendas"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
                         }}
                       />
                   </ListItemButton>
@@ -339,7 +339,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.2,
                     }}
                   >
@@ -359,7 +359,8 @@ export default function Sidebar() {
                         primary="Dashboard"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
+                          marginLeft: -0.5,
                         }}
                       />
                   </ListItemButton>
@@ -380,7 +381,7 @@ export default function Sidebar() {
                 <ListItemButton
                   className="menu-link"
                   sx={{
-                    justifyContent: open ? "initial" : "center",
+                    justifyContent: open ? "initial" : "flex",
                     px: 2.5,
                   }}
                 >
@@ -400,7 +401,8 @@ export default function Sidebar() {
                       primary="Setor Financeiro"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
+                        marginLeft: -0.2,
                       }}
                     />
                 </ListItemButton>
@@ -412,7 +414,7 @@ export default function Sidebar() {
 
             <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
               <Tooltip
-                title="Cadastro"
+                title="Cadastrar"
                 placement="right"
                 arrow
                 disableHoverListener={open}
@@ -420,7 +422,7 @@ export default function Sidebar() {
                 <ListItemButton
                   className="menu-link"
                   sx={{
-                    justifyContent: open ? "initial" : "center",
+                    justifyContent: open ? "initial" : "flex",
                     px: 2.5,
                   }}
                   onClick={handleClick} // Abre opções ao clicar
@@ -436,10 +438,11 @@ export default function Sidebar() {
                     <BsBuildingFillAdd size={19} />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Cadastro"
+                    primary="Cadastrar"
                     sx={{
                       color: "#666666",
-                      opacity: open ? 1 : 0,
+                      display: open ? "block" : "none",
+                      marginLeft: -0.3,
                     }}
                   />
                 </ListItemButton>
@@ -497,7 +500,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.2,
                     }}
                   >
@@ -518,7 +521,8 @@ export default function Sidebar() {
                         primary="Lista de Clientes"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
+                          marginLeft: -0.5,
                         }}
                       />
                   </ListItemButton>
@@ -542,7 +546,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                   >
@@ -562,7 +566,7 @@ export default function Sidebar() {
                         primary="Cadastro"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
                         }}
                       />
                   </ListItemButton>
@@ -582,8 +586,8 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      justifyContent: open ? "initial" : "flex",
+                      px: 2.6,
                     }}
                     onClick={() => handlePortalFunc()}
                   >
@@ -601,7 +605,8 @@ export default function Sidebar() {
                       primary="Portal do Funcionário"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
+                        marginLeft: -0.3,
                       }}
                     />
                   </ListItemButton>
@@ -615,7 +620,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                   >
@@ -635,7 +640,7 @@ export default function Sidebar() {
                       primary="Controle Etapas"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
                       }}
                     />
                   </ListItemButton>
@@ -649,7 +654,7 @@ export default function Sidebar() {
                     <ListItemButton
                       className="menu-link"
                       sx={{
-                        justifyContent: open ? "initial" : "center",
+                        justifyContent: open ? "initial" : "flex",
                         px: 2.5,
                       }}
                     >
@@ -669,7 +674,8 @@ export default function Sidebar() {
                         primary="Lista de Funcionários"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
+                          marginLeft: -0.2,
                         }}
                       />
                     </ListItemButton>
@@ -689,7 +695,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                     onClick={() => handleLogout()}
@@ -708,7 +714,8 @@ export default function Sidebar() {
                       primary="Sair"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
+                        marginLeft: -0.2,
                       }}
                     />
                   </ListItemButton>
