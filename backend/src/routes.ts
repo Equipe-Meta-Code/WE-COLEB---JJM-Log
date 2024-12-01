@@ -11,7 +11,9 @@ import PedidoController from './controllers/PedidoController';
 import EtapaPedidoController from './controllers/EtapaPedido.Controller';
 import ClienteController from './controllers/ClienteController';
 import UserFilesController from './controllers/UserFilesController';
+import CompanyFilesController from './controllers/CompanyFilesController';
 const uploadPdf = require('./Services/UploadPdf');
+const uploadImage = require('./Services/UploadImage');
 
 const router = Router();
 //router.post("/users", is(['Admin_Role', 'Admin/Vendedor_Role']), UserController.create);
@@ -24,8 +26,10 @@ router.post("/etapas", EtapaController.create);
 router.post("/pedidos", PedidoController.create);
 router.post("/etapapedido", EtapaPedidoController.create);
 router.post('/upload', uploadPdf.single('pdf'), UserFilesController.create);
+router.post('/upload/image', uploadImage.single('image'), CompanyFilesController.create);
 
 router.get("/arquivos", UserFilesController.getAll);
+router.get("/upload/images", CompanyFilesController.getAll);
 router.get("/users", UserController.getAll);
 router.get("/usersid/:id", UserController.getById);
 router.get("/pedidos", PedidoController.getAll);
@@ -53,5 +57,6 @@ router.get("/clientes/:id", ClienteController.getClienteById); // Buscar cliente
 router.put("/clientes/:id", ClienteController.update); // Atualizar cliente
 router.delete("/clientes/:id", ClienteController.delete); // Deletar cliente
 router.delete('/arquivos/:id', UserFilesController.delete);
+router.delete('/imagens/:id', CompanyFilesController.delete);
 
 export { router };
