@@ -93,49 +93,6 @@
     width: 100%;
     border-collapse: collapse;
     background-color: white;
-    font-size: 16px;
-    text-align: left;
-  }
-  .tabela-clientes th, .tabela-clientes td {
-    padding: 10px;
-    border: 1px solid #ddd;
-  }
-
-  @media (max-width: 768px) {
-    .tabela-clientes {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .cabecalho-tabela {
-        display: none; /* Oculta os cabeçalhos */
-    }
-
-    .corpo-tabela tr {
-        display: block;
-        margin-bottom: 20px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .linha-tabela {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-    }
-
-    .linha-tabela td {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-    }
-
-    .linha-tabela td:before {
-        content: attr(data-label); /* Insere o título da coluna como conteúdo */
-        font-weight: bold;
-        flex-shrink: 0;
-        margin-right: 10px;
-    }
   }
   
   .cabecalho-tabela {
@@ -143,10 +100,48 @@
   }
   
   .cabecalho-tabela th, .corpo-tabela td {
-    padding: 12px 20px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
     text-align: left;
   }
+
+  @media screen and (max-width: 768px) {
+    .tabela-de-clientes {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tabela-clientes {
+        display: block;
+    }
+
+    .linha-tabela {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .linha-tabela td {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+
+    .linha-tabela td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 20px;
+        flex: 1;
+    }
+
+    .cabecalho-tabela {
+        display: none; /* Esconde o cabeçalho da tabela em telas pequenas */
+    }
+}
   
   .corpo-tabela tr:nth-child(even) {
     background-color: #f9f9f9;
