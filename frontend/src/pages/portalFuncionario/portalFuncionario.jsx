@@ -40,6 +40,61 @@ function PortalFuncionario() {
     buscarFuncionario();
   }, []);
 
+  //upload imagem no mural de avisos
+  const handleUploadImage = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return alert("Nenhuma imagem selecionada.");
+  
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("userId", userId);
+    formData.append("origem", origem);
+    formData.append('tipoImg', "Mural de avisos");
+    console.log("enviando pro banco", userId, origem)
+    
+    try {
+      const response = await api.post("/upload/image", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+      }
+    });
+      console.log("Resposta do servidor:", response);
+
+      // Atualiza o carrossel com a nova imagem
+      const newImage = {
+        src: `${response.data.rota}`,
+        alt: `Imagem enviada por ${response.data.user_id}`,
+      };
+
+      setCarouselImages((prevImages) => [...prevImages, newImage]);
+      alert("Imagem adicionada ao carrossel!");
+    } catch (error) {
+      console.error("Erro ao enviar o arquivo:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchCarouselImages = async () => {
+      try {
+        const response = await api.get("/upload/images"); // Rota do backend para buscar imagens
+        console.log("Imagens recebidas do backend:", response.data);
+
+        const imagens = response.data.map((img) => ({
+          src: img.url, 
+          alt: img.nome,
+        }));
+
+        setCarouselImages(imagens);
+      } catch (error) {
+        console.error("Erro ao carregar imagens no mural de avisos:", error);
+      }
+    };
+
+    fetchCarouselImages();
+  }, []);
+
+  const [carouselImages, setCarouselImages] = useState([]);
+
   return (
     <>
       <h1 className="titulo">{"Bem-vindo ao portal do funcionário de"}
@@ -59,17 +114,40 @@ function PortalFuncionario() {
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="./src/assets/morango.jpg" className="d-block w-100" alt="Morango" />
-          </div>
-          <div className="carousel-item">
-            <img src="./src/assets/kiwi.jpg" className="d-block w-100" alt="Kiwi" />
-          </div>
-          <div className="carousel-item">
-            <img src="./src/assets/manga.jpg" className="d-block w-100" alt="Manga" />
-          </div>
+
+        {/* Botão de Upload */}
+        <div className="upload-btn-wrapper">
+          <label htmlFor="upload-carousel" className="upload-label">
+            Upload Imagem
+          </label>
+          <input
+            id="upload-carousel"
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={handleUploadImage}
+          />
         </div>
+
+        <div className="carousel-inner">
+          {carouselImages.length > 0 ? (
+            carouselImages.map((img, index) => (
+              <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                <img src={img.src} className="d-block w-100" alt={img.alt} />
+              </div>
+            ))
+          ) : (
+            //imagem padrão enquanto não há nenhuma imagem no banco
+            <div className="carousel-item active">
+            <img 
+              src="/src/assets/morango.jpg"
+              className="d-block w-100" 
+              alt="Imagem padrão do mural" 
+            />
+          </div>
+          )}
+        </div>
+
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Previous</span>
