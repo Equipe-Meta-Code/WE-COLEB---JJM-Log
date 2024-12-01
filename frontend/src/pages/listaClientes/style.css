@@ -134,7 +134,7 @@
     .linha-tabela td:before {
         content: attr(data-label);
         font-weight: bold;
-        margin-right: 20px;
+        margin-right: 100px;
         flex: 1;
     }
 
