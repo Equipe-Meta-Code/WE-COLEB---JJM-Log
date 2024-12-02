@@ -1,5 +1,17 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.pagina{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
 .pasta-div {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   flex-direction: inline;
