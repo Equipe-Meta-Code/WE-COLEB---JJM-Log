@@ -5,7 +5,7 @@ import User from "../models/User";
 import Role from "../models/Role";
 import Permission from "../models/Permission";
 import Departamento from "../models/Departamento";
-import Cliente from "../models/Cliente";
+
 import Endereco from "../models/Endereco";
 import Etapa from "../models/Etapa";
 import EtapaPedido from "../models/EtapaPedido";
@@ -24,6 +24,7 @@ import { CreateEtapas1727183768483 } from "./migrations/1727183768483-CreateEtap
 import { CreateEtapasPedidos1727183789278 } from "./migrations/1727183789278-CreateEtapasPedidos";
 import { CreateUserFiles1729473571831 } from "./migrations/1729473571831-CreateUserFiles";
 import UserFiles from "../models/UserFiles";
+import { Cliente } from "../models/Cliente";
 
 export const AppDataSource = new DataSource({
     type: "mysql",

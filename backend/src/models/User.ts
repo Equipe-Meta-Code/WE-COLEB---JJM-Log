@@ -18,6 +18,9 @@ class User {
     @Column('varchar', { length: 100, nullable: true })
     senha: string;
 
+    @Column('varchar', { length: 100, nullable: true })
+    cargo: string;
+
     @Column('timestamp', { default: 'CURRENT_TIMESTAMP'} )
     data_criacao: Date;
 
