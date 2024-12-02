@@ -156,7 +156,10 @@ export default function Sidebar() {
         <CssBaseline />
 
         {/* Navbar */}
-        <AppBar position="fixed" open={open}>
+        <AppBar position="fixed" open={open} sx={{
+          width: { sm: `calc(100% - ${open ? 240 : 0}px)` }, // Ajuste dinâmico
+          ml: { sm: `${open ? 240 : 72}px` },
+        }}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -194,7 +197,16 @@ export default function Sidebar() {
         </AppBar>
 
         {/* Sidebar */}
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open}
+          sx={{
+            width: { sm: open ? 240 : 72 }, // Ajusta a largura
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: { sm: open ? 240 : 72 },
+              boxSizing: "border-box",
+            },
+            }}
+        >
           <DrawerHeader>
             <Box
               sx={{
@@ -234,7 +246,7 @@ export default function Sidebar() {
             {/* Monitoramento de Pacote */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Monitoramento de Pacote"
                   placement="right"
@@ -244,7 +256,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                   >
@@ -262,10 +274,10 @@ export default function Sidebar() {
 
                     </Link>
                       <ListItemText
-                        primary="Monitoramento de Pacote"
+                        primary="Monitorar Pacote"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0, // Texto visível somente quando sidebar estiver aberto
+                          display: open ? "block" : "none", // Texto visível somente quando sidebar estiver aberto
                         }}
                       />
                   </ListItemButton>
@@ -276,7 +288,7 @@ export default function Sidebar() {
             {/* Desempenho de Vendas */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Desempenho de Vendas"
                   placement="right"
@@ -286,8 +298,8 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      justifyContent: open ? "initial" : "flex",
+                      px: 2.4,
                     }}
                   >
                     <Link to="/Vendas" className="no-link-style">
@@ -303,10 +315,10 @@ export default function Sidebar() {
                       </ListItemIcon>
                     </Link>
                       <ListItemText
-                        primary="Desempenho de Vendas"
+                        primary="Desempenho Vendas"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
                         }}
                       />
                   </ListItemButton>
@@ -317,7 +329,7 @@ export default function Sidebar() {
             {/* Dashboard */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Dashboard"
                   placement="right"
@@ -327,8 +339,8 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      justifyContent: open ? "initial" : "flex",
+                      px: 2.2,
                     }}
                   >
                     <Link to="/Dashboard" className="no-link-style">
@@ -347,7 +359,8 @@ export default function Sidebar() {
                         primary="Dashboard"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
+                          marginLeft: -0.5,
                         }}
                       />
                   </ListItemButton>
@@ -358,7 +371,7 @@ export default function Sidebar() {
             {/* Setor Financeiro */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
             <Tooltip
                 title="Setor Financeiro"
                 placement="right"
@@ -368,7 +381,7 @@ export default function Sidebar() {
                 <ListItemButton
                   className="menu-link"
                   sx={{
-                    justifyContent: open ? "initial" : "center",
+                    justifyContent: open ? "initial" : "flex",
                     px: 2.5,
                   }}
                 >
@@ -388,7 +401,8 @@ export default function Sidebar() {
                       primary="Setor Financeiro"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
+                        marginLeft: -0.2,
                       }}
                     />
                 </ListItemButton>
@@ -398,9 +412,9 @@ export default function Sidebar() {
             
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
               <Tooltip
-                title="Cadastro"
+                title="Cadastrar"
                 placement="right"
                 arrow
                 disableHoverListener={open}
@@ -408,7 +422,7 @@ export default function Sidebar() {
                 <ListItemButton
                   className="menu-link"
                   sx={{
-                    justifyContent: open ? "initial" : "center",
+                    justifyContent: open ? "initial" : "flex",
                     px: 2.5,
                   }}
                   onClick={handleClick} // Abre opções ao clicar
@@ -424,10 +438,11 @@ export default function Sidebar() {
                     <BsBuildingFillAdd size={19} />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Cadastro"
+                    primary="Cadastrar"
                     sx={{
                       color: "#666666",
-                      opacity: open ? 1 : 0,
+                      display: open ? "block" : "none",
+                      marginLeft: -0.3,
                     }}
                   />
                 </ListItemButton>
@@ -475,7 +490,7 @@ export default function Sidebar() {
             {/* Lista de Clientes */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Lista de Clientes"
                   placement="right"
@@ -485,8 +500,8 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      justifyContent: open ? "initial" : "flex",
+                      px: 2.2,
                     }}
                   >
                     <Link to="/clientes" className="no-link-style">
@@ -506,7 +521,8 @@ export default function Sidebar() {
                         primary="Lista de Clientes"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
+                          marginLeft: -0.5,
                         }}
                       />
                   </ListItemButton>
@@ -515,12 +531,12 @@ export default function Sidebar() {
             </PermissionComponent>
             
      
-            <Divider />
+            <Divider sx={{marginTop: "5px", marginBottom: "5px"}} />
           
 
             {/* Botão separado para Cadastro de Usuário */}
             <PermissionComponent role="Admin_Role">
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Cadastro de Usuário"
                   placement="right"
@@ -530,7 +546,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                   >
@@ -550,7 +566,7 @@ export default function Sidebar() {
                         primary="Cadastro"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
                         }}
                       />
                   </ListItemButton>
@@ -560,7 +576,7 @@ export default function Sidebar() {
 
             {/* Portal do Funcionário */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
-              <ListItem disablePadding sx={{ display: "block" }}>
+             <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Portal do Funcionário"
                   placement="right"
@@ -570,8 +586,8 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      justifyContent: open ? "initial" : "flex",
+                      px: 2.6,
                     }}
                     onClick={() => handlePortalFunc()}
                   >
@@ -589,7 +605,8 @@ export default function Sidebar() {
                       primary="Portal do Funcionário"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
+                        marginLeft: -0.3,
                       }}
                     />
                   </ListItemButton>
@@ -598,12 +615,12 @@ export default function Sidebar() {
             </PermissionComponent>
 
             <PermissionComponent role="Admin_Role">
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip title="Controle Etapas" placement="right" arrow>
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                   >
@@ -623,7 +640,7 @@ export default function Sidebar() {
                       primary="Controle Etapas"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
                       }}
                     />
                   </ListItemButton>
@@ -632,12 +649,12 @@ export default function Sidebar() {
             </PermissionComponent>
 
             <PermissionComponent role="Admin_Role,Rh_Role">
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                   <Tooltip title="Lista de Funcionários" placement="right" arrow>
                     <ListItemButton
                       className="menu-link"
                       sx={{
-                        justifyContent: open ? "initial" : "center",
+                        justifyContent: open ? "initial" : "flex",
                         px: 2.5,
                       }}
                     >
@@ -657,7 +674,8 @@ export default function Sidebar() {
                         primary="Lista de Funcionários"
                         sx={{
                           color: "#666666",
-                          opacity: open ? 1 : 0,
+                          display: open ? "block" : "none",
+                          marginLeft: -0.2,
                         }}
                       />
                     </ListItemButton>
@@ -667,7 +685,7 @@ export default function Sidebar() {
 
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
               {/* Sair */}
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
                 <Tooltip
                   title="Sair"
                   placement="right"
@@ -677,7 +695,7 @@ export default function Sidebar() {
                   <ListItemButton
                     className="menu-link"
                     sx={{
-                      justifyContent: open ? "initial" : "center",
+                      justifyContent: open ? "initial" : "flex",
                       px: 2.5,
                     }}
                     onClick={() => handleLogout()}
@@ -696,35 +714,14 @@ export default function Sidebar() {
                       primary="Sair"
                       sx={{
                         color: "#666666",
-                        opacity: open ? 1 : 0,
+                        display: open ? "block" : "none",
+                        marginLeft: -0.2,
                       }}
                     />
                   </ListItemButton>
                 </Tooltip>
               </ListItem>
             </PermissionComponent>
-
-            {/* <ListItem disablePadding sx={{ display: "block" }}>
-              <Tooltip title="Configurações" placement="right" arrow>
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: "center",
-                  }}
-                >
-                  <Link to="/departamentos" className="menu-link-icon">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: 'white',
-                      }}
-                    >
-                      <FaGear size={19} />
-                    </ListItemIcon>
-                  </Link>
-                </ListItemButton>
-              </Tooltip>
-            </ListItem> */}
           </List>
         </Drawer>
       </Box>

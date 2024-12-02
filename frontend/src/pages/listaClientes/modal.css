@@ -5,6 +5,8 @@
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
     display: flex; /* Usado para centralizar o modal */
     align-items: center; /* Alinha verticalmente no centro */
@@ -17,6 +19,7 @@
     background-color: white; /* Fundo branco para o modal */
     border-radius: 8px; /* Cantos arredondados */
     padding: 20px; /* Espaçamento interno */
+    margin-left: 5%;
     max-width: 800px; /* Largura máxima do modal */
     width: 100%; /* Largura total até o máximo */
     max-height: 600px; /* Altura máxima do modal */
@@ -28,12 +31,12 @@
 /* Estilo do botão de fechar */
 .botao-fechar {
     position: absolute; /* Posiciona o botão no canto superior direito */
-    top: 10px;
-    right: 10px;
+    top: 4%;
+    right: 2%;
     background: none; /* Remove o fundo */
     border: none; /* Remove a borda */
     cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    font-size: 20px; /* Tamanho do ícone */
+    font-size: 1.5rem; /* Tamanho do ícone */
     color: #333; /* Cor do ícone */
 }
 
@@ -41,6 +44,31 @@
 .modal-conteudo {
     margin-top: 20px; /* Espaçamento acima do conteúdo */
 }
+
+@media (max-width: 768px) {
+    .modal {
+      max-width: 75%; /* Ajusta o tamanho do modal em telas menores */
+      padding: 15px;
+    }
+  
+    .botao-fechar {
+      top: 3%;
+      right: 3%;
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal {
+      max-width: 80%; /* Ainda mais flexível para telas muito pequenas */
+      margin-left: 10%;
+      padding: 10px;
+    }
+  
+    .modal-conteudo {
+      font-size: 0.9rem; /* Ajusta o texto para caber na tela */
+    }
+  }
 
 /* Estilo para os formulários */
 form {
