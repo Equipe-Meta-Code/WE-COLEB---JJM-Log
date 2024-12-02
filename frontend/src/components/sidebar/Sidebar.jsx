@@ -248,7 +248,7 @@ export default function Sidebar() {
                       px: 2.5,
                     }}
                   >
-                    <Link to="/cardList" className="no-link-style">
+                    <Link to="/" className="no-link-style">
                       <ListItemIcon
                         sx={{
                           justifyContent: "center",
@@ -447,10 +447,14 @@ export default function Sidebar() {
                   horizontal: "left",
                 }}
               >
+              
                 <MenuItem onClick={handleClose}>
-                  <Link to="/Cadastro/Departamento" className="no-link-style">
-                    Cadastro de Departamento
+                  <Link to="/departamentos" className="no-link-style">
+                    Departamentos
                   </Link>
+                  {/* <Link to="/Cadastro/Departamento" className="no-link-style">
+                    Cadastro de Departamento
+                  </Link> */}
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <Link to="/Cadastro/Etapas" className="no-link-style">

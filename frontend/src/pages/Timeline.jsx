@@ -401,9 +401,9 @@ const LicensePlateCard = () => {
               <SmallCard title="Distância" value={`${pedido.distancia}km`} icon={<DirectionsCarIcon sx={{ color: 'white' }} />} />
               <SmallCard title="Custos"  value={
         <>
-          {`Total: ${pedido.total}`} <br />
+          {`Total: R$${pedido.total}`} <br />
           {`Gastos: ${pedido.gastos}`} <br />
-          {`Lucro: ${pedido.lucro}`}
+          {`Lucro: R$${pedido.lucro}`}
         </>
       } icon={<AttachMoneyIcon sx={{ color: 'white' }} />} />
             </Box>

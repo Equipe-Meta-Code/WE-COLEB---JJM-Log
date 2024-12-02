@@ -19,7 +19,7 @@ router.post("/users", UserController.create);
 router.post("/sessions", SessionController.create);
 router.post("/permissions", PermissionController.create);
 router.post("/roles", RoleController.create);
-router.post("/departamentos", DepartamentoController.create);
+/* router.post("/departamentos", DepartamentoController.create); */
 router.post("/etapas", EtapaController.create);
 router.post("/pedidos", PedidoController.create);
 router.post("/etapapedido", EtapaPedidoController.create);

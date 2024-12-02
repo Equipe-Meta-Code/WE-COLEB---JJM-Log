@@ -44,7 +44,7 @@ function LoginPage() {
         try {
             await signIn({ login, senha });
             if (userLogged()) {
-                navigate('/cardList');
+                navigate('/');
                 window.location.reload();
             }
         } catch (err) {
