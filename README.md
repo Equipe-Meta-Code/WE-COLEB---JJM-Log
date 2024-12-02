@@ -1,5 +1,21 @@
-
 <h1 align="center"> Projeto API - 4  º Semestre </h1>
+
+## Índice
+<details>
+  <summary>Mostrar Índice Completo</summary>
+
+* [Objetivo](#-objetivo)
+* [Requisitos funcionais](#-requisitos-funcionais)
+* [Requisitos não-funcionais](#-requisitos-não-funcionais)
+* [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+* [Backlog e User Stories](#-backlog-e-user-stories)
+* [Diagramas](#-diagramas)
+* [Protótipo Figma](#-protótipo-figma)
+* [Vídeos das Sprints](#️-vídeos-das-sprints)
+* [Guia de Instalação](#guia-de-instalação)
+
+</details>
+
 
 ## 🎯 Objetivo
 Desenvolver um sistema Web com regra de negócio complexa em ambiente de produção (Deploy), com foco em processos de trabalho, fluxos de trabalho e colaboração entre equipes, para a empresa **JJM Log**.
@@ -30,44 +46,27 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
 
 <span id="sprints">
 
-## 📊 Sprints e Backlog
+## 📊 Backlog e User Stories
+
+* Acesse o link do Backlog e da User Stories [[Clique aqui](https://docs.google.com/spreadsheets/d/1g18uVSJqFhiE9HOQwmeEbCcnJMawdrVH/edit?usp=sharing&ouid=116603387262938038555&rtpof=true&sd=true)]
 
 <div style="display: flex;">
-  <img src="https://github.com/user-attachments/assets/909aef2a-802f-4f94-9556-c58c3a05eb1c" width="500"  />
-  <img src="https://github.com/user-attachments/assets/a582ae84-9e07-4252-9e17-6a05277a7d8f" width="500" />
+  <img src="https://github.com/user-attachments/assets/61ceab49-c9a7-4d8c-a5bf-4e2e964d9ad9" width="450"  />
+  <img src="https://github.com/user-attachments/assets/43466187-9d3a-42a8-852e-3caf43cb5d3a" width="450" />
 </div>
-
-
-
-<span id="user">
-
-## 📊 User Stories
-
-![Rank](https://github.com/user-attachments/assets/f47fcab4-051f-4cd0-8607-d9a9678483e7)
-
-  <details>
-     <summary>Backlog - Sprint 1</summary>
-      <div align="center">
-
-| Rank | Prioridade | User Story | Requisito do Parceiro |
-| --- | --- | --- | --- |
-| 1 | ALTA | EU, como cliente, quero ter acesso ao fluxo de ordens de serviço, para facilitar o acompanhamento e execução das solicitações de trabalho entre os departamentos. | RF3 |
-| 2 | ALTA | EU, como cliente, quero acessar a interface principal do sistema que exibe o fluxograma dos processos de trabalho, para que os usuários possam acompanhar visualmente o status e o progresso das entregas e atividades. | RF4 |
-| 3 | ALTA | EU, como cliente, quero ter uma visão geral clara e mínima do site, para garantir que posso entender rapidamente o que estou usando e como isso atende às minhas necessidades. | RF7 |
-
-  </details>
-
-<span id="MVP">
- 
-## 📋 MVP
-Em andamento.
-
 
 <span id="Diagrama de classes">
  
-## 📁 Diagrama (DER)
+## 📁 Diagramas
+### Modelo Conceitual
+![image](https://github.com/user-attachments/assets/e662640a-980d-4403-9770-0b7c0be9a209)
 
-![image](https://github.com/user-attachments/assets/2926ddf4-333b-4291-8241-c478edf2a769)
+### Modelo Lógico
+![image](https://github.com/user-attachments/assets/304453c5-f21c-4051-b852-db7e22acf293)
+
+### MVC
+![model-view-controller-architecture](https://github.com/user-attachments/assets/8d0d6e5f-19f7-482a-a640-edb0a06bc0c3)
+
 
 <span id="Vídeo">
   
@@ -77,35 +76,134 @@ Em andamento.
 https://www.figma.com/design/cLvxtdAwY5JHZP9VonyJeV/dashboard-(Copy)?node-id=0-1&t=DR6TnYwYdQLy0fZv-1
  </details>
   
-## 📽️ Vídeo das Sprints
+## 📽️ Vídeos das Sprints
+
 <details>
-  <summary>VÍDEOS</summary>
-  <details>
-     <summary>SPRINT 1</summary>
-      <div align="center">
+  <summary>Ver todos os vídeos das sprints</summary>
 
-https://github.com/user-attachments/assets/69486f51-dc0e-43f5-8714-9c0f5ff1176b
+  ##### SPRINT 1 - Assistir ao vídeo da Sprint 1
+  <div align="center">
 
-  </details>
+
+https://github.com/user-attachments/assets/5a88baa1-954c-4877-bab0-7c3ef3dfdd97
+
+
+  </div>
+
+  ---
   
-  <details>
-     <summary>SPRINT 2</summary>
-      <div align="center">
-  </details>
+  ##### SPRINT 2 - Assistir ao vídeo da Sprint 2
+  <div align="center">
+   
+
+https://github.com/user-attachments/assets/7563efdb-d8d6-45cf-85b5-071ceb0a85ca
+
+
+  </div>
+
+  ---
   
-  <details>
-     <summary>SPRINT 3</summary>
-      <div align="center">
-  </details>
+  ##### SPRINT 3 - Assistir ao vídeo da Sprint 3
+  <div align="center">
+
+
+
+https://github.com/user-attachments/assets/547da2f8-306b-4a3d-9580-b75a900d852b
+
+
+    
+  </div>
+
+  ---
   
-  <details>
-     <summary>SPRINT 4</summary>
-      <div align="center">
-  </details>  
+  ##### SPRINT 4 - O vídeo da Sprint 4 ainda não foi adicionado.
+  <div align="center">
+   
+  </div>
+
 </details>
 
 
-# Guia de Instalação
+## ⬇Guia de Instalação
 
 Este guia oferece instruções detalhadas sobre como baixar, configurar e executar este projeto em sua máquina local.
 
+### Pré-requisitos
+- **VSCode**: Editor de código para visualização e edição do projeto. [Baixe o VSCode](https://code.visualstudio.com/download)
+- **MySQL**: Banco de dados para armazenar informações necessárias ao sistema. [Baixe o MYSQL](https://dev.mysql.com/downloads/installer/)
+
+---
+
+### Instalação
+
+#### 1. Baixando o Projeto
+- No repositório do GitHub, clique em **"Code"** e selecione **"Download ZIP"** ou [Clique aqui](https://github.com/Equipe-Meta-Code/WE-COLEB-JJM-Log/archive/refs/heads/main.zip).
+- Localize o arquivo ZIP baixado e extraia-o para uma pasta de sua escolha.
+
+#### 2. Abrindo o Projeto no VSCode
+- Inicie o VSCode.
+- Clique em **File > Open Folder...** e selecione a pasta extraída para abrir o projeto.
+
+---
+
+### Passos para Executar o Backend
+  
+#### 1. Configuração do Banco de Dados
+> Inicie o MySQL e crie um database chamado `wecollab`.
+  ```bash
+  create database wecollab;
+  ```  
+
+#### 2. Configuração de Credenciais no Projeto
+> No arquivo [data-source.ts](./backend/src/database/data-source.ts) que está localizado em `backend/src/database/data-source.ts`, adicione a senha do seu MySQL no campo `password` para conectar ao banco de dados.
+  ```bash
+  password: " ", #coloque a senha do seu MySQL entre as aspas
+  ```  
+
+#### 3. Preparação do Projeto no VSCode
+> Abra o terminal no VSCode e navegue até a pasta do backend:
+  ```bash
+  cd backend
+  ```
+#### 4. Instalação de Dependências
+> No terminal, instale as dependências do projeto:
+  ```bash
+  npm install
+  ```
+#### 5. Executando as Migrations
+> Aplique as migrations para configurar as tabelas no banco de dados:
+  ```bash
+  npm run typeorm -- -d ./src/database/data-source.ts migration:run
+  ```
+#### 6. Inserindo Dados no Banco
+> No MySQL, execute os scripts de inserção de dados localizados na pasta `database/banco` para configurar o banco.
+> Acesse o aruqivo [banco](./database/banco)
+  
+#### 7. Iniciando o Servidor Backend
+> Inicie o servidor backend com o comando:
+  ```bash
+  npm run dev:server
+  ```
+
+---
+
+###  Passos para Executar o Frontend
+    
+#### 1. Abrindo um Novo Terminal
+> Abra um novo terminal no VSCode para configurar o frontend.
+
+#### 2. Configuração e Execução do Frontend
+> Navegue até a pasta do frontend:
+  ```bash
+  cd frontend
+  ```
+> Instale as dependências do frontend:
+  ```bash
+  npm install
+  ```
+> Inicie o frontend com o comando:
+  ```bash
+  npm run dev
+  ```
+#### 3. Acessando a Aplicação
+> No terminal, copie o link que aparece e abra-o no navegador de sua preferência para acessar a aplicação.
