@@ -90,6 +90,11 @@ export class CreatePedidos1727115009916 implements MigrationInterface {
                     type: 'float',
                     isNullable: true,
                 },
+                {
+                    name: 'gastos',
+                    type: 'float',
+                    isNullable: true,
+                },
             ],
         }), true);
 

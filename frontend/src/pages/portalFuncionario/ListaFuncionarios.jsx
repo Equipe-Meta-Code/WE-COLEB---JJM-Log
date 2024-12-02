@@ -85,7 +85,7 @@ function ListaFuncionarios() {
                                 <td className="coluna-cpf">{funcionario.cpf}</td>
                                 <td className="coluna-email">{funcionario.login}</td>
 
-                                <td className="coluna-cargo">{getCargo(funcionario.roles)}</td> {/* Mapeia os cargos */}
+                                <td className="coluna-cargo">{funcionario.cargo}</td> {/* Mapeia os cargos */}
                                 <td className="coluna-acoes">
                                     {/* Botão de menu */}
                                     <div className="menu-container">

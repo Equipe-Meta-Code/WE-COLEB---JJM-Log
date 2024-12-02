@@ -28,8 +28,11 @@ class Endereco {
     @Column({ type: 'varchar', nullable: true })
     complemento: string;
 
-    @ManyToOne(() => Cliente)
-    @JoinColumn({ name: 'cliente_id' })
+    @ManyToOne(() => Cliente, (cliente) => cliente.enderecos, {
+        onDelete: "CASCADE", // Exclui endereços ao excluir cliente, se necessário
+        eager: true, // Defina como `true` se quiser carregar o cliente por padrão
+    })
+    @JoinColumn({ name: "cliente_id" }) // Nome da coluna no banco
     cliente: Cliente;
 }
 

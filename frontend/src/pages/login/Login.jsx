@@ -34,7 +34,7 @@ function LoginPage() {
     const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar a abertura do modal
     const [recoveryEmail, setRecoveryEmail] = useState(''); // Estado para o email de recuperação
     const navigate = useNavigate();
-    const { signIn } = useAuth();
+    const { signIn, userLogged } = useAuth();
 
     const handleLoginClick = useCallback(async () => {
         if (!login || !senha) {
@@ -43,11 +43,12 @@ function LoginPage() {
         }
         try {
             await signIn({ login, senha });
-            navigate('/');
-            window.location.reload();
-        } catch (error) {
+            if (userLogged()) {
+                navigate('/');
+                window.location.reload();
+            }
+        } catch (err) {
             setError("Credenciais inválidas. Por favor, verifique seu login e senha.");
-            console.log("Erro login")
         }
     }, [login, senha, signIn, navigate]);
 
@@ -103,6 +104,7 @@ return (
                 </div>
                 <button className="recovery-link" onClick={() => setIsModalOpen(true)}>Esqueceu a senha?</button>
                 <button className="login-button" onClick={handleLoginClick}>Entrar</button>
+                {error}
             </div>
         </div>
 

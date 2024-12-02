@@ -41,6 +41,7 @@
   .titulo {
       color: black;
       padding-bottom: 15px;
+      text-align: center;
   }
   
   .titulo-seg {
@@ -51,6 +52,14 @@
   .titulo-clientes{
     width: max-content;
     color: black;
+    margin: 20px 0;
+    font-size: 2rem;
+    white-space: nowrap;
+  }
+    @media (max-width: 768px) {
+      .titulo-clientes {
+        font-size: 1.8rem;
+    }
   }
   .lista-clientes {
     width: 100%;
@@ -59,18 +68,26 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   .tabela-de-clientes{
     background-color: rgb(247, 247, 247);
   }
   
   .input-pesquisa {
-    width: 300px;
-    padding: 12px 20px;
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px auto;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  @media (max-width: 768px) {
+    .input-pesquisa {
+        max-width: 90%; 
+        font-size: 0.9rem; 
+    }
   }
   
   .tabela-clientes {
@@ -84,10 +101,48 @@
   }
   
   .cabecalho-tabela th, .corpo-tabela td {
-    padding: 12px 20px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
     text-align: left;
   }
+
+  @media screen and (max-width: 768px) {
+    .tabela-de-clientes {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tabela-clientes {
+        display: block;
+    }
+
+    .linha-tabela {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .linha-tabela td {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+
+    .linha-tabela td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 100px;
+        flex: 1;
+    }
+
+    .cabecalho-tabela {
+        display: none; /* Esconde o cabeçalho da tabela em telas pequenas */
+    }
+}
   
   .corpo-tabela tr:nth-child(even) {
     background-color: #f9f9f9;

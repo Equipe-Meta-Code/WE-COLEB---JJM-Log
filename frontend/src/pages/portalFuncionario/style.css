@@ -1,5 +1,17 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.pagina{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
 .pasta-div {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   flex-direction: inline;
@@ -51,6 +63,14 @@
 .titulo-funcionarios{
   width: max-content;
   color: black;
+  margin: 20px 0;
+  font-size: 2rem;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .titulo-funcionarios {
+      font-size: 1.8rem;
+  }
 }
 .lista-funcionarios {
   width: 100%;
@@ -65,12 +85,20 @@
 }
 
 .input-pesquisa {
-  width: 300px;
-  padding: 12px 20px;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px auto;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .input-pesquisa {
+      max-width: 90%; 
+      font-size: 0.9rem; 
+  }
 }
 
 .tabela-funcionarios {

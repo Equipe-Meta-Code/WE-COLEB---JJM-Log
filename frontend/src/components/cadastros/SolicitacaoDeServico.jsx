@@ -31,6 +31,7 @@ function SolicitacaoDeServico() {
         distancia: '',
         total: 0,
         lucro: 0,
+        gastos: 0,
         departamentos: [
             {
                 idPedido: pedidos.length + 1,
@@ -89,21 +90,34 @@ function SolicitacaoDeServico() {
             let calculando = 0
             let totalCalculado = 0
             let lucroCalculado = 0
+            let gastosCalculado = 0
             let consumoCaminhao = 0.35
             let gasolina = 5.32
 
             if(parseFloat(dadosPedido.distancia) > 125){
-                calculando = (parseFloat(dadosPedido.distancia) - 125) * valorFixo
-                totalCalculado = (calculando + (125 * valor_adicional))
-                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
+                
+                
+
+    
+                setDadosPedido({
+                    ...dadosPedido,
+                    total: totalCalculado,
+                    lucro: lucroCalculado
+                });
+                calculando = (parseFloat(dadosPedido.distancia) - 125) * (valorFixo + valor_adicional)
+                totalCalculado = (calculando + (125 * valorFixo ))
+                gastosCalculado = consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina
+                lucroCalculado = totalCalculado - gastosCalculado
     
                 setDadosPedido({ ...dadosPedido, total: calculando })
                 setDadosPedido({ ...dadosPedido, lucro: lucroCalculado })
+                setDadosPedido({ ...dadosPedido, gastos: gastosCalculado })
                 console.log(dadosPedido)
             }
             else{
                 totalCalculado = (parseFloat(dadosPedido.distancia) * valorFixo)
-                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
+                gastosCalculado = consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina
+                lucroCalculado = totalCalculado - gastosCalculado
                 console.log(dadosPedido)
             }   
 
@@ -124,6 +138,7 @@ function SolicitacaoDeServico() {
                 distancia: dadosPedido.distancia,
                 total: totalCalculado,
                 lucro: lucroCalculado,
+                gastos: gastosCalculado,
             });
     
             console.log(response);
@@ -151,6 +166,7 @@ function SolicitacaoDeServico() {
                 distancia: '',
                 total: 0,
                 lucro: 0,
+                gastos: 0,
                 departamentos: [
                     {
                         idPedido: pedidos.length + 1, 

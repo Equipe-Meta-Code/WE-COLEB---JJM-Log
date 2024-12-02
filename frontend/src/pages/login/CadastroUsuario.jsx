@@ -12,18 +12,37 @@ function CadastroUsuario() {
         senha: "",
     });
     const [roles, setRoles] = useState("");
+    const [cargoSelecionado, setCargoSelecionado] = useState("");
     const [error, setError] = useState(""); // State for error message
     const [successMessage, setSuccessMessage] = useState(""); // State for success message
-    const navigate = useNavigate(); // Hook para redirecionar após o cadastro]
-    const [emailError, setEmailError] = useState('');
+    const navigate = useNavigate(); // Hook para redirecionar após o cadastro
+    const [emailError, setEmailError] = useState("");
+
+    // Lista de cargos por nível de acesso
+    const cargosPorNivel = {
+        "2": [
+            "Coordenador administrativo",
+            "Gerente de Operações",
+            "Gerente Comercial",
+            "Diretor Executivo",
+        ],
+        "1": [
+            "Assistente Administrativo",
+            "Analista Administrativo",
+            "Vendedor",
+            "Especialista em Logística",
+            "Operador de Logística",
+            "Analista de Logística",
+            "Motorista",
+        ],
+        "3": ["Analista de RH"],
+    };
 
     const formatarCPF = (value) => {
-        const cpfDigits = value.replace(/\D/g, ''); // Remove all non-numeric characters
-        let formattedCPF = cpfDigits.slice(0, 11); // Ensures CPF has at most 11 digits
-
-        // Apply CPF formatting mask
+        const cpfDigits = value.replace(/\D/g, '');
+        let formattedCPF = cpfDigits.slice(0, 11);
         formattedCPF = formattedCPF.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-        setNovoUsuario({ ...novoUsuario, cpf: formattedCPF })
+        setNovoUsuario({ ...novoUsuario, cpf: formattedCPF });
     };
 
     const aoApertarEnter = (event) => {
@@ -36,7 +55,7 @@ function CadastroUsuario() {
         setError(""); // Clear previous error message
         setSuccessMessage(""); // Clear previous success message
 
-        if (novoUsuario.cpf.length !== 14) { // Checks if CPF has 14 characters, including dots and dash
+        if (novoUsuario.cpf.length !== 14) {
             setError("Por favor, insira um CPF válido com 11 dígitos.");
             return;
         }
@@ -48,14 +67,20 @@ function CadastroUsuario() {
             return;
         }
 
+        if (!roles || !cargoSelecionado) {
+            setError("Por favor, selecione um nível de acesso e um cargo.");
+            return;
+        }
+
         try {
-            console.log("Cadastrando", novoUsuario, roles);
+            console.log("Cadastrando", novoUsuario, roles, cargoSelecionado);
             const response = await api.post("/users", {
                 nome: novoUsuario.nome,
                 cpf: novoUsuario.cpf,
                 login: novoUsuario.usuario,
                 senha: novoUsuario.senha,
-                roles: roles // Enviar o nível de acesso selecionado
+                roles, // Enviar o nível de acesso
+                cargo: cargoSelecionado, // Enviar o cargo selecionado
             });
 
             console.log(response.data);
@@ -89,11 +114,19 @@ function CadastroUsuario() {
             <h2 className="titulo-usuario">Cadastro de Usuário</h2>
             <div className="label-container">
                 <label>Nome:</label>
-                <input value={novoUsuario.nome} onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })} placeholder="Nome" />
+                <input
+                    value={novoUsuario.nome}
+                    onChange={(e) => setNovoUsuario({ ...novoUsuario, nome: e.target.value })}
+                    placeholder="Nome"
+                />
             </div>
             <div className="label-container">
                 <label>CPF:</label>
-                <input value={novoUsuario.cpf} onChange={(event) => formatarCPF(event.target.value)} placeholder="CPF" />
+                <input
+                    value={novoUsuario.cpf}
+                    onChange={(event) => formatarCPF(event.target.value)}
+                    placeholder="CPF"
+                />
             </div>
             <div className="label-container">
                 <label>Email:</label>
@@ -126,18 +159,37 @@ function CadastroUsuario() {
 
             {/* Dropdown para escolher o nível de acesso */}
             <div className="label-container">
-                <label>Nível de Acesso:</label>
-                <select
-                    className="dropdown" // Adicionando a classe para aplicar o estilo
-                    value={roles}
-                    onChange={(event) => setRoles(event.target.value)}
-                >
-                    <option value={""}>Selecione</option>
-                    <option value={"1"}>Usuário Comum</option>
-                    <option value={"2"}>Administrador</option>
-                    <option value={"3"}>Recursos Humanos</option>
-                </select>
-            </div>
+            <label>Cargo:</label>
+            <select
+                className="dropdown"
+                value={cargoSelecionado}
+                onChange={(event) => {
+                    const selectedCargo = event.target.value;
+
+                    // Atualiza o cargo e a role correspondente
+                    setCargoSelecionado(selectedCargo);
+                    if (cargosPorNivel["2"].includes(selectedCargo)) {
+                        setRoles("2");
+                    } else if (cargosPorNivel["1"].includes(selectedCargo)) {
+                        setRoles("1");
+                    } else if (cargosPorNivel["3"].includes(selectedCargo)) {
+                        setRoles("3");
+                    }
+                }}
+            >
+                <option value="">Selecione</option>
+
+                {/* Adiciona as opções de todos os cargos */}
+                {Object.keys(cargosPorNivel).map((roleKey) =>
+                    cargosPorNivel[roleKey].map((cargo, index) => (
+                        <option key={`${roleKey}-${index}`} value={cargo}>
+                            {cargo}
+                        </option>
+                    ))
+                )}
+            </select>
+        </div>
+
 
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}

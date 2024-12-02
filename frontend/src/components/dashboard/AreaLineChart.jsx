@@ -1,112 +1,82 @@
-import React, { useEffect, useState } from 'react';
-import { Line, LineChart, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-import api from '../../services/api';
-import moment from 'moment';
-import 'moment/locale/pt-br'; 
+import React, { useState } from 'react';
+import AdmChart from './AdmChart';
+import FinanceChart from './FinanceChart';
+import OperationalChart from './OperationalChart';
+import RhChart from './RhChart';
 
 const AreaLineChart = () => {
-  const [chartData, setChartData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [yDomain, setYDomain] = useState([0, 20]);
+  const [departamento, setDepartamento] = useState("ADM");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
-  const processChartData = (data) => {
-    moment.locale('pt-br');
-    
-    const mesesEmPortugues = [
-      'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 
-      'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-    ];
-  
-    const ordersByMonth = data.reduce((acc, order) => {
-      const monthIndex = moment(order.data_criacao, 'DD/MM/YYYY').month();
-  
-      if (!acc[monthIndex]) {
-        acc[monthIndex] = { mes: monthIndex, total_pedidos: 0 }; 
-      }
-      acc[monthIndex].total_pedidos += 1;
-      return acc;
-    }, {});
-  
-    return Object.entries(ordersByMonth).map(([mes, valor]) => ({
-      mes: mesesEmPortugues[mes], 
-      total_pedidos: valor.total_pedidos
-    })).sort((a, b) => a.mes - b.mes); 
+  // Função para renderizar o gráfico com base no departamento
+  const renderChart = () => {
+    switch (departamento) {
+      case 'ADM':
+        return <AdmChart startDate={startDate} endDate={endDate} />;
+      case 'FINANCEIRO':
+        return <FinanceChart startDate={startDate} endDate={endDate} />;
+      case 'OPERACIONAL':
+        return <OperationalChart startDate={startDate} endDate={endDate} />;
+      case 'RH':
+        return <RhChart startDate={startDate} endDate={endDate} />;
+      default:
+        return null;
+    }
+  };
 
-  };  
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('/pedidosDashboard');
-        const processedData = processChartData(response.data);
-        setChartData(processedData);
-        setYDomain([0, Math.max(...processedData.map(item => item.total_pedidos), 20)]);
-        setLoading(false);
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  // Função para lidar com a alteração de datas
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "startDate") {
+      setStartDate(value);
+    } else if (name === "endDate") {
+      setEndDate(value);
+    }
+  };
 
   return (
-    <div style={{
-      backgroundColor: '#fff',          
-      borderRadius: '15px',               
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', 
-      padding: '20px',                   
-      margin: '20px 0'                   
-    }}>
-      <div className="line-chart-info">
-        <h5 className="line-chart-title" style={{ color: '#000' }}>Pedidos por Mês</h5>
+    <div style={{ backgroundColor: '#fff', borderRadius: '15px', padding: '20px', margin: '20px 0' }}>
+      <h2 style={{ textAlign: 'center' }}>Gráficos por Departamento</h2>
+
+      <div style={{ marginBottom: '15px', textAlign: 'center' }}>
+        <label htmlFor="departamento">Selecione o Departamento: </label>
+        <select
+          id="departamento"
+          value={departamento}
+          onChange={(e) => setDepartamento(e.target.value)}
+          style={{ padding: '5px' }}
+        >
+          <option value="ADM">Administrativo</option>
+          <option value="FINANCEIRO">Financeiro</option>
+          <option value="OPERACIONAL">Operacional</option>
+          <option value="RH">Recursos Humanos</option>
+        </select>
       </div>
-      <div className="line-chart-wrapper">
-        {loading ? (
-          <p style={{ color: '#000' }}>Carregando...</p>
-        ) : error ? (
-          <p style={{ color: '#000' }}>Erro ao carregar os dados.</p>
-        ) : (
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart
-              data={chartData}
-              margin={{
-                top: 10,
-                right: 30,
-                left: 20,
-                bottom: 0,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-              <XAxis dataKey="mes" stroke="#000" />
-              <YAxis domain={yDomain} tickCount={6} stroke="#000" tickFormatter={(value) => value.toLocaleString('pt-BR')} />
-              <Tooltip formatter={(value, name) => [`${value}`, 'Pedidos']} />
-              {chartData.length === 0 && (
-                <text
-                  x="50%"
-                  y="50%"
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fill="black"
-                >
-                  Não há dados para exibir no gráfico.
-                </text>
-              )}
-              <Line
-                type="monotone"
-                dataKey="total_pedidos"
-                name="Quantidade de pedidos"
-                stroke="#336184" 
-                fill="rgba(51,97,132,0.8)" 
-                fillOpacity={1}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        )}
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+        <div style={{ marginRight: '10px' }}>
+          <label>Data Início:</label>
+          <input
+            type="date"
+            name="startDate"
+            value={startDate || ''}
+            onChange={handleDateChange}
+          />
+        </div>
+        <div>
+          <label>Data Fim:</label>
+          <input
+            type="date"
+            name="endDate"
+            value={endDate || ''}
+            onChange={handleDateChange}
+          />
+        </div>
       </div>
+
+      {/* Renderiza o gráfico selecionado com os filtros de data */}
+      {renderChart()}
     </div>
   );
 };

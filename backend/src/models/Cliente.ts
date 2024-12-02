@@ -1,52 +1,60 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from "typeorm";
+import Endereco from "./Endereco";
 
 @Entity('clientes')
-class Cliente {
-    
+export class Cliente {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     cnpj: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     razao_social: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     nome_fantasia: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     inscricao_municipal: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     inscricao_estadual: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     contribuinte: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     telefone: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     email: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     natureza_operacao: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     ramo_atividade: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     rntrc: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     validade_rntrc: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     valor_fixo: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column()
     valor_adicional: string;
+
+    @CreateDateColumn({ type: 'timestamp' })
+    data_criacao: Date;
+
+    @OneToMany(() => Endereco, (endereco) => endereco.cliente, {
+        cascade: true, // Garante que alterações em cliente afetam endereços
+    })
+    enderecos: Endereco[]; // Aqui está a propriedade que estava ausente
 }
 
 export default Cliente;

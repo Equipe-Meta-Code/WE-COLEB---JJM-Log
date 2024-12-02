@@ -3,6 +3,7 @@ import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm
 export class CreateEndereco1727114998737 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        // Cria a tabela 'endereco'
         await queryRunner.createTable(new Table({
             name: 'endereco',
             columns: [
@@ -57,19 +58,18 @@ export class CreateEndereco1727114998737 implements MigrationInterface {
             ],
         }), true);
 
+        // Cria a chave estrangeira entre 'endereco' e 'clientes'
         await queryRunner.createForeignKey('endereco', new TableForeignKey({
             columnNames: ['cliente_id'],
-            referencedTableName: 'clientes',
             referencedColumnNames: ['id'],
-            name: 'fk_cliente_endereco_',
+            referencedTableName: 'clientes',
             onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('endereco', 'fk_cliente_endereco_');
-        await queryRunner.dropTable("endereco");
+        await queryRunner.dropForeignKey('endereco', 'FK_endereco_cliente_id');
+        await queryRunner.dropTable('endereco');
     }
 
 }

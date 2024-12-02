@@ -25,18 +25,10 @@ const AppRoutes = () => {
                
       <Routes>
 
-            <Route path="/cadastro" exact element={<CadastroUsuario />} />
           <Route path="/login" exact element={<Login />} />
+
         <Route element={<BaseLayout />}>
           {/* <Route path="*" element={<PageNotFound />} /> */}
-
-
-          <Route path="/Dashboard" exact element={<Dashboard />} />
-          <Route path="/clientes" exact element={<ListaClientes />} />
-          <Route path="/clientes/:id" exact element={<PaginaCliente />} />
-            
-          <Route element={<PrivateRoutes role="Admin_Role" />} >
-          </Route> 
 
           <Route element={<PrivateRoutes role="User_Role,Admin_Role,Rh_Role" />} >
             <Route path='/' exact element={<CardList/>}></Route> 
@@ -48,24 +40,18 @@ const AppRoutes = () => {
             <Route path="/departamentos" exact element={<Departamentos />} />
             <Route path="/Dashboard" exact element={<Dashboard />} />
             <Route path="/clientes" exact element={<ListaClientes />} />
+            <Route path="/clientes/:id" exact element={<PaginaCliente />} />
 
             <Route path="/portalFuncionario" element={<PortalFuncionario />} />
             <Route path="/arquivos/:tipo" element={<ListaArquivos />} />
             <Route path="/funcionarios" exact element={<ListaFuncionarios />} />
-
           </Route>
+
           <Route element={<PrivateRoutes role="Admin_Role" />} >
             <Route path="/controleEtapa" element={<ControleEtapa />} />
+            <Route path="/cadastro" exact element={<CadastroUsuario />} />
           </Route>
 
-{/* 
-          <Route path='Monitoramento' exact element={<Timeline/>}></Route>
-          <Route path='Vendas' exact element={<Dashboard/>}></Route>
-          <Route path='SetorFinanceiro' exact element={<SetorFinanceiro/>}></Route>
-          <Route path='Portal' exact element={<Portal/>}></Route> 
-          <Route path='Configurações' exact element={<Settings/>}></Route> 
-
-          */}
         </Route>
       </Routes>
 

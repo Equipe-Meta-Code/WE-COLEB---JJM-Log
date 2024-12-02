@@ -27,14 +27,14 @@ const PrivateRoutes: React.FC<RoutesPropsData> = ({role}) => {
     const { userLogged } = useAuth();
 
     if(!userLogged()) {
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     }
 
     if(!role && userLogged()) {
         return <Outlet/>;
     }
 
-    return permissions ? <Outlet/> : <Navigate to="/" />;
+    return permissions ? <Outlet/> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;

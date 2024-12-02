@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AreaLineChart from "../../components/dashboard/AreaLineChart";
 import AreaBarChart from "../../components/dashboard/AreaBarChart";
 import styles from './dashboard.module.css';
+import SalesDashboard from "../../components/dashboard/SalesDashboard";
 
 const Dashboard = () => {
   const [pageTitle, setPageTitle] = useState('Dashboard');
@@ -25,6 +26,9 @@ const Dashboard = () => {
       <div className={styles["vendas-por-vendedor"]}>
         <AreaLineChart />
       </div>
+      {/* <div className={styles["vendas-por-vendedor"]}>
+        <SalesDashboard />
+      </div> */}
     </div>
   );
 };
