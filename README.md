@@ -58,7 +58,7 @@ Desenvolver um sistema Web com regra de negócio complexa em ambiente de produç
  
 ## 📁 Diagramas
 ### Modelo Conceitual
-![image](https://github.com/user-attachments/assets/e662640a-980d-4403-9770-0b7c0be9a209)
+![image](https://github.com/user-attachments/assets/cc2389f9-114d-44de-8956-59c7f60ff070)
 
 ### Modelo Lógico
 ![image](https://github.com/user-attachments/assets/304453c5-f21c-4051-b852-db7e22acf293)
