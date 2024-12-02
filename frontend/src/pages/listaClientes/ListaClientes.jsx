@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import { FormLabel } from "react-bootstrap";
 
 function ListaClientes() {
     const [clientes, setClientes] = useState([]);
@@ -38,18 +39,27 @@ function ListaClientes() {
     // Função para editar um cliente da API
     async function editarClientes(cliente) {
         try {
-            const response = await api.put(`/clientes/${cliente.id}`, cliente); // Atualiza o cliente específico
-            // Atualiza a lista de clientes com os dados retornados
-            setClientes(clientes.map(c => (c.id === cliente.id ? response.data : c)));
+            await api.put(`/clientes/${cliente.id}`, cliente);
+            if (cliente.enderecos) {
+                for (const endereco of cliente.enderecos) {
+                    await api.put(`/clientes/${cliente.id}/enderecos/${endereco.id}`, endereco);
+                }
+            }
+            setClientes(clientes.map(c => (c.id === cliente.id ? cliente : c)));
         } catch (error) {
-            console.error("Erro ao editar cliente:", error);
+            console.error("Erro ao editar cliente e endereços:", error);
         }
     }
 
     // Função para abrir o modal de edição
-    const handleEditClick = (cliente) => {
-        setClienteSelecionado(cliente); // Define o cliente selecionado
-        setOpenModal(true); // Abre o modal
+    const handleEditClick = async (cliente) => {
+        try {
+            const responseEnderecos = await api.get(`/clientes/${cliente.id}/enderecos`);
+            setClienteSelecionado({ ...cliente, enderecos: responseEnderecos.data });
+            setOpenModal(true);
+        } catch (error) {
+            console.error("Erro ao buscar endereços:", error);
+        }
     };
 
     useEffect(() => {
@@ -75,6 +85,10 @@ function ListaClientes() {
         }
         return value; // Retorna o valor sem formatação caso não seja CPF ou CNPJ válido
     };
+
+    function formatCEP(cep) {
+        return cep.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+    }
 
     const navigate = useNavigate();
 
@@ -149,101 +163,193 @@ function ListaClientes() {
                     <div className="title-modal">Editar Cliente</div>
                     <div className="content-modal">
                         {clienteSelecionado && (
-                            <form onSubmit={(e) => {
+                            <form className="form-cliente" onSubmit={(e) => {
                                 e.preventDefault();
                                 editarClientes(clienteSelecionado); // Chama a função para editar o cliente
                                 setOpenModal(false); // Fecha o modal
                             }}>
-                                <label className="label-cliente">CNPJ</label>
+                                <label className="label-Listacliente">CNPJ</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     maxLength={14}
                                     value={formatarCNPJ(clienteSelecionado.cnpj)}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, cnpj: e.target.value })}
                                 />
-                                <label className="label-cliente">Razão Social</label>
+                                <label className="label-Listacliente">Razão Social</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.razao_social}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, razao_social: e.target.value })}
                                 />
-                                <label className="label-cliente">Nome Fantasia</label>
+                                <label className="label-Listacliente">Nome Fantasia</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.nome_fantasia}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, nome_fantasia: e.target.value })}
                                 />
-                                <label className="label-cliente">Inscrição Municipal</label>
+                                <label className="label-Listacliente">Inscrição Municipal</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.inscricao_municipal}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, inscricao_municipal: e.target.value })}
                                 />
-                                <label className="label-cliente">Inscrição Estadual</label>
+                                <label className="label-Listacliente">Inscrição Estadual</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.inscricao_estadual}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, inscricao_estadual: e.target.value })}
                                 />
-                                <label className="label-cliente">Contribuinte</label>
+                                <label className="label-Listacliente">Contribuinte</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.contribuinte}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, contribuinte: e.target.value })}
                                 />
-                                <label className="label-cliente">Telefone</label>
+                                <label className="label-Listacliente">Telefone</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={formatTelefone(clienteSelecionado.telefone)}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, telefone: e.target.value })}
                                 />
-                                <label className="label-cliente">Email</label>
+                                <label className="label-Listacliente">Email</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.email}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, email: e.target.value })}
                                 />
-                                <label className="label-cliente">Natureza da Operacao</label>
+                                <label className="label-Listacliente">Natureza da Operacao</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.natureza_operacao}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, natureza_operacao: e.target.value })}
                                 />
-                                <label className="label-cliente">Ramo de atividade</label>
+                                <label className="label-Listacliente">Ramo de atividade</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.ramo_atividade}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, ramo_atividade: e.target.value })}
                                 />
-                                <label className="label-cliente">RNTRC</label>
+                                <label className="label-Listacliente">RNTRC</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.rntrc}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, rntrc: e.target.value })}
                                 />
-                                <label className="label-cliente">Validade RNTRC</label>
+                                <label className="label-Listacliente">Validade RNTRC</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="date"
                                     value={clienteSelecionado.validade_rntrc}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, validade_rntrc: e.target.value })}
                                 />
 
-                                <label className="label-cliente">Valor fixo</label>
+                                <label className="label-Listacliente">Valor fixo</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.valor_fixo}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, valor_fixo: e.target.value })}
                                 />
-                                <label className="label-cliente">Valor adicional</label>
+                                <label className="label-Listacliente">Valor adicional</label>
                                 <input
+                                    className="input-listaCliente"
                                     type="text"
                                     value={clienteSelecionado.valor_adicional}
                                     onChange={(e) => setClienteSelecionado({ ...clienteSelecionado, valor_adicional: e.target.value })}
                                 />
 
-                                <button type="submit">
-                                    Salvar
-                                </button>
+                                {/* Renderizando os endereços do cliente */}
+                                <div className="enderecos-container">
+                                    <h4>Endereços</h4>
+                                    {clienteSelecionado.enderecos && clienteSelecionado.enderecos.map((endereco, index) => (
+                                        <div key={index} className="endereco-item">
+                                            <FormLabel htmlFor={`endereco-${index + 1}`}>{`ENDEREÇO ${index + 1}:`}</FormLabel>
+                                            <label>Rua</label>
+                                            <input
+                                                type="text"
+                                                value={endereco.rua}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].rua = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                            <label>Número</label>
+                                            <input
+                                                type="text"
+                                                value={endereco.numero}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].numero = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                            <label>Complemento</label>
+                                            <input
+                                                type="text"
+                                                value={endereco.complemento}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].complemento = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                            <label>Bairro</label>
+                                            <input
+                                                type="text"
+                                                value={endereco.bairro}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].bairro = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                            <label>Cidade</label>
+                                            <input
+                                                type="text"
+                                                value={endereco.cidade}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].cidade = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                            <label>Estado</label>
+                                            <input
+                                                type="text"
+                                                value={endereco.estado}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].estado = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                            <label>CEP</label>
+                                            <input
+                                                type="text"
+                                                value={formatCEP(endereco.cep)}
+                                                onChange={(e) => {
+                                                    const updatedEnderecos = [...clienteSelecionado.enderecos];
+                                                    updatedEnderecos[index].cep = e.target.value;
+                                                    setClienteSelecionado({ ...clienteSelecionado, enderecos: updatedEnderecos });
+                                                }}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <button className="button-ListaCliente" type="submit">SALVAR</button>
                             </form>
                         )}
                     </div>

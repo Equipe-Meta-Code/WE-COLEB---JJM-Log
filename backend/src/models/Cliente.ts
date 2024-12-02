@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import Endereco from "./Endereco";
 
 @Entity('clientes')
 class Cliente {
@@ -48,9 +49,8 @@ class Cliente {
     @Column({ type: 'varchar', nullable: false })
     valor_adicional: string;
 
-    @Column({ type: 'varchar', nullable: false })
-    data_criacao: Date;
-
+    @OneToMany(() => Endereco, (endereco) => endereco.cliente)
+    enderecos: Endereco[];
 }
 
 export default Cliente;

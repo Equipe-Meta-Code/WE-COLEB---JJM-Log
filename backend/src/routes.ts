@@ -10,6 +10,7 @@ import EtapaController from './controllers/EtapaController';
 import PedidoController from './controllers/PedidoController';
 import EtapaPedidoController from './controllers/EtapaPedido.Controller';
 import ClienteController from './controllers/ClienteController';
+import EnderecoController from './controllers/EnderecoController';
 import UserFilesController from './controllers/UserFilesController';
 const uploadPdf = require('./Services/UploadPdf');
 
@@ -56,5 +57,11 @@ router.get("/clientes/:id", ClienteController.getClienteById); // Buscar cliente
 router.put("/clientes/:id", ClienteController.update); // Atualizar cliente
 router.delete("/clientes/:id", ClienteController.delete); // Deletar cliente
 router.delete('/arquivos/:id', UserFilesController.delete);
+
+// Rotas de Endereços
+router.post('/clientes/:id/enderecos', EnderecoController.create); // Adiciona endereço para cliente
+router.get('/clientes/:id/enderecos', EnderecoController.getByClienteId); // Lista endereços de um cliente
+router.put('/clientes/:clienteId/enderecos/:enderecoId', EnderecoController.update);
+router.delete('/clientes/:id/enderecos', EnderecoController.delete); // Excluir endereço
 
 export { router };

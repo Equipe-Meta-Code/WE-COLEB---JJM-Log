@@ -1,80 +1,173 @@
 /* Estilo para o fundo do modal */
 .background-modal {
-    position: fixed; /* Fixa o modal na tela */
+    position: fixed; 
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-    display: flex; /* Usado para centralizar o modal */
-    align-items: center; /* Alinha verticalmente no centro */
-    justify-content: center; /* Alinha horizontalmente no centro */
-    z-index: 999; /* Garante que o modal fique acima de outros elementos */
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 999; 
 }
 
 /* Estilo para o próprio modal */
 .modal {
-    background-color: white; /* Fundo branco para o modal */
-    border-radius: 8px; /* Cantos arredondados */
-    padding: 20px; /* Espaçamento interno */
-    max-width: 800px; /* Largura máxima do modal */
-    width: 100%; /* Largura total até o máximo */
-    max-height: 600px; /* Altura máxima do modal */
-    overflow: auto; /* Permite rolagem se o conteúdo exceder a altura máxima */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para efeito de profundidade */
-    position: relative; /* Para posicionar o botão de fechar */
+    background-color: white; 
+    border-radius: 8px; 
+    padding: 15px; 
+    max-width: 800px; 
+    width: 100%; 
+    max-height: 700px; 
+    overflow: auto; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    position: relative; 
 }
 
 /* Estilo do botão de fechar */
 .botao-fechar {
-    position: absolute; /* Posiciona o botão no canto superior direito */
-    top: 10px;
-    right: 10px;
-    background: none; /* Remove o fundo */
-    border: none; /* Remove a borda */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    font-size: 20px; /* Tamanho do ícone */
-    color: #333; /* Cor do ícone */
+    position: absolute;
+    top: 30px; 
+    right: 30px; 
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 30px; 
+    color: #333; 
+    z-index: 1050; 
+    transition: color 0.3s ease, transform 0.2s ease; 
 }
 
-/* Estilo do conteúdo do modal */
-.modal-conteudo {
-    margin-top: 20px; /* Espaçamento acima do conteúdo */
+/* Estilo ao passar o mouse */
+.botao-fechar:hover {
+    color: #ff4d4d; 
+    transform: scale(1.2); 
+}
+
+/* Estilo para o modal */
+.container-modal {
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+.title-modal {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
 }
 
 /* Estilo para os formulários */
-form {
-    display: flex; /* Usado para layout flexível */
-    flex-direction: column; /* Coloca os elementos em coluna */
+.form-cliente {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Estilo para os rótulos dos campos */
-label {
-    margin-bottom: 5px; /* Espaço abaixo dos rótulos */
-    font-weight: bold; /* Destaca os rótulos */
+.label-Listacliente {
+    font-weight: 600;
+    font-size: 14px;
+    color: #555 !important;
 }
 
 /* Estilo para os campos de entrada */
-input {
-    padding: 10px; /* Espaçamento interno */
-    margin-bottom: 15px; /* Espaço abaixo de cada campo */
-    border: 1px solid #ccc; /* Borda leve */
-    border-radius: 4px; /* Cantos arredondados */
-    font-size: 16px; /* Tamanho da fonte */
+.input-listaCliente {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.input-listaCliente:focus{
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
 /* Estilo do botão de salvar */
-button[type="submit"] {
+.button-ListaCliente {
+    font-weight: bold;
     padding: 10px; /* Espaçamento interno */
-    background-color: #007bff; /* Cor de fundo do botão */
+    background-color: #7aa6d6; /* Cor de fundo do botão */
     color: white; /* Cor do texto */
     border: none; /* Remove a borda */
     border-radius: 4px; /* Cantos arredondados */
     cursor: pointer; /* Muda o cursor para indicar que é clicável */
     font-size: 16px; /* Tamanho da fonte */
+    width: 50%;
+    display: block; /* Faz o botão ocupar uma linha */
+    margin: 5px auto; /* Centraliza horizontalmente e adiciona espaçamento vertical */
 }
 
 /* Estilo do botão de salvar ao passar o mouse */
-button[type="submit"]:hover {
-    background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+.button-ListaCliente:hover {
+    background-color: #559ce7; /* Cor mais escura ao passar o mouse */
+}
+
+/* Estilo para os endereços */
+.enderecos-container {
+    margin-top: 20px;
+}
+
+.enderecos-container h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.endereco-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.endereco-item label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.endereco-item input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-modal {
+        max-width: 90%;
+    }
+
+    .enderecos-container h4 {
+        font-size: 16px;
+    }
+
+    .input-listaCliente {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .button-ListaCliente {
+        font-size: 16px;
+    }
 }
