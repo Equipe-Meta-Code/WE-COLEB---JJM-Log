@@ -14,7 +14,7 @@ class UserController {
         const roleRepository = AppDataSource.getRepository(Role);
         
         console.log('Request received:', request.body);
-        const { nome, cpf, login, senha, roles } = request.body;
+        const { nome, cpf, login, senha, cargo, roles } = request.body;
 
         const existUser = await userRepository.findOneBy({cpf});
 
@@ -32,6 +32,7 @@ class UserController {
             cpf,
             login,
             senha: senhaHashed,
+            cargo,
             roles: existsRoles,
         });
 
