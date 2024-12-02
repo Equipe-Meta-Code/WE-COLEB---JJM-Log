@@ -25,6 +25,7 @@ class PedidoController {
             distancia,
             total,
             lucro,
+            gastos,
         } = req.body;
 
         const pedidoRepository = AppDataSource.getRepository(Pedido);
@@ -57,6 +58,7 @@ class PedidoController {
                 distancia,
                 total,
                 lucro,
+                gastos,
             });
 
             // Salvar o pedido no banco de dados

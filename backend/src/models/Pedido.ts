@@ -47,6 +47,9 @@ class Pedido {
     @Column({ type: 'float', nullable: true })
     lucro: number;
 
+    @Column({ type: 'float', nullable: true })
+    gastos: number;
+
     @ManyToOne(() => User)
     @JoinColumn({ name: 'user_id' })
     user: User;

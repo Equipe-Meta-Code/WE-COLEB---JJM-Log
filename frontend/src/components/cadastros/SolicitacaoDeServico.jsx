@@ -95,17 +95,17 @@ function SolicitacaoDeServico() {
             let gasolina = 5.32
 
             if(parseFloat(dadosPedido.distancia) > 125){
-                calculando = (parseFloat(dadosPedido.distancia) - 125) * (valorFixo + valor_adicional)
-                totalCalculado = (calculando + (125 * valorFixo ))
-                lucroCalculado = totalCalculado - (consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina)
+                
+                
+
     
                 setDadosPedido({
                     ...dadosPedido,
                     total: totalCalculado,
                     lucro: lucroCalculado
                 });
-                calculando = (parseFloat(dadosPedido.distancia) - 125) * valorFixo
-                totalCalculado = (calculando + (125 * valor_adicional))
+                calculando = (parseFloat(dadosPedido.distancia) - 125) * (valorFixo + valor_adicional)
+                totalCalculado = (calculando + (125 * valorFixo ))
                 gastosCalculado = consumoCaminhao * parseFloat(dadosPedido.distancia) * gasolina
                 lucroCalculado = totalCalculado - gastosCalculado
     
