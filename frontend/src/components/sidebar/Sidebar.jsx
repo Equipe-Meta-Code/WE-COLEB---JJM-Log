@@ -285,46 +285,6 @@ export default function Sidebar() {
               </ListItem>
             </PermissionComponent>
 
-            {/* Desempenho de Vendas */}
-            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
-
-              <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
-                <Tooltip
-                  title="Desempenho de Vendas"
-                  placement="right"
-                  arrow
-                  disableHoverListener={open}
-                >
-                  <ListItemButton
-                    className="menu-link"
-                    sx={{
-                      justifyContent: open ? "initial" : "flex",
-                      px: 2.4,
-                    }}
-                  >
-                    <Link to="/Vendas" className="no-link-style">
-                      <ListItemIcon
-                        sx={{
-                          justifyContent: "center",
-                          color: "#666666",
-                          minWidth: 0,
-                          mr: open ? 1.5 : "auto",
-                        }}
-                      >
-                        <MdOutlineDashboard size={19} />
-                      </ListItemIcon>
-                    </Link>
-                      <ListItemText
-                        primary="Desempenho Vendas"
-                        sx={{
-                          color: "#666666",
-                          display: open ? "block" : "none",
-                        }}
-                      />
-                  </ListItemButton>
-                </Tooltip>
-              </ListItem>
-            </PermissionComponent>
             
             {/* Dashboard */}
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
@@ -368,47 +328,6 @@ export default function Sidebar() {
               </ListItem>
             </PermissionComponent>
 
-            {/* Setor Financeiro */}
-            <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
-
-            <ListItem disablePadding sx={{ display: "flex", justifyContent: open ? "flex-start" : "center", alignItems: "center", }}>
-            <Tooltip
-                title="Setor Financeiro"
-                placement="right"
-                arrow
-                disableHoverListener={open}
-              >
-                <ListItemButton
-                  className="menu-link"
-                  sx={{
-                    justifyContent: open ? "initial" : "flex",
-                    px: 2.5,
-                  }}
-                >
-                  <Link to="/SetorFinanceiro" className="no-link-style">
-                    <ListItemIcon
-                      sx={{
-                        justifyContent: "center",
-                        color: "#666666",
-                        minWidth: 0,
-                        mr: open ? 1.5 : "auto",
-                      }}
-                    >
-                      <FaMoneyCheckDollar size={19} />
-                    </ListItemIcon>
-                  </Link>
-                    <ListItemText
-                      primary="Setor Financeiro"
-                      sx={{
-                        color: "#666666",
-                        display: open ? "block" : "none",
-                        marginLeft: -0.2,
-                      }}
-                    />
-                </ListItemButton>
-              </Tooltip>
-            </ListItem>
-            </PermissionComponent>
             
             <PermissionComponent role="User_Role,Admin_Role,Rh_Role">
 
